@@ -1,4 +1,4 @@
-package com.example.enforest
+package com.gsm.enforest
 
 import org.junit.Test
 

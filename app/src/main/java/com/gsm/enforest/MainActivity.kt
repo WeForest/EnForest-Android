@@ -1,4 +1,4 @@
-package com.example.enforest
+package com.gsm.enforest
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
