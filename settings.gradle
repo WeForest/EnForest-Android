@@ -8,3 +8,6 @@ dependencyResolutionManagement {
 }
 rootProject.name = "EnForest"
 include ':app'
+include ':presentation'
+include ':domain'
+include ':data'
