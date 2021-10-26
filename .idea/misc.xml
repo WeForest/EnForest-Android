@@ -7,9 +7,11 @@
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest/app/src/main/res/layout/fragment_sign.xml" value="0.536" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest/app/src/main/res/layout/fragment_sign_up.xml" value="0.45208333333333334" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/drawable/sign_in_origin_login_btn.xml" value="0.1758974358974359" />
+        <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/drawable/sign_up_edit_txt.xml" value="0.265625" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/layout/activity_sign_in_sign_up_main.xml" value="0.16302083333333334" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/layout/activity_sign_up_sign_in_main.xml" value="0.2" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_sign_in.xml" value="0.2" />
+        <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_sign_up_name.xml" value="0.4" />
       </map>
     </option>
   </component>
