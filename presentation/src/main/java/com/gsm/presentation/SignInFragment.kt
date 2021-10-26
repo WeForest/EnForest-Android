@@ -1,11 +1,10 @@
-package com.kdn.presentation
+package com.gsm.presentation
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.gsm.presentation.R
 
 class SignInFragment : Fragment() {
 

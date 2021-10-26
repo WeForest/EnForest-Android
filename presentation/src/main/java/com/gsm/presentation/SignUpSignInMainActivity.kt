@@ -1,8 +1,7 @@
-package com.kdn.presentation
+package com.gsm.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.gsm.presentation.R
 
 class SignUpSignInMainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
