@@ -8,6 +8,8 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.gsm.presentation.R
 import com.gsm.presentation.databinding.FragmentCommunityBinding
 import com.kdn.presentation.base.BaseFragment
+import com.kdn.presentation.view.community.partner.PartnerFragment
+import com.kdn.presentation.view.community.studymeeting.StudyMeetingFragment
 
 class CommunityFragment : BaseFragment<FragmentCommunityBinding>(R.layout.fragment_community) {
     private lateinit var navController: NavController
