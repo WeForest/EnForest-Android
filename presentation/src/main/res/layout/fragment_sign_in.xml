@@ -37,11 +37,11 @@
             android:gravity="center"
             android:includeFontPadding="false"
             android:padding="15dp"
-            android:text="일반 로그인 하기"
+            android:text="구글로 시작하기"
             android:textColor="@color/white"
             android:textSize="18sp" />
 
-        <RelativeLayout
+     <!--   <RelativeLayout
             android:layout_width="match_parent"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"
@@ -131,7 +131,8 @@
                     android:textSize="15sp" />
             </LinearLayout>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>-->
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
