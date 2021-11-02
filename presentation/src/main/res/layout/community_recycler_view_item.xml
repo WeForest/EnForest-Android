@@ -54,7 +54,7 @@
             android:text="코딩이 정말 힘든데 도와주세요!!!"
             android:fontFamily="@font/noto_sans_kr_bold"
             android:textColor="@color/black"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:textSize="23sp"
             android:includeFontPadding="false"
             />
@@ -65,7 +65,7 @@
             android:text="2021년 11월 2일"
             android:fontFamily="@font/noto_sans_kr_medium"
             android:textColor="@color/main_color"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="5dp"
             android:textSize="18sp"
             android:includeFontPadding="false"
             />
