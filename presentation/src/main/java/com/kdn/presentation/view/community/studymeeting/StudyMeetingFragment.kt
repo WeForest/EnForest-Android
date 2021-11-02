@@ -6,14 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.gsm.presentation.R
+import com.gsm.presentation.databinding.FragmentStudyMeetingBinding
+import com.kdn.presentation.base.BaseFragment
+import com.kdn.presentation.view.community.partner.PartnerRecyclerAdapter
+import com.kdn.presentation.widget.dxtension.showVertical
 
-class StudyMeetingFragment : Fragment() {
+class StudyMeetingFragment : BaseFragment<FragmentStudyMeetingBinding>(R.layout.fragment_study_meeting) {
+    override fun init() {
+        initRecyclerView()
+    }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_study_meeting, container, false)
+    private fun initRecyclerView() {
+        binding.studyMeetingRecyclerView.showVertical(requireContext())
+        binding.studyMeetingRecyclerView.adapter = PartnerRecyclerAdapter()
     }
 }

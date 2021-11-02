@@ -5,15 +5,15 @@
 
     </data>
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+       <androidx.recyclerview.widget.RecyclerView
+           android:id="@+id/study_meeting_recycler_view"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           />
 
-    </FrameLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
