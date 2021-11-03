@@ -7,4 +7,9 @@
         <item>인공지능</item>
         <item>게임개발</item>
     </string-array>
+
+    <string-array name="JobSerach">
+        <item>구인자</item>
+        <item>구직자</item>
+    </string-array>
 </resources>
