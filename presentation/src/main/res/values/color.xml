@@ -5,4 +5,6 @@
     <color name="white">#FFFFFF</color>
     <color name="login_other_login">#A3A3A3</color>
     <color name="sign_up_ex_txt">#ACACAC</color>
+    <color name="background_main">#8294C0</color>
+    <color name="prograssbar">#FFAC0C</color>
 </resources>
