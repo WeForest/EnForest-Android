@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="Field">
+        <item>안드로이드</item>
+        <item>백엔드</item>
+        <item>프론트엔드</item>
+        <item>인공지능</item>
+        <item>게임개발</item>
+    </string-array>
+</resources>
