@@ -3,9 +3,9 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.7">
       <module name="EnForest-Android.buildSrc" target="11" />
-      <module name="EnForest.app" target="11" />
-      <module name="EnForest.data" target="11" />
-      <module name="EnForest.presentation" target="11" />
+      <module name="EnForest.buildSrc" target="1.8" />
+      <module name="EnForest.data" target="1.8" />
+      <module name="EnForest.presentation" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
