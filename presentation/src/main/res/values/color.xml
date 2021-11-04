@@ -7,4 +7,6 @@
     <color name="sign_up_ex_txt">#ACACAC</color>
     <color name="background_main">#8294C0</color>
     <color name="prograssbar">#FFAC0C</color>
+    <color name="easy_test">#FFBACD</color>
+    <color name="basic_test">#107AB0</color>
 </resources>
