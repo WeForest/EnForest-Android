@@ -30,7 +30,7 @@ class PartnerRecyclerAdapter : RecyclerView.Adapter<PartnerRecyclerAdapter.Partn
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return 1
     }
 
     class PartnerRecyclerAdapterViewHolder(private val binding: CommunityRecyclerViewItemBinding) :

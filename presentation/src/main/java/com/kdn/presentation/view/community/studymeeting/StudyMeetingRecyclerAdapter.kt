@@ -31,7 +31,7 @@ class StudyMeetingRecyclerAdapter : RecyclerView.Adapter<StudyMeetingRecyclerAda
     }
 
     override fun getItemCount(): Int {
-        return 10
+        return 1
     }
 
     class StudyMeetingRecyclerAdapterViewHolder(private val binding: CommunityRecyclerViewItemBinding) :
