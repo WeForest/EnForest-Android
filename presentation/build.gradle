@@ -1,10 +1,9 @@
 plugins {
-    id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
-    id 'androidx.navigation.safeargs.kotlin'
 }
+apply plugin: 'com.android.application'
 
 android {
     compileSdk 31
@@ -49,7 +48,6 @@ dependencies {
     implementation (AndroidX.LEGACY)
 
     androidTestImplementation (AndroidTest.EXT_JUNIT)
-    implementation 'com.github.applikeysolutions:cosmocalendar:1.0.4'
     // dager hilt
     implementation (DaggerHilt.DAGGER_HILT)
     kapt (DaggerHilt.DAGGER_HILT_COMPILER)
