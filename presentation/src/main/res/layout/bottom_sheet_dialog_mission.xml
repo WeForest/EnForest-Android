@@ -62,7 +62,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mission_write_content_edit_text" />
 
-    <com.applikeysolutions.cosmocalendar.view.CalendarView
+    <CalendarView
         android:id="@+id/calendar_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
