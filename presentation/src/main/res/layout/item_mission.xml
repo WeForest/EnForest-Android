@@ -4,15 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="160dp"
     android:layout_height="140dp"
-    android:layout_marginStart="22sp"
+    android:layout_margin="10dp"
     app:cardCornerRadius="15dp"
-    android:layout_marginTop="20dp"
     app:cardElevation="15dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#005BFF">
+
 
         <TextView
             android:id="@+id/mission_title_text"
@@ -32,7 +32,7 @@
             android:id="@+id/mission_line"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="8dp"
             android:background="#FCEBEB"
             android:fontFamily="@font/noto_sans_kr_medium"
             android:includeFontPadding="false"
@@ -70,10 +70,10 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/noto_sans_kr_medium"
+            android:fontFamily="@font/noto_sans_kr_light"
 
             android:includeFontPadding="false"
-            android:textColor="@color/black"
+            android:textColor="#BDA5A5"
             android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="@+id/text_line"
             app:layout_constraintEnd_toEndOf="@+id/text_line"
