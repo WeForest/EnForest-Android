@@ -6,32 +6,27 @@
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest/app/src/main/res/layout/activity_sign.xml" value="0.45208333333333334" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest/app/src/main/res/layout/fragment_sign.xml" value="0.536" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest/app/src/main/res/layout/fragment_sign_up.xml" value="0.45208333333333334" />
+        <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/app/src/main/res/layout/activity_sign.xml" value="0.24739583333333334" />
+        <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/drawable/community_recycler_item_frame.xml" value="0.2640625" />
+        <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/drawable/search_frame.xml" value="0.2635416666666667" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/drawable/sign_in_origin_login_btn.xml" value="0.1758974358974359" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/drawable/sign_up_edit_txt.xml" value="0.265625" />
+        <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/layout/activity_sign_in_sign_up_main.xml" value="0.16302083333333334" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/layout/activity_sign_up_sign_in_main.xml" value="0.2" />
+        <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/layout/community_recycler_view_item.xml" value="0.264" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_auth_number_input.xml" value="0.264" />
+        <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_community.xml" value="0.264" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_id_input.xml" value="0.264" />
+        <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_meeting_and_mentor_mentee.xml" value="0.24739583333333334" />
+        <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_partner.xml" value="0.1" />
+        <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_password_input.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_phone_auth.xml" value="0.264" />
-        <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_sign_in.xml" value="0.2" />
-        <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_sign_up_name.xml" value="0.176" />
-        <entry key="presentation/src/main/res/drawable/background_practice_test.xml" value="0.3765625" />
-        <entry key="presentation/src/main/res/drawable/background_test_main.xml" value="0.3765625" />
-        <entry key="presentation/src/main/res/drawable/prograss_edit.xml" value="0.21770833333333334" />
-        <entry key="presentation/src/main/res/drawable/prograssbar_costom.xml" value="0.21770833333333334" />
-        <entry key="presentation/src/main/res/drawable/sign_in_origin_login_btn.xml" value="0.3765625" />
-        <entry key="presentation/src/main/res/drawable/sign_up_edit_txt.xml" value="0.3707692307692308" />
-        <entry key="presentation/src/main/res/layout/activity_sign_up_sign_in_main.xml" value="0.36041666666666666" />
-        <entry key="presentation/src/main/res/layout/background_test.xml" value="0.2015625" />
-        <entry key="presentation/src/main/res/layout/fragment_auth_number_input.xml" value="0.2015625" />
-        <entry key="presentation/src/main/res/layout/fragment_id_input.xml" value="0.36041666666666666" />
-        <entry key="presentation/src/main/res/layout/fragment_password_input.xml" value="0.36041666666666666" />
-        <entry key="presentation/src/main/res/layout/fragment_phone_auth.xml" value="0.2015625" />
-        <entry key="presentation/src/main/res/layout/fragment_prograss.xml" value="0.25" />
-        <entry key="presentation/src/main/res/layout/fragment_sign_in.xml" value="0.2015625" />
-        <entry key="presentation/src/main/res/layout/fragment_sign_up_name.xml" value="0.2015625" />
-        <entry key="presentation/src/main/res/layout/fragment_test_main.xml" value="0.25" />
-        <entry key="presentation/src/main/res/layout/test_item.xml" value="0.36041666666666666" />
+        <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_sign_in.xml" value="0.264" />
+        <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_sign_up_name.xml" value="0.2" />
+        <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_sign_up_user_job_search.xml" value="0.2" />
+        <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_sign_up_user_situation.xml" value="0.264" />
+        <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_study_meeting.xml" value="0.24739583333333334" />
       </map>
     </option>
   </component>
