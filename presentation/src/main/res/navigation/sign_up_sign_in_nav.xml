@@ -9,53 +9,5 @@
         android:id="@+id/signInFragment"
         android:name="com.gsm.presentation.SignInFragment"
         android:label="fragment_sign_in"
-        tools:layout="@layout/fragment_sign_in" >
-        <action
-            android:id="@+id/action_signInFragment_to_idInputFragment"
-            app:destination="@id/idInputFragment" />
-        <action
-            android:id="@+id/action_signInFragment_to_signUpNameFragment"
-            app:destination="@id/signUpNameFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/authNumberInputFragment"
-        android:name="com.gsm.presentation.AuthNumberInputFragment"
-        tools:layout="@layout/fragment_auth_number_input"
-        android:label="AuthNumberInputFragment" />
-    <fragment
-        android:id="@+id/idInputFragment"
-        android:name="com.gsm.presentation.IdInputFragment"
-        tools:layout="@layout/fragment_id_input"
-        android:label="IdInputFragment" >
-        <action
-            android:id="@+id/action_idInputFragment_to_passwordInputFragment"
-            app:destination="@id/passwordInputFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/passwordInputFragment"
-        android:name="com.gsm.presentation.PasswordInputFragment"
-        tools:layout="@layout/fragment_password_input"
-        android:label="PasswordInputFragment" >
-        <action
-            android:id="@+id/action_passwordInputFragment_to_signUpNameFragment"
-            app:destination="@id/signUpNameFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/signUpNameFragment"
-        android:name="com.kdn.presentation.SignUpNameFragment"
-        tools:layout="@layout/fragment_sign_up_name"
-        android:label="SignUpNameFragment" >
-        <action
-            android:id="@+id/action_signUpNameFragment_to_phoneAuthFragment"
-            app:destination="@id/phoneAuthFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/phoneAuthFragment"
-        android:name="com.gsm.presentation.PhoneAuthFragment"
-        tools:layout="@layout/fragment_phone_auth"
-        android:label="PhoneAuthFragment" >
-        <action
-            android:id="@+id/action_phoneAuthFragment_to_authNumberInputFragment"
-            app:destination="@id/authNumberInputFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_sign_in" />
 </navigation>
