@@ -10,32 +10,33 @@ interface MissionService {
     @POST("mission/add")
     suspend fun addMission(
         @Body request: AddMissionRequest
-    ): Response<AddMissionResponse>
+    ): AddMissionResponse
 
     @DELETE("mission/{number}")
     suspend fun deleteMission(
         @Path("number") number: Int
-    ): Response<DeleteMissioNResponse>
+    ): DeleteMissioNResponse
 
     @GET("mission/{number}")
     suspend fun getMission(
         @Path("number") number: Int
-    ): Response<GetMissionResponse>
+    ): GetMissionResponse
 
     @GET("mission/{type}")
     suspend fun getMissionType(
         @Path("type") type: String
-    ):Response<GetMissionTypeResponse>
+    ): GetMissionTypeResponse
+
     @PATCH("/mission/clear/{number}")
     suspend fun patchMissionClear(
         @Header("authorization") header: String,
         @Path("number") number: Int
-    ): Response<PathMissionClearResponse>
+    ): PathMissionClearResponse
 
     @PATCH("/mission/fail/{number}")
     suspend fun patchMissionFail(
         @Header("authorization") header: String,
         @Path("number") number: Int
-    ): Response<PathMissionFailResponse>
+    ): PathMissionFailResponse
 
 }

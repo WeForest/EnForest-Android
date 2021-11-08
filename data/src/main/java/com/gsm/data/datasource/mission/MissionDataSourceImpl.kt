@@ -11,33 +11,33 @@ class MissionDataSourceImpl @Inject constructor(
     override val service: MissionService
 
 ) : BaseDataSource<MissionService>(), MissionDataSource {
-    override suspend fun addMission(request: AddMissionRequest): Response<AddMissionResponse> {
+    override suspend fun addMission(request: AddMissionRequest): AddMissionResponse {
         return service.addMission(request)
     }
 
-    override suspend fun deleteMission(number: Int): Response<DeleteMissioNResponse> {
+    override suspend fun deleteMission(number: Int): DeleteMissioNResponse {
         return service.deleteMission(number)
     }
 
-    override suspend fun getMission(number: Int): Response<GetMissionResponse> {
+    override suspend fun getMission(number: Int): GetMissionResponse {
         return service.getMission(number)
     }
 
-    override suspend fun getMissionType(type: String): Response<GetMissionTypeResponse> {
+    override suspend fun getMissionType(type: String): GetMissionTypeResponse {
         return service.getMissionType(type)
     }
 
     override suspend fun patchMissionClear(
         header: String,
         number: Int
-    ): Response<PathMissionClearResponse> {
+    ): PathMissionClearResponse {
         return service.patchMissionClear(header, number)
     }
 
     override suspend fun patchMissionFail(
         header: String,
         number: Int
-    ): Response<PathMissionFailResponse> {
+    ): PathMissionFailResponse {
         return service.patchMissionFail(header, number)
     }
 }

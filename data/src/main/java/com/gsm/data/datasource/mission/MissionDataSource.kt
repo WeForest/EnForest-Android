@@ -5,12 +5,12 @@ import com.gsm.data.entity.mission.response.*
 import retrofit2.Response
 
 interface MissionDataSource {
-    suspend fun addMission(request: AddMissionRequest): Response<AddMissionResponse>
-    suspend fun deleteMission(number: Int): Response<DeleteMissioNResponse>
-    suspend fun getMission(number: Int): Response<GetMissionResponse>
-    suspend fun getMissionType(type: String): Response<GetMissionTypeResponse>
-    suspend fun patchMissionClear(header: String, number: Int): Response<PathMissionClearResponse>
-    suspend fun patchMissionFail(header: String, number: Int): Response<PathMissionFailResponse>
+    suspend fun addMission(request: AddMissionRequest): AddMissionResponse
+    suspend fun deleteMission(number: Int): DeleteMissioNResponse
+    suspend fun getMission(number: Int): GetMissionResponse
+    suspend fun getMissionType(type: String): GetMissionTypeResponse
+    suspend fun patchMissionClear(header: String, number: Int): PathMissionClearResponse
+    suspend fun patchMissionFail(header: String, number: Int): PathMissionFailResponse
 
 
 }
