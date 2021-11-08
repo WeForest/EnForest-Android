@@ -1,8 +1,9 @@
-package com.kdn.presentation
+package com.gsm.presentation
 
 
 import android.os.Bundle
-import com.kdn.presentation.base.BaseActivity
+import com.gsm.presentation.base.BaseActivity
+import com.kdn.presentation.R
 import com.kdn.presentation.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 

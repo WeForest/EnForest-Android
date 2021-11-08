@@ -1,4 +1,4 @@
-package com.kdn.presentation.di
+package com.gsm.presentation.di
 
 import com.gsm.data.datasource.mission.MissionDataSourceImpl
 import com.gsm.data.repository.MissionRepositoryImpl

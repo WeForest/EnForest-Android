@@ -1,4 +1,4 @@
-package com.kdn.presentation.util.extension
+package com.gsm.presentation.util.extension
 
 import android.os.Build
 import android.util.Log

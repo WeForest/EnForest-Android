@@ -1,4 +1,4 @@
-package com.kdn.presentation.viewmodel.mission
+package com.gsm.presentation.viewmodel.mission
 
 import android.util.Log
 import androidx.lifecycle.LiveData

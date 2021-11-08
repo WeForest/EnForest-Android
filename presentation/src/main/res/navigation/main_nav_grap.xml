@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/fragmentMission"
-        android:name="com.kdn.presentation.ui.mission.MissionFragment"
+        android:name="com.gsm.presentation.ui.mission.MissionFragment"
         android:label="FragmentMission"
         tools:layout="@layout/fragment_mission">
         <action
@@ -17,7 +17,7 @@
     </fragment>
     <dialog
         android:id="@+id/bottomSheetMissionDialog"
-        android:name="com.kdn.presentation.ui.mission.bottomSheet.BottomSheetMissionDialog"
+        android:name="com.gsm.presentation.ui.mission.bottomSheet.BottomSheetMissionDialog"
         android:label="BottomSheetMissionDialog"
         tools:layout="@layout/bottom_sheet_dialog_write_mission" >
 

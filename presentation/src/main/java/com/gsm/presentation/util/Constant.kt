@@ -1,4 +1,4 @@
-package com.kdn.presentation.util
+package com.gsm.presentation.util
 
 class Constant {
     companion object {

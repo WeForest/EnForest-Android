@@ -20,7 +20,7 @@
         android:supportsRtl="true"
         android:usesCleartextTraffic="true">
         <receiver
-            android:name=".ui.mission.MissionNotification"
+            android:name="com.gsm.presentation.ui.mission.MissionNotification"
             android:enabled="true"
             android:exported="true" >
             <intent-filter>

@@ -7,7 +7,7 @@
 
         <variable
             name="fragment"
-            type="com.kdn.presentation.ui.mission.MissionFragment" />
+            type="com.gsm.presentation.ui.mission.MissionFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

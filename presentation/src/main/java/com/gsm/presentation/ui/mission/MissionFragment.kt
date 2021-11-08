@@ -1,4 +1,4 @@
-package com.kdn.presentation.ui.mission
+package com.gsm.presentation.ui.mission
 
 import android.app.AlarmManager
 import android.app.PendingIntent
@@ -8,10 +8,9 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.kdn.presentation.R
-import com.kdn.presentation.base.BaseBottomSheetDialogFragment
-import com.kdn.presentation.base.BaseFragment
+import com.gsm.presentation.base.BaseFragment
+import com.gsm.presentation.viewmodel.mission.MissionViewModel
 import com.kdn.presentation.databinding.FragmentMissionBinding
-import com.kdn.presentation.viewmodel.mission.MissionViewModel
 
 class MissionFragment : BaseFragment<FragmentMissionBinding>(R.layout.fragment_mission) {
     private val viewModel: MissionViewModel by viewModels<MissionViewModel>()
