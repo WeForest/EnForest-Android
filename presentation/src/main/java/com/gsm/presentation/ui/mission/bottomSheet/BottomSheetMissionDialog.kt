@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.chip.Chip
 import com.gsm.presentation.base.BaseBottomSheetDialogFragment
+import com.gsm.presentation.util.EventObserver
 import com.gsm.presentation.util.extension.TimeConverter
 import com.gsm.presentation.viewmodel.mission.MissionViewModel
 import com.kdn.presentation.R
@@ -53,7 +54,7 @@ class BottomSheetMissionDialog() :
                     }
                 }
             }
-            success.observe(this@BottomSheetMissionDialog, {
+            success.observe(this@BottomSheetMissionDialog,EventObserver {
 
                 if (it) {
                     Toast.makeText(requireContext(), "성공했습니다 !.", Toast.LENGTH_SHORT).show()
