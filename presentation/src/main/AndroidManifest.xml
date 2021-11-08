@@ -4,8 +4,11 @@
 
     <application>
         <activity
+            android:name=".ui.profile.activity.MainActivity"
+            android:exported="false" />
+        <activity
             android:name="com.kdn.presentation.MainActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
