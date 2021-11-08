@@ -28,14 +28,14 @@ interface MissionService {
     ):Response<GetMissionTypeResponse>
     @PATCH("/mission/clear/{number}")
     suspend fun patchMissionClear(
-        @Header("authorization") header : String,
-        @Path("number") number : Int
-    ):Response<PatchMissionClearResponse>
+        @Header("authorization") header: String,
+        @Path("number") number: Int
+    ): Response<PathMissionClearResponse>
 
     @PATCH("/mission/fail/{number}")
     suspend fun patchMissionFail(
-        @Header("authorization") header : String,
-        @Path("number") number : Int
-    ):Response<PatchMissionFailResponse>
+        @Header("authorization") header: String,
+        @Path("number") number: Int
+    ): Response<PathMissionFailResponse>
 
 }
