@@ -30,12 +30,18 @@
         <entry key="presentation/src/main/res/drawable/background_practice_test.xml" value="0.1935185185185185" />
         <entry key="presentation/src/main/res/drawable/background_test.xml" value="0.1935185185185185" />
         <entry key="presentation/src/main/res/drawable/mission_write_background.xml" value="0.1935185185185185" />
+        <entry key="presentation/src/main/res/drawable/profile_background.xml" value="0.19074074074074074" />
+        <entry key="presentation/src/main/res/drawable/profile_bottom_layout_backgorund.xml" value="0.2109375" />
+        <entry key="presentation/src/main/res/drawable/profilelayout_background.xml" value="0.19074074074074074" />
+        <entry key="presentation/src/main/res/drawable/sign_in_origin_login_btn.xml" value="0.19074074074074074" />
         <entry key="presentation/src/main/res/layout/activity_main.xml" value="0.32037037037037036" />
         <entry key="presentation/src/main/res/layout/activity_sign_up_sign_in_main.xml" value="0.32037037037037036" />
         <entry key="presentation/src/main/res/layout/fragment_mission.xml" value="0.32037037037037036" />
         <entry key="presentation/src/main/res/layout/fragment_mission_detail.xml" value="0.32037037037037036" />
         <entry key="presentation/src/main/res/layout/fragment_mission_detail_row.xml" value="0.32037037037037036" />
+        <entry key="presentation/src/main/res/layout/fragment_profile.xml" value="0.25" />
         <entry key="presentation/src/main/res/layout/fragment_prograss.xml" value="0.31598173515981737" />
+        <entry key="presentation/src/main/res/layout/fragment_set_profile.xml" value="0.25" />
         <entry key="presentation/src/main/res/layout/fragment_sign_in.xml" value="0.17916666666666667" />
         <entry key="presentation/src/main/res/layout/fragment_sign_up_name.xml" value="0.32037037037037036" />
         <entry key="presentation/src/main/res/layout/fragment_sign_up_user_job_search.xml" value="0.17916666666666667" />

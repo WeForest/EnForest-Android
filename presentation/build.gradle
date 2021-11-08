@@ -39,6 +39,8 @@ android {
 
 dependencies {
 
+    implementation 'com.airbnb.android:lottie:4.2.0'
+
     implementation 'com.dinuscxj:circleprogressbar:1.3.0' // CircleProgressBar
 
     implementation project(":domain")

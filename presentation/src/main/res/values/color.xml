@@ -11,5 +11,6 @@
     <color name="background_main">#8294C0</color>
     <color name="prograssbar">#FFAC0C</color>
     <color name="easy_test">#FFBACD</color>
+    <color name="m_c">#8AB8FE</color>
     <color name="basic_test">#107AB0</color>
 </resources>

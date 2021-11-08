@@ -34,6 +34,11 @@ dependencies {
 
     implementation project(":domain")
 
+    // Retrofit
+    implementation (Retrofit.RETROFIT)
+    implementation (Retrofit.CONVERTER_GSON)
+    implementation (Retrofit.CONVERTER_JAXB)
+
     implementation (KTX.CORE)
     implementation (AndroidX.APP_COMPAT)
     implementation (Google.MATERIAL)
