@@ -29,7 +29,7 @@
             </intent-filter>
         </receiver>
         <activity
-            android:name="com.gsm.presentation.MainActivity"
+            android:name="com.gsm.presentation.ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
