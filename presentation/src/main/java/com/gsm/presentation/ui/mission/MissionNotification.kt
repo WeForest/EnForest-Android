@@ -1,4 +1,4 @@
-package com.kdn.presentation.ui.mission
+package com.gsm.presentation.ui.mission
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -10,10 +10,10 @@ import android.graphics.Color
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import com.kdn.presentation.MainActivity
+import com.gsm.presentation.MainActivity
+import com.gsm.presentation.util.Constant.Companion.MISSION_CHANNEL_ID
+import com.gsm.presentation.util.Constant.Companion.NOTIFICATION_ID
 import com.kdn.presentation.R
-import com.kdn.presentation.util.Constant.Companion.MISSION_CHANNEL_ID
-import com.kdn.presentation.util.Constant.Companion.NOTIFICATION_ID
 
 
 class MissionNotification : BroadcastReceiver() {
