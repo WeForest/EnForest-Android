@@ -1,13 +1,17 @@
 package com.kdn.presentation
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import com.gsm.presentation.R
-import com.gsm.presentation.databinding.ActivityMainBinding
-import com.kdn.presentation.base.BaseActivity
 
+import android.os.Bundle
+import com.kdn.presentation.base.BaseActivity
+import com.kdn.presentation.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
-    override fun init() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+
+        super.onCreate(savedInstanceState)
 
     }
 }
