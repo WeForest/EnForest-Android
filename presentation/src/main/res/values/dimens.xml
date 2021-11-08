@@ -7,4 +7,5 @@
     <dimen name="sign_up_center_margin">30dp</dimen>
     <dimen name="sign_up_bottom_next_btn_margin">30dp</dimen>
     <dimen name="sign_up_center_ex_txt_margin">40dp</dimen>
+    <dimen name="sign_up_frame_elevation">4dp</dimen>
 </resources>
