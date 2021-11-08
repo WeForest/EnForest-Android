@@ -27,7 +27,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="@dimen/sign_up_center_margin"
         android:background="@drawable/sign_up_edit_txt"
-        android:elevation="10dp"
+        android:elevation="@dimen/sign_up_frame_elevation"
         android:hint="실제 이름을 입력해 주세요"
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="@+id/title_txt"
