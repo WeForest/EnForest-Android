@@ -29,7 +29,16 @@
         android:id="@+id/signUpUserPositionInfoFragment"
         android:name="com.gsm.presentation.SignUpUserPositionInfoFragment"
         tools:layout="@layout/fragment_sign_up_user_position_info"
-        android:label="SignUpUserPositionInfoFragment" />
+        android:label="SignUpUserPositionInfoFragment" >
+        <action
+            android:id="@+id/action_signUpUserPositionInfoFragment_to_signUpUserDetailInfoFragment"
+            app:destination="@id/signUpUserDetailInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpUserDetailInfoFragment"
+        android:name="com.gsm.presentation.SignUpUserDetailInfoFragment"
+        tools:layout="@layout/fragment_sign_up_user_detail_info"
+        android:label="SignUpUserDetailInfoFragment" />
 
 
 </navigation>
