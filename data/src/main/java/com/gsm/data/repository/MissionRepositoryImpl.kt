@@ -16,35 +16,33 @@ class MissionRepositoryImpl @Inject constructor(
 ) : MissionRepository {
 
     // domain -> data toData
-    override suspend fun addMission(request: AddMission): AddMissionEntity? =
-        dataSource.addMission(request.toRequest()).body()?.toDomain()
+    override suspend fun addMission(request: AddMission): AddMissionEntity =
+        dataSource.addMission(request.toRequest()).toDomain()
 
-//
-//    override suspend fun deleteMission(number: Int): Response<DeleteMissionEntity> {
-//        return dataSource.deleteMission()
-//    }
-//
-//    override suspend fun getMission(number: Int): Response<GetMissionEntity> {
-//        return dataSource.getMission(number)
-//    }
-//
-//    override suspend fun getMissionType(type: String): Response<GetMissionTypeEntity> {
-//        return dataSource.getMissionType(type)
-//    }
-//
-//    override suspend fun patchMissionClear(
-//        header: String,
-//        number: Int
-//    ): Response<PathMissionClearEntity> =
-//        dataSource.patchMissionClear(header, number) {
-//
-//        }
-//
-//
-//    override suspend fun patchMissionFail(
-//        header: String,
-//        number: Int
-//    ): Response<PachMissionFailEntity> {
-//        return dataSource.patchMissionFail(header, number)
-//    }
+
+    override suspend fun deleteMission(number: Int): DeleteMissionEntity {
+        return dataSource.deleteMission(number).toDomain()
+    }
+
+    override suspend fun getMission(number: Int): GetMissionEntity {
+        return dataSource.getMission(number).toDomain()
+    }
+
+    override suspend fun getMissionType(type: String): GetMissionTypeEntity {
+        return dataSource.getMissionType(type).toDomain()
+    }
+
+    override suspend fun patchMissionClear(
+        header: String,
+        number: Int
+    ): PathMissionClearEntity =
+        dataSource.patchMissionClear(header, number).toDomain()
+
+
+    override suspend fun patchMissionFail(
+        header: String,
+        number: Int
+    ): PachMissionFailEntity {
+        return dataSource.patchMissionFail(header, number).toDomain()
+    }
 }
