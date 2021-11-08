@@ -3,7 +3,7 @@ package com.gsm.data.entity.mission.response
 
 import com.google.gson.annotations.SerializedName
 
-data class PatchMissionFailResponse(
+data class PathMissionClearResponse(
     @SerializedName("accessToken")
     val accessToken: String?,
     @SerializedName("authCompany")
