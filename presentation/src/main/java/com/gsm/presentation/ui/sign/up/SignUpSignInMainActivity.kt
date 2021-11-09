@@ -1,8 +1,11 @@
-package com.gsm.presentation
+package com.gsm.presentation.ui.sign.up
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.gsm.presentation.R
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignUpSignInMainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

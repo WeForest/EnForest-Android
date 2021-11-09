@@ -1,4 +1,4 @@
-package com.gsm.presentation
+package com.gsm.presentation.ui
 
 import android.content.Context
 import android.widget.BaseAdapter
