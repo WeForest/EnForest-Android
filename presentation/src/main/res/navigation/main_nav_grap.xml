@@ -3,7 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_grap"
-   >
+    app:startDestination="@id/fragmentMission">
+
+
+    <fragment
+        android:id="@+id/fragmentMission"
+        android:name="com.gsm.presentation.ui.mission.MissionFragment"
+        android:label="FragmentMission"
+        tools:layout="@layout/fragment_mission">
+        <action
+            android:id="@+id/action_fragmentMission_to_bottomSheetMissionDialog"
+            app:destination="@id/bottomSheetMissionDialog" />
+    </fragment>
+    <dialog
+        android:id="@+id/bottomSheetMissionDialog"
+        android:name="com.gsm.presentation.ui.mission.bottomSheet.BottomSheetMissionDialog"
+        android:label="BottomSheetMissionDialog"
+        tools:layout="@layout/bottom_sheet_dialog_write_mission" >
+
+    </dialog>
 
 
 </navigation>
