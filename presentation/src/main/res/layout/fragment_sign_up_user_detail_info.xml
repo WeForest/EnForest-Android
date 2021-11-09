@@ -1,0 +1,127 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/title_txt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/sign_up_title_txt_margin"
+        android:layout_marginTop="@dimen/sign_up_title_txt_margin"
+        android:fontFamily="@font/noto_sans_kr_bold"
+        android:includeFontPadding="false"
+        android:text="세부 정보를\n입력해 주세요"
+        android:textColor="@color/black"
+        android:textSize="45sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/input_goal_edit_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/sign_up_center_margin"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="@dimen/sign_up_center_margin"
+        android:background="@drawable/sign_up_edit_txt"
+        android:elevation="@dimen/sign_up_frame_elevation"
+        android:hint="자신의 목표를 적어주세요"
+        android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/title_txt"
+        app:layout_constraintStart_toStartOf="@+id/title_txt"
+        app:layout_constraintTop_toBottomOf="@+id/title_txt" />
+
+    <TextView
+        android:id="@+id/goal_ex_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/sign_up_center_ex_txt_margin"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="@dimen/sign_up_center_ex_txt_margin"
+        android:fontFamily="@font/noto_sans_kr_light"
+        android:includeFontPadding="false"
+        android:text="목표를 명확히 작성해 주세요"
+        android:textColor="@color/sign_up_ex_txt"
+        app:layout_constraintEnd_toEndOf="@+id/input_goal_edit_txt"
+        app:layout_constraintStart_toStartOf="@+id/input_goal_edit_txt"
+        app:layout_constraintTop_toBottomOf="@+id/input_goal_edit_txt" />
+
+    <EditText
+        android:id="@+id/input_hobby_edit_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/sign_up_center_margin"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="@dimen/sign_up_center_margin"
+        android:background="@drawable/sign_up_edit_txt"
+        android:elevation="@dimen/sign_up_frame_elevation"
+        android:hint="자신의 흥미있는것을 적어주세요"
+        android:padding="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/goal_ex_txt" />
+
+    <TextView
+        android:id="@+id/hobby_ex_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/sign_up_center_ex_txt_margin"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="@dimen/sign_up_center_ex_txt_margin"
+        android:fontFamily="@font/noto_sans_kr_light"
+        android:includeFontPadding="false"
+        android:text="취미를 명확히 작성해 주세요"
+        android:textColor="@color/sign_up_ex_txt"
+        app:layout_constraintEnd_toEndOf="@+id/input_goal_edit_txt"
+        app:layout_constraintStart_toStartOf="@+id/input_hobby_edit_txt"
+        app:layout_constraintTop_toBottomOf="@+id/input_hobby_edit_txt" />
+
+    <EditText
+        android:id="@+id/input_company_edit_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/sign_up_center_margin"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="@dimen/sign_up_center_margin"
+        android:background="@drawable/sign_up_edit_txt"
+        android:elevation="@dimen/sign_up_frame_elevation"
+        android:hint="회사 이메일을 적어주세요"
+        android:padding="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/hobby_ex_txt" />
+
+    <TextView
+        android:id="@+id/company_ex_txt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/sign_up_center_ex_txt_margin"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="@dimen/sign_up_center_ex_txt_margin"
+        android:fontFamily="@font/noto_sans_kr_light"
+        android:includeFontPadding="false"
+        android:text="만약 회사를 다니신다면 이메일을 적어주세요"
+        android:textColor="@color/sign_up_ex_txt"
+        app:layout_constraintEnd_toEndOf="@+id/input_company_edit_txt"
+        app:layout_constraintStart_toStartOf="@+id/input_company_edit_txt"
+        app:layout_constraintTop_toBottomOf="@+id/input_company_edit_txt" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/next_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/sign_up_bottom_next_btn_margin"
+        android:layout_marginEnd="@dimen/sign_up_bottom_next_btn_margin"
+        android:layout_marginBottom="@dimen/sign_up_bottom_next_btn_margin"
+        android:background="@drawable/sign_in_origin_login_btn"
+        android:fontFamily="@font/noto_sans_kr_medium"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:padding="@dimen/signup_next_btn_padding"
+        android:text="다음으로"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

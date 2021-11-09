@@ -20,14 +20,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/input_edit_txt"
+        android:id="@+id/input_goal_edit_txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/sign_up_center_margin"
         android:layout_marginTop="40dp"
         android:layout_marginEnd="@dimen/sign_up_center_margin"
         android:background="@drawable/sign_up_edit_txt"
-        android:elevation="10dp"
+        android:elevation="@dimen/sign_up_frame_elevation"
         android:hint="실제 이름을 입력해 주세요"
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="@+id/title_txt"
@@ -35,19 +35,19 @@
         app:layout_constraintTop_toBottomOf="@+id/title_txt" />
 
     <TextView
-        android:id="@+id/ex_txt"
+        android:id="@+id/goal_ex_txt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/noto_sans_kr_light"
         android:includeFontPadding="false"
         android:text="실제 이름을 사용하셔야 더욱 현실감이 있고 효과를 극대화 할수 있습니다"
         android:textColor="@color/sign_up_ex_txt"
-        app:layout_constraintEnd_toEndOf="@+id/input_edit_txt"
+        app:layout_constraintEnd_toEndOf="@+id/input_goal_edit_txt"
         android:layout_marginStart="@dimen/sign_up_center_ex_txt_margin"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="@dimen/sign_up_center_ex_txt_margin"
-        app:layout_constraintStart_toStartOf="@+id/input_edit_txt"
-        app:layout_constraintTop_toBottomOf="@+id/input_edit_txt" />
+        app:layout_constraintStart_toStartOf="@+id/input_goal_edit_txt"
+        app:layout_constraintTop_toBottomOf="@+id/input_goal_edit_txt" />
 
 
     <androidx.appcompat.widget.AppCompatButton
