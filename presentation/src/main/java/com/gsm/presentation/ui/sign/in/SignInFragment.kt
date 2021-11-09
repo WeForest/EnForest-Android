@@ -3,8 +3,10 @@ package com.gsm.presentation.ui.sign.`in`
 import android.content.Intent
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -14,6 +16,7 @@ import com.google.android.gms.tasks.Task
 import com.gsm.presentation.R
 import com.gsm.presentation.base.BaseFragment
 import com.gsm.presentation.databinding.FragmentSignInBinding
+import com.gsm.presentation.util.EventObserver
 import com.gsm.presentation.viewmodel.sign.`in`.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -31,7 +34,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
 
 
         view?.let { clickUserGoogleLogin(it) }
-
+        successLogin(view)
 //        getToken()
     }
 
@@ -93,6 +96,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
             // a listener.
             val task: Task<GoogleSignInAccount> = GoogleSignIn.getSignedInAccountFromIntent(data)
             handleSignInResult(task)
+
         }
     }
 
@@ -118,6 +122,18 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
             Log.d("TAG", "postLogin: $token")
             signInViewModel.postLogin(token)
         }
+    }
+
+    private fun successLogin(view: View?) {
+        signInViewModel.successMessage.observe(viewLifecycleOwner, EventObserver {
+            if (it) {
+
+                view?.findNavController()?.navigate(R.id.action_signInFragment_to_signUpNameFragment)
+                Toast.makeText(requireContext(),"성공",Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(),"실패",Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
 
