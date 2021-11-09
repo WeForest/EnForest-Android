@@ -1,8 +1,8 @@
-package com.gsm.data.entity.profile.response
+package com.gsm.data.entity.profile.request
 
 import com.google.gson.annotations.SerializedName
 
-data class GetNickNameResopnse (
+data class GetProfileRequest (
     @SerializedName("nickname")
     val nickname : String
 )
