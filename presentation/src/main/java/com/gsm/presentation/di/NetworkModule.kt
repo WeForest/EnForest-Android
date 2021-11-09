@@ -62,17 +62,17 @@ object NetworkModule {
     fun provideLoginService(retrofit: Retrofit): LoginService {
         return (retrofit.create(LoginService::class.java))
     }
-        @Provides
-        @Singleton
-        fun provideMissionService(retrofit: Retrofit): MissionService {
-            return (retrofit.create(MissionService::class.java))
-        }
 
-
-        // 서버로 부터 받아온 데이터 log 찍기
-        private fun getLoggingInterceptor(): HttpLoggingInterceptor =
-            HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
-
-
+    @Provides
+    @Singleton
+    fun provideMissionService(retrofit: Retrofit): MissionService {
+        return (retrofit.create(MissionService::class.java))
     }
+
+
+    // 서버로 부터 받아온 데이터 log 찍기
+    private fun getLoggingInterceptor(): HttpLoggingInterceptor =
+        HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
+
+
 }
