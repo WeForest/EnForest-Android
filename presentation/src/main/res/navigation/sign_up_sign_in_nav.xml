@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.gsm.presentation.SignInFragment"
+        android:name="com.gsm.presentation.ui.sign.in.SignInFragment"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in" >
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/signUpNameFragment"
-        android:name="com.kdn.presentation.SignUpNameFragment"
+        android:name="com.gsm.presentation.ui.sign.up.SignUpNameFragment"
         tools:layout="@layout/fragment_sign_up_name"
         android:label="SignUpNameFragment" >
 
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpUserPositionInfoFragment"
-        android:name="com.gsm.presentation.SignUpUserPositionInfoFragment"
+        android:name="com.gsm.presentation.ui.sign.up.SignUpUserPositionInfoFragment"
         tools:layout="@layout/fragment_sign_up_user_position_info"
         android:label="SignUpUserPositionInfoFragment" >
         <action
@@ -36,7 +36,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpUserDetailInfoFragment"
-        android:name="com.gsm.presentation.SignUpUserDetailInfoFragment"
+        android:name="com.gsm.presentation.ui.sign.up.SignUpUserDetailInfoFragment"
         tools:layout="@layout/fragment_sign_up_user_detail_info"
         android:label="SignUpUserDetailInfoFragment" />
 
