@@ -57,6 +57,9 @@ dependencies {
     androidTestImplementation (AndroidTest.EXT_JUNIT)
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
+    // DataStore
+    implementation "androidx.datastore:datastore-preferences:1.0.0-beta01"
+
     // dager hilt
     implementation (DaggerHilt.DAGGER_HILT)
     kapt (DaggerHilt.DAGGER_HILT_COMPILER)

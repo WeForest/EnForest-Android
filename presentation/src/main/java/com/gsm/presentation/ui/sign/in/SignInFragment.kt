@@ -34,7 +34,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
 
 
         view?.let { clickUserGoogleLogin(it) }
-        successLogin(view)
+        observeToken()
 //        getToken()
     }
 
@@ -121,17 +121,22 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
         lifecycleScope.launch {
             Log.d("TAG", "postLogin: $token")
             signInViewModel.postLogin(token)
+
         }
     }
 
-    private fun successLogin(view: View?) {
-        signInViewModel.successMessage.observe(viewLifecycleOwner, EventObserver {
-            if (it) {
-
-                view?.findNavController()?.navigate(R.id.action_signInFragment_to_signUpNameFragment)
-                Toast.makeText(requireContext(),"성공",Toast.LENGTH_SHORT).show()
+    private fun observeToken() {
+        signInViewModel.tokenValue.observe(requireActivity(), EventObserver {
+            if (it.isNotEmpty()) {
+                // token이 제대로 나오면 저장하고
+                signInViewModel.saveToken(it)
+                //화면이동하고
+                view?.findNavController()
+                    ?.navigate(R.id.action_signInFragment_to_signUpNameFragment)
+                // Toast를 띄운다.
+                Toast.makeText(requireContext(), "성공", Toast.LENGTH_SHORT).show()
             } else {
-                Toast.makeText(requireContext(),"실패",Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "실패", Toast.LENGTH_SHORT).show()
             }
         })
     }
