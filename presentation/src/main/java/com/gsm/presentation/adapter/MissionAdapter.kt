@@ -6,8 +6,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.gsm.domain.entity.GetMissionEntity
-import com.kdn.presentation.R
-import com.kdn.presentation.databinding.ItemMissionBinding
+import com.gsm.presentation.R
+import com.gsm.presentation.databinding.ItemMissionBinding
 
 class MissionAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var missionList = mutableListOf<GetMissionEntity>()
@@ -64,7 +64,6 @@ class MissionAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val diffUtilResult = movieDiffUtil.let { DiffUtil.calculateDiff(it) }
         missionList = mutableListOf(data)
         diffUtilResult.dispatchUpdatesTo(this)
-        notifyDataSetChanged()
     }
 
     class MissionDiffUtil(
