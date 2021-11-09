@@ -19,7 +19,7 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideMissionRepository(loginDataSourceImpl: LoginDataSourceImpl): LoginRepository {
+    fun provideLoginRepository(loginDataSourceImpl: LoginDataSourceImpl): LoginRepository {
         return LoginRepositoryImpl(loginDataSourceImpl)
     }
 
