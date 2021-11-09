@@ -10,10 +10,10 @@ import android.graphics.Color
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import com.gsm.presentation.R
 import com.gsm.presentation.ui.MainActivity
 import com.gsm.presentation.util.Constant.Companion.MISSION_CHANNEL_ID
 import com.gsm.presentation.util.Constant.Companion.NOTIFICATION_ID
-import com.kdn.presentation.R
 
 
 class MissionNotification : BroadcastReceiver() {

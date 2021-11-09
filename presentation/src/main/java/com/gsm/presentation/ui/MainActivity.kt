@@ -1,9 +1,9 @@
 package com.gsm.presentation.ui
 
 import android.os.Bundle
+import com.gsm.presentation.R
 import com.gsm.presentation.base.BaseActivity
-import com.kdn.presentation.R
-import com.kdn.presentation.databinding.ActivityMainBinding
+import com.gsm.presentation.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

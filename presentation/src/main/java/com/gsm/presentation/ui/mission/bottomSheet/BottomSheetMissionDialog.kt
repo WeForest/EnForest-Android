@@ -7,12 +7,12 @@ import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.chip.Chip
+import com.gsm.presentation.R
 import com.gsm.presentation.base.BaseBottomSheetDialogFragment
+import com.gsm.presentation.databinding.BottomSheetDialogWriteMissionBinding
 import com.gsm.presentation.util.EventObserver
 import com.gsm.presentation.util.extension.TimeConverter
 import com.gsm.presentation.viewmodel.mission.MissionViewModel
-import com.kdn.presentation.R
-import com.kdn.presentation.databinding.BottomSheetDialogWriteMissionBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.util.*
