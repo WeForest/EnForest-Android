@@ -2,10 +2,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gsm.presentation">
 
-    <application>
+    <application
+        android:allowBackup="true"
+        android:fullBackupContent="true"
+        android:name=".util.App"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.EnForest"
+        android:usesCleartextTraffic="true">
         <activity
-            android:name=".SignUpSignInMainActivity"
-            android:exported="true" >
+            android:name=".ui.sign.up.SignUpSignInMainActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
