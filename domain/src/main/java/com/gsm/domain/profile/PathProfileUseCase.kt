@@ -10,7 +10,7 @@ class PathProfileUseCase @Inject constructor(private val repository: ProfileRepo
 
 
     data class Params(
-       val authorization : String
+        val authorization : String
     )
 
     override suspend fun buildUseCaseObservable(params: Params): PathProfileEntity {

@@ -27,6 +27,7 @@
         <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_sign_up_user_job_search.xml" value="0.2" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_sign_up_user_situation.xml" value="0.264" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_study_meeting.xml" value="0.24739583333333334" />
+        <entry key="domain2/src/main/res/layout/activity_main.xml" value="0.2015625" />
         <entry key="presentation/src/main/res/drawable/background_practice_test.xml" value="0.1935185185185185" />
         <entry key="presentation/src/main/res/drawable/background_test.xml" value="0.1935185185185185" />
         <entry key="presentation/src/main/res/drawable/mission_write_background.xml" value="0.1935185185185185" />
@@ -35,7 +36,9 @@
         <entry key="presentation/src/main/res/drawable/profilelayout_background.xml" value="0.19074074074074074" />
         <entry key="presentation/src/main/res/drawable/sign_in_origin_login_btn.xml" value="0.19074074074074074" />
         <entry key="presentation/src/main/res/layout/activity_main.xml" value="0.32037037037037036" />
+        <entry key="presentation/src/main/res/layout/activity_main_profile.xml" value="0.1875" />
         <entry key="presentation/src/main/res/layout/activity_sign_up_sign_in_main.xml" value="0.32037037037037036" />
+        <entry key="presentation/src/main/res/layout/activitymain.xml" value="0.2015625" />
         <entry key="presentation/src/main/res/layout/fragment_mission.xml" value="0.32037037037037036" />
         <entry key="presentation/src/main/res/layout/fragment_mission_detail.xml" value="0.32037037037037036" />
         <entry key="presentation/src/main/res/layout/fragment_mission_detail_row.xml" value="0.32037037037037036" />
@@ -49,10 +52,12 @@
         <entry key="presentation/src/main/res/layout/fragment_test_main.xml" value="0.31598173515981737" />
         <entry key="presentation/src/main/res/layout/item_mission.xml" value="0.32037037037037036" />
         <entry key="presentation/src/main/res/layout/test_item.xml" value="0.31598173515981737" />
+        <entry key="presentation/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.21770833333333334" />
+        <entry key="presentation/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.21770833333333334" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

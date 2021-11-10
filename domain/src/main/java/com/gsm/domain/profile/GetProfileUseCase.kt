@@ -14,6 +14,6 @@ class GetProfileUseCase @Inject constructor(private val repository: ProfileRepos
     )
 
     override suspend fun buildUseCaseObservable(params: Params): GetProfileEntity {
-       return repository.getProfile(params.request)
+        return repository.getProfile(params.request)
     }
 }

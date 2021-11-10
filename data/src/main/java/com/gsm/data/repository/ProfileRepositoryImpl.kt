@@ -1,9 +1,9 @@
 package com.gsm.data.repository
 
 import com.gsm.data.datasource.profile.ProfileDataSourceImpl
+import com.gsm.data.maper.toDomain
+import com.gsm.data.maper.toRequest
 import com.gsm.domain.entity.request.GetProfileRequestEntity
-import com.gsm.data.mapper.profile.toDomain
-import com.gsm.data.mapper.profile.toRequest
 import com.gsm.domain.entity.response.GetProfileEntity
 import com.gsm.domain.entity.response.PathProfileEntity
 import com.gsm.domain.repository.ProfileRepository
@@ -19,5 +19,4 @@ class ProfileRepositoryImpl @Inject constructor(
     override suspend fun pathProfile(authorization: String): PathProfileEntity {
         return dataSource.pathProfile(authorization).toDomain()
     }
-
 }
