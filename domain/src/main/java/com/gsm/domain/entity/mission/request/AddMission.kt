@@ -1,4 +1,4 @@
-package com.gsm.domain.entity.request
+package com.gsm.domain.entity.mission.request
 
 data class AddMission(
     val level: Int?,

@@ -1,8 +1,8 @@
-package com.gsm.domain.entity
+package com.gsm.domain.entity.mission
 
 
 
-data class DeleteMissionEntity(
+data class AddMissionEntity(
     val content: String?,
     val createdAt: String?,
     val exp: Int?,

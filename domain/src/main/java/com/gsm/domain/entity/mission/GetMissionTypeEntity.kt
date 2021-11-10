@@ -1,8 +1,7 @@
-package com.gsm.domain.entity
+package com.gsm.domain.entity.mission
 
 
-
-data class GetMissionEntity(
+data class GetMissionTypeEntity(
     val content: String?,
     val createdAt: String?,
     val exp: Int?,
