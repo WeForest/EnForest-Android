@@ -3,15 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_grap"
-    app:startDestination="@id/fragmentMission">
+    app:startDestination="@id/missionFragment">
 
 
     <fragment
-        android:id="@+id/fragmentMission"
+        android:id="@+id/missionFragment"
         android:name="com.gsm.presentation.ui.mission.MissionFragment"
         android:label="FragmentMission"
         tools:layout="@layout/fragment_mission">
         <action
+            app:popUpToInclusive="true"
             android:id="@+id/action_fragmentMission_to_bottomSheetMissionDialog"
             app:destination="@id/bottomSheetMissionDialog" />
     </fragment>
