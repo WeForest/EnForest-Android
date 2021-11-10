@@ -1,14 +1,11 @@
 package com.gsm.data.repository
 
 import com.gsm.data.datasource.mission.MissionDataSourceImpl
-import com.gsm.data.entity.mission.response.AddMissionResponse
-import com.gsm.data.mapper.mission.toData
 import com.gsm.data.mapper.mission.toDomain
 import com.gsm.data.mapper.mission.toRequest
-import com.gsm.domain.entity.*
-import com.gsm.domain.entity.request.AddMission
+import com.gsm.domain.entity.mission.*
+import com.gsm.domain.entity.mission.request.AddMission
 import com.gsm.domain.repository.MissionRepository
-import retrofit2.Response
 import javax.inject.Inject
 
 class MissionRepositoryImpl @Inject constructor(
@@ -28,9 +25,10 @@ class MissionRepositoryImpl @Inject constructor(
         return dataSource.getMission(number).toDomain()
     }
 
-    override suspend fun getMissionType(type: String): GetMissionTypeEntity {
-        return dataSource.getMissionType(type).toDomain()
+    override suspend fun getMissionTypePage(type: String, page: Int): List<GetMissionTypePageEntity> {
+        return dataSource.getMissionTypePage(type, page).map { it.toDomain() }
     }
+
 
     override suspend fun patchMissionClear(
         header: String,

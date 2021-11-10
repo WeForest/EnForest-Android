@@ -8,9 +8,7 @@ interface MissionDataSource {
     suspend fun addMission(request: AddMissionRequest): AddMissionResponse
     suspend fun deleteMission(number: Int): DeleteMissioNResponse
     suspend fun getMission(number: Int): GetMissionResponse
-    suspend fun getMissionType(type: String): GetMissionTypeResponse
+    suspend fun getMissionTypePage(type: String, number: Int): List<GetMissionTypePageResponse>
     suspend fun patchMissionClear(header: String, number: Int): PathMissionClearResponse
     suspend fun patchMissionFail(header: String, number: Int): PathMissionFailResponse
-
-
 }
