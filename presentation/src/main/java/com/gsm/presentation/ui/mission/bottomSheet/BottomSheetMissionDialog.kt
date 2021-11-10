@@ -10,6 +10,9 @@ import com.google.android.material.chip.Chip
 import com.gsm.presentation.R
 import com.gsm.presentation.base.BaseBottomSheetDialogFragment
 import com.gsm.presentation.databinding.BottomSheetDialogWriteMissionBinding
+import com.gsm.presentation.ui.mission.MissionFragment.Companion.DAY
+import com.gsm.presentation.ui.mission.MissionFragment.Companion.MONTH
+import com.gsm.presentation.ui.mission.MissionFragment.Companion.WEEK
 import com.gsm.presentation.util.EventObserver
 import com.gsm.presentation.util.extension.TimeConverter
 import com.gsm.presentation.viewmodel.mission.MissionViewModel
@@ -54,7 +57,7 @@ class BottomSheetMissionDialog() :
                     }
                 }
             }
-            success.observe(this@BottomSheetMissionDialog,EventObserver {
+            success.observe(this@BottomSheetMissionDialog, EventObserver {
 
                 if (it) {
                     Toast.makeText(requireContext(), "성공했습니다 !.", Toast.LENGTH_SHORT).show()
@@ -81,9 +84,9 @@ class BottomSheetMissionDialog() :
     private fun chipText(): Int {
         return when (chipText) {
 
-            "daily" -> 1
-            "weekly" -> 7
-            "monthly" -> timeConverter.addMonth()
+            DAY -> 1
+            WEEK -> 7
+            MONTH -> timeConverter.addMonth()
             else -> 0
         }
     }
