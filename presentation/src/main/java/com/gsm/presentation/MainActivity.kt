@@ -1,8 +1,7 @@
-package com.gsm.presentation.ui.profile.activity
+package com.gsm.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.gsm.presentation.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
