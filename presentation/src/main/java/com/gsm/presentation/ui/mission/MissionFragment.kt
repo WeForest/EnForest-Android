@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.chip.Chip
@@ -16,6 +17,8 @@ import com.gsm.presentation.adapter.MissionAdapter
 import com.gsm.presentation.base.BaseFragment
 import com.gsm.presentation.databinding.FragmentMissionBinding
 import com.gsm.presentation.ui.mission.notification.MissionNotification
+import com.gsm.presentation.util.EventObserver
+import com.gsm.presentation.viewmodel.mission.MissionRemoteViewModel
 import com.gsm.presentation.viewmodel.mission.MissionViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -29,13 +32,34 @@ todo : 하루에 하나씩 미션이 울려 저장을 해야함 내부 db 사용
 class MissionFragment : BaseFragment<FragmentMissionBinding>(R.layout.fragment_mission) {
     private val missionAdapter: MissionAdapter by lazy { MissionAdapter() }
     private val viewModel: MissionViewModel by viewModels<MissionViewModel>()
+    private val remoteViewModel: MissionRemoteViewModel by viewModels<MissionRemoteViewModel>()
     override fun FragmentMissionBinding.onCreateView() {
         binding.fragment = this@MissionFragment
-    }
+        with(binding) {
+            missionDailyLayout.setOnClickListener {
 
-    var chipText = "daily"
+                val action = MissionFragmentDirections
+                    .actionMissionFragmentToMissionDetailFragment(DAY)
+                it?.findNavController()?.navigate(action)
+            }
+            missionWeeklyLayout.setOnClickListener {
 
-    val time: Long = 1000 * 60 * 60
+                val action = MissionFragmentDirections
+                    .actionMissionFragmentToMissionDetailFragment(WEEK)
+                it?.findNavController()?.navigate(action)
+
+            }
+                missionMonthlyLayout.setOnClickListener {
+                    val action = MissionFragmentDirections
+                        .actionMissionFragmentToMissionDetailFragment(MONTH)
+                    it?.findNavController()?.navigate(action)
+                }
+            }
+        }
+
+        var chipText = "daily"
+
+    val time: Long = 60 * 60
     var number: Int = 1
 
     override fun FragmentMissionBinding.onViewCreated() {
@@ -46,7 +70,12 @@ class MissionFragment : BaseFragment<FragmentMissionBinding>(R.layout.fragment_m
         setTimer()
         getMission()
         observeGetMissionType()
+        observeGetMission()
+        observeErrorMessage()
+
+
     }
+
 
 
     private fun alarmManager() {
@@ -59,20 +88,20 @@ class MissionFragment : BaseFragment<FragmentMissionBinding>(R.layout.fragment_m
         val alarmTimeAtUTC: Long = System.currentTimeMillis() + time
 
 
-        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.M) {
-            Log.d("alarm", "alarmManager: 성공 ! ")
-            alarmManager.setAlarmClock(
-                AlarmManager.AlarmClockInfo(alarmTimeAtUTC, pendingIntent),
-                pendingIntent
-            )
-        } else {
-            Log.d("alarm", "alarmManager: 실패 ! ")
-            alarmManager.setExactAndAllowWhileIdle(
-                AlarmManager.RTC_WAKEUP,
-                alarmTimeAtUTC,
-                pendingIntent
-            )
-        }
+                if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.M) {
+                    Log.d("alarm", "alarmManager: 성공 ! ")
+                    alarmManager.setAlarmClock(
+                        AlarmManager.AlarmClockInfo(alarmTimeAtUTC, pendingIntent),
+                        pendingIntent
+                    )
+                } else {
+                    Log.d("alarm", "alarmManager: 실패 ! ")
+                    alarmManager.setExactAndAllowWhileIdle(
+                        AlarmManager.RTC_WAKEUP,
+                        alarmTimeAtUTC,
+                        pendingIntent
+                    )
+                }
     }
 
 
@@ -81,6 +110,7 @@ class MissionFragment : BaseFragment<FragmentMissionBinding>(R.layout.fragment_m
         val task: TimerTask = object : TimerTask() {
             override fun run() {
                 Log.d("시간", "run: $time ")
+                getMission()
             }
         }
         timer.schedule(task, 0L, time)
@@ -98,7 +128,7 @@ class MissionFragment : BaseFragment<FragmentMissionBinding>(R.layout.fragment_m
         binding.chipType.setOnCheckedChangeListener { group, selectedChipId ->
             val chip = group.findViewById<Chip>(selectedChipId)
             val selectedMealType = chip.text.toString().lowercase(Locale.ROOT)
-            chipText=selectedMealType
+            chipText = selectedMealType
             when (chipText) {
                 DAY -> getMissionType(DAY, 1)
                 WEEK -> getMissionType(WEEK, 1)
@@ -110,15 +140,15 @@ class MissionFragment : BaseFragment<FragmentMissionBinding>(R.layout.fragment_m
 
 
     private fun observeGetMissionType() {
-        viewModel.missionPageData.observe(viewLifecycleOwner) {
-            Log.d("mission", "observeGetMissionType: ${it} ")
+        viewModel.missionPageData.observe(viewLifecycleOwner, EventObserver {
             when (it[0].type) {
                 DAY -> missionAdapter.setData(it)
                 WEEK -> missionAdapter.setData(it)
                 MONTH -> missionAdapter.setData(it)
             }
-        }
+        })
     }
+
 
     private fun setAdapter() {
         binding.recyclerView.apply {
@@ -136,6 +166,30 @@ class MissionFragment : BaseFragment<FragmentMissionBinding>(R.layout.fragment_m
             viewModel.getMission(number)
 
             Log.d("number", "getMission:  number : ${number}")
+        }
+    }
+
+    private fun observeGetMission() {
+        viewModel.missionData.observe(viewLifecycleOwner) {
+            lifecycleScope.launch {
+
+                remoteViewModel.insertMission(it)
+            }
+        }
+    }
+
+    private fun observeErrorMessage() {
+        viewModel.errorMessage.observe(viewLifecycleOwner) {
+            if (it.isNotEmpty()) {
+                Log.d("TAG", "observeErrorMessage: error")
+                binding.recyclerView.visibility = View.INVISIBLE
+                binding.errorLayout.visibility = View.VISIBLE
+
+            } else {
+                Log.d("TAG", "observeErrorMessage: not error")
+                binding.recyclerView.visibility = View.VISIBLE
+                binding.errorLayout.visibility = View.GONE
+            }
         }
     }
 
