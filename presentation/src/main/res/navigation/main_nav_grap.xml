@@ -15,14 +15,28 @@
             app:popUpToInclusive="true"
             android:id="@+id/action_fragmentMission_to_bottomSheetMissionDialog"
             app:destination="@id/bottomSheetMissionDialog" />
+        <action
+            android:id="@+id/action_missionFragment_to_missionDetailFragment"
+            app:destination="@id/missionDetailFragment" />
+
     </fragment>
     <dialog
         android:id="@+id/bottomSheetMissionDialog"
         android:name="com.gsm.presentation.ui.mission.bottomSheet.BottomSheetMissionDialog"
         android:label="BottomSheetMissionDialog"
         tools:layout="@layout/bottom_sheet_dialog_write_mission" >
-
     </dialog>
+    <fragment
+        android:id="@+id/missionDetailFragment"
+        tools:layout="@layout/fragment_mission_detail"
+        android:name="com.gsm.presentation.ui.mission.MissionDetailFragment"
+        android:label="MissionDetailFragment" >
+        <argument
+            android:name="type"
+            app:nullable="true"
+            android:defaultValue="true"
+            app:argType="string" />
+    </fragment>
 
 
 </navigation>
