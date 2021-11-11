@@ -59,18 +59,7 @@ fun GetMissionTypePageResponse.toDomain(): GetMissionTypePageEntity {
         )
 }
 
-fun GetMissionTypeResponse.toDomain(): GetMissionTypeEntity {
-    return GetMissionTypeEntity(
-        this.content,
-        this.createdAt,
-        this.exp,
-        this.expiredAt,
-        this.id,
-        this.level,
-        this.title,
-        this.type
-    )
-}
+
 
 fun PathMissionClearResponse.toDomain(): PathMissionClearEntity {
     return PathMissionClearEntity(
