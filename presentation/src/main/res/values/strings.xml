@@ -4,4 +4,7 @@
     <string name="day">daily</string>
     <string name="week">weekly</string>
     <string name="month">monthly</string>
+    <string name="low">low</string>
+    <string name="middle">middle</string>
+    <string name="high">high</string>
 </resources>
