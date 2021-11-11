@@ -1,7 +1,7 @@
 package com.gsm.domain.entity.mission.request
 
 data class AddMission(
-    val level: Int?,
+    val level: String?,
     val exp: Int?,
     val title: String?,
     val content: String?,
