@@ -34,19 +34,25 @@ class MissionViewModel @Inject constructor
     private val _missionData = MutableLiveData<GetMissionEntity>()
     val missionData: LiveData<GetMissionEntity> get() = _missionData
 
-    private val _missionPageData = MutableLiveData<List<GetMissionTypePageEntity>>()
-    val missionPageData: LiveData<List<GetMissionTypePageEntity>> get() = _missionPageData
+    private val _missionPageData = MutableLiveData<Event<List<GetMissionTypePageEntity>>>()
+    val missionPageData: LiveData<Event<List<GetMissionTypePageEntity>>> get() = _missionPageData
 
+    private val _errorMessage = MutableLiveData<String>()
+    val errorMessage: LiveData<String> get() = _errorMessage
+
+    init {
+        _errorMessage.value=""
+    }
 
     val success: LiveData<Event<Boolean>> get() = _success
-    suspend fun addMission(title: String, content: String, expiredAt: Int, type: String) =
+    suspend fun addMission(level:String,title: String, content: String, expiredAt: Int, type: String) =
         viewModelScope.launch {
             try {
                 Log.d(TAG, "addMission: content : ${content}")
                 addMissionUseCase.buildUseCaseObservable(
                     AddMissionUseCase.Params(
                         AddMission(
-                            0,
+                            level,
                             0,
                             title,
                             content,
@@ -88,11 +94,24 @@ class MissionViewModel @Inject constructor
                     page
                 )
             ).let {
-                _missionPageData.value = it
+                Log.d(TAG, "MissionViewModel - getMissionType : $it")
+
+                if (it?.isNotEmpty() == true) {
+                    _missionPageData.value = Event(it)
+                    _errorMessage.value = ""
+
+                } else {
+                    Log.d(TAG, "getMissionType:에러 ")
+                    _errorMessage.value = "에러"
+                }
+
 
             }
         } catch (e: Exception) {
-            Log.e(TAG, "getMissionType: $e")
+            Log.e(TAG, "getMissionType: ${e.message}")
+
+            _errorMessage.value = e.message
+
         }
     }
 }
