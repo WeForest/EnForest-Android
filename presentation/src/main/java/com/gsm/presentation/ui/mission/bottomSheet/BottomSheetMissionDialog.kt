@@ -32,10 +32,12 @@ class BottomSheetMissionDialog() :
     }
 
     var chipText = "daily"
+    var chipLevelText = "low"
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun BottomSheetDialogWriteMissionBinding.onViewCreated() {
         chipClickType()
+        chipLevelClickType()
         Log.d("TAG", "onViewCreated: ${chipText()}")
         with(viewModel) {
             // 미션생성하기
@@ -47,6 +49,7 @@ class BottomSheetMissionDialog() :
                             .isNotEmpty()
                     ) {
                         addMission(
+                            chipLevelText,
                             binding.missionWriteEditText.text.toString(),
                             binding.missionWriteContentEditText.text.toString(),
                             chipText(),
@@ -75,6 +78,17 @@ class BottomSheetMissionDialog() :
             val chip = group.findViewById<Chip>(selectedChipId)
             val selectedMealType = chip.text.toString().lowercase(Locale.ROOT)
             chipText = selectedMealType
+        }
+        Log.i("TAG", "chipClickType: ${chipText}")
+
+    }
+
+    private fun chipLevelClickType() {
+
+        binding.chipLevelType.setOnCheckedChangeListener { group, selectedChipId ->
+            val chip = group.findViewById<Chip>(selectedChipId)
+            val selectedMealType = chip.text.toString().lowercase(Locale.ROOT)
+            chipLevelText = selectedMealType
         }
         Log.i("TAG", "chipClickType: ${chipText}")
 
