@@ -15,7 +15,7 @@ import com.gsm.presentation.ui.mission.detail.NormalFragment
 
 class MissionDetailFragment :
     BaseFragment<FragmentMissionDetailBinding>(R.layout.fragment_mission_detail) {
-    val pagerAdapter = DetailPagerAdapter(requireActivity())
+    private val pagerAdapter: DetailPagerAdapter by lazy { DetailPagerAdapter(requireActivity()) }
 
 
     override fun FragmentMissionDetailBinding.onViewCreated() {
