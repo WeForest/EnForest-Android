@@ -9,5 +9,6 @@ class Constant {
         const val MISSION_CHANNEL_ID = "notification_channel"
         // 알림 시간 설정
         const val ALARM_TIMER = 5
+        const val DATABASE_NAME="mission"
     }
 }
