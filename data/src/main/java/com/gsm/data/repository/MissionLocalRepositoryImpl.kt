@@ -1,6 +1,6 @@
 package com.gsm.data.repository
 
-import com.gsm.data.datasource.mission.MissionDataSourceImpl
+import com.gsm.data.datasource.mission.local.MissionLocalDataSourceImpl
 import com.gsm.data.mapper.mission.toDomain
 import com.gsm.data.mapper.mission.toRequest
 import com.gsm.domain.entity.mission.*
@@ -8,8 +8,8 @@ import com.gsm.domain.entity.mission.request.AddMission
 import com.gsm.domain.repository.MissionRepository
 import javax.inject.Inject
 
-class MissionRepositoryImpl @Inject constructor(
-    private val dataSource: MissionDataSourceImpl
+class MissionLocalRepositoryImpl @Inject constructor(
+    private val dataSource: MissionLocalDataSourceImpl
 ) : MissionRepository {
 
     // domain -> data toData
@@ -25,7 +25,10 @@ class MissionRepositoryImpl @Inject constructor(
         return dataSource.getMission(number).toDomain()
     }
 
-    override suspend fun getMissionTypePage(type: String, page: Int): List<GetMissionTypePageEntity> {
+    override suspend fun getMissionTypePage(
+        type: String,
+        page: Int
+    ): List<GetMissionTypePageEntity> {
         return dataSource.getMissionTypePage(type, page).map { it.toDomain() }
     }
 
