@@ -15,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MissionRemoteViewModel @Inject constructor(
     private val getMissionUseCase: GetMissionUseCase,
-    private val insertMissionUsdCase: InsertMissionUsdCase
+    private val insertMissionUsdCase: InsertMissionUsdCase,
 ) : ViewModel() {
 
     suspend fun insertMission(getMissionEntity: GetMissionEntity) = viewModelScope.launch {
@@ -23,12 +23,15 @@ class MissionRemoteViewModel @Inject constructor(
         insertMissionUsdCase.buildUseCaseObservable(InsertMissionUsdCase.Params(getMissionEntity))
     }
 
-    private val _getMission = MutableLiveData<List<GetMissionEntity>>()
-    val getMission: LiveData<List<GetMissionEntity>> get() = _getMission
 
-    suspend fun getMission(type: String) = viewModelScope.launch {
-        getMissionUseCase.getMission(type).let {
-            Log.d(TAG, "getRemoteMission: ${it} ")
+    private val _getMission = MutableLiveData<List<GetMissionEntity>?>()
+    val getMission: LiveData<List<GetMissionEntity>?> get() = _getMission
+
+
+    fun getMission(type: String, level: String) = viewModelScope.launch {
+        Log.d(TAG, "MissionRemoteViewModel - getMission() called")
+        getMissionUseCase.getMission(type, level).let {
+            Log.d(TAG, "getMission: ${it}")
             _getMission.value = it
         }
     }

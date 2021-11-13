@@ -39,13 +39,21 @@ class MissionViewModel @Inject constructor
 
     private val _errorMessage = MutableLiveData<String>()
     val errorMessage: LiveData<String> get() = _errorMessage
+    private val _type = MutableLiveData<String>()
+    val type: LiveData<String> get() = _type
 
     init {
-        _errorMessage.value=""
+        _errorMessage.value = ""
     }
 
     val success: LiveData<Event<Boolean>> get() = _success
-    suspend fun addMission(level:String,title: String, content: String, expiredAt: Int, type: String) =
+    suspend fun addMission(
+        level: String,
+        title: String,
+        content: String,
+        expiredAt: Int,
+        type: String
+    ) =
         viewModelScope.launch {
             try {
                 Log.d(TAG, "addMission: content : ${content}")
@@ -96,7 +104,7 @@ class MissionViewModel @Inject constructor
             ).let {
                 Log.d(TAG, "MissionViewModel - getMissionType : $it")
 
-                if (it?.isNotEmpty() == true) {
+                if (it.isNotEmpty()) {
                     _missionPageData.value = Event(it)
                     _errorMessage.value = ""
 
@@ -113,5 +121,9 @@ class MissionViewModel @Inject constructor
             _errorMessage.value = e.message
 
         }
+    }
+
+     fun getType(type: String) {
+        _type.value = type
     }
 }
