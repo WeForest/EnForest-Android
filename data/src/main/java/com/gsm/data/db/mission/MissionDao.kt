@@ -14,9 +14,8 @@ interface MissionDao {
     suspend fun deleteMission(mission: GetMissionResponse)
 
 
-    @Query("SELECT * FROM mission_table WHERE :type =type  ")
-    fun getMission(type: String): List<GetMissionResponse>
-
+    @Query("SELECT * FROM mission_table WHERE type like :type and level like :level ")
+    fun getMission(type: String, level: String): List<GetMissionResponse>
 
 
 }
