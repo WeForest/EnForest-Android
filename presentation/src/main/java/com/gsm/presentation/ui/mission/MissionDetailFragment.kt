@@ -1,9 +1,9 @@
 package com.gsm.presentation.ui.mission
 
 import android.util.Log
-import android.view.View
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.gsm.presentation.R
 import com.gsm.presentation.adapter.DetailPagerAdapter
@@ -12,14 +12,17 @@ import com.gsm.presentation.databinding.FragmentMissionDetailBinding
 import com.gsm.presentation.ui.mission.detail.EasyFragment
 import com.gsm.presentation.ui.mission.detail.HardFragment
 import com.gsm.presentation.ui.mission.detail.NormalFragment
+import com.gsm.presentation.viewmodel.mission.MissionViewModel
 
 class MissionDetailFragment :
     BaseFragment<FragmentMissionDetailBinding>(R.layout.fragment_mission_detail) {
     private val pagerAdapter: DetailPagerAdapter by lazy { DetailPagerAdapter(requireActivity()) }
 
-
+    private val missionViewModel: MissionViewModel by activityViewModels()
+    private val args by navArgs<MissionDetailFragmentArgs>()
     override fun FragmentMissionDetailBinding.onViewCreated() {
         setUpViewPager()
+        missionViewModel.getType(args.type.toString())
 
     }
 
@@ -41,7 +44,7 @@ class MissionDetailFragment :
         binding.viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                Log.e("ViewPagerFragment", "Page ${position + 1}")
+                Log.d("ViewPagerFragment", "Page ${position + 1}")
             }
         })
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
