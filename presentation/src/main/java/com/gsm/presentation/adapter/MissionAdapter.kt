@@ -60,8 +60,8 @@ class MissionAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     fun setData(data: List<GetMissionTypePageEntity>) {
 
-        val movieDiffUtil = MissionDiffUtil(missionList, (data))
-        val diffUtilResult = movieDiffUtil.let { DiffUtil.calculateDiff(it) }
+        val missionDiffUtil = MissionDiffUtil(missionList, (data))
+        val diffUtilResult = missionDiffUtil.let { DiffUtil.calculateDiff(it) }
         missionList = data.toMutableList()
         diffUtilResult.dispatchUpdatesTo(this)
     }
