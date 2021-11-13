@@ -25,7 +25,7 @@ object DataBaseModule {
         MissionDataBase::class.java,
         DATABASE_NAME
 
-    ).fallbackToDestructiveMigration().build()
+    ).fallbackToDestructiveMigration().allowMainThreadQueries().build()
 
 
     @Singleton
