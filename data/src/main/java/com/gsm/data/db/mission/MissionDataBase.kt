@@ -9,7 +9,7 @@ import com.gsm.domain.entity.mission.GetMissionTypePageEntity
 
 @Database(
     entities = [GetMissionResponse::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 
 )
