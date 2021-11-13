@@ -59,7 +59,7 @@ class MissionFragment : BaseFragment<FragmentMissionBinding>(R.layout.fragment_m
 
         var chipText = "daily"
 
-    val time: Long = 60 * 60
+    val time: Long = 1000* 60 * 60
     var number: Int = 1
 
     override fun FragmentMissionBinding.onViewCreated() {
@@ -68,14 +68,12 @@ class MissionFragment : BaseFragment<FragmentMissionBinding>(R.layout.fragment_m
         setAdapter()
         alarmManager()
         setTimer()
-        getMission()
         observeGetMissionType()
         observeGetMission()
         observeErrorMessage()
 
 
     }
-
 
 
     private fun alarmManager() {
@@ -88,20 +86,20 @@ class MissionFragment : BaseFragment<FragmentMissionBinding>(R.layout.fragment_m
         val alarmTimeAtUTC: Long = System.currentTimeMillis() + time
 
 
-                if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.M) {
-                    Log.d("alarm", "alarmManager: 성공 ! ")
-                    alarmManager.setAlarmClock(
-                        AlarmManager.AlarmClockInfo(alarmTimeAtUTC, pendingIntent),
-                        pendingIntent
-                    )
-                } else {
-                    Log.d("alarm", "alarmManager: 실패 ! ")
-                    alarmManager.setExactAndAllowWhileIdle(
-                        AlarmManager.RTC_WAKEUP,
-                        alarmTimeAtUTC,
-                        pendingIntent
-                    )
-                }
+        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.M) {
+            Log.d("alarm", "alarmManager: 성공 ! ")
+            alarmManager.setAlarmClock(
+                AlarmManager.AlarmClockInfo(alarmTimeAtUTC, pendingIntent),
+                pendingIntent
+            )
+        } else {
+            Log.d("alarm", "alarmManager: 실패 ! ")
+            alarmManager.setExactAndAllowWhileIdle(
+                AlarmManager.RTC_WAKEUP,
+                alarmTimeAtUTC,
+                pendingIntent
+            )
+        }
     }
 
 
@@ -162,8 +160,8 @@ class MissionFragment : BaseFragment<FragmentMissionBinding>(R.layout.fragment_m
 
     private fun getMission() {
         lifecycleScope.launch {
-            number.plus(1)
-            viewModel.getMission(number)
+
+            viewModel.getMission(number++)
 
             Log.d("number", "getMission:  number : ${number}")
         }
@@ -172,7 +170,7 @@ class MissionFragment : BaseFragment<FragmentMissionBinding>(R.layout.fragment_m
     private fun observeGetMission() {
         viewModel.missionData.observe(viewLifecycleOwner) {
             lifecycleScope.launch {
-
+                Log.d("remote", "observeGetMission: 데이터가 추가됨")
                 remoteViewModel.insertMission(it)
             }
         }
