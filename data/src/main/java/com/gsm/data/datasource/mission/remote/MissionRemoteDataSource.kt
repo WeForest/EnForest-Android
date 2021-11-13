@@ -7,7 +7,7 @@ interface MissionRemoteDataSource {
     suspend fun deleteMission(mission: GetMissionResponse)
 
 
-    fun getMission(type:String): List<GetMissionResponse>
+    fun getMission(type:String,level:String): List<GetMissionResponse>
 
 
 }

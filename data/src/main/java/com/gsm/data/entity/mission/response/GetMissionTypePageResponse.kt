@@ -17,7 +17,7 @@ data class GetMissionTypePageResponse(
     @SerializedName("id")
     val id: Int?,
     @SerializedName("level")
-    val level: Int?,
+    val level: String?,
     @SerializedName("title")
     val title: String?,
     @SerializedName("type")
