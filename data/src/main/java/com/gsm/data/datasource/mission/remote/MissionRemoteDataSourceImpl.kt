@@ -14,8 +14,8 @@ class MissionRemoteDataSourceImpl @Inject constructor(private val dao: MissionDa
         return dao.deleteMission(mission)
     }
 
-    override fun getMission(type: String): List<GetMissionResponse> {
-        return dao.getMission(type)
+    override  fun getMission(type: String, level:String): List<GetMissionResponse>{
+        return dao.getMission(type,level)
     }
 
 
