@@ -34,7 +34,6 @@
         <argument
             android:name="type"
             app:nullable="true"
-            android:defaultValue="true"
             app:argType="string" />
     </fragment>
 
