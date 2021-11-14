@@ -4,7 +4,7 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 apply plugin: 'com.android.application'
-apply plugin: "androidx.navigation.safeargs.kotlin"
+
 android {
     compileSdk 31
 
@@ -54,22 +54,9 @@ dependencies {
     implementation(AndroidX.CONSTRAINT_LAYOUT)
     implementation(AndroidX.LEGACY)
     implementation project(path: ':data')
-    implementation 'com.google.android.gms:play-services-auth:19.2.0'
-    // workManager
-    implementation "androidx.work:work-runtime-ktx:2.7.0"
 
-    implementation project(path: ':data')
-    def roomVersion = "2.3.0"
-// DataStore
-    implementation "androidx.datastore:datastore-preferences:1.0.0"
-    implementation("androidx.room:room-runtime:$roomVersion")
-    annotationProcessor("androidx.room:room-compiler:$roomVersion")
-    // To use Kotlin annotation processing tool (kapt)
-    kapt("androidx.room:room-compiler:$roomVersion")
-    // optional - Kotlin Extensions and Coroutines support for Room
-    implementation("androidx.room:room-ktx:$roomVersion")
-    // optional - Guava support for Room, including Optional and ListenableFuture
-    implementation("androidx.room:room-guava:$roomVersion")
+
+    implementation 'androidx.test:core-ktx:1.3.0'
     androidTestImplementation(AndroidTest.EXT_JUNIT)
     implementation (KTX.CORE)
     implementation (AndroidX.APP_COMPAT)
@@ -84,6 +71,23 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation (AndroidTest.EXT_JUNIT)
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    // workManager
+    implementation "androidx.work:work-runtime-ktx:2.7.0"
+    def roomVersion = "2.3.0"
+
+    implementation("androidx.room:room-runtime:$roomVersion")
+    annotationProcessor("androidx.room:room-compiler:$roomVersion")
+    // To use Kotlin annotation processing tool (kapt)
+    kapt("androidx.room:room-compiler:$roomVersion")
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:$roomVersion")
+    // optional - Guava support for Room, including Optional and ListenableFuture
+    implementation("androidx.room:room-guava:$roomVersion")
+
+
+    //paging
+
+    implementation("androidx.paging:paging-runtime-ktx:3.0.1")
 
     // dager hilt
     implementation(DaggerHilt.DAGGER_HILT)
