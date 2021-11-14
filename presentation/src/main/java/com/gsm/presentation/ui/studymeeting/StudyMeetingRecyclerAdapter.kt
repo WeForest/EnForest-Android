@@ -1,4 +1,4 @@
-package com.kdn.presentation.view.community.partner
+package com.gsm.presentation.ui.studymeeting
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gsm.presentation.R
 import com.gsm.presentation.databinding.CommunityRecyclerViewItemBinding
 
-class PartnerRecyclerAdapter : RecyclerView.Adapter<PartnerRecyclerAdapter.PartnerRecyclerAdapterViewHolder>() {
+class StudyMeetingRecyclerAdapter : RecyclerView.Adapter<StudyMeetingRecyclerAdapter.StudyMeetingRecyclerAdapterViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): PartnerRecyclerAdapterViewHolder {
+    ): StudyMeetingRecyclerAdapterViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
 
         val binding = DataBindingUtil.inflate<CommunityRecyclerViewItemBinding>(
@@ -21,11 +21,11 @@ class PartnerRecyclerAdapter : RecyclerView.Adapter<PartnerRecyclerAdapter.Partn
             false
         )
 
-        return PartnerRecyclerAdapterViewHolder(binding)
+        return StudyMeetingRecyclerAdapterViewHolder(binding)
     }
 
 
-    override fun onBindViewHolder(holder: PartnerRecyclerAdapterViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: StudyMeetingRecyclerAdapterViewHolder, position: Int) {
 
     }
 
@@ -33,9 +33,8 @@ class PartnerRecyclerAdapter : RecyclerView.Adapter<PartnerRecyclerAdapter.Partn
         return 1
     }
 
-    class PartnerRecyclerAdapterViewHolder( val binding: CommunityRecyclerViewItemBinding) :
+    class StudyMeetingRecyclerAdapterViewHolder(private val binding: CommunityRecyclerViewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
     }
 }
-

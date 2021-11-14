@@ -1,4 +1,4 @@
-package com.kdn.presentation.view.community
+package com.gsm.presentation.ui.community
 
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
@@ -6,10 +6,10 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.gsm.presentation.R
+import com.gsm.presentation.base.BaseFragment
 import com.gsm.presentation.databinding.FragmentCommunityBinding
-import com.kdn.presentation.base.BaseFragment
-import com.kdn.presentation.view.community.partner.PartnerFragment
-import com.kdn.presentation.view.community.studymeeting.StudyMeetingFragment
+import com.gsm.presentation.ui.studymeeting.StudyMeetingFragment
+import com.gsm.presentation.ui.partner.PartnerFragment
 
 class CommunityFragment : BaseFragment<FragmentCommunityBinding>(R.layout.fragment_community) {
     private lateinit var navController: NavController

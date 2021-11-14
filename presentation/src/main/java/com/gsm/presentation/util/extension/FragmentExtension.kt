@@ -1,4 +1,4 @@
-package com.kdn.presentation.widget.dxtension
+package com.gsm.presentation.util.extension
 
 import android.content.Context
 import androidx.recyclerview.widget.LinearLayoutManager

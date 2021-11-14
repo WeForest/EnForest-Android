@@ -1,15 +1,10 @@
-package com.kdn.presentation.view.community.studymeeting
+package com.gsm.presentation.ui.studymeeting
 
-import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.gsm.presentation.R
+import com.gsm.presentation.base.BaseFragment
 import com.gsm.presentation.databinding.FragmentStudyMeetingBinding
-import com.kdn.presentation.base.BaseFragment
-import com.kdn.presentation.view.community.partner.PartnerRecyclerAdapter
-import com.kdn.presentation.widget.dxtension.showVertical
+import com.gsm.presentation.ui.partner.PartnerRecyclerAdapter
+import com.gsm.presentation.util.extension.showVertical
 import java.io.DataInputStream
 import java.io.DataOutputStream
 import java.net.ServerSocket
