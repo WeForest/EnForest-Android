@@ -54,7 +54,7 @@ dependencies {
     implementation(AndroidX.CONSTRAINT_LAYOUT)
     implementation(AndroidX.LEGACY)
     implementation project(path: ':data')
-
+    implementation 'com.google.android.gms:play-services-auth:19.2.0'
     // workManager
     implementation "androidx.work:work-runtime-ktx:2.7.0"
 
