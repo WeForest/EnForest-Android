@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_marginEnd="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:elevation="5dp"
+        android:background="@drawable/community_recycler_item_frame"
+        android:padding="20dp"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/profile_img"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/search_frame"
+              />
+
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/profile_img"
+                android:fontFamily="@font/noto_sans_kr_medium"
+                android:includeFontPadding="false"
+                android:text="사용자 이름"
+                android:textColor="@color/main_color"
+                android:textSize="17sp" />
+
+
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="코딩이 정말 힘든데 도와주세요!!!"
+            android:fontFamily="@font/noto_sans_kr_bold"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            android:textSize="23sp"
+            android:includeFontPadding="false"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2021년 11월 2일"
+            android:fontFamily="@font/noto_sans_kr_medium"
+            android:textColor="@color/main_color"
+            android:layout_marginTop="5dp"
+            android:textSize="18sp"
+            android:includeFontPadding="false"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="코딩 잘하는 방법이 뭐죠??!! 저랑 같이 공부해요!! \n구한다구욧 구구구구구구구구한다구욧"
+            android:fontFamily="@font/noto_sans_kr_medium"
+            android:textColor="#717171"
+            android:layout_marginTop="10dp"
+            android:textSize="18sp"
+            android:includeFontPadding="false"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="wrap_content"
+            >
+
+            <TextView
+                android:id="@+id/tag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:fontFamily="@font/noto_sans_kr_medium"
+                android:includeFontPadding="false"
+                android:text="#안드로이드"
+                android:textColor="@color/main_color"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/tag"
+                android:fontFamily="@font/noto_sans_kr_medium"
+                android:includeFontPadding="false"
+                android:layout_marginEnd="10dp"
+
+                android:text="#20Lv 이상"
+                android:textColor="@color/main_color"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/people"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="#최대 10명"
+                android:fontFamily="@font/noto_sans_kr_medium"
+                android:textColor="@color/main_color"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/level"
+                android:textSize="17sp"
+                android:includeFontPadding="false"
+                />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>
