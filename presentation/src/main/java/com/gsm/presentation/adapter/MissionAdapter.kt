@@ -5,12 +5,12 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.gsm.domain.entity.GetMissionEntity
+import com.gsm.domain.entity.mission.GetMissionTypePageEntity
 import com.gsm.presentation.R
 import com.gsm.presentation.databinding.ItemMissionBinding
 
 class MissionAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private var missionList = mutableListOf<GetMissionEntity>()
+    private var missionList = mutableListOf<GetMissionTypePageEntity>()
 
     companion object {
         const val RECENT_MISSION = 0
@@ -40,7 +40,7 @@ class MissionAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     class RecentMissionViewHolder(val binding: ItemMissionBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(data: GetMissionEntity) {
+        fun bind(data: GetMissionTypePageEntity) {
             binding.data = data
             binding.executePendingBindings()
         }
@@ -58,17 +58,17 @@ class MissionAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         }
     }
 
-    fun setData(data: GetMissionEntity) {
+    fun setData(data: List<GetMissionTypePageEntity>) {
 
-        val movieDiffUtil = MissionDiffUtil(missionList, listOf(data))
-        val diffUtilResult = movieDiffUtil.let { DiffUtil.calculateDiff(it) }
-        missionList = mutableListOf(data)
+        val missionDiffUtil = MissionDiffUtil(missionList, (data))
+        val diffUtilResult = missionDiffUtil.let { DiffUtil.calculateDiff(it) }
+        missionList = data.toMutableList()
         diffUtilResult.dispatchUpdatesTo(this)
     }
 
     class MissionDiffUtil(
-        private val oldList: List<GetMissionEntity>,
-        private val newList: List<GetMissionEntity>
+        private val oldList: List<GetMissionTypePageEntity>,
+        private val newList: List<GetMissionTypePageEntity>
     ) : DiffUtil.Callback() {
         override fun getOldListSize(): Int = oldList.size
 

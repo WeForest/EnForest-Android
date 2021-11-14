@@ -2,8 +2,8 @@ package com.gsm.data.mapper.mission
 
 import com.gsm.data.entity.mission.request.AddMissionRequest
 import com.gsm.data.entity.mission.response.*
-import com.gsm.domain.entity.*
-import com.gsm.domain.entity.request.AddMission
+import com.gsm.domain.entity.mission.*
+import com.gsm.domain.entity.mission.request.AddMission
 
 
 fun AddMissionResponse.toDomain(): AddMissionEntity {
@@ -45,18 +45,21 @@ fun GetMissionResponse.toDomain(): GetMissionEntity {
     )
 }
 
-fun GetMissionTypeResponse.toDomain(): GetMissionTypeEntity {
-    return GetMissionTypeEntity(
-        this.content,
-        this.createdAt,
-        this.exp,
-        this.expiredAt,
-        this.id,
+fun GetMissionTypePageResponse.toDomain(): GetMissionTypePageEntity {
+    return GetMissionTypePageEntity(
         this.level,
+        this.exp,
         this.title,
-        this.type
-    )
+        this.content,
+        this.expiredAt,
+        this.type,
+        this.id,
+        this.createdAt,
+
+        )
 }
+
+
 
 fun PathMissionClearResponse.toDomain(): PathMissionClearEntity {
     return PathMissionClearEntity(
@@ -94,6 +97,7 @@ fun PathMissionFailResponse.toDomain(): PachMissionFailEntity {
         this.sub
     )
 }
+
 fun AddMissionEntity.toData(): AddMissionResponse {
     return AddMissionResponse(
         this.content,

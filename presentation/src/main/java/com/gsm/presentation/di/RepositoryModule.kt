@@ -1,11 +1,15 @@
 package com.gsm.presentation.di
 
+
+import com.gsm.data.datasource.mission.local.MissionLocalDataSourceImpl
+import com.gsm.data.datasource.mission.remote.MissionRemoteDataSourceImpl
+import com.gsm.data.repository.MissionLocalRepositoryImpl
+import com.gsm.data.repository.MissionRemoteRepositoryImpl
 import com.gsm.domain.datasource.sign.LoginDataSourceImpl
 import com.gsm.domain.repository.LoginRepository
-import com.gsm.domain.repository.sign.LoginRepositoryImpl
-import com.gsm.data.datasource.mission.MissionDataSourceImpl
-import com.gsm.data.repository.MissionRepositoryImpl
+import com.gsm.domain.repository.MissionRemoteRepository
 import com.gsm.domain.repository.MissionRepository
+import com.gsm.domain.repository.sign.LoginRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -25,8 +29,15 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideMissionRepository(missionDataSourceImpl: MissionDataSourceImpl): MissionRepository {
-        return MissionRepositoryImpl(missionDataSourceImpl)
+    fun provideMissionRepository(missionDataSourceImpl: MissionLocalDataSourceImpl): MissionRepository {
+        return MissionLocalRepositoryImpl(missionDataSourceImpl)
     }
+
+    @Provides
+    @Singleton
+    fun provideMissionRemoteRepository(missionRemoteDataSourceImpl: MissionRemoteDataSourceImpl): MissionRemoteRepository {
+        return MissionRemoteRepositoryImpl(missionRemoteDataSourceImpl)
+    }
+
 
 }

@@ -4,5 +4,8 @@
     <string name="day">daily</string>
     <string name="week">weekly</string>
     <string name="month">monthly</string>
+    <string name="low">low</string>
+    <string name="middle">middle</string>
+    <string name="high">high</string>
     <string name="client_id">863855204367-hm6eoi341o031ig9ljnd2psncvr700g0.apps.googleusercontent.com</string>
 </resources>

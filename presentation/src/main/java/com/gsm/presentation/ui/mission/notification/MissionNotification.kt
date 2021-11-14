@@ -1,4 +1,4 @@
-package com.gsm.presentation.ui.mission
+package com.gsm.presentation.ui.mission.notification
 
 import android.app.NotificationChannel
 import android.app.NotificationManager

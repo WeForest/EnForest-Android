@@ -1,4 +1,4 @@
-package com.gsm.domain.entity
+package com.gsm.domain.entity.mission
 
 
 data class PathMissionClearEntity(

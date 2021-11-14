@@ -1,9 +1,11 @@
 package com.gsm.data.entity.mission.response
 
 
+import androidx.room.Entity
 import com.google.gson.annotations.SerializedName
 
-data class GetMissionTypeResponse(
+@Entity
+data class GetMissionTypePageResponse(
     @SerializedName("content")
     val content: String?,
     @SerializedName("createdAt")
@@ -15,7 +17,7 @@ data class GetMissionTypeResponse(
     @SerializedName("id")
     val id: Int?,
     @SerializedName("level")
-    val level: Int?,
+    val level: String?,
     @SerializedName("title")
     val title: String?,
     @SerializedName("type")
