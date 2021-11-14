@@ -38,4 +38,10 @@
     </fragment>
 
 
+
+    <fragment
+        android:id="@+id/communityFragment"
+        android:name="com.kdn.presentation.view.community.CommunityFragment"
+        tools:layout="@layout/fragment_community"
+        android:label="CommunityFragment" />
 </navigation>
