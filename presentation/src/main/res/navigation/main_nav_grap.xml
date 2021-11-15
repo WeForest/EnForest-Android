@@ -3,7 +3,33 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_grap"
-   >
+    app:startDestination="@id/profileFragment">
 
-
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.gsm.presentation.ui.profile.fragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_setProfileFragment"
+            app:destination="@id/setProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/setProfileFragment"
+        android:name="com.gsm.presentation.ui.profile.fragment.SetProfileFragment"
+        android:label="fragment_set_profile"
+        tools:layout="@layout/fragment_set_profile" >
+        <action
+            android:id="@+id/action_setProfileFragment_to_setProfileEndFragment"
+            app:destination="@id/setProfileEndFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/setProfileEndFragment"
+        android:name="com.gsm.presentation.ui.profile.fragment.SetProfileEndFragment"
+        android:label="fragment_set_profile_end"
+        tools:layout="@layout/fragment_set_profile_end" >
+        <action
+            android:id="@+id/action_setProfileEndFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
 </navigation>

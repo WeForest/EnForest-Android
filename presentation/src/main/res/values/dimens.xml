@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="sign_in_padding">30dp</dimen>
+    <dimen name="login_other_logo">50dp</dimen>
+    <dimen name="signup_next_btn_padding">10dp</dimen>
+    <dimen name="sign_up_title_txt_margin">30dp</dimen>
+    <dimen name="sign_up_center_margin">30dp</dimen>
+    <dimen name="sign_up_bottom_next_btn_margin">30dp</dimen>
+    <dimen name="sign_up_center_ex_txt_margin">40dp</dimen>
+    <dimen name="sign_up_frame_elevation">4dp</dimen>
+</resources>
