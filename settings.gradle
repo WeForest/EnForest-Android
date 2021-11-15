@@ -10,3 +10,4 @@ rootProject.name = "EnForest"
 include ':data'
 include ':domain'
 include ':presentation'
+include ':domain'
