@@ -1,9 +1,9 @@
-package com.gsm.presentation.ui.studymeeting
+package com.gsm.presentation.ui.study.meeting
 
 import com.gsm.presentation.R
 import com.gsm.presentation.base.BaseFragment
 import com.gsm.presentation.databinding.FragmentStudyMeetingBinding
-import com.gsm.presentation.ui.partner.PartnerRecyclerAdapter
+import com.gsm.presentation.ui.study.partner.PartnerRecyclerAdapter
 import com.gsm.presentation.util.extension.showVertical
 import java.io.DataInputStream
 import java.io.DataOutputStream

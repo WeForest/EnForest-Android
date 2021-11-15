@@ -1,4 +1,4 @@
-package com.gsm.presentation
+package com.gsm.presentation.util
 
 import android.widget.TextView
 import androidx.databinding.BindingAdapter

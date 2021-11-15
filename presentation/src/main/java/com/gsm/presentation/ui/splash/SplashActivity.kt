@@ -1,4 +1,4 @@
-package com.gsm.presentation.ui
+package com.gsm.presentation.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,7 @@ import androidx.lifecycle.asLiveData
 import com.gsm.presentation.R
 import com.gsm.presentation.base.BaseActivity
 import com.gsm.presentation.databinding.ActivitySplashBinding
+import com.gsm.presentation.ui.main.MainActivity
 import com.gsm.presentation.ui.sign.SignUpSignInMainActivity
 import com.gsm.presentation.viewmodel.sign.`in`.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint

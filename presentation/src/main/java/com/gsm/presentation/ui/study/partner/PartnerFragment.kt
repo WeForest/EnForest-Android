@@ -1,4 +1,4 @@
-package com.gsm.presentation.ui.partner
+package com.gsm.presentation.ui.study.partner
 
 import com.gsm.presentation.R
 import com.gsm.presentation.base.BaseFragment

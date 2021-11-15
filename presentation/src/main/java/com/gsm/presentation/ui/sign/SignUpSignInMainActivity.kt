@@ -1,4 +1,4 @@
-package com.gsm.presentation.ui.sign.up
+package com.gsm.presentation.ui.sign
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.gsm.presentation.ui.studymeeting
+package com.gsm.presentation.ui.study.meeting
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
