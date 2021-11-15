@@ -2,16 +2,15 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
-    id 'com.android.application'
 }
-
-
+apply plugin: 'com.android.application'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 android {
     compileSdk 31
 
     defaultConfig {
         minSdk 21
-        targetSdk 31
+        targetSdk 30
         versionCode 1
         versionName "1.0"
 
@@ -23,6 +22,13 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            java {
+                srcDirs += 'build/generated/source/navigation-args'
+            }
         }
     }
     compileOptions {
@@ -42,56 +48,81 @@ dependencies {
 
     implementation project(':domain')
 
+    implementation(KTX.CORE)
+    implementation(AndroidX.APP_COMPAT)
+    implementation(Google.MATERIAL)
+    implementation(AndroidX.CONSTRAINT_LAYOUT)
+    implementation(AndroidX.LEGACY)
+    implementation project(path: ':data')
+
+    // DataStore
+    implementation "androidx.datastore:datastore-preferences:1.0.0"
+    implementation 'com.google.android.gms:play-services-auth:19.2.0'
+    implementation 'androidx.test:core-ktx:1.3.0'
+    androidTestImplementation(AndroidTest.EXT_JUNIT)
     implementation (KTX.CORE)
     implementation (AndroidX.APP_COMPAT)
     implementation (Google.MATERIAL)
     implementation (AndroidX.CONSTRAINT_LAYOUT)
     implementation (AndroidX.LEGACY)
+    androidTestImplementation (AndroidTest.EXT_JUNIT)
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
-    implementation 'com.google.android.gms:play-services-auth:19.2.0'
-    implementation project(path: ':data')
     testImplementation 'junit:junit:4.+'
     androidTestImplementation (AndroidTest.EXT_JUNIT)
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    // workManager
+    implementation "androidx.work:work-runtime-ktx:2.7.0"
+    def roomVersion = "2.3.0"
 
-    // DataStore
-    implementation "androidx.datastore:datastore-preferences:1.0.0-beta01"
+    implementation("androidx.room:room-runtime:$roomVersion")
+    annotationProcessor("androidx.room:room-compiler:$roomVersion")
+    // To use Kotlin annotation processing tool (kapt)
+    kapt("androidx.room:room-compiler:$roomVersion")
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:$roomVersion")
+    // optional - Guava support for Room, including Optional and ListenableFuture
+    implementation("androidx.room:room-guava:$roomVersion")
+
+
+    //paging
+
+    implementation("androidx.paging:paging-runtime-ktx:3.0.1")
 
     // dager hilt
-    implementation (DaggerHilt.DAGGER_HILT)
-    kapt (DaggerHilt.DAGGER_HILT_COMPILER)
-    implementation (DaggerHilt.DAGGER_HILT_VIEW_MODEL)
-    kapt (DaggerHilt.DAGGER_HILT_ANDROIDX_COMPILER)
+    implementation(DaggerHilt.DAGGER_HILT)
+    kapt(DaggerHilt.DAGGER_HILT_COMPILER)
+    implementation(DaggerHilt.DAGGER_HILT_VIEW_MODEL)
+    kapt(DaggerHilt.DAGGER_HILT_ANDROIDX_COMPILER)
 
     // ViewModel
-    implementation (AndroidX.LIFECYCLE_VIEW_MODEL)
+    implementation(AndroidX.LIFECYCLE_VIEW_MODEL)
 
     // LiveData
-    implementation (AndroidX.LIFECYCLE_LIVEDATA)
+    implementation(AndroidX.LIFECYCLE_LIVEDATA)
 
     // Retrofit
-    implementation (Retrofit.RETROFIT)
-    implementation (Retrofit.CONVERTER_GSON)
-    implementation (Retrofit.CONVERTER_JAXB)
+    implementation(Retrofit.RETROFIT)
+    implementation(Retrofit.CONVERTER_GSON)
+    implementation(Retrofit.CONVERTER_JAXB)
 
     //okHttp
-    implementation (OkHttp.OKHTTP)
-    implementation (OkHttp.LOGGING_INTERCEPTOR)
+    implementation(OkHttp.OKHTTP)
+    implementation(OkHttp.LOGGING_INTERCEPTOR)
 
     //coroutines
-    implementation (Coroutines.COROUTINES)
+    implementation(Coroutines.COROUTINES)
 
     //by viewModel
-    implementation (AndroidX.ACTIVITY)
-    implementation (AndroidX.FRAGMENT)
+    implementation(AndroidX.ACTIVITY)
+    implementation(AndroidX.FRAGMENT)
 
     //nav component
-    implementation (NavComponent.NAVIGATION_FRAGMENT)
-    implementation (NavComponent.NAVIGATION_UI)
-    implementation (NavComponent.NAVIGATION_DYNAMIC_FEATURES_FRAGMENT)
-    androidTestImplementation (NavComponent.NAVIGATION_TESTING)
-    implementation (NavComponent.NAVIGATION_COMPOSE)
+    implementation(NavComponent.NAVIGATION_FRAGMENT)
+    implementation(NavComponent.NAVIGATION_UI)
+    implementation(NavComponent.NAVIGATION_DYNAMIC_FEATURES_FRAGMENT)
+    androidTestImplementation(NavComponent.NAVIGATION_TESTING)
+    implementation(NavComponent.NAVIGATION_COMPOSE)
 }

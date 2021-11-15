@@ -1,6 +1,7 @@
 package com.gsm.presentation.di
 
 import com.gsm.data.network.service.sign.LoginService
+import com.gsm.data.network.service.MissionService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -28,8 +29,7 @@ object NetworkModule {
             .connectTimeout(100, TimeUnit.SECONDS)
             // 얼마나 빨리 서버로 데이터를 받을 수 있는지 판단한다.
             .writeTimeout(100, TimeUnit.SECONDS)
-            .// 이 클라이언트를 통해 오고 가는 네트워크 요청/응답을 로그로 표시하도록 합니다.
-            addInterceptor(getLoggingInterceptor())
+            .addInterceptor(getLoggingInterceptor())
             .build()
 
     }
@@ -63,6 +63,11 @@ object NetworkModule {
         return (retrofit.create(LoginService::class.java))
     }
 
+    @Provides
+    @Singleton
+    fun provideMissionService(retrofit: Retrofit): MissionService {
+        return (retrofit.create(MissionService::class.java))
+    }
 
 
     // 서버로 부터 받아온 데이터 log 찍기

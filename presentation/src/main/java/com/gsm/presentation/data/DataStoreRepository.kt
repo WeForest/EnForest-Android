@@ -1,4 +1,4 @@
-package com.gsm.presentation
+package com.gsm.presentation.data
 
 import android.content.Context
 import android.util.Log
@@ -8,7 +8,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.gsm.presentation.DataStoreRepository.PreferencesKeys.dataStoreToken
+import com.gsm.presentation.data.DataStoreRepository.PreferencesKeys.dataStoreToken
 import com.gsm.presentation.util.Constant.Companion.DEFAULT_TOKEN
 import com.gsm.presentation.util.Constant.Companion.PREFERENCES_TOKEN
 import com.gsm.presentation.util.Constant.Companion.PREFERENCE_NAME

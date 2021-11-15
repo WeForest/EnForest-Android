@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/KyungMin/AppData/Local/Android/Sdk/platforms/android-31/data/res/drawable/status_bar_item_app_background.xml" value="0.46770833333333334" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/drawable/item_background.xml" value="0.27395833333333336" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/drawable/mission_item_background.xml" value="0.2814814814814815" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/drawable/mission_right.xml" value="0.46822916666666664" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/drawable/mission_write_background.xml" value="0.1" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/drawable/right.xml" value="0.2814814814814815" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/drawable/search_frame.xml" value="0.2833333333333333" />
@@ -14,13 +16,17 @@
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/activity_sign_up_sign_in_main.xml" value="0.4" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/bottom_sheet_dialog_mission.xml" value="0.176" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/bottom_sheet_dialog_write_mission.xml" value="0.264" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/community_recycler_view_item.xml" value="0.2609375" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_auth_number_input.xml" value="0.4484375" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_community.xml" value="0.264" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_id_input.xml" value="0.4484375" />
-        <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_mission.xml" value="0.264" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_mission.xml" value="0.4" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_mission_detail.xml" value="0.2198581560283688" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_mission_detail_row.xml" value="0.2" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_mission_easy.xml" value="0.4515625" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_mission_hard.xml" value="0.4515625" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_mission_main.xml" value="0.4" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_mission_normal.xml" value="0.4515625" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_mission_row.xml" value="0.2198581560283688" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_partner.xml" value="0.2578125" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_password_input.xml" value="0.2578125" />
@@ -33,8 +39,9 @@
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_sign_up_user_job_search.xml" value="0.45208333333333334" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_sign_up_user_position_info.xml" value="0.264" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_sign_up_user_situation.xml" value="0.45208333333333334" />
-        <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_study_meeting.xml" value="0.2578125" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_study_meeting.xml" value="0.536" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_test_main.xml" value="0.264" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/item_get_mission.xml" value="0.45208333333333334" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/item_mission.xml" value="0.536" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest/app/src/main/res/layout/activity_sign.xml" value="0.45208333333333334" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest/app/src/main/res/layout/fragment_sign.xml" value="0.536" />

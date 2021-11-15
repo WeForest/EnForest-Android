@@ -1,14 +1,17 @@
-package com.gsm.presentation.ui.sign.up
+package com.gsm.presentation.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.gsm.presentation.R
+import com.gsm.presentation.base.BaseActivity
+import com.gsm.presentation.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SignUpSignInMainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
+
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_up_sign_in_main)
+
     }
 }
