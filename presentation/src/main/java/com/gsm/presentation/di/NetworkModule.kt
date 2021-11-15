@@ -3,6 +3,8 @@ package com.gsm.presentation.di
 import com.gsm.domain.sign.LoginService
 import dagger.Provides
 import dagger.Module
+import com.gsm.data.network.service.sign.LoginService
+import com.gsm.data.network.service.MissionService
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
@@ -69,6 +71,11 @@ object NetworkModule {
         return (retrofit.create(LoginService::class.java))
     }
 
+    @Provides
+    @Singleton
+    fun provideLoginService(retrofit: Retrofit): LoginService {
+        return (retrofit.create(LoginService::class.java))
+    }
 
 
     // 서버로 부터 받아온 데이터 log 찍기

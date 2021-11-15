@@ -18,12 +18,33 @@ object DataSourceModule {
     @Singleton
     fun provideUserProfileDataSource(authRemote: ProfileService): ProfileDataSourceImpl {
         return ProfileDataSourceImpl(authRemote)
+    }
 
         @Provides
         @Singleton
         fun provideLoginSource(authRemote: LoginService): LoginDataSourceImpl {
             return LoginDataSourceImpl(authRemote)
         }
+    fun provideMissionLocalDataSource(authRemote: MissionService): MissionLocalDataSourceImpl {
+        return MissionLocalDataSourceImpl(authRemote)
+    }
 
+    @Provides
+    @Singleton
+    fun provideMissionDataSource(dao: MissionDao): MissionRemoteDataSourceImpl {
+        return MissionRemoteDataSourceImpl(dao)
+    }
+    @Provides
+    @Singleton
+    fun provideLoginSource(authRemote: LoginService): LoginDataSourceImpl {
+        return LoginDataSourceImpl(authRemote)
+    }
+    @Provides
+    @Singleton
+    fun provideUserDataSource(authRemote: MissionService): MissionLocalDataSource {
+        return MissionLocalDataSourceImpl(authRemote)
     }
 }
+
+
+

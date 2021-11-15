@@ -40,5 +40,21 @@
         tools:layout="@layout/fragment_sign_up_user_detail_info"
         android:label="SignUpUserDetailInfoFragment" />
 
+        <action
+            android:id="@+id/action_signInFragment_to_signUpNameFragment"
+            app:destination="@id/signUpNameFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signUpNameFragment"
+        android:name="com.gsm.presentation.ui.sign.up.SignUpNameFragment"
+        tools:layout="@layout/fragment_sign_up_name"
+        android:label="SignUpNameFragment" >
+
+        <action
+            android:id="@+id/action_signUpNameFragment_to_signUpUserPositionInfoFragment"
+            app:destination="@id/signUpUserPositionInfoFragment" />
+    </fragment>
+
 
 </navigation>
