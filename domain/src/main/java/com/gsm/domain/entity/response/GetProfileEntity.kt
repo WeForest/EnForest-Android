@@ -4,23 +4,23 @@ import com.google.gson.annotations.SerializedName
 
 data class GetProfileEntity(
     @SerializedName("id")
-    val id: String,
+    val id: Int,
     @SerializedName("sub")
     val sub: String,
     @SerializedName("name")
     val name: String,
     @SerializedName("profileImg")
-    val profileImg: Boolean,
+    val profileImg: String,
     @SerializedName("isJobSeeker")
-    val isJobSeeker: String,
+    val isJobSeeker: Boolean,
     @SerializedName("companyEmail")
-    val companyEmail: Boolean,
+    val companyEmail: String,
     @SerializedName("authCompany")
-    val authCompany: String,
+    val authCompany: Boolean,
     @SerializedName("purpose")
-    val purpose: Int,
+    val purpose: String,
     @SerializedName("level")
     val level: Int,
     @SerializedName("exp")
-    val exp: String
+    val exp: Int
 )
