@@ -1,4 +1,4 @@
-package com.gsm.presentation.ui
+package com.gsm.presentation.ui.profile.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
