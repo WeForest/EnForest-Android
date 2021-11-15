@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/signup_signin_nav"
+    app:startDestination="@id/signInFragment">
+
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.gsm.presentation.ui.sign.in.activity.SignInFragment"
+        android:label="fragment_sign_in"
+        tools:layout="@layout/fragment_sign_in" >
+        <action
+            android:id="@+id/action_signInFragment_to_signUpNameFragment"
+            app:destination="@id/signUpNameFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/signUpNameFragment"
+        android:name="com.gsm.presentation.ui.sign.up.fragment.SignUpNameFragment"
+        tools:layout="@layout/fragment_sign_up_name"
+        android:label="SignUpNameFragment" >
+
+        <action
+            android:id="@+id/action_signUpNameFragment_to_signUpUserPositionInfoFragment"
+            app:destination="@id/signUpUserPositionInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpUserPositionInfoFragment"
+        android:name="com.gsm.presentation.ui.sign.up.fragment.SignUpUserPositionInfoFragment"
+        tools:layout="@layout/fragment_sign_up_user_position_info"
+        android:label="SignUpUserPositionInfoFragment" >
+        <action
+            android:id="@+id/action_signUpUserPositionInfoFragment_to_signUpUserDetailInfoFragment"
+            app:destination="@id/signUpUserDetailInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpUserDetailInfoFragment"
+        android:name="com.gsm.presentation.ui.sign.up.fragment.SignUpUserDetailInfoFragment"
+        tools:layout="@layout/fragment_sign_up_user_detail_info"
+        android:label="SignUpUserDetailInfoFragment" />
+
+
+</navigation>
