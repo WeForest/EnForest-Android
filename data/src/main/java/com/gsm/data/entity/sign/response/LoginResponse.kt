@@ -1,4 +1,4 @@
-package com.gsm.domain.entity.sign.response
+package com.gsm.data.entity.sign.response
 
 
 import com.google.gson.annotations.SerializedName

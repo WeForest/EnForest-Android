@@ -1,9 +1,9 @@
-package com.gsm.domain.datasource.sign
+package com.gsm.data.datasource.sign
 
-import com.gsm.domain.base.BaseDataSource
-import com.gsm.domain.entity.sign.request.TokenRequest
-import com.gsm.domain.entity.sign.response.LoginResponse
-import com.gsm.domain.network.service.sign.LoginService
+import com.gsm.data.base.BaseDataSource
+import com.gsm.data.entity.sign.request.TokenRequest
+import com.gsm.data.entity.sign.response.LoginResponse
+import com.gsm.data.network.service.sign.LoginService
 import javax.inject.Inject
 
 class LoginDataSourceImpl @Inject constructor(override val service: LoginService) :

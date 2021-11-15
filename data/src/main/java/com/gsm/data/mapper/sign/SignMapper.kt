@@ -1,9 +1,9 @@
-package com.gsm.domain.mapper.sign
+package com.gsm.data.mapper.sign
 
 import com.gsm.domain.entity.request.sign.TokenEntity
 import com.gsm.domain.entity.response.LoginEntity
-import com.gsm.domain.entity.sign.request.TokenRequest
-import com.gsm.domain.entity.sign.response.LoginResponse
+import com.gsm.data.entity.sign.request.TokenRequest
+import com.gsm.data.entity.sign.response.LoginResponse
 
 fun LoginResponse.toDomain(): LoginEntity {
     return LoginEntity(

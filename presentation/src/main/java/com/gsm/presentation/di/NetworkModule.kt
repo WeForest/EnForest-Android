@@ -1,6 +1,6 @@
 package com.gsm.presentation.di
 
-import com.gsm.domain.network.service.sign.LoginService
+import com.gsm.data.network.service.sign.LoginService
 import com.gsm.data.network.service.MissionService
 import dagger.Module
 import dagger.Provides

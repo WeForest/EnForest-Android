@@ -1,13 +1,13 @@
 package com.gsm.presentation.di
 
+import com.gsm.data.datasource.sign.LoginDataSourceImpl
+import com.gsm.data.network.service.sign.LoginService
 import com.gsm.data.datasource.mission.local.MissionLocalDataSource
 import com.gsm.data.datasource.mission.local.MissionLocalDataSourceImpl
 import com.gsm.data.datasource.mission.remote.MissionRemoteDataSource
 import com.gsm.data.datasource.mission.remote.MissionRemoteDataSourceImpl
 import com.gsm.data.db.mission.MissionDao
 import com.gsm.data.network.service.MissionService
-import com.gsm.domain.datasource.sign.LoginDataSourceImpl
-import com.gsm.domain.network.service.sign.LoginService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
