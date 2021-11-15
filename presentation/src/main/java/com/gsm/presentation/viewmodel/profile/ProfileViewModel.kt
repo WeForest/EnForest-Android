@@ -29,19 +29,26 @@ class ProfileViewModel @Inject constructor(
     private val _profileData = MutableLiveData<GetProfileEntity>()
     val profileData: LiveData<GetProfileEntity> get() = _profileData
 
-    private var name : String? = null
+    private val _isJobSeeker = MutableLiveData<Boolean>()
+    val isJobSeeker: LiveData<Boolean> get() = _isJobSeeker
 
-    private var isJobSeeker : Boolean = true
+    private val _interests = MutableLiveData<Interests>()
+    val interests: LiveData<Interests> get() = _interests
 
-    private lateinit var major : Major
+    private val _purpose = MutableLiveData<String>()
+    val purpose: LiveData<String> get() = _purpose
 
-    private lateinit var interests : Interests
+    private val _email = MutableLiveData<String>()
+    val email : LiveData<String> get() = _email
 
-    private var purpose : String = ""
+    private val _name = MutableLiveData<String>()
+    val name : LiveData<String> get() = _name
 
-    private var email : String = ""
+    private val _userProfile = MutableLiveData<String>()
+    val userProfile : LiveData<String> get() = _userProfile
 
-    private var userProfile : String? = null
+    private val _major = MutableLiveData<Major>()
+    val major : LiveData<Major> get() = _major
 
     //값이 잘 왔는지 확인하기위한 boolean 값
     private val _isSuccess = MutableLiveData<Event<Boolean>>()
@@ -49,9 +56,9 @@ class ProfileViewModel @Inject constructor(
 
 
     fun setProfileEmailNameProfile(email : String, name : String, profile : String){
-        this.email = email
-        this.name = name
-        this.userProfile = profile
+        this._email.value = email
+        this._name.value = name
+        this._userProfile.value = profile
     }
 
     //우선 string 값 한개만 들어가가게 설정
@@ -59,12 +66,12 @@ class ProfileViewModel @Inject constructor(
     suspend fun setProfilePurposeMajor(interests: String, major : String){
 
         val itemInterests = InterestsItem(interests)
-        this.interests[0] = itemInterests
+        this._interests.value?.set(0, itemInterests)
 
         val itemMajor = MajorItem(major)
-        this.major[0] = itemMajor
+        this._major.value?.set(0, itemMajor)
 
-        pathProfile(name,purpose,isJobSeeker,email,this.major,this.interests)
+        pathProfile(_name.value,_purpose.value,_isJobSeeker.value!!,_email.value,this._major.value!!,this._interests.value!!)
     }
 
 
@@ -88,11 +95,11 @@ class ProfileViewModel @Inject constructor(
     }
 
     fun isJobSicker(){
-        isJobSeeker = true
+        _isJobSeeker.value = true
     }
 
     fun isCompany(){
-        isJobSeeker = false
+        _isJobSeeker.value = false
     }
 
     suspend fun pathProfile(name : String?, purpose : String?, isJobSeeker : Boolean, companyEmail : String?, Major : Major, Interests : Interests
