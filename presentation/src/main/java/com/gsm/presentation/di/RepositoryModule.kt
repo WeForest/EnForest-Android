@@ -3,6 +3,9 @@ package com.gsm.presentation.di
 import com.gsm.data.datasource.profile.ProfileDataSourceImpl
 import com.gsm.data.repository.ProfileRepositoryImpl
 import com.gsm.domain.repository.ProfileRepository
+import com.gsm.domain.sign.LoginDataSourceImpl
+import com.gsm.domain.repository.LoginRepository
+import com.gsm.domain.sign.LoginRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,6 +20,12 @@ object RepositoryModule {
     @Singleton
     fun provideProfileRepository(profileDataSourceImpl: ProfileDataSourceImpl): ProfileRepository {
         return ProfileRepositoryImpl(profileDataSourceImpl)
-    }
 
+        @Provides
+        @Singleton
+        fun provideMissionRepository(loginDataSourceImpl: LoginDataSourceImpl): LoginRepository {
+            return LoginRepositoryImpl(loginDataSourceImpl)
+        }
+
+    }
 }

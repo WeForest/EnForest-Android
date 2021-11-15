@@ -1,9 +1,8 @@
 package com.gsm.data.maper
 
-import com.gsm.data.entity.profile.request.GetProfileRequest
+import com.gsm.data.entity.profile.request.PathProfileRequest
 import com.gsm.data.entity.profile.response.GetProfileResponse
 import com.gsm.data.entity.profile.response.PathProfileResponse
-import com.gsm.domain.entity.request.GetProfileRequestEntity
 import com.gsm.domain.entity.response.GetProfileEntity
 import com.gsm.domain.entity.response.PathProfileEntity
 
@@ -11,6 +10,7 @@ import com.gsm.domain.entity.response.PathProfileEntity
 
 fun GetProfileResponse.toDomain() : GetProfileEntity {
     return GetProfileEntity(
+        this.id,
         this.sub,
         this.name,
         this.profileImg,
@@ -19,10 +19,10 @@ fun GetProfileResponse.toDomain() : GetProfileEntity {
         this.authCompany,
         this.purpose,
         this.level,
-        this.exp,
-        this.id
+        this.exp
     )
 }
+
 
 fun PathProfileResponse.toDomain() : PathProfileEntity {
     return PathProfileEntity(
@@ -36,13 +36,5 @@ fun PathProfileResponse.toDomain() : PathProfileEntity {
         this.level,
         this.exp,
         this.id
-    )
-}
-
-// domain 딴에 있는 entity 의 값을 data 의 GetProfileRequestEntity 형식으로 끌어다쓰게 만들어준다.
-
-fun GetProfileRequestEntity.toRequest() : GetProfileRequest {
-    return GetProfileRequest (
-        this.nickname
     )
 }
