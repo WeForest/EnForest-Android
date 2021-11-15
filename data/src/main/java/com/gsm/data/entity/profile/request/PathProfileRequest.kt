@@ -1,8 +1,8 @@
 package com.gsm.data.entity.profile.request
 
 import com.google.gson.annotations.SerializedName
-import com.gsm.domain.entity.request.profile.Interests
-import com.gsm.domain.entity.request.profile.Major
+import com.gsm.domain.entity.request.profile.InterestsItem
+import com.gsm.domain.entity.request.profile.MajorItem
 
 data class PathProfileRequest(
     @SerializedName("nickname")
@@ -14,8 +14,8 @@ data class PathProfileRequest(
     @SerializedName("companyEmail")
     val companyEmail: String?,
     @SerializedName("Major")
-    val Major: Major,
+    val Major: MajorItem,
     @SerializedName("Major")
-    val Interests: Interests
+    val Interests: InterestsItem
 
 )

@@ -3,6 +3,7 @@ package com.gsm.data.maper
 import com.gsm.data.entity.profile.request.PathProfileRequest
 import com.gsm.data.entity.profile.response.GetProfileResponse
 import com.gsm.data.entity.profile.response.PathProfileResponse
+import com.gsm.domain.entity.request.profile.PathProfile
 import com.gsm.domain.entity.response.GetProfileEntity
 import com.gsm.domain.entity.response.PathProfileEntity
 
@@ -20,6 +21,17 @@ fun GetProfileResponse.toDomain() : GetProfileEntity {
         this.purpose,
         this.level,
         this.exp
+    )
+}
+
+fun PathProfile.toDomain() : PathProfileRequest{
+    return PathProfileRequest(
+        this.name,
+        this.purpose,
+        this.isJobSeeker,
+        this.companyEmail,
+        this.Major,
+        this.Interests
     )
 }
 
