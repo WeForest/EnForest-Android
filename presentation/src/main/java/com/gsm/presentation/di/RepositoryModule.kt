@@ -1,8 +1,8 @@
 package com.gsm.presentation.di
 
-import com.gsm.domain.datasource.sign.LoginDataSourceImpl
+import com.gsm.data.datasource.sign.LoginDataSourceImpl
 import com.gsm.domain.repository.LoginRepository
-import com.gsm.domain.repository.sign.LoginRepositoryImpl
+import com.gsm.data.repository.sign.LoginRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

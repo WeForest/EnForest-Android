@@ -1,6 +1,6 @@
 package com.gsm.presentation.di
 
-import com.gsm.domain.network.service.sign.LoginService
+import com.gsm.data.network.service.sign.LoginService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -59,7 +59,7 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideMissionService(retrofit: Retrofit): LoginService {
+    fun provideLoginService(retrofit: Retrofit): LoginService {
         return (retrofit.create(LoginService::class.java))
     }
 
