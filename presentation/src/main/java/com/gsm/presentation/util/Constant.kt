@@ -13,8 +13,6 @@ class Constant {
         // 알림 시간 설정
         const val ALARM_TIMER = 5
         const val DATABASE_NAME="mission"
-        const val PREFERENCE_NAME = "token_preference"
-        const val DEFAULT_TOKEN = "default token"
         const val PREFERENCES_TOKEN = "preferences_token"
 
     }
