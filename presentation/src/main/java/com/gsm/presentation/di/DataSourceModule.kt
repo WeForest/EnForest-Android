@@ -1,9 +1,14 @@
 package com.gsm.presentation.di
 
-import com.gsm.domain.sign.LoginDataSourceImpl
-import com.gsm.domain.sign.LoginService
+import com.gsm.data.datasource.mission.local.MissionLocalDataSource
+import com.gsm.data.datasource.mission.local.MissionLocalDataSourceImpl
+import com.gsm.data.datasource.mission.remote.MissionRemoteDataSourceImpl
 import com.gsm.data.datasource.profile.ProfileDataSourceImpl
+import com.gsm.data.datasource.sign.LoginDataSourceImpl
+import com.gsm.data.db.mission.MissionDao
+import com.gsm.data.network.service.MissionService
 import com.gsm.data.network.service.ProfileService
+import com.gsm.data.network.service.sign.LoginService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,11 +25,8 @@ object DataSourceModule {
         return ProfileDataSourceImpl(authRemote)
     }
 
-        @Provides
-        @Singleton
-        fun provideLoginSource(authRemote: LoginService): LoginDataSourceImpl {
-            return LoginDataSourceImpl(authRemote)
-        }
+
+
     fun provideMissionLocalDataSource(authRemote: MissionService): MissionLocalDataSourceImpl {
         return MissionLocalDataSourceImpl(authRemote)
     }
@@ -34,11 +36,13 @@ object DataSourceModule {
     fun provideMissionDataSource(dao: MissionDao): MissionRemoteDataSourceImpl {
         return MissionRemoteDataSourceImpl(dao)
     }
+
     @Provides
     @Singleton
     fun provideLoginSource(authRemote: LoginService): LoginDataSourceImpl {
         return LoginDataSourceImpl(authRemote)
     }
+
     @Provides
     @Singleton
     fun provideUserDataSource(authRemote: MissionService): MissionLocalDataSource {
