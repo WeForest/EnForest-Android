@@ -5,6 +5,6 @@ data class PathProfile(
     val purpose : String?,
     val isJobSeeker : Boolean,
     val companyEmail : String?,
-    val Major : MajorItem,
-    val Interests : InterestsItem
+    val Major : Major,
+    val Interests : Interests
     )
