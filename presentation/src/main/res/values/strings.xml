@@ -9,5 +9,7 @@
     <string name="low">low</string>
     <string name="middle">middle</string>
     <string name="high">high</string>
-    <string name="client_id">863855204367-hm6eoi341o031ig9ljnd2psncvr700g0.apps.googleusercontent.com</string>
+    <string name="mission">mission</string>
+    <string name="study">study</string>
+    <string name="home">home</string>
 </resources>

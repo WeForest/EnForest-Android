@@ -107,8 +107,7 @@
             android:layout_height="50dp"
             android:layout_marginStart="80dp"
             android:layout_marginBottom="156dp"
-            android:background="@drawable/profile_background"
-            android:backgroundTint="@color/m_c"
+            android:background="@drawable/profile_click_background"
             android:elevation="20dp"
             android:padding="15dp"
             android:src="@drawable/building"
@@ -132,6 +131,7 @@
             app:layout_constraintTop_toTopOf="@+id/isCompany_imageView" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/next_btn"
             android:textSize="18dp"
             android:onClick="@{() -> fragment.nextButton()}"
             android:fontFamily="@font/noto_sans_kr_bold"

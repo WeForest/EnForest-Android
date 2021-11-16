@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/homeFragment"
+        android:title="@string/home"
+        android:icon="@drawable/ic_home_24"
+        />
+    <item android:id="@+id/communityFragment"
+        android:title="@string/study"
+        android:icon="@drawable/ic_menu_book"
+        />
+    <item android:id="@+id/missionFragment"
+        android:title="@string/mission"
+        android:icon="@drawable/ic_quiz"
+        />
+    <item android:id="@+id/profileFragment"
+        android:title="profile"
+        android:icon="@drawable/ic_people_alt"
+        />
+</menu>

@@ -88,7 +88,7 @@
             android:id="@+id/next_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/sign_in_origin_login_btn"
+            android:background="@drawable/sign_in_fail"
             android:fontFamily="@font/noto_sans_kr_medium"
             android:gravity="center"
             android:layout_marginBottom="@dimen/sign_up_bottom_next_btn_margin"
