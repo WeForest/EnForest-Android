@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -21,6 +21,11 @@ import com.gsm.presentation.viewmodel.sign.`in`.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+// TODO: 2021-11-15
+// 사용자 구글 로그인 -> 개인정보 입력 -> main
+// // 토큰이 재발급 될때 -> 구글 로그인 -> main
+// 개인정보를 입력하면  true 를 dataStore로 저장 하면안되지.
+// 서버에서 미이 로그인된 유저 정보면 true값을 내보내는게 타당한듯
 @AndroidEntryPoint
 class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sign_in) {
 
@@ -50,14 +55,6 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
     }
 
 
-    override fun onStart() {
-        super.onStart()
-        val gsa = GoogleSignIn.getLastSignedInAccount(requireContext())
-        if (gsa != null && gsa.id != null) {
-            postLogin(gsa.idToken)
-
-        }
-    }
 
     fun clickUserGoogleLogin(view: View) {
         binding.loginBtn.setOnClickListener {
@@ -125,14 +122,16 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
         }
     }
 
+
     private fun observeToken() {
         signInViewModel.tokenValue.observe(requireActivity(), EventObserver {
             if (it.isNotEmpty()) {
+                Log.d("sign", "observeToken: ")
                 // token이 제대로 나오면 저장하고
                 signInViewModel.saveToken(it)
                 //화면이동하고
-                view?.findNavController()
-                    ?.navigate(R.id.action_signInFragment_to_signUpNameFragment)
+                findNavController()
+                    .navigate(R.id.action_signInFragment_to_signUpNameFragment)
                 // Toast를 띄운다.
                 Toast.makeText(requireContext(), "성공", Toast.LENGTH_SHORT).show()
             } else {
