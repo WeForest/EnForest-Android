@@ -9,7 +9,7 @@ import com.gsm.presentation.R
 import com.gsm.presentation.base.BaseActivity
 import com.gsm.presentation.databinding.ActivitySplashBinding
 import com.gsm.presentation.ui.main.MainActivity
-import com.gsm.presentation.ui.sign.SignUpSignInMainActivity
+import com.gsm.presentation.ui.sign.up.activity.SignUpSignInMainActivity
 import com.gsm.presentation.viewmodel.sign.`in`.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
