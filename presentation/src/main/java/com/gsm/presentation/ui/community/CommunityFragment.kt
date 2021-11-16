@@ -8,18 +8,20 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.gsm.presentation.R
 import com.gsm.presentation.base.BaseFragment
 import com.gsm.presentation.databinding.FragmentCommunityBinding
-import com.gsm.presentation.ui.studymeeting.StudyMeetingFragment
-import com.gsm.presentation.ui.partner.PartnerFragment
+import com.gsm.presentation.ui.study.meeting.StudyMeetingFragment
+import com.gsm.presentation.ui.study.partner.PartnerFragment
 
 class CommunityFragment : BaseFragment<FragmentCommunityBinding>(R.layout.fragment_community) {
     private lateinit var navController: NavController
     private lateinit var navHostFragment: NavHostFragment
 
+    override fun FragmentCommunityBinding.onViewCreated() {
+        initTabLayoutAndViewPager()
+    }
 
     private fun initTabLayoutAndViewPager() {
         binding.viewPager.adapter = FragmentAdapter(requireParentFragment())
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
-
 
                 when (position) {
                     0 -> tab.text = "모임"
