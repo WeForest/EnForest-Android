@@ -98,3 +98,8 @@ local.properties
 /buildSrc/build/kotlin/compileKotlin/caches-jvm/inputs/source-to-output.tab_i.len
 /buildSrc/build/classes/kotlin/main/Test.class
 /buildSrc/build/classes/kotlin/main/Versions.class
+/hs_err_pid8208.log
+/hs_err_pid11712.log
+/hs_err_pid12224.log
+/hs_err_pid22928.log
+/replay_pid12224.log
