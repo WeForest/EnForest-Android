@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    compileSdk 31
+    compileSdk 30
 
     defaultConfig {
         minSdk 21
@@ -47,7 +47,6 @@ dependencies {
     // optional - Guava support for Room, including Optional and ListenableFuture
     implementation("androidx.room:room-guava:$roomVersion")
 
-    implementation 'com.github.dhaval2404:imagepicker:2.1'
     implementation(Retrofit.RETROFIT)
     implementation(Retrofit.CONVERTER_GSON)
     implementation(Retrofit.CONVERTER_JAXB)
