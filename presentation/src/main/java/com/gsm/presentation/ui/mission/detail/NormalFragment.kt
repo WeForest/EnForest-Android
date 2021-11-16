@@ -14,8 +14,10 @@ import com.gsm.presentation.ui.mission.MissionDetailFragmentArgs
 import com.gsm.presentation.ui.mission.MissionFragment
 import com.gsm.presentation.viewmodel.mission.MissionRemoteViewModel
 import com.gsm.presentation.viewmodel.mission.MissionViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class NormalFragment :
     BaseFragment<FragmentMissionNormalBinding>(R.layout.fragment_mission_normal) {
 

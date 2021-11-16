@@ -11,7 +11,7 @@ import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.gsm.presentation.R
-import com.gsm.presentation.MainActivity
+import com.gsm.presentation.ui.main.MainActivity
 import com.gsm.presentation.util.Constant.Companion.MISSION_CHANNEL_ID
 import com.gsm.presentation.util.Constant.Companion.NOTIFICATION_ID
 

@@ -9,14 +9,11 @@ import com.gsm.presentation.R
 import com.gsm.presentation.adapter.DetailPagerAdapter
 import com.gsm.presentation.base.BaseFragment
 import com.gsm.presentation.databinding.FragmentMissionDetailBinding
-import com.gsm.presentation.ui.mission.detail.EasyFragment
-import com.gsm.presentation.ui.mission.detail.HardFragment
-import com.gsm.presentation.ui.mission.detail.NormalFragment
 import com.gsm.presentation.viewmodel.mission.MissionViewModel
 
 class MissionDetailFragment :
     BaseFragment<FragmentMissionDetailBinding>(R.layout.fragment_mission_detail) {
-    private val pagerAdapter: DetailPagerAdapter by lazy { DetailPagerAdapter(requireActivity()) }
+    private val pagerAdapter: DetailPagerAdapter by lazy { DetailPagerAdapter(requireParentFragment()) }
 
     private val missionViewModel: MissionViewModel by activityViewModels()
     private val args by navArgs<MissionDetailFragmentArgs>()
@@ -28,16 +25,13 @@ class MissionDetailFragment :
 
     override fun onDestroyView() {
         super.onDestroyView()
-        pagerAdapter.removeFragment()
     }
 
 
     private fun setUpViewPager() {
 
         // 3개의 Fragment Add
-        pagerAdapter.addFragment(EasyFragment())
-        pagerAdapter.addFragment(NormalFragment())
-        pagerAdapter.addFragment(HardFragment())
+
         // Adapter
         binding.viewPager.adapter = pagerAdapter
 
@@ -54,7 +48,7 @@ class MissionDetailFragment :
                 2 -> tab.text = "어려움"
                 else -> ""
             }
-        }
+        }.attach()
     }
 
 

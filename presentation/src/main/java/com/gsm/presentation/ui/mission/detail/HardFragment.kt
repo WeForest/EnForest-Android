@@ -13,8 +13,9 @@ import com.gsm.presentation.ui.mission.MissionDetailFragmentArgs
 import com.gsm.presentation.ui.mission.MissionFragment
 import com.gsm.presentation.viewmodel.mission.MissionRemoteViewModel
 import com.gsm.presentation.viewmodel.mission.MissionViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
+@AndroidEntryPoint
 class HardFragment : BaseFragment<FragmentMissionHardBinding>(R.layout.fragment_mission_hard) {
     private val remoteViewModel: MissionRemoteViewModel by viewModels()
     private val missionViewModel: MissionViewModel by activityViewModels()
