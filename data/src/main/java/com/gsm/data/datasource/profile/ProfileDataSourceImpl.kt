@@ -1,4 +1,5 @@
 package com.gsm.data.datasource.profile
+import android.util.Log
 import com.gsm.data.base.BaseDataSource
 import com.gsm.data.entity.profile.request.PathProfileRequest
 import com.gsm.data.network.service.ProfileService
@@ -14,7 +15,8 @@ class ProfileDataSourceImpl @Inject constructor(
         return service.viewProfile(nickname)
     }
 
-    override suspend fun pathProfile(request: PathProfileRequest): PathProfileResponse {
-        return service.pathProfile(request)
+    override suspend fun pathProfile(token:String,request: PathProfileRequest): PathProfileResponse {
+        Log.d("ProfileDataSourceImpl", "pathProfile: ${request} ")
+        return service.pathProfile(token,request)
     }
 }

@@ -1,8 +1,7 @@
 package com.gsm.domain.usecase.profile
 
+import android.util.Log
 import com.gsm.domain.base.ParamsUseCase
-import com.gsm.domain.entity.request.profile.InterestsItem
-import com.gsm.domain.entity.request.profile.MajorItem
 import com.gsm.domain.entity.request.profile.PathProfile
 import com.gsm.domain.entity.response.PathProfileEntity
 import com.gsm.domain.repository.ProfileRepository
@@ -13,10 +12,12 @@ class PathProfileUseCase @Inject constructor(private val repository: ProfileRepo
 
 
     data class Params(
+        val token:String,
         val pathProfile : PathProfile
     )
 
     override suspend fun buildUseCaseObservable(params: Params): PathProfileEntity {
-        return repository.pathProfile(params.pathProfile)
+        Log.d("TAG", "buildUseCaseObservable: ${params.pathProfile}")
+        return repository.pathProfile(params.token,params.pathProfile)
     }
 }

@@ -1,31 +1,32 @@
 package com.gsm.presentation.ui.profile.fragment
 
 import android.content.Intent
-import android.content.RestrictionsManager.RESULT_ERROR
-import android.icu.number.NumberFormatter.with
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
-import com.github.dhaval2404.imagepicker.ImagePicker
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
-import androidx.media.MediaBrowserServiceCompat.RESULT_ERROR
-import androidx.navigation.fragment.findNavController
-import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.github.dhaval2404.imagepicker.ImagePicker
 import com.gsm.presentation.R
 import com.gsm.presentation.databinding.FragmentSetProfileBinding
+import com.gsm.presentation.ui.main.MainActivity
+import com.gsm.presentation.ui.sign.up.activity.SignUpSignInMainActivity
 import com.gsm.presentation.util.EventObserver
 import com.gsm.presentation.viewmodel.profile.ProfileViewModel
+import com.gsm.presentation.viewmodel.sign.`in`.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -33,6 +34,8 @@ class SetProfileFragment : Fragment() {
     private lateinit var binding: FragmentSetProfileBinding
     private var proFileUri: Uri? = null
     private val viewModel by activityViewModels<ProfileViewModel>()
+    private val signViewModel by viewModels<SignInViewModel>()
+    var token: String = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,10 +46,15 @@ class SetProfileFragment : Fragment() {
 
         binding.viewmodel = viewModel
         binding.fragment = this
-
-        getUserProfileAndSetting()
+        getToken()
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        getUserProfileAndSetting()
+
     }
 
     fun getUserProfileImage() {
@@ -60,13 +68,19 @@ class SetProfileFragment : Fragment() {
             .start()
     }
 
+    private fun getToken(){
+        signViewModel.readToken.asLiveData().observe(viewLifecycleOwner){
+            token=it.token
+        }
+    }
+
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         when (requestCode) {
             2404 -> {
-                proFileUri = data?.data!!
+                proFileUri = data?.data
 
                 binding.profileImageView.setImageURI(proFileUri)
             }
@@ -86,51 +100,60 @@ class SetProfileFragment : Fragment() {
         }
     }
 
+
+
     fun nextButton() {
 
-        if (TextUtils.isEmpty(binding.companyEmailEditText.text) && TextUtils.isEmpty(binding.companyEditText.text)) {
+        if (textNullTest()) {
+            lifecycleScope.launch {
+                viewModel.pathProfile(token)
+                Log.d("TAG", "SetProfileFragment - nextButton() called")
+            }
+        }
+
+    }
+
+    private fun textNullTest(): Boolean {
+        return if (!(TextUtils.isEmpty(binding.companyEmailEditText.text)) && !(TextUtils.isEmpty(
+                binding.companyEditText.text
+            ))
+        ) {
             viewModel.setProfileEmailNameProfile(
                 binding.companyEmailEditText.text.toString(),
                 binding.companyEditText.text.toString(),
                 binding.profileImageView.toString()
             )
-            findNavController().navigate(R.id.action_setProfileFragment_to_setProfileEndFragment)
+            true
         } else {
             Toast.makeText(activity, "모든 빈칸을 채워주세요!", Toast.LENGTH_SHORT).show()
+            false
         }
+    }
 
+    fun isComponyOnclick() {
+        viewModel.isJobSicker()
+        binding.isCompanyImageView.setBackgroundResource(R.drawable.profile_click_background)
+        binding.isJobSickerImageView.setBackgroundResource(R.drawable.profile_background)
     }
 
     fun isJobSeekerOnclick() {
 
-
         viewModel.isCompany()
-        binding.isCompanyImageView.setColorFilter(R.color.m_c)
-        binding.isJobSickerImageView.setColorFilter(R.color.white)
+        binding.isCompanyImageView.setBackgroundResource(R.drawable.profile_background)
+        binding.isJobSickerImageView.setBackgroundResource(R.drawable.profile_click_background)
     }
 
-
-    fun isComponyOnclick() {
-
-        viewModel.isJobSicker()
-
-        binding.isCompanyImageView.setColorFilter(R.color.white)
-
-        binding.isJobSickerImageView.setColorFilter(R.color.m_c)
-    }
 
     private fun getUserProfileAndSetting() {
-        val gsa = GoogleSignIn.getLastSignedInAccount(requireContext())
 
         lifecycleScope.launch {
             viewModel.isSuccess.observe(viewLifecycleOwner, EventObserver {
-
-                with(viewModel) {
-
-                    lifecycleScope.launch {
-                        viewModel.getProfile(gsa!!.account!!.name)
-                    }
-
+                if (it) {
+                    startActivity(Intent(requireContext(), MainActivity::class.java))
+                    (activity as SignUpSignInMainActivity).finish()
+                } else {
+                    Log.d("TAG", "getUserProfileAndSetting: 실패")
+                    Toast.makeText(requireContext(), "실패", Toast.LENGTH_SHORT).show()
                 }
             })
         }

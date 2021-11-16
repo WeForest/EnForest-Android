@@ -14,6 +14,7 @@ interface ProfileService {
 
     @PATCH("/profile/update")
     suspend fun pathProfile(
+        @Header("authorization") token : String,
         @Body request : PathProfileRequest
     ) : PathProfileResponse
 

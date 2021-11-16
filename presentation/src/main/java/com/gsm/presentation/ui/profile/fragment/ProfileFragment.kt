@@ -26,7 +26,7 @@ class ProfileFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding.viewmodel = viewModel
         binding.fragment = this
@@ -61,7 +61,7 @@ class ProfileFragment : Fragment() {
     }
 
     fun setProfileButton(){
-        findNavController().navigate(R.id.action_profileFragment_to_setProfileFragment)
+        findNavController().navigate(R.id.action_setProfileFragment_to_profileFragment)
     }
 
     private fun isJobSeeker(){

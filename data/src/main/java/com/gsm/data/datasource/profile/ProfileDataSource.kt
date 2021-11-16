@@ -7,5 +7,5 @@ import com.gsm.data.entity.profile.response.PathProfileResponse
 
 interface  ProfileDataSource {
     suspend fun getProfile(nickname : String): GetProfileResponse
-    suspend fun pathProfile(request : PathProfileRequest): PathProfileResponse
+    suspend fun pathProfile(token:String,request : PathProfileRequest): PathProfileResponse
 }

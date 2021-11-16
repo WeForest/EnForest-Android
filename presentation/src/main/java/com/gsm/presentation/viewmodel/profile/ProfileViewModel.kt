@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val getProfileUseCase: GetProfileUseCase,
-    private val pathProfileUseCase : PathProfileUseCase
+    private val pathProfileUseCase: PathProfileUseCase
 ) : ViewModel() {
 
     private val TAG = "profile"
@@ -29,40 +29,37 @@ class ProfileViewModel @Inject constructor(
     private val _isJobSeeker = MutableLiveData<Boolean>()
     val isJobSeeker: LiveData<Boolean> get() = _isJobSeeker
 
-    private val _interests = MutableLiveData<Interests>()
-    val interests: LiveData<Interests> get() = _interests
+    private val _interests = MutableLiveData<MutableList<InterestsItem>>()
+    val interests: LiveData<MutableList<InterestsItem>> get() = _interests
 
     private val _purpose = MutableLiveData<String>()
     val purpose: LiveData<String> get() = _purpose
 
     private val _email = MutableLiveData<String>()
-    val email : LiveData<String> get() = _email
+    val email: LiveData<String> get() = _email
 
     private val _name = MutableLiveData<String>()
-    val name : LiveData<String> get() = _name
+    val name: LiveData<String> get() = _name
 
     private val _userProfile = MutableLiveData<String>()
-    val userProfile : LiveData<String> get() = _userProfile
+    val userProfile: LiveData<String> get() = _userProfile
 
-    private val _major = MutableLiveData<Major>()
-    val major : LiveData<Major> get() = _major
+    private val _major = MutableLiveData<MutableList<MajorItem>?>()
+    val major: LiveData<MutableList<MajorItem>?> get() = _major
 
     //값이 잘 왔는지 확인하기위한 boolean 값
     private val _isSuccess = MutableLiveData<Event<Boolean>>()
-    val isSuccess : LiveData<Event<Boolean>> get() = _isSuccess
+    val isSuccess: LiveData<Event<Boolean>> get() = _isSuccess
+    private val _token = MutableLiveData<String>()
+    val token: LiveData<String> get() = _token
 
     init {
-    _isJobSeeker.value = false
+        _isJobSeeker.value = false
 
-        val itemInterests = InterestsItem("Not interests")
-        this._interests.value?.set(0,itemInterests)
-
-        val itemMajor = MajorItem("Not major")
-        this._major.value?.set(0,itemMajor)
     }
 
 
-    fun setProfileEmailNameProfile(email : String, name : String, profile : String){
+    fun setProfileEmailNameProfile(email: String, name: String, profile: String) {
         this._email.value = email
         this._name.value = name
         this._userProfile.value = profile
@@ -70,15 +67,16 @@ class ProfileViewModel @Inject constructor(
 
     //우선 string 값 한개만 들어가가게 설정
 
-    suspend fun setProfilePurposeMajor(interests: String, major : String){
+    fun setProfilePurposeMajor(interests: String, major: String) {
 
-        val itemInterests = InterestsItem(interests)
-        this._interests.value?.set(0,itemInterests)
 
-        val itemMajor = MajorItem(major)
-        this._major.value?.set(0,itemMajor)
+        Log.d(TAG, "setProfilePurposeMajor perimeter: ${interests} ${major}")
+        _interests.value = listOf(InterestsItem(interests)).toMutableList()
+        _major.value = listOf(MajorItem(major)).toMutableList()
 
-        pathProfile(_name.value,_purpose.value,_isJobSeeker.value!!,_email.value,this._major.value!!,this._interests.value!!)
+        Log.d(TAG, "setProfilePurposeMajor: ${_interests.value?.get(0)} ${_major.value?.get(0)}")
+
+
     }
 
 
@@ -95,25 +93,39 @@ class ProfileViewModel @Inject constructor(
 
 
         } catch (e: Exception) {
-                Log.d(TAG,"fail to : $e")
+            Log.d(TAG, "fail to : $e")
 
             _isSuccess.value = Event(false)
         }
     }
 
-    fun isJobSicker(){
+    fun isJobSicker() {
         _isJobSeeker.value = true
     }
 
-    fun isCompany(){
+    fun isCompany() {
         _isJobSeeker.value = false
     }
 
-    suspend fun pathProfile(name : String?, purpose : String?, isJobSeeker : Boolean, companyEmail : String?, Major : Major, Interests : Interests
+    suspend fun pathProfile(
+        token: String
+
     ) = viewModelScope.launch {
 
         try {
-            pathProfileUseCase.buildUseCaseObservable(PathProfileUseCase.Params(PathProfile(name,purpose,isJobSeeker,companyEmail,Major,Interests))).let {
+            pathProfileUseCase.buildUseCaseObservable(
+                PathProfileUseCase.Params(
+                    token,
+                    PathProfile(
+                        name = _name.value,
+                        purpose = "",
+                        major = _major.value,
+                        interests = _interests.value,
+                        isJobSeeker = _isJobSeeker.value ?: false,
+                        companyEmail = _email.value,
+                    )
+                )
+            ).let {
 
                 _isSuccess.value = Event(true)
 
@@ -122,7 +134,7 @@ class ProfileViewModel @Inject constructor(
 
 
         } catch (e: Exception) {
-            Log.d(TAG,"fail to : $e")
+            Log.d(TAG, "fail to : $e")
 
             _isSuccess.value = Event(false)
         }

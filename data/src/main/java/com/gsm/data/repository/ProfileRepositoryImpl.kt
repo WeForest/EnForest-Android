@@ -1,8 +1,8 @@
 package com.gsm.data.repository
 
+import android.util.Log
 import com.gsm.data.datasource.profile.ProfileDataSourceImpl
-import com.gsm.data.entity.profile.request.PathProfileRequest
-import com.gsm.data.maper.toDomain
+import com.gsm.data.mapper.profile.toDomain
 import com.gsm.domain.entity.request.profile.PathProfile
 import com.gsm.domain.entity.response.GetProfileEntity
 import com.gsm.domain.entity.response.PathProfileEntity
@@ -16,8 +16,9 @@ class ProfileRepositoryImpl @Inject constructor(
         return dataSource.getProfile(nickname).toDomain()
     }
 
-    override suspend fun pathProfile(pathProfile: PathProfile): PathProfileEntity {
-        return dataSource.pathProfile((pathProfile).toDomain()).toDomain()
+    override suspend fun pathProfile(token:String,pathProfile: PathProfile): PathProfileEntity {
+        Log.d("profile", "ProfileRepositoryImpl: ${pathProfile} ")
+        return dataSource.pathProfile(token,(pathProfile).toDomain()).toDomain()
     }
 
 }
