@@ -1,18 +1,23 @@
 package com.gsm.data.entity.profile.request
 
+import com.google.gson.annotations.SerializedName
+
 
 data class PathProfileRequest(
-    val name: String?,
+
+   internal val name: String?,
     val purpose: String?,
-    val Major: List<Major?>,
-    val Interests: List<Interests?>,
+    val major: List<Major?>,
+    val interested: List<Interests?>,
     val isJobSeeker: Boolean?,
     val companyEmail: String?,
 
-)
+    )
+
 data class Interests(
-    val interests: String
+    val Interested: String
 )
+
 data class Major(
     val major: String
 )

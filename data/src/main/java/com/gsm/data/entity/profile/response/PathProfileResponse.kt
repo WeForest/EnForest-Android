@@ -4,23 +4,23 @@ import com.google.gson.annotations.SerializedName
 
 data class PathProfileResponse(
     @SerializedName("id")
-    val id : String,
+    val id : String?,
     @SerializedName("sub")
-    val sub : String,
+    val sub : String?,
     @SerializedName("name")
-    val name : String,
+    val name : String?,
     @SerializedName("profileImg")
-    val profileImg : String,
+    val profileImg : String?,
     @SerializedName("isJobSeeker")
-    val isJobSeeker : Boolean,
+    val isJobSeeker : Boolean?,
     @SerializedName("companyEmail")
-    val companyEmail : String,
+    val companyEmail : String?,
     @SerializedName("authCompany")
-    val authCompany : Boolean,
+    val authCompany : Boolean?,
     @SerializedName("purpose")
-    val purpose : String,
+    val purpose : String?,
     @SerializedName("level")
-    val level: Int,
+    val level: Int?,
     @SerializedName("exp")
-    val exp : Int
+    val exp : Int?
 )

@@ -3,7 +3,7 @@ package com.gsm.domain.entity.request.profile
 
 
 data class PathProfile(
-    val name: String?,
+    val name: String,
     val purpose: String?,
     val major: MutableList<MajorItem>?,
     val interests: MutableList<InterestsItem>?,
@@ -13,8 +13,8 @@ data class PathProfile(
     )
 
 data class MajorItem(
-    val major: String
+    val major: String?
 )
 data class InterestsItem (
-    val interests: String
+    val interests: String?
 )
