@@ -14,10 +14,13 @@
         android:exported="true"
         android:fullBackupContent="true"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:theme="@style/Theme.EnForest"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".SignUpSignInMainActivity"
+            android:name=".ui.splash.SplashActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.MainActivity"
             android:exported="false" />
         <activity
             android:name=".ui.sign.up.activity.SignUpSignInMainActivity"
@@ -28,9 +31,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.profile.activity.MainProfileActivity"
-            android:exported="true"></activity>
 
         <receiver
             android:name=".ui.mission.notification.MissionNotification"
