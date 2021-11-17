@@ -5,26 +5,37 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gsm.domain.entity.request.profile.*
+import com.gsm.domain.entity.request.profile.InterestsItem
+import com.gsm.domain.entity.request.profile.MajorItem
+import com.gsm.domain.entity.request.profile.PathProfile
 import com.gsm.domain.entity.response.GetProfileEntity
+import com.gsm.domain.entity.response.PathProfileEntity
 import com.gsm.domain.usecase.profile.GetProfileUseCase
 import com.gsm.domain.usecase.profile.PathProfileUseCase
+import com.gsm.presentation.data.DataStoreRepository
+import com.gsm.presentation.util.Constant.Companion.DEFAULT_NAME
 import com.gsm.presentation.util.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val getProfileUseCase: GetProfileUseCase,
-    private val pathProfileUseCase: PathProfileUseCase
+    private val pathProfileUseCase: PathProfileUseCase,
+    private val dataStore: DataStoreRepository
 ) : ViewModel() {
 
     private val TAG = "profile"
+    var defaultName = DEFAULT_NAME
+    val readName = dataStore.readName
 
     //사용자 프로필 저장 변수
     private val _profileData = MutableLiveData<GetProfileEntity>()
     val profileData: LiveData<GetProfileEntity> get() = _profileData
+    private val _pathProfileData = MutableLiveData<Event<PathProfileEntity>>()
+    val pathProfileData: LiveData<Event<PathProfileEntity>> get() = _pathProfileData
 
     private val _isJobSeeker = MutableLiveData<Boolean>()
     val isJobSeeker: LiveData<Boolean> get() = _isJobSeeker
@@ -38,8 +49,8 @@ class ProfileViewModel @Inject constructor(
     private val _email = MutableLiveData<String>()
     val email: LiveData<String> get() = _email
 
-    private val _name = MutableLiveData<String>()
-    val name: LiveData<String> get() = _name
+    private val _name = MutableLiveData<String?>()
+    val name: LiveData<String?> get() = _name
 
     private val _userProfile = MutableLiveData<String>()
     val userProfile: LiveData<String> get() = _userProfile
@@ -58,8 +69,14 @@ class ProfileViewModel @Inject constructor(
 
     }
 
+    private fun saveName(name: String) =
+        viewModelScope.launch(Dispatchers.IO) {
+            Log.d(TAG, "saveName: $name")
+            dataStore.saveName(name)
+        }
 
-    fun setProfileEmailNameProfile(email: String, name: String, profile: String) {
+
+    fun setProfileEmailNameProfile(email: String?, name: String?, profile: String?) {
         this._email.value = email
         this._name.value = name
         this._userProfile.value = profile
@@ -76,19 +93,19 @@ class ProfileViewModel @Inject constructor(
 
         Log.d(TAG, "setProfilePurposeMajor: ${_interests.value?.get(0)} ${_major.value?.get(0)}")
 
-
     }
 
 
     suspend fun getProfile(nickname: String) = viewModelScope.launch {
 
+        Log.d(TAG, "getProfile: $nickname")
         try {
             getProfileUseCase.buildUseCaseObservable(GetProfileUseCase.Params(nickname)).let {
-                _profileData.value = it
+                _profileData.postValue(it)
 
                 _isSuccess.value = Event(true)
 
-                Log.d(TAG, "getMission: clear")
+                Log.d(TAG, "getProfile: ${it}")
             }
 
 
@@ -108,16 +125,15 @@ class ProfileViewModel @Inject constructor(
     }
 
     suspend fun pathProfile(
-        token: String
-
+        token: String,
     ) = viewModelScope.launch {
-
         try {
+            Log.d(TAG, "pathProfile name : ${_name}")
             pathProfileUseCase.buildUseCaseObservable(
                 PathProfileUseCase.Params(
                     token,
                     PathProfile(
-                        name = _name.value,
+                        name = _name.value.toString(),
                         purpose = "",
                         major = _major.value,
                         interests = _interests.value,
@@ -126,15 +142,16 @@ class ProfileViewModel @Inject constructor(
                     )
                 )
             ).let {
-
+                Log.d(TAG, "pathProfile 성공: ${it}")
                 _isSuccess.value = Event(true)
+                saveName(_name.value.toString())
 
                 Log.d(TAG, "getMission: clear")
             }
 
 
         } catch (e: Exception) {
-            Log.d(TAG, "fail to : $e")
+            Log.d(TAG, "pathProfile: ${e}")
 
             _isSuccess.value = Event(false)
         }
