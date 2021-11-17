@@ -8,9 +8,12 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.gsm.presentation.data.DataStoreRepository.PreferencesKeys.dataStoreName
 import com.gsm.presentation.data.DataStoreRepository.PreferencesKeys.dataStoreToken
+import com.gsm.presentation.util.Constant.Companion.DEFAULT_NAME
 import com.gsm.presentation.util.Constant.Companion.DEFAULT_TOKEN
 import com.gsm.presentation.util.Constant.Companion.PREFERENCES_TOKEN
+import com.gsm.presentation.util.Constant.Companion.PREFERENCES_USER_NAME
 import com.gsm.presentation.util.Constant.Companion.PREFERENCE_NAME
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ActivityRetainedScoped
@@ -28,6 +31,8 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
 
     private object PreferencesKeys {
         val dataStoreToken = stringPreferencesKey(PREFERENCES_TOKEN)
+        val dataStoreName = stringPreferencesKey(PREFERENCES_USER_NAME)
+
 
     }
 
@@ -42,12 +47,17 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
             preferences[dataStoreToken] = token
             Log.d("DataStoreRepository", "saveToken: ${preferences[dataStoreToken]}")
 
-
         }
-
     }
 
+    suspend fun saveName(name: String) {
 
+        dataStore.edit { preferences ->
+            preferences[dataStoreName] = name
+            Log.d("DataStoreRepository", "saveName: ${preferences[dataStoreName]}")
+
+        }
+    }
 
     val readToken: Flow<Token> = dataStore.data
         .catch { exception ->
@@ -63,9 +73,26 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
             Token(token)
         }
 
+    val readName: Flow<Name> = dataStore.data
+        .catch { exception ->
+            if (exception is IOException) {
+                emit(emptyPreferences())
+            } else {
+                throw exception
+            }
+        }
+        .map { preferences ->
+            val name = preferences[dataStoreName] ?: DEFAULT_NAME
+            Log.d("DataStoreRepository", "readName  $name")
+            Name(name)
+        }
+
 
 }
 
 data class Token(
     val token: String,
+)
+data class Name(
+    val name: String,
 )
