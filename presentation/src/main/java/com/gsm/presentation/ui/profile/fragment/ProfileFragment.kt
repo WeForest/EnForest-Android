@@ -1,77 +1,76 @@
 package com.gsm.presentation.ui.profile.fragment
 
-import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.animation.AnimationUtils
-import androidx.databinding.DataBindingUtil
+import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.gsm.presentation.R
+import com.gsm.presentation.base.BaseFragment
 import com.gsm.presentation.databinding.FragmentProfileBinding
-import com.gsm.presentation.util.EventObserver
 import com.gsm.presentation.viewmodel.profile.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class ProfileFragment : Fragment() {
-    private lateinit var binding : FragmentProfileBinding
+class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_profile) {
     private val viewModel by activityViewModels<ProfileViewModel>()
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun FragmentProfileBinding.onViewCreated() {
 
-        binding.viewmodel = viewModel
-        binding.fragment = this
-
+        Log.d("TAG", "onViewCreated: ")
         isJobSeeker()
-        getProfile()
-
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
-
-
-        return binding.root
     }
 
-    private fun getProfile(){
+    override fun FragmentProfileBinding.onCreateView() {
+        binding.fragment = this@ProfileFragment
+        nameNullTest()
+        with(viewModel){
+            profileData.observe(requireActivity()){
+                Log.d("TAG", "onCreateView: ${it}")
+                binding.data = it
 
-        val gsa = GoogleSignIn.getLastSignedInAccount(requireContext())
-
-        lifecycleScope.launch{
-            viewModel.isSuccess.observe(viewLifecycleOwner, EventObserver{
-                Log.d("TAG", "onViewCreated: success $it")
-
-                with(viewModel){
-
-                    lifecycleScope.launch {
-                        viewModel.getProfile(gsa!!.account!!.name)
-                    }
-
-                }
-            })
+            }
         }
 
+
     }
 
-    fun setProfileButton(){
+    private fun getProfile(name:String) {
+
+
+        lifecycleScope.launch {
+
+            with(viewModel) {
+
+                lifecycleScope.launch {
+
+                    getProfile(name)
+                }
+
+            }
+        }
+    }
+
+    private fun nameNullTest() {
+        viewModel.readName.asLiveData().observe(viewLifecycleOwner) {
+            Log.d("TAG", "nameNullTest: ${it.name}")
+            if (it.name.isEmpty()) {
+                Toast.makeText(requireContext(), "프로필을 불러올수 없습니다.", Toast.LENGTH_SHORT).show()
+            } else {
+                getProfile(it.name)            }
+        }
+    }
+
+    fun setProfileButton() {
         findNavController().navigate(R.id.action_setProfileFragment_to_profileFragment)
     }
 
-    private fun isJobSeeker(){
-        if(viewModel.profileData.value!!.isJobSeeker)
-        {
+    private fun isJobSeeker() {
+        if (viewModel.profileData.value?.isJobSeeker == true) {
             binding.isCompanyImageView.setColorFilter(R.color.m_c)
             binding.isJobSickerImageView.setColorFilter(R.color.white)
-        }
-        else
-        {
+        } else {
             binding.isCompanyImageView.setColorFilter(R.color.white)
             binding.isJobSickerImageView.setColorFilter(R.color.m_c)
         }
