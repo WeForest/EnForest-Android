@@ -4,7 +4,9 @@ import android.content.Intent
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -16,7 +18,10 @@ import com.google.android.gms.tasks.Task
 import com.gsm.presentation.R
 import com.gsm.presentation.base.BaseFragment
 import com.gsm.presentation.databinding.FragmentSignInBinding
+import com.gsm.presentation.ui.main.MainActivity
+import com.gsm.presentation.ui.sign.up.activity.SignUpSignInMainActivity
 import com.gsm.presentation.util.EventObserver
+import com.gsm.presentation.viewmodel.profile.ProfileViewModel
 import com.gsm.presentation.viewmodel.sign.`in`.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -29,7 +34,8 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sign_in) {
 
-    private val signInViewModel: SignInViewModel by viewModels()
+    private val signInViewModel: SignInViewModel by activityViewModels()
+    private val profileViewModel: ProfileViewModel by viewModels()
 
     var mGoogleSignInClient: GoogleSignInClient? = null
     private val RC_SIGN_IN = 123
@@ -40,6 +46,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
 
         view?.let { clickUserGoogleLogin(it) }
         observeToken()
+
 //        getToken()
     }
 
@@ -55,7 +62,6 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
     }
 
 
-
     fun clickUserGoogleLogin(view: View) {
         binding.loginBtn.setOnClickListener {
             Log.d("TAG", "clickUserGoogleLogin: click")
@@ -68,12 +74,29 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
         startActivityForResult(signInIntent, RC_SIGN_IN)
     }
 
+    // 개인정보를 추가 했다면
+    private fun readName() {
+        profileViewModel.readName.asLiveData().observe(viewLifecycleOwner) {
+            if (it.name == profileViewModel.defaultName) {
+                findNavController()
+                    .navigate(R.id.action_signInFragment_to_setProfileEndFragment)
+
+            } else {
+                startActivity(Intent(requireContext(), MainActivity::class.java))
+                (activity as SignUpSignInMainActivity).finish()
+            }
+        }
+    }
+
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
             val acct = completedTask.getResult(ApiException::class.java)
             if (acct != null) {
 
+                
+                // 구글로그인 시 token 나오면 저장
                 postLogin(acct.idToken)
+                // 개인정보 입력되어있으면 main 아니면 입력창
                 Log.d("TAG", "handleSignInResult: ${acct.idToken}")
 
             }
@@ -119,6 +142,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
             Log.d("TAG", "postLogin: $token")
             signInViewModel.postLogin(token)
 
+
         }
     }
 
@@ -126,13 +150,8 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
     private fun observeToken() {
         signInViewModel.tokenValue.observe(requireActivity(), EventObserver {
             if (it.isNotEmpty()) {
-                Log.d("sign", "observeToken: ")
-                // token이 제대로 나오면 저장하고
                 signInViewModel.saveToken(it)
-                //화면이동하고
-                findNavController()
-                    .navigate(R.id.action_signInFragment_to_signUpNameFragment)
-                // Toast를 띄운다.
+                readName()
                 Toast.makeText(requireContext(), "성공", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(requireContext(), "실패", Toast.LENGTH_SHORT).show()
