@@ -28,9 +28,9 @@ fun PathProfile.toDomain(): PathProfileRequest {
     return PathProfileRequest(
         name = this.name,
         purpose = this.purpose,
-        Major =  this.major?.toDomain()!!,
-        Interests = this.interests?.toDomain()!!,
-        isJobSeeker =this.isJobSeeker,
+        major = this.major?.toDomain()!!,
+        interested = this.interests?.toDomain()!!,
+        isJobSeeker = this.isJobSeeker,
         companyEmail = this.companyEmail,
     )
 }
@@ -39,7 +39,7 @@ fun PathProfile.toDomain(): PathProfileRequest {
 fun List<InterestsItem>.toDomain(): List<Interests> {
 
     return this.map {
-        Interests(it.interests)
+        Interests(it.interests.toString())
     }
 
 }
@@ -47,7 +47,7 @@ fun List<InterestsItem>.toDomain(): List<Interests> {
 @JvmName("toDomainMajorItem")
 fun List<MajorItem>.toDomain(): List<Major> {
     return this.map {
-        Major(it.major)
+        Major(it.major.toString())
     }
 
 }
