@@ -8,8 +8,8 @@
     <data>
 
         <variable
-            name="viewmodel"
-            type="com.gsm.presentation.viewmodel.profile.ProfileViewModel" />
+            name="data"
+            type="com.gsm.domain.entity.response.GetProfileEntity" />
 
         <variable
             name="fragment"
@@ -69,7 +69,7 @@
                 android:background="@drawable/profile_background"
                 android:elevation="10dp"
                 android:padding="15dp"
-                android:src="@{viewmodel.profileData.profileImg}"
+                android:src="@{data.profileImg}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -80,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/noto_sans_kr_bold"
-                android:text="@{viewmodel.profileData.purpose}"
+                android:text="@{data.purpose}"
                 android:textColor="@color/black"
                 android:textSize="12dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -94,7 +94,7 @@
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/noto_sans_kr_bold"
                 android:includeFontPadding="false"
-                android:text="@{viewmodel.profileData.name}"
+                android:text="@{data.name}"
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/noto_sans_kr_bold"
-                android:text="@{viewmodel.profileData.companyEmail}"
+                android:text="@{data.companyEmail}"
                 android:textColor="#808080"
                 android:textSize="13dp"
                 app:layout_constraintEnd_toEndOf="parent"
