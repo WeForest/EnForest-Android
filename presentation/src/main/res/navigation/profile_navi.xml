@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/signup_signin_nav"
-    app:startDestination="@id/setProfileEndFragment">
+    app:startDestination="@id/signInFragment">
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.gsm.presentation.ui.profile.fragment.ProfileFragment"
@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_signInFragment_to_signUpNameFragment"
             app:destination="@id/signUpNameFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_setProfileEndFragment"
+            app:destination="@id/setProfileEndFragment" />
     </fragment>
 
     <fragment
