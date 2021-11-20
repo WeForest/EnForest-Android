@@ -4,6 +4,9 @@
 
     <data>
 
+        <variable
+            name="fragmernt"
+            type="com.gsm.presentation.ui.study.group.CommunityFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,6 +41,7 @@
             android:layout_margin="18dp"
             android:backgroundTint="@color/main_color"
             android:contentDescription="추가"
+            android:onClick="@{fragmernt::createDialog}"
             android:elevation="3dp"
             android:src="@drawable/plus"
             app:borderWidth="0dp"

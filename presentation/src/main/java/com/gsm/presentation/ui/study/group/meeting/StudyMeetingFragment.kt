@@ -3,7 +3,7 @@ package com.gsm.presentation.ui.study.group.meeting
 import com.gsm.presentation.R
 import com.gsm.presentation.base.BaseFragment
 import com.gsm.presentation.databinding.FragmentStudyMeetingBinding
-import com.gsm.presentation.ui.study.group.partner.PartnerRecyclerAdapter
+import com.gsm.presentation.adapter.PartnerRecyclerAdapter
 import com.gsm.presentation.util.extension.showVertical
 import dagger.hilt.android.AndroidEntryPoint
 

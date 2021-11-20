@@ -92,6 +92,5 @@ class MissionGetAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             )
         }
 
-
     }
 }

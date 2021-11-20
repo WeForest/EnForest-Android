@@ -1,5 +1,6 @@
 package com.gsm.presentation.ui.study.group
 
+import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -9,6 +10,7 @@ import com.gsm.presentation.R
 import com.gsm.presentation.base.BaseFragment
 import com.gsm.presentation.databinding.FragmentCommunityBinding
 import com.gsm.presentation.ui.study.StudyFragment
+import com.gsm.presentation.ui.study.dialog.CreateGroupDialog
 import com.gsm.presentation.ui.study.group.partner.PartnerFragment
 import com.gsm.presentation.viewmodel.group.GroupViewModel
 import com.gsm.presentation.viewmodel.sign.`in`.SignInViewModel
@@ -26,6 +28,10 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>(R.layout.fragme
         initTabLayoutAndViewPager()
     }
 
+    override fun FragmentCommunityBinding.onCreateView() {
+        binding.fragmernt=this@CommunityFragment
+    }
+
     private fun initTabLayoutAndViewPager() {
         binding.viewPager.adapter = FragmentAdapter(requireParentFragment())
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
@@ -36,6 +42,11 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>(R.layout.fragme
                 }
 
         }.attach()
+    }
+
+    fun createDialog(view: View){
+        val dialog=CreateGroupDialog()
+        dialog.show(childFragmentManager,"dialog")
     }
 
     class FragmentAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {
