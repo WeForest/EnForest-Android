@@ -1,5 +1,6 @@
 package com.gsm.presentation.di
 
+import com.gsm.data.network.service.GroupService
 import dagger.Provides
 import dagger.Module
 import com.gsm.data.network.service.sign.LoginService
@@ -80,6 +81,11 @@ object NetworkModule {
     @Singleton
     fun provideProfileService(retrofit: Retrofit): ProfileService {
         return (retrofit.create(ProfileService::class.java))
+    }
+    @Provides
+    @Singleton
+    fun provideGroupService(retrofit: Retrofit): GroupService {
+        return (retrofit.create(GroupService::class.java))
     }
 
 

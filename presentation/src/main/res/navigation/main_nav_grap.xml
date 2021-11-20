@@ -41,7 +41,7 @@
 
     <fragment
         android:id="@+id/communityFragment"
-        android:name="com.gsm.presentation.ui.community.CommunityFragment"
+        android:name="com.gsm.presentation.ui.study.group.CommunityFragment"
         tools:layout="@layout/fragment_community"
      />
     <fragment

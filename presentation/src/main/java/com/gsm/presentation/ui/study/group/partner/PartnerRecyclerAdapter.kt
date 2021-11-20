@@ -1,13 +1,16 @@
-package com.gsm.presentation.ui.study.partner
+package com.gsm.presentation.ui.study.group.partner
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.gsm.domain.entity.group.response.CreateGroupEntity
 import com.gsm.presentation.R
 import com.gsm.presentation.databinding.CommunityRecyclerViewItemBinding
 
 class PartnerRecyclerAdapter : RecyclerView.Adapter<PartnerRecyclerAdapter.PartnerRecyclerAdapterViewHolder>() {
+
+    private val studyList= mutableListOf<CreateGroupEntity>()
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -27,15 +30,20 @@ class PartnerRecyclerAdapter : RecyclerView.Adapter<PartnerRecyclerAdapter.Partn
 
     override fun onBindViewHolder(holder: PartnerRecyclerAdapterViewHolder, position: Int) {
 
+      holder.bind(studyList[position])
     }
 
     override fun getItemCount(): Int {
-        return 1
+        return studyList.size
     }
 
     class PartnerRecyclerAdapterViewHolder( val binding: CommunityRecyclerViewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+            fun bind(bind:CreateGroupEntity){
+                binding.data=bind
+                binding.executePendingBindings()
+            }
     }
 }
 

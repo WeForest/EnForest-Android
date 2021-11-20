@@ -2,6 +2,7 @@ package com.gsm.presentation.util.extension
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.res.Resources
 import android.text.Editable
 import android.text.TextWatcher
@@ -27,22 +28,22 @@ fun EditText.addTextChangedListener(context: Context, button: Button) {
         override fun beforeTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
 
-            }
+        }
 
         override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
             Log.d("text", "onTextChanged: ${s?.length}")
-            if (s?.length==0) {
+            if (s?.length == 0) {
 
                 button.apply {
-                    background=(ContextCompat.getDrawable(context, R.drawable.sign_in_fail))
+                    background = (ContextCompat.getDrawable(context, R.drawable.sign_in_fail))
                     setTextColor(ContextCompat.getColor(context, R.color.black))
-                    isClickable=false
+                    isClickable = false
                 }
-            }else{
+            } else {
                 button.apply {
-                    background=(ContextCompat.getDrawable(context, R.drawable.sign_in_success))
+                    background = (ContextCompat.getDrawable(context, R.drawable.sign_in_success))
                     setTextColor(ContextCompat.getColor(context, R.color.white))
-                    isClickable=true
+                    isClickable = true
                 }
             }
         }

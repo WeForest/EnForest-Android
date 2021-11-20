@@ -5,8 +5,9 @@ import com.gsm.data.entity.group.request.CreateGroupRequest
 import com.gsm.data.entity.group.response.BaseGroupResponse
 import com.gsm.data.entity.group.response.CreateGroupResponse
 import com.gsm.data.network.service.GroupService
+import javax.inject.Inject
 
-class GroupDataSourceImpl(override val service: GroupService) : BaseDataSource<GroupService>(),
+class GroupDataSourceImpl @Inject constructor(override val service: GroupService) : BaseDataSource<GroupService>(),
     GroupDataSource {
     override suspend fun joinGroup(token: String, id: Int): BaseGroupResponse {
 

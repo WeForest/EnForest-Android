@@ -88,6 +88,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
         }
     }
 
+
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
             val acct = completedTask.getResult(ApiException::class.java)
@@ -142,9 +143,9 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(R.layout.fragment_sig
             Log.d("TAG", "postLogin: $token")
             signInViewModel.postLogin(token)
 
-
         }
     }
+
 
 
     private fun observeToken() {

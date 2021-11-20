@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
+        <variable
+            name="data"
+            type="com.gsm.domain.entity.group.response.CreateGroupEntity" />
     </data>
 
     <LinearLayout
@@ -35,11 +39,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:text="@{data.name}"
                 android:layout_marginStart="10dp"
                 android:layout_toEndOf="@id/profile_img"
                 android:fontFamily="@font/noto_sans_kr_medium"
                 android:includeFontPadding="false"
-                android:text="사용자 이름"
+              tools:text="사용자 이름"
                 android:textColor="@color/main_color"
                 android:textSize="17sp" />
 
@@ -51,7 +56,8 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="코딩이 정말 힘든데 도와주세요!!!"
+          tools:text="코딩이 정말 힘든데 도와주세요!!!"
+android:text="@{data.name}"
             android:fontFamily="@font/noto_sans_kr_bold"
             android:textColor="@color/black"
             android:layout_marginTop="10dp"
@@ -72,8 +78,9 @@
 
         <TextView
             android:layout_width="match_parent"
+            android:text="@{data.description}"
             android:layout_height="wrap_content"
-            android:text="코딩 잘하는 방법이 뭐죠??!! 저랑 같이 공부해요!! \n구한다구욧 구구구구구구구구한다구욧"
+           tools:text="코딩 잘하는 방법이 뭐죠??!! 저랑 같이 공부해요!! \n구한다구욧 구구구구구구구구한다구욧"
             android:fontFamily="@font/noto_sans_kr_medium"
             android:textColor="#717171"
             android:layout_marginTop="10dp"
@@ -89,7 +96,7 @@
 
             <TextView
                 android:id="@+id/tag"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
@@ -97,35 +104,12 @@
                 android:fontFamily="@font/noto_sans_kr_medium"
                 android:includeFontPadding="false"
                 android:text="#안드로이드"
+                tools:text="@{data.tags}"
                 android:textColor="@color/main_color"
                 android:textSize="17sp" />
 
-            <TextView
-                android:id="@+id/level"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@id/tag"
-                android:fontFamily="@font/noto_sans_kr_medium"
-                android:includeFontPadding="false"
-                android:layout_marginEnd="10dp"
 
-                android:text="#20Lv 이상"
-                android:textColor="@color/main_color"
-                android:textSize="17sp" />
 
-            <TextView
-                android:id="@+id/people"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="#최대 10명"
-                android:fontFamily="@font/noto_sans_kr_medium"
-                android:textColor="@color/main_color"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@id/level"
-                android:textSize="17sp"
-                android:includeFontPadding="false"
-                />
 
         </RelativeLayout>
 

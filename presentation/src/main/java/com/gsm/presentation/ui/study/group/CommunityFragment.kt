@@ -1,19 +1,26 @@
-package com.gsm.presentation.ui.community
+package com.gsm.presentation.ui.study.group
 
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import com.gsm.presentation.R
 import com.gsm.presentation.base.BaseFragment
 import com.gsm.presentation.databinding.FragmentCommunityBinding
-import com.gsm.presentation.ui.study.meeting.StudyMeetingFragment
-import com.gsm.presentation.ui.study.partner.PartnerFragment
+import com.gsm.presentation.ui.study.StudyFragment
+import com.gsm.presentation.ui.study.group.partner.PartnerFragment
+import com.gsm.presentation.viewmodel.group.GroupViewModel
+import com.gsm.presentation.viewmodel.sign.`in`.SignInViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CommunityFragment : BaseFragment<FragmentCommunityBinding>(R.layout.fragment_community) {
-    private lateinit var navController: NavController
-    private lateinit var navHostFragment: NavHostFragment
+
+
+    private val viewModel by viewModels<GroupViewModel>()
+    private val signViewModel by activityViewModels<SignInViewModel>()
+
 
     override fun FragmentCommunityBinding.onViewCreated() {
         initTabLayoutAndViewPager()
@@ -38,11 +45,13 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>(R.layout.fragme
 
         override fun createFragment(position: Int): Fragment {
             return when (position) {
-                0 -> StudyMeetingFragment()
+                0 -> StudyFragment()
                 1 -> PartnerFragment()
-                else -> StudyMeetingFragment()
+                else -> StudyFragment()
             }
         }
 
     }
+
+
 }
