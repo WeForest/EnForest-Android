@@ -4,6 +4,8 @@ import com.gsm.data.base.BaseDataSource
 import com.gsm.data.entity.group.request.CreateGroupRequest
 import com.gsm.data.entity.group.response.BaseGroupResponse
 import com.gsm.data.entity.group.response.CreateGroupResponse
+import com.gsm.data.entity.group.response.SearchChatResponse
+import com.gsm.data.entity.group.response.SearchGroupResponse
 import com.gsm.data.network.service.GroupService
 import javax.inject.Inject
 
@@ -27,5 +29,13 @@ class GroupDataSourceImpl @Inject constructor(override val service: GroupService
 
     override suspend fun deleteGroup(token: String, id: Int): BaseGroupResponse {
         return service.deleteGroup(token, id)
+    }
+
+    override suspend fun searchChat(page: Int, k: String):SearchChatResponse {
+        return service.searchChat(page,k)
+    }
+
+    override suspend fun searchGroup(page: Int, k: String): List<SearchGroupResponse> {
+        return service.searchGroup(page,k)
     }
 }

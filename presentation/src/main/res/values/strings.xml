@@ -12,4 +12,5 @@
     <string name="mission">mission</string>
     <string name="study">study</string>
     <string name="home">home</string>
+    <string name="search_view_hint" >검색</string>
 </resources>

@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.gsm.domain.entity.group.response.GroupData" />
+            type="com.gsm.data.entity.group.response.SearchGroupResponseItem" />
     </data>
 
     <LinearLayout

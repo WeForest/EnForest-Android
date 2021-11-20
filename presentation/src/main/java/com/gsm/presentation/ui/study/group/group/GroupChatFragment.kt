@@ -1,4 +1,4 @@
-package com.gsm.presentation.ui.study
+package com.gsm.presentation.ui.study.group.group
 
 import android.util.Log
 import android.view.Menu
@@ -8,9 +8,9 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.gsm.presentation.R
-import com.gsm.presentation.adapter.GroupRecyclerAdapter
 import com.gsm.presentation.base.BaseFragment
-import com.gsm.presentation.databinding.FragmentStudyBinding
+import com.gsm.presentation.databinding.FragmentStudyMeetingBinding
+import com.gsm.presentation.adapter.GroupRecyclerAdapter
 import com.gsm.presentation.util.extension.showVertical
 import com.gsm.presentation.viewmodel.group.GroupViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -18,35 +18,33 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class StudyFragment : BaseFragment<FragmentStudyBinding>(R.layout.fragment_study) {
+class GroupChatFragment :
+    BaseFragment<FragmentStudyMeetingBinding>(R.layout.fragment_study_meeting){
+
     private val viewModel: GroupViewModel by viewModels()
     private val groupAdapter: GroupRecyclerAdapter by lazy {
         GroupRecyclerAdapter()
     }
 
-    override fun FragmentStudyBinding.onCreateView() {
+    override fun FragmentStudyMeetingBinding.onCreateView() {
         setHasOptionsMenu(true)
 
+        with(viewModel) {
+            getQuery("")
+        }
 
     }
 
-    override fun FragmentStudyBinding.onViewCreated() {
+    override fun FragmentStudyMeetingBinding.onViewCreated() {
         initRecyclerView()
         with(viewModel) {
-            lifecycleScope.launch {
-                getQuery("")
-                    .collectLatest {
-                        (groupAdapter).submitData(
-                            it
-                        )
-                    }
-            }
+
         }
     }
 
     private fun initRecyclerView() {
-        binding.studyRecycler.adapter = groupAdapter
-        binding.studyRecycler.showVertical(requireContext())
+        binding.studyMeetingRecyclerView.adapter = groupAdapter
+        binding.studyMeetingRecyclerView.showVertical(requireContext())
     }
 
 
@@ -59,14 +57,7 @@ class StudyFragment : BaseFragment<FragmentStudyBinding>(R.layout.fragment_study
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 if (query != null) {
-                    Log.d("TAG", "onQueryTextSubmit: ")
-                    lifecycleScope.launch {
-                        viewModel.getQuery(query).collectLatest {
-                            (groupAdapter).submitData(
-                                it
-                            )
-                        }
-                    }
+                    viewModel.getQuery(query)
                 }
 
                 return false
@@ -74,14 +65,7 @@ class StudyFragment : BaseFragment<FragmentStudyBinding>(R.layout.fragment_study
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 if (newText != null) {
-                    Log.d("TAG", "onQueryTextChange: ")
-                    lifecycleScope.launch {
-                        viewModel.getQuery(newText).collectLatest {
-                            (groupAdapter).submitData(
-                                it
-                            )
-                        }
-                    }
+                    viewModel.getQuery(newText)
                 }
 
                 return true
@@ -101,4 +85,5 @@ class StudyFragment : BaseFragment<FragmentStudyBinding>(R.layout.fragment_study
         }
 
     }
+
 }

@@ -3,6 +3,8 @@ package com.gsm.data.network.service
 import com.gsm.data.entity.group.request.CreateGroupRequest
 import com.gsm.data.entity.group.response.BaseGroupResponse
 import com.gsm.data.entity.group.response.CreateGroupResponse
+import com.gsm.data.entity.group.response.SearchChatResponse
+import com.gsm.data.entity.group.response.SearchGroupResponse
 import retrofit2.http.*
 
 interface GroupService {
@@ -35,5 +37,20 @@ interface GroupService {
         @Path("id") id: Int
     ): BaseGroupResponse
 
-
+    @GET("group/list/{page}")
+    suspend fun searchGroup(
+        @Path("page") page:Int,
+        @Query("k") keyword:String
+    ):List<SearchGroupResponse>
+    @GET("group/list/{page}")
+    suspend fun searchGroups(
+        @Path("page") page:Int,
+        @Query("k") keyword:String
+    ):SearchGroupResponse
+    //chat 그룹
+    @GET("chat/{page}")
+    suspend fun searchChat(
+        @Path("page") page:Int,
+        @Query("k") key:String,
+    ):SearchChatResponse
 }
