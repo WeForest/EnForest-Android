@@ -1,5 +1,6 @@
 package com.gsm.presentation.ui.study.group
 
+import android.view.MenuItem
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -29,24 +30,24 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>(R.layout.fragme
     }
 
     override fun FragmentCommunityBinding.onCreateView() {
-        binding.fragmernt=this@CommunityFragment
+        binding.fragmernt = this@CommunityFragment
     }
 
     private fun initTabLayoutAndViewPager() {
         binding.viewPager.adapter = FragmentAdapter(requireParentFragment())
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
 
-                when (position) {
-                    0 -> tab.text = "모임"
-                    1 -> tab.text = "파트너"
-                }
+            when (position) {
+                0 -> tab.text = "그룹"
+                1 -> tab.text = "chat"
+            }
 
         }.attach()
     }
 
-    fun createDialog(view: View){
-        val dialog=CreateGroupDialog()
-        dialog.show(childFragmentManager,"dialog")
+    fun createDialog(view: View) {
+        val dialog = CreateGroupDialog()
+        dialog.show(childFragmentManager, "dialog")
     }
 
     class FragmentAdapter(fragment: Fragment) : FragmentStateAdapter(fragment) {

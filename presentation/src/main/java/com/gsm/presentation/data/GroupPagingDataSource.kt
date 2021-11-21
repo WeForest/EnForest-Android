@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 class GroupPagingDataSource @Inject constructor(
     private val service: GroupService,
-    private val k: String,
+    private val k: String?,
 
 
     ) : PagingSource<Int, SearchGroupResponseItem>() {

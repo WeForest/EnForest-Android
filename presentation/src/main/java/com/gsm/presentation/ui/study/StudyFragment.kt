@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -11,6 +12,8 @@ import com.gsm.presentation.R
 import com.gsm.presentation.adapter.GroupRecyclerAdapter
 import com.gsm.presentation.base.BaseFragment
 import com.gsm.presentation.databinding.FragmentStudyBinding
+import com.gsm.presentation.ui.main.MainActivity
+import com.gsm.presentation.ui.study.group.CommunityFragment
 import com.gsm.presentation.util.extension.showVertical
 import com.gsm.presentation.viewmodel.group.GroupViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,6 +29,7 @@ class StudyFragment : BaseFragment<FragmentStudyBinding>(R.layout.fragment_study
 
     override fun FragmentStudyBinding.onCreateView() {
         setHasOptionsMenu(true)
+        (activity as MainActivity).supportActionBar?.show()
 
 
     }
@@ -58,16 +62,19 @@ class StudyFragment : BaseFragment<FragmentStudyBinding>(R.layout.fragment_study
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                if (query != null) {
-                    Log.d("TAG", "onQueryTextSubmit: ")
-                    lifecycleScope.launch {
-                        viewModel.getQuery(query).collectLatest {
-                            (groupAdapter).submitData(
-                                it
-                            )
-                        }
+
+                lifecycleScope.launch {
+                    viewModel.getQuery(query).collectLatest {
+                        (groupAdapter).submitData(
+                            it
+                        )
                     }
                 }
+
+                if (query?.isEmpty() == true) {
+                    binding.studyRecycler.scrollToPosition(0)
+                }
+                searchView.onActionViewCollapsed()
 
                 return false
             }
@@ -95,10 +102,17 @@ class StudyFragment : BaseFragment<FragmentStudyBinding>(R.layout.fragment_study
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         return when (item.itemId) {
-            R.id.menu_action_search ->
+            R.id.menu_action_search -> {
+                (childFragmentManager.findFragmentById(R.id.communityFragment) as? CommunityFragment)?.binding?.apply {
+                    tabLayout.visibility = View.INVISIBLE
+                    createGroupBtn.visibility = View.INVISIBLE
+                }
+
                 true
+            }
             else -> super.onOptionsItemSelected(item)
         }
 
     }
+
 }

@@ -45,7 +45,7 @@ interface GroupService {
     @GET("group/list/{page}")
     suspend fun searchGroups(
         @Path("page") page:Int,
-        @Query("k") keyword:String
+        @Query("k") keyword:String?
     ):SearchGroupResponse
     //chat 그룹
     @GET("chat/{page}")

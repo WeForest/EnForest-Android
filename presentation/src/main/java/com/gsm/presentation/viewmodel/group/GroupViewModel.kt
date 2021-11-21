@@ -72,7 +72,7 @@ class GroupViewModel @Inject constructor(
 
     private val _query = MutableLiveData<Event<String>>()
 
-    fun getQuery(query: String): Flow<PagingData<SearchGroupResponseItem>> {
+    fun getQuery(query: String?): Flow<PagingData<SearchGroupResponseItem>> {
 
         return Pager(
 

@@ -2,6 +2,7 @@ package com.gsm.presentation.ui.main
 
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
@@ -12,6 +13,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.gsm.presentation.R
 import com.gsm.presentation.base.BaseActivity
 import com.gsm.presentation.databinding.ActivityMainBinding
+import com.gsm.presentation.ui.study.group.CommunityFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 // ViewBinding
@@ -37,6 +39,8 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navi.setupWithNavController(navController)
+        initNavigation()
+
 
     }
 
@@ -44,6 +48,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
+
     private fun initNavigation() {
 
         val navController = findNavController(R.id.navHostFragment)
@@ -53,7 +58,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
             // fragment id 가 아닐 시 bottom navigation 안뜸
             if (destination.id == R.id.communityFragment) {
             } else {
-              supportActionBar?.hide()
+                supportActionBar?.hide()
             }
         }
     }
