@@ -9,5 +9,7 @@ data class LoginResponse(
     @SerializedName("success")
     val success: Boolean?,
     @SerializedName("token")
-    val token: String?
+    val token: String?,
+    @SerializedName("isLogin")
+    val isLogin: Boolean?
 )

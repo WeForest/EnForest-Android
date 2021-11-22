@@ -28,6 +28,8 @@ class SignInViewModel @Inject constructor(
 
     private val _tokenValue = MutableLiveData<Event<String>>()
     val tokenValue: LiveData<Event<String>> get() = _tokenValue
+    private val _isLogin = MutableLiveData<Event<Boolean>>()
+    val isLogin: LiveData<Event<Boolean>> get() = _isLogin
 
     // 토큰을 저장한다.
     fun saveToken(token: String) =
@@ -43,6 +45,7 @@ class SignInViewModel @Inject constructor(
                 Log.d("Token", "success ${it.success} message : ${it.message} token  ")
                 if (it.success == true) {
                     _tokenValue.value = Event(it.token!!)
+                    _isLogin.value = Event(it.isLogin!!)
 
                 } else {
                     _tokenValue.value = Event("")

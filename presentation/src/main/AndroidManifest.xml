@@ -15,15 +15,20 @@
         android:fullBackupContent="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.EnForest"
+
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.splash.SplashActivity"
+            android:name=".ui.sign.up.SignUpSignInMainActivity"
             android:exported="false" />
         <activity
             android:name=".ui.main.MainActivity"
             android:exported="false" />
+
         <activity
-            android:name=".ui.sign.up.activity.SignUpSignInMainActivity"
+            android:name=".ui.sign.in.SignInActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.splash.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

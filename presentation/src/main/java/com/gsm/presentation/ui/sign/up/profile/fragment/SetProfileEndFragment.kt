@@ -1,6 +1,5 @@
-package com.gsm.presentation.ui.profile.fragment
+package com.gsm.presentation.ui.sign.up.profile.fragment
 
-import android.net.Uri
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
@@ -11,13 +10,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.gsm.presentation.R
-import com.gsm.presentation.databinding.FragmentSetProfileBinding
 import com.gsm.presentation.databinding.FragmentSetProfileEndBinding
 import com.gsm.presentation.viewmodel.profile.ProfileViewModel
-import kotlinx.coroutines.launch
 
 class SetProfileEndFragment : Fragment() {
     private lateinit var binding: FragmentSetProfileEndBinding

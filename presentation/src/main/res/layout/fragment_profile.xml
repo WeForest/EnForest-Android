@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -13,7 +12,7 @@
 
         <variable
             name="fragment"
-            type="com.gsm.presentation.ui.profile.fragment.ProfileFragment" />
+            type="com.gsm.presentation.ui.sign.up.profile.fragment.ProfileFragment" />
 
     </data>
 
@@ -21,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context=".ui.profile.fragment.ProfileFragment">
+        tools:context=".ui.sign.up.profile.fragment.ProfileFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
@@ -38,25 +37,25 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
-                android:layout_margin="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
-                android:backgroundTint="@color/m_c"
+                android:layout_margin="5dp"
                 android:background="@drawable/profile_bottom_layout_backgorund"
+                android:backgroundTint="@color/m_c"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:onClick="@{() -> fragment.setProfileButton()}"
                 android:id="@+id/modified_ImageView"
-                android:padding="7dp"
-                android:elevation="30dp"
-                android:background="@drawable/profile_background"
                 android:layout_width="40dp"
                 android:layout_height="30dp"
                 android:layout_marginTop="40dp"
                 android:layout_marginEnd="28dp"
+                android:background="@drawable/profile_background"
+                android:elevation="30dp"
+                android:onClick="@{() -> fragment.setProfileButton()}"
+                android:padding="7dp"
                 android:src="@drawable/edit"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -135,36 +134,35 @@
                 android:layout_marginStart="88dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="90dp"
-                android:background="@drawable/profile_background"
-                android:backgroundTint="@color/m_c"
                 android:elevation="20dp"
                 android:padding="15dp"
                 android:src="@drawable/building"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/companyEmail_textview"
-                app:layout_constraintVertical_bias="1.0" />
+                app:layout_constraintVertical_bias="1.0"
+                tools:background="@drawable/profile_click_background" />
 
             <ImageView
                 android:id="@+id/isJobSicker_ImageView"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/profile_background"
                 android:elevation="20dp"
                 android:padding="15dp"
                 android:src="@drawable/document"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.33"
                 app:layout_constraintStart_toEndOf="@+id/isCompany_imageView"
-                app:layout_constraintTop_toBottomOf="@+id/companyEmail_textview" />
+                app:layout_constraintTop_toBottomOf="@+id/companyEmail_textview"
+                tools:background="@drawable/profile_background" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:layout_margin="5dp"
-                android:backgroundTint="@color/m_c"
                 android:background="@drawable/profilelayout_background"
+                android:backgroundTint="@color/m_c"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />

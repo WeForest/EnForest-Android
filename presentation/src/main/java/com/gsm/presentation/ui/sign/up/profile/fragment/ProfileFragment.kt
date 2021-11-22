@@ -1,14 +1,15 @@
-package com.gsm.presentation.ui.profile.fragment
+package com.gsm.presentation.ui.sign.up.profile.fragment
 
+import android.content.Intent
 import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import com.gsm.presentation.R
 import com.gsm.presentation.base.BaseFragment
 import com.gsm.presentation.databinding.FragmentProfileBinding
+import com.gsm.presentation.ui.sign.up.SignUpSignInMainActivity
 import com.gsm.presentation.viewmodel.profile.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -16,27 +17,38 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_profile) {
     private val viewModel by activityViewModels<ProfileViewModel>()
+
     override fun FragmentProfileBinding.onViewCreated() {
 
-        Log.d("TAG", "onViewCreated: ")
-        isJobSeeker()
     }
 
     override fun FragmentProfileBinding.onCreateView() {
         binding.fragment = this@ProfileFragment
         nameNullTest()
-        with(viewModel){
-            profileData.observe(requireActivity()){
-                Log.d("TAG", "onCreateView: ${it}")
-                binding.data = it
-
-            }
-        }
+        observeProfile()
 
 
     }
 
-    private fun getProfile(name:String) {
+    private fun observeProfile() {
+        with(viewModel) {
+            profileData.observe(requireActivity()) {
+                Log.d("TAG", "onCreateView: ${it}")
+                binding.data = it
+
+
+                if (it.isJobSeeker == true) {
+                    binding.isCompanyImageView.setBackgroundResource(R.drawable.profile_click_background)
+                    binding.isJobSickerImageView.setBackgroundResource(R.drawable.profile_background)
+                }else{
+                    binding.isCompanyImageView.setBackgroundResource(R.drawable.profile_background)
+                    binding.isJobSickerImageView.setBackgroundResource(R.drawable.profile_click_background)
+                }
+            }
+        }
+    }
+
+    private fun getProfile(name: String) {
 
 
         lifecycleScope.launch {
@@ -58,21 +70,17 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
             if (it.name.isEmpty()) {
                 Toast.makeText(requireContext(), "프로필을 불러올수 없습니다.", Toast.LENGTH_SHORT).show()
             } else {
-                getProfile(it.name)            }
+                getProfile(it.name)
+            }
         }
     }
 
     fun setProfileButton() {
-        findNavController().navigate(R.id.action_setProfileFragment_to_profileFragment)
+        startActivity(Intent(requireContext(), SignUpSignInMainActivity::class.java)).apply {
+
+        }
+
     }
 
-    private fun isJobSeeker() {
-        if (viewModel.profileData.value?.isJobSeeker == true) {
-            binding.isCompanyImageView.setColorFilter(R.color.m_c)
-            binding.isJobSickerImageView.setColorFilter(R.color.white)
-        } else {
-            binding.isCompanyImageView.setColorFilter(R.color.white)
-            binding.isJobSickerImageView.setColorFilter(R.color.m_c)
-        }
-    }
+
 }

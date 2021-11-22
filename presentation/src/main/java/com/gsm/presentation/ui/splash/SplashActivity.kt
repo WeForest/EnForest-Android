@@ -9,7 +9,7 @@ import com.gsm.presentation.R
 import com.gsm.presentation.base.BaseActivity
 import com.gsm.presentation.databinding.ActivitySplashBinding
 import com.gsm.presentation.ui.main.MainActivity
-import com.gsm.presentation.ui.sign.up.activity.SignUpSignInMainActivity
+import com.gsm.presentation.ui.sign.`in`.SignInActivity
 import com.gsm.presentation.viewmodel.sign.`in`.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -29,7 +29,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
             Log.d("splash", "readLogin: ${it.token}")
             if (it.token == viewModel.token) {
 
-                startActivity(Intent(this, SignUpSignInMainActivity::class.java))
+                startActivity(Intent(this, SignInActivity::class.java))
                 finish()
 
             } else {

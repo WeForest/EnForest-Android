@@ -4,7 +4,7 @@
     <data>
         <variable
             name="fragment"
-            type="com.gsm.presentation.ui.sign.in.SignInFragment" />
+            type="com.gsm.presentation.ui.sign.in.SignInActivity" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
-        tools:context="com.gsm.presentation.ui.sign.in.SignInFragment">
+        tools:context="com.gsm.presentation.ui.sign.in.SignInActivity">
 
         <TextView
             android:layout_width="wrap_content"
@@ -54,7 +54,6 @@
                 android:padding="15dp"
                 android:text="구글로 시작하기"
                 android:textColor="@color/white"
-                android:onClick="@{fragment::clickUserGoogleLogin}"
                 android:textSize="18sp" />
 
             <!--   <RelativeLayout

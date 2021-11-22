@@ -1,4 +1,4 @@
-package com.gsm.presentation.ui.profile.fragment
+package com.gsm.presentation.ui.sign.up.profile.fragment
 
 import android.content.Intent
 import android.net.Uri
@@ -21,12 +21,11 @@ import com.github.dhaval2404.imagepicker.ImagePicker
 import com.gsm.presentation.R
 import com.gsm.presentation.databinding.FragmentSetProfileBinding
 import com.gsm.presentation.ui.main.MainActivity
-import com.gsm.presentation.ui.sign.up.activity.SignUpSignInMainActivity
+import com.gsm.presentation.ui.sign.up.SignUpSignInMainActivity
 import com.gsm.presentation.util.EventObserver
 import com.gsm.presentation.viewmodel.profile.ProfileViewModel
 import com.gsm.presentation.viewmodel.sign.`in`.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -36,6 +35,7 @@ class SetProfileFragment : Fragment() {
     private val viewModel by activityViewModels<ProfileViewModel>()
     private val signViewModel by viewModels<SignInViewModel>()
     var token: String = ""
+    var isJobSeeker = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -54,7 +54,9 @@ class SetProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         getUserProfileAndSetting()
-
+        isComponyOnclick()
+        isJobSeekerOnclick()
+        nextButton()
     }
 
     fun getUserProfileImage() {
@@ -68,9 +70,9 @@ class SetProfileFragment : Fragment() {
             .start()
     }
 
-    private fun getToken(){
-        signViewModel.readToken.asLiveData().observe(viewLifecycleOwner){
-            token=it.token
+    private fun getToken() {
+        signViewModel.readToken.asLiveData().observe(viewLifecycleOwner) {
+            token = it.token
         }
     }
 
@@ -101,12 +103,11 @@ class SetProfileFragment : Fragment() {
     }
 
 
-
     fun nextButton() {
 
         if (textNullTest()) {
             lifecycleScope.launch {
-                viewModel.pathProfile(token)
+                viewModel.pathProfile(token, isJobSeeker)
                 Log.d("TAG", "SetProfileFragment - nextButton() called")
             }
         }
@@ -125,20 +126,18 @@ class SetProfileFragment : Fragment() {
             )
             true
         } else {
-            Toast.makeText(activity, "모든 빈칸을 채워주세요!", Toast.LENGTH_SHORT).show()
             false
         }
     }
 
     fun isComponyOnclick() {
-        viewModel.isJobSicker()
+        isJobSeeker = true
         binding.isCompanyImageView.setBackgroundResource(R.drawable.profile_click_background)
         binding.isJobSickerImageView.setBackgroundResource(R.drawable.profile_background)
     }
 
     fun isJobSeekerOnclick() {
-
-        viewModel.isCompany()
+        isJobSeeker = false
         binding.isCompanyImageView.setBackgroundResource(R.drawable.profile_background)
         binding.isJobSickerImageView.setBackgroundResource(R.drawable.profile_click_background)
     }

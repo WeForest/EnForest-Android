@@ -30,10 +30,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         //앱 바 구성성
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.homeFragment,
+                R.id.profileFragment,
                 R.id.communityFragment,
                 R.id.missionFragment,
-                R.id.profileFragment,
+
             )
         )
 

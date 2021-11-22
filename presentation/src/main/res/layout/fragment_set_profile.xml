@@ -13,14 +13,14 @@
 
         <variable
             name="fragment"
-            type="com.gsm.presentation.ui.profile.fragment.SetProfileFragment" />
+            type="com.gsm.presentation.ui.sign.up.profile.fragment.SetProfileFragment" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.profile.fragment.SetProfileFragment">
+        tools:context=".ui.sign.up.profile.fragment.SetProfileFragment">
 
 
         <ImageView

@@ -9,7 +9,8 @@ fun LoginResponse.toDomain(): LoginEntity {
     return LoginEntity(
         this.message,
         this.success,
-        this.token
+        this.token,
+        this.isLogin
     )
 }
 

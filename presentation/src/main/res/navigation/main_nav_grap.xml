@@ -46,7 +46,7 @@
      />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.gsm.presentation.ui.profile.fragment.ProfileFragment"
+        android:name="com.gsm.presentation.ui.sign.up.profile.fragment.ProfileFragment"
         android:label=""
         tools:layout="@layout/fragment_profile" >
 

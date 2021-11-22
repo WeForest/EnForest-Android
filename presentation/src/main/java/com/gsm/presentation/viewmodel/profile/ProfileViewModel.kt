@@ -64,10 +64,6 @@ class ProfileViewModel @Inject constructor(
     private val _token = MutableLiveData<String>()
     val token: LiveData<String> get() = _token
 
-    init {
-        _isJobSeeker.value = false
-
-    }
 
     private fun saveName(name: String) =
         viewModelScope.launch(Dispatchers.IO) {
@@ -126,9 +122,10 @@ class ProfileViewModel @Inject constructor(
 
     suspend fun pathProfile(
         token: String,
+        isJobSeeker: Boolean
     ) = viewModelScope.launch {
         try {
-            Log.d(TAG, "pathProfile name : ${_name}")
+            Log.d(TAG, "pathProfile _isJobSeeker : ${isJobSeeker}")
             pathProfileUseCase.buildUseCaseObservable(
                 PathProfileUseCase.Params(
                     token,
@@ -136,8 +133,8 @@ class ProfileViewModel @Inject constructor(
                         name = _name.value.toString(),
                         purpose = "",
                         major = _major.value,
+                        isJobSeeker = isJobSeeker,
                         interests = _interests.value,
-                        isJobSeeker = _isJobSeeker.value ?: false,
                         companyEmail = _email.value,
                     )
                 )

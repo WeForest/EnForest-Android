@@ -16,7 +16,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.profile.fragment.SetProfileEndFragment">
+        tools:context=".ui.sign.up.profile.fragment.SetProfileEndFragment">
 
         <TextView
             android:id="@+id/major_textview"
