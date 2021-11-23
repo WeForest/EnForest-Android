@@ -19,6 +19,7 @@ class MissionDetailFragment :
     private val args by navArgs<MissionDetailFragmentArgs>()
     override fun FragmentMissionDetailBinding.onViewCreated() {
         setUpViewPager()
+        setHasOptionsMenu(false)
         missionViewModel.getType(args.type.toString())
 
     }

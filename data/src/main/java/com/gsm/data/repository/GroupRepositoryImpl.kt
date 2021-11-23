@@ -1,12 +1,12 @@
 package com.gsm.data.repository
 
 import com.gsm.data.datasource.group.GroupDataSourceImpl
-import com.gsm.data.entity.group.response.SearchChatResponse
 import com.gsm.data.mapper.group.toDomain
 import com.gsm.data.mapper.group.toData
 import com.gsm.domain.entity.group.request.CreateGroup
 import com.gsm.domain.entity.group.response.BaseGroupEntity
 import com.gsm.domain.entity.group.response.CreateGroupEntity
+import com.gsm.domain.entity.group.response.JoinGroupEntity
 import com.gsm.domain.entity.group.response.SearchChatEntity
 import com.gsm.domain.entity.group.response.search.SearchGroupEntity
 import com.gsm.domain.repository.GroupRepository
@@ -15,7 +15,7 @@ import javax.inject.Inject
 class GroupRepositoryImpl @Inject constructor(
     private val groupDataSourceImpl: GroupDataSourceImpl
 ) : GroupRepository {
-    override suspend fun joinGroup(token: String, id: Int): BaseGroupEntity {
+    override suspend fun joinGroup(token: String, id: Int): JoinGroupEntity {
         return groupDataSourceImpl.joinGroup(token, id).toDomain()
     }
 

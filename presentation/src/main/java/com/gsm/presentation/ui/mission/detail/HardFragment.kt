@@ -21,6 +21,7 @@ class HardFragment : BaseFragment<FragmentMissionHardBinding>(R.layout.fragment_
     private val missionViewModel: MissionViewModel by activityViewModels()
     private val missionAdapter: MissionGetAdapter by lazy { MissionGetAdapter() }
     override fun FragmentMissionHardBinding.onCreateView() {
+        setHasOptionsMenu(true);
     }
 
     override fun FragmentMissionHardBinding.onViewCreated() {

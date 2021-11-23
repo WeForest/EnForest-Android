@@ -43,12 +43,46 @@
         android:id="@+id/communityFragment"
         android:name="com.gsm.presentation.ui.study.group.CommunityFragment"
         tools:layout="@layout/fragment_community"
-     />
+     >
+
+        <action
+            android:id="@+id/action_communityFragment_to_studyFragment"
+            app:destination="@id/studyFragment" />
+        <action
+            android:id="@+id/action_communityFragment_to_groupChatFragment"
+            app:destination="@id/groupChatFragment" />
+        <argument
+            android:name="groupId"
+            app:argType="integer" />
+
+
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.gsm.presentation.ui.sign.up.profile.fragment.ProfileFragment"
         android:label=""
         tools:layout="@layout/fragment_profile" >
 
+
+    </fragment>
+    <activity
+        tools:layout="@layout/fragment_group_chat"
+        android:id="@+id/groupChatFragment"
+        android:name="com.gsm.presentation.ui.study.chat.GroupChatFragment"
+        android:label="" >
+
+        <argument
+            android:name="groupId"
+            app:argType="integer" />
+
+    </activity>
+    <fragment
+        android:id="@+id/studyFragment"
+        tools:layout="@layout/fragment_study"
+        android:name="com.gsm.presentation.ui.study.StudyFragment"
+        android:label="StudyFragment" >
+        <action
+            android:id="@+id/action_studyFragment_to_groupChatFragment"
+            app:destination="@id/groupChatFragment" />
     </fragment>
 </navigation>

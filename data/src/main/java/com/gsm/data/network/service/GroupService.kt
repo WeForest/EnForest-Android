@@ -1,10 +1,7 @@
 package com.gsm.data.network.service
 
 import com.gsm.data.entity.group.request.CreateGroupRequest
-import com.gsm.data.entity.group.response.BaseGroupResponse
-import com.gsm.data.entity.group.response.CreateGroupResponse
-import com.gsm.data.entity.group.response.SearchChatResponse
-import com.gsm.data.entity.group.response.SearchGroupResponse
+import com.gsm.data.entity.group.response.*
 import retrofit2.http.*
 
 interface GroupService {
@@ -14,7 +11,7 @@ interface GroupService {
     suspend fun joinGroup(
         @Header("authorization") token: String,
         @Path("id") id: Int
-    ): BaseGroupResponse
+    ): JoinGroupResponse
 
     // 그룹 탈퇴
     @PATCH("group/{id}")

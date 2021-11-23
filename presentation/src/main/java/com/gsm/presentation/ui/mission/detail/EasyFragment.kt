@@ -1,6 +1,9 @@
 package com.gsm.presentation.ui.mission.detail
 
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -19,6 +22,7 @@ import com.gsm.presentation.ui.mission.MissionFragment.Companion.WEEK
 import com.gsm.presentation.viewmodel.mission.MissionRemoteViewModel
 import com.gsm.presentation.viewmodel.mission.MissionViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -53,6 +57,17 @@ class EasyFragment : BaseFragment<FragmentMissionEasyBinding>(R.layout.fragment_
             }
 
         }
+    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_search, menu)
+
+
+
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        menu.findItem(R.id.menu_action_search).isVisible = false
     }
 
     private fun observeMission() {

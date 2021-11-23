@@ -34,6 +34,7 @@ class MissionFragment : BaseFragment<FragmentMissionBinding>(R.layout.fragment_m
     private val viewModel: MissionViewModel by viewModels<MissionViewModel>()
     private val remoteViewModel: MissionRemoteViewModel by viewModels<MissionRemoteViewModel>()
     override fun FragmentMissionBinding.onCreateView() {
+        setHasOptionsMenu(false)
         binding.fragment = this@MissionFragment
         with(binding) {
             missionDailyLayout.setOnClickListener {

@@ -70,6 +70,11 @@ class GroupViewModel @Inject constructor(
             }
         }
 
+    private fun groupJoin(token: String, id: Int) = viewModelScope.launch {
+        val data = joinGroupUseCase.buildUseCaseObservable(JoinGroupUseCase.Params(token,id))
+    }
+
+
     private val _query = MutableLiveData<Event<String>>()
 
     fun getQuery(query: String?): Flow<PagingData<SearchGroupResponseItem>> {

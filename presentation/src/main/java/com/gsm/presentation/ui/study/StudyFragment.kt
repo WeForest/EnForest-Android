@@ -20,6 +20,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+// 그룹 리스트
 @AndroidEntryPoint
 class StudyFragment : BaseFragment<FragmentStudyBinding>(R.layout.fragment_study) {
     private val viewModel: GroupViewModel by viewModels()

@@ -2,16 +2,13 @@ package com.gsm.data.datasource.group
 
 import com.gsm.data.base.BaseDataSource
 import com.gsm.data.entity.group.request.CreateGroupRequest
-import com.gsm.data.entity.group.response.BaseGroupResponse
-import com.gsm.data.entity.group.response.CreateGroupResponse
-import com.gsm.data.entity.group.response.SearchChatResponse
-import com.gsm.data.entity.group.response.SearchGroupResponse
+import com.gsm.data.entity.group.response.*
 import com.gsm.data.network.service.GroupService
 import javax.inject.Inject
 
 class GroupDataSourceImpl @Inject constructor(override val service: GroupService) : BaseDataSource<GroupService>(),
     GroupDataSource {
-    override suspend fun joinGroup(token: String, id: Int): BaseGroupResponse {
+    override suspend fun joinGroup(token: String, id: Int): JoinGroupResponse {
 
         return service.joinGroup(token, id)
     }

@@ -34,6 +34,18 @@ fun SearchChatResponse.toDomain(): SearchChatEntity {
 
 }
 
+fun JoinGroupResponse.toDomain(): JoinGroupEntity {
+    return JoinGroupEntity(
+        this.id,
+        this.name,
+        this.description,
+        this.tags,
+        this.userId,
+    )
+
+}
+
+
 fun SearchGroupResponse.toDomain(): SearchGroupEntity {
     return SearchGroupEntity()
 

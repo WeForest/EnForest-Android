@@ -139,6 +139,7 @@ class SignInActivity : BaseActivity<FragmentSignInBinding>(R.layout.fragment_sig
 
     private fun observeToken() {
         signInViewModel.tokenValue.observe(this, EventObserver {
+            Log.d("TAG", "observeToken: ${it}")
             if (it.isNotEmpty()) {
                 signInViewModel.saveToken(it)
                 readName()

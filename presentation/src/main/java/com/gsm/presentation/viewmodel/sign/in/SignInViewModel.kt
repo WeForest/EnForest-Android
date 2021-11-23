@@ -42,7 +42,7 @@ class SignInViewModel @Inject constructor(
 
         try {
             loginUseCase.buildUseCaseObservable(LoginUseCase.Params(TokenEntity(token))).let {
-                Log.d("Token", "success ${it.success} message : ${it.message} token  ")
+                Log.d("login", "success ${it.success} message : ${it.message} token  ")
                 if (it.success == true) {
                     _tokenValue.value = Event(it.token!!)
                     _isLogin.value = Event(it.isLogin!!)
@@ -52,7 +52,7 @@ class SignInViewModel @Inject constructor(
                 }
             }
         } catch (e: Exception) {
-            Log.e("TAG", "postLogin: $e")
+            Log.e("login", "postLogin: $e")
             _tokenValue.value = Event("")
 
         }

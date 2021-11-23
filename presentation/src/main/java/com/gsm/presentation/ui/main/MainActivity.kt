@@ -25,6 +25,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setSupportActionBar(binding.toolbar)
+
         navi = binding.bottomNavigationView
         navController = findNavController(R.id.navHostFragment)
         //앱 바 구성성
@@ -34,7 +35,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 R.id.communityFragment,
                 R.id.missionFragment,
 
-            )
+                )
         )
 
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -50,16 +51,21 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
     }
 
     private fun initNavigation() {
-
         val navController = findNavController(R.id.navHostFragment)
-        navi.setupWithNavController(navController)
+        binding.bottomNavigationView.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            // fragment id 가 아닐 시 bottom navigation 안뜸
-            if (destination.id == R.id.communityFragment) {
+            if (destination.id == R.id.profileFragment || destination.id == R.id.communityFragment || destination.id == R.id.missionFragment) {
+                binding.bottomNavigationView.visibility = View.VISIBLE
             } else {
-                supportActionBar?.hide()
+                binding.bottomNavigationView.visibility = View.GONE
             }
+            when (destination.id) {
+                R.id.profileFragment -> binding.toolbar.visibility = View.GONE
+                R.id.missionFragment -> binding.toolbar.visibility = View.GONE
+                R.id.studyFragment -> binding.toolbar.visibility = View.VISIBLE
+            }
+
         }
     }
 

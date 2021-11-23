@@ -2,6 +2,8 @@ package com.gsm.presentation.ui.sign.up.profile.fragment
 
 import android.content.Intent
 import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.asLiveData
@@ -47,6 +49,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
             }
         }
     }
+
+
+
 
     private fun getProfile(name: String) {
 
