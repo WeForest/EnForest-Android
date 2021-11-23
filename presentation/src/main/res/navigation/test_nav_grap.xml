@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/test_nav_grap"
+    app:startDestination="@id/testMainFragment">
+
+    <fragment
+        tools:layout="@layout/fragment_test_main"
+        android:id="@+id/testMainFragment"
+        android:name="com.gsm.presentation.TestMainFragment"
+        android:label="TestMainFragment" >
+        <action
+            android:id="@+id/action_testMainFragment_to_easyTestFragment"
+            app:destination="@id/easyTestFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/easyTestFragment"
+        android:name="com.gsm.presentation.EasyTestFragment"
+        android:label="fragment_easy_test"
+        tools:layout="@layout/fragment_easy_test" />
+</navigation>
