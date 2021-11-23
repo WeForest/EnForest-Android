@@ -6,8 +6,8 @@ import com.gsm.domain.entity.group.request.CreateGroup
 import com.gsm.domain.entity.group.response.*
 import com.gsm.domain.entity.group.response.search.SearchGroupEntity
 
-fun BaseGroupResponse.toDomain(): BaseGroupEntity {
-    return BaseGroupEntity(this.message, this.code, this.success)
+fun BaseResponse.toDomain(): BaseEntity {
+    return BaseEntity(this.message, this.code, this.success)
 }
 
 fun CreateGroup.toData(): CreateGroupRequest {

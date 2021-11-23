@@ -18,7 +18,7 @@ interface GroupService {
     suspend fun secessionGroup(
         @Header("authorization") token: String,
         @Path("id") id: Int
-    ): BaseGroupResponse
+    ): BaseResponse
 
     // 그룹 생성
     @POST("group/create")
@@ -32,7 +32,7 @@ interface GroupService {
     suspend fun deleteGroup(
         @Header("authorization") token: String,
         @Path("id") id: Int
-    ): BaseGroupResponse
+    ): BaseResponse
 
     @GET("group/list/{page}")
     suspend fun searchGroup(

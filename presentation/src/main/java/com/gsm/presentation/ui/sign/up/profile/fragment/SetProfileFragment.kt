@@ -1,16 +1,23 @@
 package com.gsm.presentation.ui.sign.up.profile.fragment
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
+import android.provider.MediaStore
 import android.text.TextUtils
+import android.util.Base64
+import android.util.Base64.*
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat.getExternalFilesDirs
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -27,7 +34,28 @@ import com.gsm.presentation.viewmodel.profile.ProfileViewModel
 import com.gsm.presentation.viewmodel.sign.`in`.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.IOException
+import java.io.InputStream
+import androidx.core.app.ActivityCompat.startActivityForResult
+import com.bumptech.glide.Glide
+import java.text.SimpleDateFormat
+import java.util.*
 
+
+//todo
+//    val img: Bitmap = BitmapFactory.decodeStream(ins)
+//                    ins?.close()
+//                    val resized = Bitmap.createScaledBitmap(img, 256, 256, true)
+//                    val byteArrayOutputStream = ByteArrayOutputStream()
+//                    resized.compress(Bitmap.CompressFormat.JPEG, 60, byteArrayOutputStream)
+//                    val byteArray: ByteArray = byteArrayOutputStream.toByteArray()
+//                    Log.d("profile", "onActivityResult: ${(Base64.encodeToString(byteArray, NO_WRAP))}")
+//                    postProfile(Base64.encodeToString(byteArray, NO_WRAP))
 @AndroidEntryPoint
 class SetProfileFragment : Fragment() {
     private lateinit var binding: FragmentSetProfileBinding
@@ -76,6 +104,15 @@ class SetProfileFragment : Fragment() {
         }
     }
 
+    private fun postProfile(patch: MultipartBody.Part) {
+        lifecycleScope.launch {
+            viewModel.postProfile(token, patch)
+        }
+
+
+    }
+
+
     @RequiresApi(Build.VERSION_CODES.Q)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -83,8 +120,51 @@ class SetProfileFragment : Fragment() {
         when (requestCode) {
             2404 -> {
                 proFileUri = data?.data
+                var filepath = data?.data?.path
+                Log.d("profile", "onActivityResult: $proFileUri")
+                Log.d("profile", "onActivityResult: bitmap $filepath")
 
-                binding.profileImageView.setImageURI(proFileUri)
+                Glide.with(this)
+                    .load(proFileUri)
+                    .into(binding.profileImageView)
+
+                val ins: InputStream? = proFileUri?.let {
+                    context?.contentResolver?.openInputStream(
+                        it
+
+                    )
+                }
+                val file: File? = File(filepath)
+                var inputStream: InputStream? = null
+                try {
+                    inputStream = proFileUri?.let { context!!.contentResolver.openInputStream(it) }
+                } catch (e: IOException) {
+                    e.printStackTrace()
+                }
+                val bitmap = BitmapFactory.decodeStream(inputStream)
+                val byteArrayOutputStream = ByteArrayOutputStream()
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream)
+                val requestBody: RequestBody = RequestBody.create(
+                    "image/jpg".toMediaTypeOrNull(),
+                    byteArrayOutputStream.toByteArray()
+                )
+                val uploadFile: MultipartBody.Part =
+                    MultipartBody.Part.createFormData("postImg", file?.name, requestBody)
+                postProfile(uploadFile)
+
+                ins?.close()
+//                    val byteArrayOutputStream = ByteArrayOutputStream()
+                val byteArray: ByteArray = byteArrayOutputStream.toByteArray()
+                Log.d(
+                    "profile",
+                    "onActivityResult: ${(Base64.encodeToString(byteArray, DEFAULT))}"
+                )
+
+                try {
+
+                } catch (e: Exception) {
+
+                }
             }
             ImagePicker.RESULT_ERROR -> {
                 proFileUri = null

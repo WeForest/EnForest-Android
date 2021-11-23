@@ -2,7 +2,9 @@ package com.gsm.data.datasource.mission.local
 
 import com.gsm.data.entity.mission.request.AddMissionRequest
 import com.gsm.data.entity.mission.response.*
+import okhttp3.MultipartBody
 import retrofit2.Response
+import retrofit2.http.Multipart
 
 interface MissionLocalDataSource {
     suspend fun addMission(request: AddMissionRequest): AddMissionResponse

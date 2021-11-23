@@ -12,19 +12,24 @@ import com.gsm.domain.entity.response.GetProfileEntity
 import com.gsm.domain.entity.response.PathProfileEntity
 import com.gsm.domain.usecase.profile.GetProfileUseCase
 import com.gsm.domain.usecase.profile.PathProfileUseCase
+import com.gsm.domain.usecase.profile.PostProfileUseCase
 import com.gsm.presentation.data.DataStoreRepository
 import com.gsm.presentation.util.Constant.Companion.DEFAULT_NAME
 import com.gsm.presentation.util.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.File
 import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val getProfileUseCase: GetProfileUseCase,
     private val pathProfileUseCase: PathProfileUseCase,
-    private val dataStore: DataStoreRepository
+    private val dataStore: DataStoreRepository,
+    private val postProfileUseCase: PostProfileUseCase
 ) : ViewModel() {
 
     private val TAG = "profile"
@@ -89,6 +94,21 @@ class ProfileViewModel @Inject constructor(
 
         Log.d(TAG, "setProfilePurposeMajor: ${_interests.value?.get(0)} ${_major.value?.get(0)}")
 
+    }
+
+    suspend fun postProfile(token: String, file:  MultipartBody.Part) = viewModelScope.launch {
+        try {
+            postProfileUseCase.buildUseCaseObservable(PostProfileUseCase.Params(token, file))
+                .apply {
+
+                    if(this.success){
+                        Log.d(TAG, "postProfile: 성공")
+                    }
+                }
+
+        } catch (e: Exception) {
+            Log.d(TAG, "postProfile: 실패 ${e}")
+        }
     }
 
 

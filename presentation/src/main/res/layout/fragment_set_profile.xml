@@ -27,6 +27,7 @@
             android:onClick="@{() -> fragment.getUserProfileImage()}"
             android:id="@+id/profile_imageView"
             android:layout_width="130dp"
+            android:scaleType="centerInside"
             android:layout_height="80dp"
             android:layout_marginTop="48dp"
             android:background="@drawable/profile_background"

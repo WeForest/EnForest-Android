@@ -1,7 +1,6 @@
 package com.gsm.domain.usecase.group
 
 import com.gsm.domain.base.ParamsUseCase
-import com.gsm.domain.entity.group.response.BaseGroupEntity
 import com.gsm.domain.entity.group.response.JoinGroupEntity
 import com.gsm.domain.repository.GroupRepository
 import javax.inject.Inject

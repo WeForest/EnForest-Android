@@ -13,7 +13,7 @@ class GroupDataSourceImpl @Inject constructor(override val service: GroupService
         return service.joinGroup(token, id)
     }
 
-    override suspend fun secessionGroup(token: String, id: Int): BaseGroupResponse {
+    override suspend fun secessionGroup(token: String, id: Int): BaseResponse {
         return service.secessionGroup(token, id)
     }
 
@@ -24,7 +24,7 @@ class GroupDataSourceImpl @Inject constructor(override val service: GroupService
         return service.createGroup(token, request)
     }
 
-    override suspend fun deleteGroup(token: String, id: Int): BaseGroupResponse {
+    override suspend fun deleteGroup(token: String, id: Int): BaseResponse {
         return service.deleteGroup(token, id)
     }
 

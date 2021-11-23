@@ -4,7 +4,7 @@ import com.gsm.data.datasource.group.GroupDataSourceImpl
 import com.gsm.data.mapper.group.toDomain
 import com.gsm.data.mapper.group.toData
 import com.gsm.domain.entity.group.request.CreateGroup
-import com.gsm.domain.entity.group.response.BaseGroupEntity
+import com.gsm.domain.entity.group.response.BaseEntity
 import com.gsm.domain.entity.group.response.CreateGroupEntity
 import com.gsm.domain.entity.group.response.JoinGroupEntity
 import com.gsm.domain.entity.group.response.SearchChatEntity
@@ -19,7 +19,7 @@ class GroupRepositoryImpl @Inject constructor(
         return groupDataSourceImpl.joinGroup(token, id).toDomain()
     }
 
-    override suspend fun secessionGroup(token: String, id: Int): BaseGroupEntity {
+    override suspend fun secessionGroup(token: String, id: Int): BaseEntity {
         return groupDataSourceImpl.secessionGroup(token, id).toDomain()
     }
 
@@ -27,7 +27,7 @@ class GroupRepositoryImpl @Inject constructor(
         return groupDataSourceImpl.createGroup(token, request.toData()).toDomain()
     }
 
-    override suspend fun deleteGroup(token: String, id: Int): BaseGroupEntity {
+    override suspend fun deleteGroup(token: String, id: Int): BaseEntity {
         return groupDataSourceImpl.deleteGroup(token, id).toDomain()
     }
 
