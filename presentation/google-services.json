@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "132934041159",
+    "project_id": "enforest-2a3e4",
+    "storage_bucket": "enforest-2a3e4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:132934041159:android:06faaa65a68f37d6a8fb62",
+        "android_client_info": {
+          "package_name": "com.gsm.presentation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "132934041159-agv1pa7131bof007rh1tgdijdfr5vsqb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxuS7vwDSZEJuyQePq2jY02C38MVFpeMk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "132934041159-agv1pa7131bof007rh1tgdijdfr5vsqb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
