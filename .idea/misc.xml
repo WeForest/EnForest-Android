@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.21354166666666666" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest/app/src/main/res/layout/activity_sign.xml" value="0.45208333333333334" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest/app/src/main/res/layout/fragment_sign.xml" value="0.536" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest/app/src/main/res/layout/fragment_sign_up.xml" value="0.45208333333333334" />
@@ -10,10 +11,22 @@
         <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/layout/activity_sign_in_sign_up_main.xml" value="0.16302083333333334" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/layout/activity_sign_up_sign_in_main.xml" value="0.2" />
         <entry key="..\:/Users/apple/AndroidStudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_sign_in.xml" value="0.2" />
+        <entry key="presentation/src/main/res/drawable/background_practice_test.xml" value="0.13918918918918918" />
+        <entry key="presentation/src/main/res/drawable/background_test.xml" value="0.13918918918918918" />
+        <entry key="presentation/src/main/res/drawable/background_test_main.xml" value="0.13918918918918918" />
+        <entry key="presentation/src/main/res/layout/activity_main.xml" value="0.2015625" />
+        <entry key="presentation/src/main/res/layout/activity_test_main.xml" value="0.1287162162162162" />
+        <entry key="presentation/src/main/res/layout/fragment_easy_test.xml" value="0.335" />
+        <entry key="presentation/src/main/res/layout/fragment_mission_hard.xml" value="0.1875" />
+        <entry key="presentation/src/main/res/layout/fragment_prograss.xml" value="0.25" />
+        <entry key="presentation/src/main/res/layout/fragment_test_main.xml" value="0.335" />
+        <entry key="presentation/src/main/res/layout/test_item.xml" value="0.25" />
+        <entry key="presentation/src/main/res/layout/test_item_level_hard.xml" value="0.1287162162162162" />
+        <entry key="presentation/src/main/res/layout/test_item_level_middle.xml" value="0.1287162162162162" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_7" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
