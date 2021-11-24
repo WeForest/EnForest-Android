@@ -3,18 +3,22 @@ package com.gsm.presentation.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
+import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.gsm.data.entity.group.response.SearchGroupResponseItem
 import com.gsm.presentation.R
+import com.gsm.presentation.databinding.ChattingGroupRecyclerBinding
 import com.gsm.presentation.databinding.CommunityRecyclerViewItemBinding
-import com.gsm.presentation.ui.study.dialog.JoinGroupDialog
 import com.gsm.presentation.ui.study.group.CommunityFragmentDirections
-import androidx.fragment.app.Fragment
-class GroupRecyclerAdapter(private val fragment:Fragment) :
-    PagingDataAdapter<SearchGroupResponseItem, GroupRecyclerAdapter.PartnerRecyclerAdapterViewHolder>(
+
+class GroupAdapters :
+    PagingDataAdapter<SearchGroupResponseItem, GroupAdapters.ChatGroupRecyclerAdapterViewHolder>(
         diffCallback
     ) {
     companion object {
@@ -39,33 +43,21 @@ class GroupRecyclerAdapter(private val fragment:Fragment) :
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): PartnerRecyclerAdapterViewHolder {
+    ): ChatGroupRecyclerAdapterViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
 
-        val binding = DataBindingUtil.inflate<CommunityRecyclerViewItemBinding>(
+        val binding = DataBindingUtil.inflate<ChattingGroupRecyclerBinding>(
             layoutInflater,
-            R.layout.community_recycler_view_item,
+            R.layout.chatting_group_recycler,
             parent,
             false
         )
 
-        return PartnerRecyclerAdapterViewHolder(binding)
+        return ChatGroupRecyclerAdapterViewHolder(binding)
     }
 
 
-    override fun onBindViewHolder(holder: PartnerRecyclerAdapterViewHolder, position: Int) {
-        val item = getItem(position)
-        val dialog= JoinGroupDialog()
-        if (item != null) {
-            holder.bind(item)
-            holder.itemView.setOnClickListener {
-                dialog.show(fragment.childFragmentManager,"ㅇㅇ")
-            }
-        }
-    }
-
-
-    class PartnerRecyclerAdapterViewHolder(val binding: CommunityRecyclerViewItemBinding) :
+    class ChatGroupRecyclerAdapterViewHolder(val binding: ChattingGroupRecyclerBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(bind: SearchGroupResponseItem) {
@@ -74,7 +66,24 @@ class GroupRecyclerAdapter(private val fragment:Fragment) :
         }
     }
 
+    override fun onBindViewHolder(
+        holder: ChatGroupRecyclerAdapterViewHolder,
+        position: Int
+    ) {
+        val item = getItem(position)
+
+        if (item != null) {
+            holder.bind(item)
+            holder.itemView.setOnClickListener { view ->
+                val action = item.chattingId?.let { it1 ->
+                    CommunityFragmentDirections.actionCommunityFragmentToGroupChatFragment(
+                        it1
+                    )
+                }
+                action?.let { view.findNavController().navigate(it) }
+            }
+        }
+    }
+
 
 }
-
-

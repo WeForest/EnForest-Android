@@ -25,7 +25,7 @@ import kotlinx.coroutines.launch
 class StudyFragment : BaseFragment<FragmentStudyBinding>(R.layout.fragment_study) {
     private val viewModel: GroupViewModel by viewModels()
     private val groupAdapter: GroupRecyclerAdapter by lazy {
-        GroupRecyclerAdapter()
+        GroupRecyclerAdapter(this)
     }
 
     override fun FragmentStudyBinding.onCreateView() {

@@ -17,10 +17,10 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class PartnerFragment : BaseFragment<FragmentPartnerBinding>(R.layout.fragment_partner) {
 
-    private val groupAdapter: GroupAdapters by lazy{
+    private val groupAdapter: GroupAdapters by lazy {
         GroupAdapters()
     }
-    private val viewModel : GroupViewModel by activityViewModels()
+    private val viewModel: GroupViewModel by activityViewModels()
     private fun initRecyclerView() {
         binding.partnerRecyclerView.showVertical(requireContext())
         binding.partnerRecyclerView.adapter = groupAdapter
