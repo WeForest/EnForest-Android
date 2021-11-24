@@ -29,7 +29,6 @@ class JoinGroupDialog :
     var token = ""
     private val signViewModel by activityViewModels<SignInViewModel>()
     private val viewModel by viewModels<GroupViewModel>()
-    private val args by navArgs<JoinGroupDialogArgs>()
     override fun JoinDialogBinding.onCreateView() {
         getToken()
     }
@@ -49,17 +48,18 @@ class JoinGroupDialog :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        createGroup(view)
+        createGroup()
     }
 
-    fun createGroup(view: View) {
+    fun createGroup() {
         binding.joinBtn.setOnClickListener {
             Log.d("TAG", "createGroup: ")
             lifecycleScope.launch {
                 viewModel.joinGroup(
                     token,
-                    args.groupId
+                    1,
                 )
+                dialog?.dismiss()
             }
         }
     }

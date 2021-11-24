@@ -59,7 +59,7 @@ class GroupRecyclerAdapter(private val fragment:Fragment) :
         if (item != null) {
             holder.bind(item)
             holder.itemView.setOnClickListener {
-                dialog.show(fragment.childFragmentManager,"ㅇㅇ")
+                dialog.show(fragment.parentFragmentManager,"dialog")
             }
         }
     }
