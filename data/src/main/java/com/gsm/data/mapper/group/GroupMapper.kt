@@ -7,7 +7,7 @@ import com.gsm.domain.entity.group.response.*
 import com.gsm.domain.entity.group.response.search.SearchGroupEntity
 
 fun BaseResponse.toDomain(): BaseEntity {
-    return BaseEntity(this.message, this.code, this.success)
+    return BaseEntity(this.message,  this.success)
 }
 
 fun CreateGroup.toData(): CreateGroupRequest {

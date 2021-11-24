@@ -3,6 +3,7 @@ package com.gsm.presentation.ui.sign.up.profile.fragment
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.database.Cursor
@@ -11,6 +12,7 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.os.Environment
 import android.provider.MediaStore
 import android.text.TextUtils
 import android.util.Base64.DEFAULT
@@ -43,10 +45,7 @@ import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.IOException
-import java.io.InputStream
+import java.io.*
 
 
 //todo
@@ -137,7 +136,8 @@ class SetProfileFragment : Fragment() {
 
                     )
                 }
-                val file: File? = File(filepath)
+                val file =
+                    File("/storage/emulated/0/Android/data/com.gsm.presentation/files/test.txt")
 
                 var inputStream: InputStream? = null
                 try {
@@ -152,14 +152,15 @@ class SetProfileFragment : Fragment() {
 
                 val requestBody: RequestBody = RequestBody.create(
                     "image/jpg".toMediaTypeOrNull(),
-                    (Base64.encodeToString(byteArray, DEFAULT))
+                    writeTextToFile(
+                        "/storage/emulated/0/Android/data/com.gsm.presentation/files/test.txt",
+                        (Base64.encodeToString(byteArray, NO_WRAP))
+                    )
                 )
-                postProfile(MultipartBody.Part.createFormData("postImg", file?.name, requestBody))
+                postProfile(MultipartBody.Part.createFormData("postImg", file.name, requestBody))
                 ins?.close()
-                Log.d(
-                    "profile",
-                    "onActivityResult: ${(Base64.encodeToString(byteArray, DEFAULT))}"
-                )
+
+
 
                 try {
 
@@ -183,24 +184,17 @@ class SetProfileFragment : Fragment() {
         }
     }
 
+    fun writeTextToFile(path: String, data: String): File {
+        val file = File(
+            path
+        );
 
-    fun getFullPath(ctx: Activity, uri: Uri): String {
+        val fileWritesr = FileWriter(file, false)
+        val bufferedWriter = BufferedWriter(fileWritesr)
 
-        var result = ""
-        val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
-        var cursor: Cursor? = ctx.contentResolver?.query(uri, filePathColumn, null, null, null)
-
-        if (cursor == null) {
-            result = uri?.path.toString()
-        } else {
-            cursor.moveToFirst()
-            var idx = cursor.getColumnIndex(filePathColumn[0])
-            result = cursor.getString(idx)
-            cursor.close()
-        }
-        Log.e("tag", "절대 $result")
-
-        return result;
+        bufferedWriter.append(data)
+        bufferedWriter.close()
+        return file
     }
 
 

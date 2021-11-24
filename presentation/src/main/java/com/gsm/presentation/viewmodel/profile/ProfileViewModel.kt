@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.android.play.core.appupdate.e
 import com.gsm.domain.entity.request.profile.InterestsItem
 import com.gsm.domain.entity.request.profile.MajorItem
 import com.gsm.domain.entity.request.profile.PathProfile
@@ -107,9 +108,11 @@ class ProfileViewModel @Inject constructor(
                 .apply {
                     Log.d(TAG, "postProfile: ")
                     if (this.success) {
-                        Log.d(TAG, "postProfile: file ${file}")
+                        Log.d(TAG, "postProfile: file ${this.message}")
                         _isSuccessValue.value = Event(success)
                         Log.d("file", "postProfile: 성공")
+                    }else{
+                        Log.d(TAG, "postProfile: 실패 ")
                     }
                 }
 

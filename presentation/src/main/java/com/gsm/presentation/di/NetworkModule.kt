@@ -47,7 +47,7 @@ object NetworkModule {
         gsonConverterFactory: GsonConverterFactory
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://ec2-3-36-97-97.ap-northeast-2.compute.amazonaws.com:3000")
+            .baseUrl("http://10.0.2.2:3000")
             .client(okHttpClient)
             //json 변화기 Factory
 
