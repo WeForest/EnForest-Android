@@ -24,10 +24,7 @@ import io.socket.emitter.Emitter
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
-import java.net.SocketException
-import java.net.SocketTimeoutException
-import java.net.URISyntaxException
-import java.net.UnknownHostException
+import java.net.*
 import java.nio.channels.IllegalBlockingModeException
 import java.util.*
 
@@ -113,7 +110,8 @@ class GroupChatFragment :
         }
     }
 
-    private val onConnectError = Emitter.Listener {
+    private val onConnectError = Emitter.Listener {args->
+        Log.d(TAG, "onConnectError: ${args[0]} ")
         runOnUiThread {
             Toast.makeText(
                 applicationContext,

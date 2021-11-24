@@ -9,6 +9,7 @@ class Constant {
         const val WEEK = 7
         const val NOTIFICATION_ID = 0
         const val MISSION_CHANNEL_ID = "notification_channel"
+        const val Local_SERVER = "http://10.0.2.2:3000"
 
 
         const val PREFERENCE_NAME = "token_preference"

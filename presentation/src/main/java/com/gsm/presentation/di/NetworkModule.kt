@@ -6,6 +6,8 @@ import dagger.Module
 import com.gsm.data.network.service.sign.LoginService
 import com.gsm.data.network.service.MissionService
 import com.gsm.data.network.service.ProfileService
+import com.gsm.data.network.service.TestService
+import com.gsm.presentation.util.Constant.Companion.Local_SERVER
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
@@ -47,7 +49,7 @@ object NetworkModule {
         gsonConverterFactory: GsonConverterFactory
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:3000")
+            .baseUrl(Local_SERVER)
             .client(okHttpClient)
             //json 변화기 Factory
 
@@ -70,22 +72,34 @@ object NetworkModule {
         return (retrofit.create(MissionService::class.java))
     }
 
+
     @Provides
     @Singleton
     fun provideLoginService(retrofit: Retrofit): LoginService {
         return (retrofit.create(LoginService::class.java))
     }
 
+    @Provides
+    @Singleton
+    fun imsIService(retrofit: Retrofit): com.gsm.presentation.TestService {
+        return (retrofit.create(com.gsm.presentation.TestService::class.java))
+    }
+    @Provides
+    @Singleton
+    fun testService(retrofit: Retrofit): TestService {
+        return (retrofit.create(TestService::class.java))
+    }
+
+    @Provides
+    @Singleton
+    fun provideGroupService(retrofit: Retrofit): GroupService {
+        return (retrofit.create(GroupService::class.java))
+    }
 
     @Provides
     @Singleton
     fun provideProfileService(retrofit: Retrofit): ProfileService {
         return (retrofit.create(ProfileService::class.java))
-    }
-    @Provides
-    @Singleton
-    fun provideGroupService(retrofit: Retrofit): GroupService {
-        return (retrofit.create(GroupService::class.java))
     }
 
 
@@ -93,5 +107,6 @@ object NetworkModule {
     private fun getLoggingInterceptor(): HttpLoggingInterceptor =
         HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
 
-
 }
+
+

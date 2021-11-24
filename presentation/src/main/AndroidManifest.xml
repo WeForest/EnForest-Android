@@ -1,64 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     package="com.gsm.presentation">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission
-        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        tools:ignore="ScopedStorage"
-        tools:remove="android:maxSdkVersion" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".util.App"
-        android:grantUriPermissions="true"
         android:allowBackup="true"
-        android:authorities="com.gsm.presentation"
         android:exported="true"
-        android:label="EnForest"
+
         android:fullBackupContent="true"
-        android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.EnForest"
-
         android:usesCleartextTraffic="true">
-        <provider
-            android:name="androidx.core.content.FileProvider"
-            android:authorities="com.gsm.presentation"
-            android:exported="false"
-            android:grantUriPermissions="true">
 
-            <meta-data
-                android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_paths" />
-        </provider>
-
-        <activity
-            android:name=".ui.sign.up.SignUpSignInMainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.study.chat.GroupChatFragment"
-            android:exported="false" />
-        <activity
-            android:name=".ui.main.MainActivity"
-            android:exported="false" />
-
+        <activity android:name=".ui.main.MainActivity" />
         <activity
             android:name=".ui.sign.in.SignInActivity"
             android:exported="false" />
         <activity
+            android:name=".ui.test.activity.TestMainActivity"
+            android:exported="true" />
+        <activity android:name=".ui.study.chat.GroupChatFragment"/>
+        <activity
             android:name=".ui.splash.SplashActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
