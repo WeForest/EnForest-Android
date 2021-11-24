@@ -2,6 +2,7 @@ package com.gsm.presentation.ui.sign.up.profile.fragment
 
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.content.res.Resources
 import android.database.Cursor
@@ -137,6 +138,7 @@ class SetProfileFragment : Fragment() {
                     )
                 }
                 val file: File? = File(filepath)
+
                 var inputStream: InputStream? = null
                 try {
                     inputStream = proFileUri?.let { context!!.contentResolver.openInputStream(it) }
@@ -146,14 +148,14 @@ class SetProfileFragment : Fragment() {
                 val bitmap = BitmapFactory.decodeStream(inputStream)
                 val byteArrayOutputStream = ByteArrayOutputStream()
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream)
+                val byteArray: ByteArray = byteArrayOutputStream.toByteArray()
+
                 val requestBody: RequestBody = RequestBody.create(
                     "image/jpg".toMediaTypeOrNull(),
-                    file!!
+                    (Base64.encodeToString(byteArray, DEFAULT))
                 )
-               postProfile(MultipartBody.Part.createFormData("postImg", file?.name, requestBody))
+                postProfile(MultipartBody.Part.createFormData("postImg", file?.name, requestBody))
                 ins?.close()
-//                    val byteArrayOutputStream = ByteArrayOutputStream()
-                val byteArray: ByteArray = byteArrayOutputStream.toByteArray()
                 Log.d(
                     "profile",
                     "onActivityResult: ${(Base64.encodeToString(byteArray, DEFAULT))}"
@@ -182,14 +184,25 @@ class SetProfileFragment : Fragment() {
     }
 
 
-    fun getRealpath(uri: Uri?): String? {
-        val proj =
-            arrayOf(MediaStore.Images.Media.DATA)
-        val c: Cursor? = context?.contentResolver?.query(uri!!, proj, null, null, null)
-        val index = c?.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
-        c?.moveToFirst()
-        return index?.let { c?.getString(it) }
+    fun getFullPath(ctx: Activity, uri: Uri): String {
+
+        var result = ""
+        val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
+        var cursor: Cursor? = ctx.contentResolver?.query(uri, filePathColumn, null, null, null)
+
+        if (cursor == null) {
+            result = uri?.path.toString()
+        } else {
+            cursor.moveToFirst()
+            var idx = cursor.getColumnIndex(filePathColumn[0])
+            result = cursor.getString(idx)
+            cursor.close()
+        }
+        Log.e("tag", "절대 $result")
+
+        return result;
     }
+
 
     fun nextButton() {
 
@@ -238,14 +251,14 @@ class SetProfileFragment : Fragment() {
             viewModel.isSuccess.observe(viewLifecycleOwner, EventObserver {
 
 
-                    if (it) {
-                        startActivity(Intent(requireContext(), MainActivity::class.java))
-                        (activity as SignUpSignInMainActivity).finish()
-                    } else {
-                        Log.d("TAG", "getUserProfileAndSetting: 실패")
-                        Toast.makeText(requireContext(), "실패", Toast.LENGTH_SHORT).show()
-                    }
-                })
+                if (it) {
+                    startActivity(Intent(requireContext(), MainActivity::class.java))
+                    (activity as SignUpSignInMainActivity).finish()
+                } else {
+                    Log.d("TAG", "getUserProfileAndSetting: 실패")
+                    Toast.makeText(requireContext(), "실패", Toast.LENGTH_SHORT).show()
+                }
+            })
 
         }
     }
