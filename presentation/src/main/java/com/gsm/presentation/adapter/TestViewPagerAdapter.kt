@@ -1,20 +1,14 @@
-package com.gsm.presentation
+package com.gsm.presentation.adapter
 
-import android.app.Activity
-import android.content.Intent
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.graphics.toColor
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.ViewPager2
-import com.gsm.presentation.databinding.FragmentTestMainBinding
+import com.gsm.presentation.R
 
 class TestViewPagerAdapter(testColorItemList : ArrayList<String>, textSetTestLevel : ArrayList<Int>, fragment : Fragment) : RecyclerView.Adapter<TestViewPagerAdapter.PagerViewHolder>() {
 
