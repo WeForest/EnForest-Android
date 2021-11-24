@@ -8,7 +8,7 @@
     <fragment
         tools:layout="@layout/fragment_test_main"
         android:id="@+id/testMainFragment"
-        android:name="com.gsm.presentation.TestMainFragment"
+        android:name="com.gsm.presentation.ui.test.fragment.TestMainFragment"
         android:label="TestMainFragment" >
         <action
             android:id="@+id/action_testMainFragment_to_easyTestFragment"
@@ -17,7 +17,20 @@
 
     <fragment
         android:id="@+id/easyTestFragment"
-        android:name="com.gsm.presentation.EasyTestFragment"
+        android:name="com.gsm.presentation.ui.test.fragment.EasyTestFragment"
         android:label="fragment_easy_test"
-        tools:layout="@layout/fragment_easy_test" />
+        tools:layout="@layout/fragment_easy_test" >
+        <action
+            android:id="@+id/action_easyTestFragment_to_testEndFragment"
+            app:destination="@id/testEndFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/testEndFragment"
+        android:name="com.gsm.presentation.ui.test.fragment.TestEndFragment"
+        android:label="fragment_test_end"
+        tools:layout="@layout/fragment_test_end" >
+        <action
+            android:id="@+id/action_testEndFragment_to_testMainFragment"
+            app:destination="@id/testMainFragment" />
+    </fragment>
 </navigation>
