@@ -19,6 +19,7 @@
         <entry key="presentation/src/main/res/layout/fragment_easy_test.xml" value="0.335" />
         <entry key="presentation/src/main/res/layout/fragment_mission_hard.xml" value="0.1875" />
         <entry key="presentation/src/main/res/layout/fragment_prograss.xml" value="0.25" />
+        <entry key="presentation/src/main/res/layout/fragment_test_end.xml" value="0.25" />
         <entry key="presentation/src/main/res/layout/fragment_test_main.xml" value="0.335" />
         <entry key="presentation/src/main/res/layout/test_item.xml" value="0.25" />
         <entry key="presentation/src/main/res/layout/test_item_level_hard.xml" value="0.1287162162162162" />
