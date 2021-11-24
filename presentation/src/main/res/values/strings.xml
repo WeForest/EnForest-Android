@@ -1,5 +1,10 @@
 <resources>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="client_id">863855204367-hm6eoi341o031ig9ljnd2psncvr700g0.apps.googleusercontent.com</string>
+    <string name="basic_test">초급테스트</string>
+    <string name="basic_test_explain">15분 20초</string>
+    <string name="middle_test">중급테스트</string>
+    <string name="middle_test_explain">20분 25초</string>
+    <string name="hard_test">상급테스트</string>
+    <string name="hard_test_explain">30분 30초</string>
 </resources>

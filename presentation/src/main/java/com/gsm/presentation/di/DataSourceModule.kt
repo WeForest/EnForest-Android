@@ -1,7 +1,7 @@
 package com.gsm.presentation.di
 
-import com.gsm.domain.datasource.sign.LoginDataSourceImpl
-import com.gsm.domain.network.service.sign.LoginService
+import com.gsm.data.datasource.test.TestDataSourceImpl
+import com.gsm.data.network.service.TestService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -10,12 +10,11 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object DataSourceModule {
+class DataSourceModule {
 
     @Provides
     @Singleton
-    fun provideLoginSource(authRemote: LoginService): LoginDataSourceImpl {
-        return LoginDataSourceImpl(authRemote)
+    fun provideTestDataSource(authRemote: TestService): TestDataSourceImpl {
+        return TestDataSourceImpl(authRemote)
     }
-
 }

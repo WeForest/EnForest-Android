@@ -1,8 +1,8 @@
 package com.gsm.presentation.di
 
-import com.gsm.domain.network.service.sign.LoginService
-import dagger.Module
+import com.gsm.data.network.service.TestService
 import dagger.Provides
+import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
@@ -26,10 +26,12 @@ object NetworkModule {
             .readTimeout(100, TimeUnit.SECONDS)
             //서버로 요청을 시작한 후 15초가 지날 때 까지 데이터가 안오면 에러로 판단한다.
             .connectTimeout(100, TimeUnit.SECONDS)
+
             // 얼마나 빨리 서버로 데이터를 받을 수 있는지 판단한다.
             .writeTimeout(100, TimeUnit.SECONDS)
             .// 이 클라이언트를 통해 오고 가는 네트워크 요청/응답을 로그로 표시하도록 합니다.
             addInterceptor(getLoggingInterceptor())
+
             .build()
 
     }
@@ -42,13 +44,27 @@ object NetworkModule {
         gsonConverterFactory: GsonConverterFactory
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:3000")
+            .baseUrl("http://ec2-3-36-97-97.ap-northeast-2.compute.amazonaws.com:3000/")
             .client(okHttpClient)
             //json 변화기 Factory
+
             .client(provideHttpClient())
+
             .addConverterFactory(gsonConverterFactory)
             .build()
 
+    }
+
+    @Provides
+    @Singleton
+    fun provideLoginService(retrofit: Retrofit): TestService {
+        return (retrofit.create(TestService::class.java))
+    }
+
+    @Provides
+    @Singleton
+    fun imsIService(retrofit: Retrofit): com.gsm.presentation.TestService {
+        return (retrofit.create(com.gsm.presentation.TestService::class.java))
     }
 
     @Provides
@@ -57,11 +73,6 @@ object NetworkModule {
         return GsonConverterFactory.create()
     }
 
-    @Provides
-    @Singleton
-    fun provideMissionService(retrofit: Retrofit): LoginService {
-        return (retrofit.create(LoginService::class.java))
-    }
 
 
 

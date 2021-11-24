@@ -2,11 +2,12 @@ plugins {
     id 'com.android.library'
     id 'kotlin-kapt'
     id 'kotlin-android'
+    id 'dagger.hilt.android.plugin'
 
 }
 
 android {
-    compileSdk 31
+    compileSdk 30
 
     defaultConfig {
         minSdk 21
@@ -34,7 +35,29 @@ android {
 }
 
 dependencies {
+    def roomVersion = "2.3.0"
 
+    implementation project(':domain')
+    implementation("androidx.room:room-runtime:$roomVersion")
+    annotationProcessor("androidx.room:room-compiler:$roomVersion")
+    // To use Kotlin annotation processing tool (kapt)
+    kapt("androidx.room:room-compiler:$roomVersion")
+    // optional - Kotlin Extensions and Coroutines support for Room
+    implementation("androidx.room:room-ktx:$roomVersion")
+    // optional - Guava support for Room, including Optional and ListenableFuture
+    implementation("androidx.room:room-guava:$roomVersion")
+
+    implementation(Retrofit.RETROFIT)
+    implementation(Retrofit.CONVERTER_GSON)
+    implementation(Retrofit.CONVERTER_JAXB)
+    // dager hilt
+    implementation(DaggerHilt.DAGGER_HILT)
+    kapt(DaggerHilt.DAGGER_HILT_COMPILER)
+    implementation(DaggerHilt.DAGGER_HILT_VIEW_MODEL)
+    kapt(DaggerHilt.DAGGER_HILT_ANDROIDX_COMPILER)
+    implementation(KTX.CORE)
+    implementation(AndroidX.APP_COMPAT)
+    implementation(Google.MATERIAL)
     implementation project(':domain')
     implementation(Retrofit.RETROFIT)
     implementation(Retrofit.CONVERTER_GSON)

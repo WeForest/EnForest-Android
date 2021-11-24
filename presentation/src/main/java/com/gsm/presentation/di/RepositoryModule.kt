@@ -1,8 +1,8 @@
 package com.gsm.presentation.di
 
-import com.gsm.domain.datasource.sign.LoginDataSourceImpl
-import com.gsm.domain.repository.LoginRepository
-import com.gsm.domain.repository.sign.LoginRepositoryImpl
+import com.gsm.data.datasource.test.TestDataSourceImpl
+import com.gsm.data.repositoty.TestRepositoryImpl
+import com.gsm.domain.repository.TestRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,13 +11,11 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object RepositoryModule {
-
+class RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideMissionRepository(loginDataSourceImpl: LoginDataSourceImpl): LoginRepository {
-        return LoginRepositoryImpl(loginDataSourceImpl)
+    fun provideTestRepository(testSourceImpltestSourceImpl: TestDataSourceImpl): TestRepository {
+        return TestRepositoryImpl(testSourceImpltestSourceImpl)
     }
-
 }
