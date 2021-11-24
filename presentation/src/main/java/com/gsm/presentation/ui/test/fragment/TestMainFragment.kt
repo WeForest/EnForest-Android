@@ -1,6 +1,5 @@
-package com.gsm.presentation
+package com.gsm.presentation.ui.test.fragment
 
-import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,8 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.viewpager2.widget.ViewPager2
+import com.gsm.presentation.R
+import com.gsm.presentation.adapter.TestViewPagerAdapter
 import com.gsm.presentation.databinding.FragmentTestMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class TestMainFragment : Fragment() {
     private lateinit var binding : FragmentTestMainBinding
     /* 여백, 너비에 대한 정의 */
@@ -44,6 +47,6 @@ class TestMainFragment : Fragment() {
     }
 
     private fun levelListText(): ArrayList<Int> {
-        return arrayListOf<Int>(R.string.basic_test, R.string.middle_test,R.string.hard_test)
+        return arrayListOf<Int>(R.string.basic_test, R.string.middle_test, R.string.hard_test)
     }
 }
