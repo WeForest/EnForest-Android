@@ -8,7 +8,6 @@ import com.gsm.data.network.service.ProfileService
 import com.gsm.data.entity.profile.response.GetProfileResponse
 import com.gsm.data.entity.profile.response.PathProfileResponse
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import javax.inject.Inject
 
 class ProfileDataSourceImpl @Inject constructor(
@@ -29,7 +28,7 @@ class ProfileDataSourceImpl @Inject constructor(
 
     override suspend fun postProfile(
         token: String,
-        file:  MultipartBody.Part
+        file: MultipartBody.Part?
     ): BaseResponse {
         return service.postProfile(token, file)
     }

@@ -77,7 +77,7 @@ class MissionFragment : BaseFragment<FragmentMissionBinding>(R.layout.fragment_m
     }
 
 
-    private fun alarmManager() {
+    private fun     alarmManager() {
         val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(context, MissionNotification::class.java)
 

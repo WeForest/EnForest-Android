@@ -57,7 +57,7 @@ class GroupRecyclerAdapter :
         if (item != null) {
             holder.bind(item)
             holder.itemView.setOnClickListener {
-                val action= item.chattingId?.let { it1 ->
+                val action = item.chattingId?.let { it1 ->
                     CommunityFragmentDirections.actionCommunityFragmentToGroupChatFragment(
                         it1
                     )

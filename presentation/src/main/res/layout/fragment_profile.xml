@@ -68,7 +68,7 @@
                 android:background="@drawable/profile_background"
                 android:elevation="10dp"
                 android:padding="15dp"
-                android:src="@{data.profileImg}"
+                android:src="@drawable/ic_photo_camera_black_48dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

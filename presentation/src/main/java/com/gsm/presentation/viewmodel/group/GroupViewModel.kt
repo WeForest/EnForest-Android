@@ -41,6 +41,17 @@ class GroupViewModel @Inject constructor(
     val success: LiveData<Event<Boolean?>>
         get() = _success
 
+    suspend fun joinGroup(token:String,id:Int) = viewModelScope.launch {
+
+        try {
+            joinGroupUseCase.buildUseCaseObservable(JoinGroupUseCase.Params(token,id)).apply {
+                Log.d(TAG, "joinGroup: $this")
+            }
+        }catch (e:Exception){
+            Log.d(TAG, "joinGroup: ")
+        }
+    }
+
     suspend fun createGroup(token: String, name: String, description: String, tags: String) =
         viewModelScope.launch {
             Log.d(TAG, "GroupViewModel - createGroup() :${token}")
@@ -71,7 +82,7 @@ class GroupViewModel @Inject constructor(
         }
 
     private fun groupJoin(token: String, id: Int) = viewModelScope.launch {
-        val data = joinGroupUseCase.buildUseCaseObservable(JoinGroupUseCase.Params(token,id))
+        val data = joinGroupUseCase.buildUseCaseObservable(JoinGroupUseCase.Params(token, id))
     }
 
 

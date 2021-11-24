@@ -4,7 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/KyungMin/.gradle/caches/transforms-3/8883dc25bf41af39622e8aad42c4ce84/transformed/jetified-play-services-cast-framework-20.0.0/res/drawable/cast_expanded_controller_live_indicator_drawable.xml" value="0.3015625" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/domain/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.46822916666666664" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/drawable/community_recycler_item_frame.xml" value="0.46822916666666664" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/drawable/ic_enforest.xml" value="0.46102564102564103" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/drawable/ic_launcher_foreground.xml" value="0.46102564102564103" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/drawable/item_background.xml" value="0.27395833333333336" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/drawable/mission_item_background.xml" value="0.2814814814814815" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/drawable/mission_write_background.xml" value="0.1" />
@@ -13,16 +16,20 @@
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/drawable/right.xml" value="0.2814814814814815" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/drawable/search_frame.xml" value="0.2833333333333333" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/drawable/sign_in_origin_login_btn.xml" value="0.3333333333333333" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/drawable/sign_up_edit_txt.xml" value="0.46822916666666664" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/drawable/text_line_background.xml" value="0.1" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/activity_main.xml" value="0.2578125" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/activity_main_profile.xml" value="0.2554347826086957" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/activity_sign_up_sign_in_main.xml" value="0.2" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/activity_sign_up_sign_in_main2.xml" value="0.2554347826086957" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/activity_splash.xml" value="0.42028985507246375" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/bottom_sheet_dialog_mission.xml" value="0.176" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/bottom_sheet_dialog_write_mission.xml" value="0.264" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/chatting_group_recycler.xml" value="0.42028985507246375" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/community_recycler_view_item.xml" value="0.4" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_auth_number_input.xml" value="0.4484375" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_community.xml" value="0.264" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_dialog_create.xml" value="0.36231884057971014" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_group_chat.xml" value="0.45208333333333334" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_id_input.xml" value="0.4484375" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_mission.xml" value="0.264" />
@@ -39,6 +46,7 @@
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_raitng_main.xml" value="0.4" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_set_profile.xml" value="0.264" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_set_profile_end.xml" value="0.2554347826086957" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_setting.xml" value="0.28125" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_sign_in.xml" value="0.2578125" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_sign_in2.xml" value="0.2554347826086957" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_sign_up_name.xml" value="0.264" />
@@ -49,9 +57,11 @@
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_study.xml" value="0.28541666666666665" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_study_meeting.xml" value="0.2578125" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/fragment_test_main.xml" value="0.264" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/group_join_dialog.xml" value="0.28125" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/item_mission.xml" value="0.536" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/item_my_chat.xml" value="0.33106884057971014" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/item_your_chat.xml" value="0.33106884057971014" />
+        <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/layout/join_dialog.xml" value="0.28125" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/menu/main_item.xml" value="0.20104166666666667" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/menu/menu_search.xml" value="0.1527777777777778" />
         <entry key="..\:/Users/KyungMin/StudioProjects/EnForest-Android/presentation/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.15885416666666666" />

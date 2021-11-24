@@ -19,8 +19,9 @@ import com.gsm.presentation.util.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.File
 import javax.inject.Inject
 
@@ -69,6 +70,8 @@ class ProfileViewModel @Inject constructor(
     private val _token = MutableLiveData<String>()
     val token: LiveData<String> get() = _token
 
+    private val _isSuccessValue = MutableLiveData<Event<Boolean>>()
+    val isSuccessValue: LiveData<Event<Boolean>> get() = _isSuccessValue
 
     private fun saveName(name: String) =
         viewModelScope.launch(Dispatchers.IO) {
@@ -96,19 +99,31 @@ class ProfileViewModel @Inject constructor(
 
     }
 
-    suspend fun postProfile(token: String, file:  MultipartBody.Part) = viewModelScope.launch {
+    suspend fun postProfile(token: String, file: MultipartBody.Part) = viewModelScope.launch {
+        Log.d(TAG, "postProfile: file ${file}")
+
         try {
             postProfileUseCase.buildUseCaseObservable(PostProfileUseCase.Params(token, file))
                 .apply {
-
-                    if(this.success){
-                        Log.d(TAG, "postProfile: 성공")
+                    Log.d(TAG, "postProfile: ")
+                    if (this.success) {
+                        Log.d(TAG, "postProfile: file ${file}")
+                        _isSuccessValue.value = Event(success)
+                        Log.d("file", "postProfile: 성공")
                     }
                 }
 
         } catch (e: Exception) {
             Log.d(TAG, "postProfile: 실패 ${e}")
         }
+    }
+
+    private fun getImageBody(key: String, file: File): MultipartBody.Part {
+        return MultipartBody.Part.createFormData(
+            name = key,
+            filename = file.name,
+            body = file.asRequestBody("image/*".toMediaType())
+        )
     }
 
 

@@ -54,6 +54,9 @@
         <argument
             android:name="groupId"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_communityFragment_to_joinGroupDialog"
+            app:destination="@id/joinGroupDialog" />
 
 
     </fragment>
@@ -84,5 +87,14 @@
         <action
             android:id="@+id/action_studyFragment_to_groupChatFragment"
             app:destination="@id/groupChatFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/join_dialog"
+        android:id="@+id/joinGroupDialog"
+        android:name="com.gsm.presentation.ui.study.dialog.JoinGroupDialog"
+        android:label="JoinGroupDialog" >
+        <argument
+            android:name="groupId"
+            app:argType="integer" />
     </fragment>
 </navigation>

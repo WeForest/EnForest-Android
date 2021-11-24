@@ -50,8 +50,8 @@ class MissionNotification : BroadcastReceiver() {
 
         val builder = NotificationCompat.Builder(context, MISSION_CHANNEL_ID)
             .setSmallIcon(R.drawable.mission_write) // 아이콘
-            .setContentTitle("타이틀 입니다.") // 제목
-            .setContentText("내용 입니다.") // 내용
+            .setContentTitle("미션 도착.") // 제목
+            .setContentText("하루치 미션이 왔습니다!") // 내용
             .setContentIntent(contentPendingIntent)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setAutoCancel(true)

@@ -10,7 +10,6 @@ import com.gsm.domain.entity.response.GetProfileEntity
 import com.gsm.domain.entity.response.PathProfileEntity
 import com.gsm.domain.repository.ProfileRepository
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import javax.inject.Inject
 
 class ProfileRepositoryImpl @Inject constructor(
@@ -25,7 +24,7 @@ class ProfileRepositoryImpl @Inject constructor(
         return dataSource.pathProfile(token, (pathProfile).toDomain()).toDomain()
     }
 
-    override suspend fun postProfile(token: String, file:  MultipartBody.Part): BaseEntity {
+    override suspend fun postProfile(token: String, file: MultipartBody.Part?): BaseEntity {
         return dataSource.postProfile(token, file).toDomain()
     }
 

@@ -10,65 +10,83 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:paddingEnd="20dp"
         android:layout_height="wrap_content">
 
 
         <TextView
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             android:id="@+id/title_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="제목" />
+            android:layout_margin="20dp"
+            android:text="제목"
+            android:textColor="@color/black"
+            android:textSize="22dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            app:layout_constraintTop_toBottomOf="@id/title_txt"
-            app:layout_constraintLeft_toLeftOf="@id/title_txt"
             android:id="@+id/title_edit_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="제목" />
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/sign_up_edit_txt"
+            android:hint="제목"
+            android:paddingLeft="10dp"
+            app:layout_constraintLeft_toLeftOf="@id/title_txt"
+            app:layout_constraintTop_toBottomOf="@id/title_txt" />
 
         <TextView
-            app:layout_constraintTop_toBottomOf="@id/title_edit_txt"
-            app:layout_constraintLeft_toLeftOf="@id/title_edit_txt"
             android:id="@+id/content_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="내용" />
+            android:layout_marginTop="10dp"
+            android:text="내용"
+            android:textSize="22sp"
+            app:layout_constraintLeft_toLeftOf="@id/title_edit_txt"
+            app:layout_constraintTop_toBottomOf="@id/title_edit_txt" />
 
         <EditText
+            android:id="@+id/content_edit_txt"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/sign_up_edit_txt"
+            android:hint="내용"
+            android:paddingLeft="10dp"
             app:layout_constraintLeft_toLeftOf="@id/content_txt"
             app:layout_constraintTop_toBottomOf="@id/content_txt"
-            android:id="@+id/content_edit_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="내용" />
+            app:layout_goneMarginTop="10dp" />
 
         <TextView
-            app:layout_constraintTop_toBottomOf="@id/content_edit_txt"
-            app:layout_constraintLeft_toLeftOf="@id/content_edit_txt"
             android:id="@+id/tag_txt"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/content_edit_txt"
+            app:layout_constraintTop_toBottomOf="@id/content_edit_txt" />
 
         <EditText
-            app:layout_constraintLeft_toLeftOf="@id/tag_txt"
-            app:layout_constraintTop_toBottomOf="@id/tag_txt"
             android:id="@+id/tag_edit_txt"
-            android:layout_width="wrap_content"
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:hint="태그" />
+            android:hint="태그"
+            app:layout_constraintLeft_toLeftOf="@id/tag_txt"
+            app:layout_constraintTop_toBottomOf="@id/tag_txt" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/create_group_btn"
-            android:onClick="@{fragment::createGroup}"
-            app:layout_constraintLeft_toLeftOf="@id/tag_edit_txt"
-            app:layout_constraintTop_toBottomOf="@id/tag_edit_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="생성"/>
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="30dp"
+            android:onClick="@{fragment::createGroup}"
+            android:text="생성"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/tag_edit_txt"
+            app:layout_constraintLeft_toLeftOf="@id/tag_edit_txt"
+            app:layout_constraintStart_toStartOf="@+id/tag_edit_txt"
+            app:layout_constraintTop_toBottomOf="@id/tag_edit_txt" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

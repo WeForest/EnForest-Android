@@ -23,7 +23,12 @@ import io.socket.client.Socket
 import io.socket.emitter.Emitter
 import org.json.JSONException
 import org.json.JSONObject
+import java.io.IOException
+import java.net.SocketException
+import java.net.SocketTimeoutException
 import java.net.URISyntaxException
+import java.net.UnknownHostException
+import java.nio.channels.IllegalBlockingModeException
 import java.util.*
 
 
@@ -54,23 +59,52 @@ class GroupChatFragment :
         chat_Send_Button = binding.sendBtn
         setAdapter()
         getToken()
+        socket = App.get()
+
         try {
-            socket = App.get()
             socket.on(Socket.EVENT_CONNECT_ERROR, onConnectError)
             socket.on(Socket.EVENT_CONNECT, onConnectSuccess)
             socket.connect()
 
             Log.d(TAG, "onCreate: 소켓연결 성공 ${socket.connected()}")
-
+            emitSetting()
+            emitJoin()
+            socket.on("sendMessage", sendMessage)
 
         } catch (e: URISyntaxException) {
-            Log.d(TAG, "onCreate:  에러 ${e.printStackTrace()}")
-            e.printStackTrace()
-        }
+        Log.d(TAG, "onCreate:  에러 ${e.printStackTrace()}")
+        e.printStackTrace()
+    } catch (ioe: IOException) {
+        // 소켓 생성 과정에서 I/O 에러 발생.
+        Log.e(TAG, "onCreate: ${ioe}", )
+    } catch (uhe: UnknownHostException ) {
+        // 소켓 생성 시 전달되는 호스트(www.unknown-host.com)의 IP를 식별할 수 없음.
+        Log.e(TAG, "onCreate: ${uhe}", )
+    } catch (se:SecurityException ) {
+        Log.e(TAG, "onCreate: ${se}", )
 
-        emitSetting()
-        emitJoin()
-        socket.on("sendMessage", sendMessage)
+        // security manager에서 허용되지 않은 기능 수행.
+    } catch (se:IllegalArgumentException ) {
+        Log.e(TAG, "onCreate: ${se}", )
+        // 소켓 생성 시 전달되는 포트 번호(65536)이 허용 범위(0~65535)를 벗어남.
+    }
+
+    catch (se: SocketTimeoutException) {
+        Log.e(TAG, "onCreate tiemout: ${se}", )
+        // 소켓 생성 시 전달되는 포트 번호(65536)이 허용 범위(0~65535)를 벗어남.
+    }
+    catch (se: IllegalBlockingModeException) {
+        Log.e(TAG, "onCreate : ${se}", )
+        // 소켓 생성 시 전달되는 포트 번호(65536)이 허용 범위(0~65535)를 벗어남.
+    }
+    catch (se: SocketException) {
+        Log.e(TAG, "onCreate : ${se}", )
+        // 소켓 생성 시 전달되는 포트 번호(65536)이 허용 범위(0~65535)를 벗어남.
+    }
+    catch (se: NullPointerException) {
+        Log.e(TAG, "onCreate : ${se}", )
+        // 소켓 생성 시 전달되는 포트 번호(65536)이 허용 범위(0~65535)를 벗어남.
+    }
 
         chat_Send_Button.setOnClickListener {
             //아이템 추가 부분
@@ -78,6 +112,7 @@ class GroupChatFragment :
 
         }
     }
+
     private val onConnectError = Emitter.Listener {
         runOnUiThread {
             Toast.makeText(
@@ -97,14 +132,16 @@ class GroupChatFragment :
             ).show()
         }
     }
-    private fun emitSetting(){
+
+    private fun emitSetting() {
         //초기 설정
         val json = JSONObject()
         json.put("token", token)
         socket.emit("setting", json)
 
     }
-    private fun emitJoin(){
+
+    private fun emitJoin() {
         val userId = JSONObject()
         userId.put("token", token)
         userId.put("roomId", args.groupId)
@@ -112,8 +149,6 @@ class GroupChatFragment :
         socket.emit("join", userId)
 
     }
-
-
 
 
     private fun getToken() {

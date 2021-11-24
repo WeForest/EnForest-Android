@@ -5,11 +5,10 @@ import com.gsm.domain.entity.request.profile.PathProfile
 import com.gsm.domain.entity.response.GetProfileEntity
 import com.gsm.domain.entity.response.PathProfileEntity
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 
 interface ProfileRepository {
 
     suspend fun getProfile(nickname : String) : GetProfileEntity
     suspend fun pathProfile(token:String,pathProfile : PathProfile) : PathProfileEntity
-    suspend fun postProfile(token:String,file :  MultipartBody.Part) : BaseEntity
+    suspend fun postProfile(token:String, file: MultipartBody.Part?) : BaseEntity
 }

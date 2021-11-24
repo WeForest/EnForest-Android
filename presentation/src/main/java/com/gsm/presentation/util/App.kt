@@ -13,7 +13,7 @@ class App : Application() {
         private lateinit var socket : Socket
         fun get(): Socket {
             try {
-                socket = IO.socket("http://10.120.74.167:3000/chat")
+                socket = IO.socket("http://ec2-3-36-97-97.ap-northeast-2.compute.amazonaws.com:3000")
             } catch (e: URISyntaxException) {
                 Log.e("socket", "get: ${e}")
                 e.printStackTrace();

@@ -1,29 +1,33 @@
 package com.gsm.presentation.ui.sign.up.profile.fragment
 
+
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.Resources
+import android.database.Cursor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
 import android.text.TextUtils
-import android.util.Base64
-import android.util.Base64.*
+import android.util.Base64.DEFAULT
+import android.util.Base64.NO_WRAP
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
-import androidx.core.app.ActivityCompat.getExternalFilesDirs
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.TransformationUtils.rotateImage
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.gsm.presentation.R
 import com.gsm.presentation.databinding.FragmentSetProfileBinding
@@ -33,6 +37,7 @@ import com.gsm.presentation.util.EventObserver
 import com.gsm.presentation.viewmodel.profile.ProfileViewModel
 import com.gsm.presentation.viewmodel.sign.`in`.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import io.socket.engineio.parser.Base64
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -41,10 +46,6 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.IOException
 import java.io.InputStream
-import androidx.core.app.ActivityCompat.startActivityForResult
-import com.bumptech.glide.Glide
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 //todo
@@ -64,6 +65,7 @@ class SetProfileFragment : Fragment() {
     private val signViewModel by viewModels<SignInViewModel>()
     var token: String = ""
     var isJobSeeker = false
+    var uploadFile: MultipartBody.Part? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -146,12 +148,9 @@ class SetProfileFragment : Fragment() {
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream)
                 val requestBody: RequestBody = RequestBody.create(
                     "image/jpg".toMediaTypeOrNull(),
-                    byteArrayOutputStream.toByteArray()
+                    file!!
                 )
-                val uploadFile: MultipartBody.Part =
-                    MultipartBody.Part.createFormData("postImg", file?.name, requestBody)
-                postProfile(uploadFile)
-
+               postProfile(MultipartBody.Part.createFormData("postImg", file?.name, requestBody))
                 ins?.close()
 //                    val byteArrayOutputStream = ByteArrayOutputStream()
                 val byteArray: ByteArray = byteArrayOutputStream.toByteArray()
@@ -183,12 +182,22 @@ class SetProfileFragment : Fragment() {
     }
 
 
+    fun getRealpath(uri: Uri?): String? {
+        val proj =
+            arrayOf(MediaStore.Images.Media.DATA)
+        val c: Cursor? = context?.contentResolver?.query(uri!!, proj, null, null, null)
+        val index = c?.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
+        c?.moveToFirst()
+        return index?.let { c?.getString(it) }
+    }
+
     fun nextButton() {
 
         if (textNullTest()) {
             lifecycleScope.launch {
                 viewModel.pathProfile(token, isJobSeeker)
-                Log.d("TAG", "SetProfileFragment - nextButton() called")
+                uploadFile?.let { postProfile(it) }
+
             }
         }
 
@@ -227,14 +236,19 @@ class SetProfileFragment : Fragment() {
 
         lifecycleScope.launch {
             viewModel.isSuccess.observe(viewLifecycleOwner, EventObserver {
-                if (it) {
-                    startActivity(Intent(requireContext(), MainActivity::class.java))
-                    (activity as SignUpSignInMainActivity).finish()
-                } else {
-                    Log.d("TAG", "getUserProfileAndSetting: 실패")
-                    Toast.makeText(requireContext(), "실패", Toast.LENGTH_SHORT).show()
-                }
-            })
+
+
+                    if (it) {
+                        startActivity(Intent(requireContext(), MainActivity::class.java))
+                        (activity as SignUpSignInMainActivity).finish()
+                    } else {
+                        Log.d("TAG", "getUserProfileAndSetting: 실패")
+                        Toast.makeText(requireContext(), "실패", Toast.LENGTH_SHORT).show()
+                    }
+                })
+
         }
     }
 }
+
+
