@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.android.play.core.appupdate.e
 import com.gsm.domain.entity.request.profile.InterestsItem
 import com.gsm.domain.entity.request.profile.MajorItem
 import com.gsm.domain.entity.request.profile.PathProfile
@@ -100,7 +99,7 @@ class ProfileViewModel @Inject constructor(
 
     }
 
-    suspend fun postProfile(token: String, file: MultipartBody.Part) = viewModelScope.launch {
+    suspend fun postProfile(token: String, file: MultipartBody.Part?) = viewModelScope.launch {
         Log.d(TAG, "postProfile: file ${file}")
 
         try {

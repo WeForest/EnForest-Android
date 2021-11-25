@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
+import android.net.Uri
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -15,6 +16,11 @@ import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.gsm.presentation.R
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.File
 
 fun RecyclerView.showVertical(context: Context) {
     this.layoutManager =
@@ -55,3 +61,10 @@ fun EditText.addTextChangedListener(context: Context, button: Button) {
 
 
 }
+fun Uri.toFile(): File = File(this.path!!)
+
+fun File.toMultipartBody(): MultipartBody.Part = MultipartBody.Part.createFormData(
+    "name",
+    "fileName",
+    RequestBody.create("image/*".toMediaTypeOrNull(), this)
+)

@@ -7,18 +7,21 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".util.App"
         android:allowBackup="true"
         android:exported="true"
-
+        android:requestLegacyExternalStorage="true"
         android:fullBackupContent="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.EnForest"
         android:usesCleartextTraffic="true">
 
+        <activity android:name=".ui.sign.up.SignUpSignInMainActivity"/>
         <activity android:name=".ui.main.MainActivity" />
         <activity
             android:name=".ui.sign.in.SignInActivity"

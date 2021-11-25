@@ -14,6 +14,7 @@ import com.gsm.presentation.adapter.ChatAdapter
 import com.gsm.presentation.base.BaseActivity
 import com.gsm.presentation.databinding.FragmentGroupChatBinding
 import com.gsm.presentation.util.App
+import com.gsm.presentation.util.Constant.Companion.Local_SERVER
 import com.gsm.presentation.util.extension.showVertical
 import com.gsm.presentation.viewmodel.profile.ProfileViewModel
 import com.gsm.presentation.viewmodel.sign.`in`.SignInViewModel
@@ -27,6 +28,9 @@ import java.io.IOException
 import java.net.*
 import java.nio.channels.IllegalBlockingModeException
 import java.util.*
+import io.socket.client.Manager
+import io.socket.engineio.client.Transport
+import io.socket.engineio.client.transports.WebSocket
 
 
 @AndroidEntryPoint
@@ -56,52 +60,55 @@ class GroupChatFragment :
         chat_Send_Button = binding.sendBtn
         setAdapter()
         getToken()
-        socket = App.get()
 
         try {
+            val opts = IO.Options()
+            opts.transports = arrayOf(WebSocket.NAME)
+
+            socket = IO.socket(Local_SERVER, opts)
             socket.on(Socket.EVENT_CONNECT_ERROR, onConnectError)
             socket.on(Socket.EVENT_CONNECT, onConnectSuccess)
             socket.connect()
 
-            Log.d(TAG, "onCreate: 소켓연결 성공 ${socket.connected()}")
+            if(socket.connect().connected()) {
+                Log.d(TAG, "onCreate: 이걸 성공?")
+
+            }else{
+                Log.d(TAG, "onCreate: 역시 ㅋ")
+            }
             emitSetting()
             emitJoin()
             socket.on("sendMessage", sendMessage)
 
         } catch (e: URISyntaxException) {
-        Log.d(TAG, "onCreate:  에러 ${e.printStackTrace()}")
-        e.printStackTrace()
-    } catch (ioe: IOException) {
-        // 소켓 생성 과정에서 I/O 에러 발생.
-        Log.e(TAG, "onCreate: ${ioe}", )
-    } catch (uhe: UnknownHostException ) {
-        // 소켓 생성 시 전달되는 호스트(www.unknown-host.com)의 IP를 식별할 수 없음.
-        Log.e(TAG, "onCreate: ${uhe}", )
-    } catch (se:SecurityException ) {
-        Log.e(TAG, "onCreate: ${se}", )
+            Log.d(TAG, "onCreate:  에러 ${e.printStackTrace()}")
+            e.printStackTrace()
+        } catch (ioe: IOException) {
+            // 소켓 생성 과정에서 I/O 에러 발생.
+            Log.e(TAG, "onCreate: ${ioe}")
+        } catch (uhe: UnknownHostException) {
+            // 소켓 생성 시 전달되는 호스트(www.unknown-host.com)의 IP를 식별할 수 없음.
+            Log.e(TAG, "onCreate: ${uhe}")
+        } catch (se: SecurityException) {
+            Log.e(TAG, "onCreate: ${se}")
 
-        // security manager에서 허용되지 않은 기능 수행.
-    } catch (se:IllegalArgumentException ) {
-        Log.e(TAG, "onCreate: ${se}", )
-        // 소켓 생성 시 전달되는 포트 번호(65536)이 허용 범위(0~65535)를 벗어남.
-    }
-
-    catch (se: SocketTimeoutException) {
-        Log.e(TAG, "onCreate tiemout: ${se}", )
-        // 소켓 생성 시 전달되는 포트 번호(65536)이 허용 범위(0~65535)를 벗어남.
-    }
-    catch (se: IllegalBlockingModeException) {
-        Log.e(TAG, "onCreate : ${se}", )
-        // 소켓 생성 시 전달되는 포트 번호(65536)이 허용 범위(0~65535)를 벗어남.
-    }
-    catch (se: SocketException) {
-        Log.e(TAG, "onCreate : ${se}", )
-        // 소켓 생성 시 전달되는 포트 번호(65536)이 허용 범위(0~65535)를 벗어남.
-    }
-    catch (se: NullPointerException) {
-        Log.e(TAG, "onCreate : ${se}", )
-        // 소켓 생성 시 전달되는 포트 번호(65536)이 허용 범위(0~65535)를 벗어남.
-    }
+            // security manager에서 허용되지 않은 기능 수행.
+        } catch (se: IllegalArgumentException) {
+            Log.e(TAG, "onCreate: ${se}")
+            // 소켓 생성 시 전달되는 포트 번호(65536)이 허용 범위(0~65535)를 벗어남.
+        } catch (se: SocketTimeoutException) {
+            Log.e(TAG, "onCreate tiemout: ${se}")
+            // 소켓 생성 시 전달되는 포트 번호(65536)이 허용 범위(0~65535)를 벗어남.
+        } catch (se: IllegalBlockingModeException) {
+            Log.e(TAG, "onCreate : ${se}")
+            // 소켓 생성 시 전달되는 포트 번호(65536)이 허용 범위(0~65535)를 벗어남.
+        } catch (se: SocketException) {
+            Log.e(TAG, "onCreate : ${se}")
+            // 소켓 생성 시 전달되는 포트 번호(65536)이 허용 범위(0~65535)를 벗어남.
+        } catch (se: NullPointerException) {
+            Log.e(TAG, "onCreate : ${se}")
+            // 소켓 생성 시 전달되는 포트 번호(65536)이 허용 범위(0~65535)를 벗어남.
+        }
 
         chat_Send_Button.setOnClickListener {
             //아이템 추가 부분
@@ -110,7 +117,7 @@ class GroupChatFragment :
         }
     }
 
-    private val onConnectError = Emitter.Listener {args->
+    private val onConnectError = Emitter.Listener { args ->
         Log.d(TAG, "onConnectError: ${args[0]} ")
         runOnUiThread {
             Toast.makeText(
@@ -133,8 +140,8 @@ class GroupChatFragment :
 
     private fun emitSetting() {
         //초기 설정
-        val json = JSONObject()
-        json.put("token", token)
+        val json = mutableMapOf<String, String>()
+        json["token"] = token
         socket.emit("setting", json)
 
     }

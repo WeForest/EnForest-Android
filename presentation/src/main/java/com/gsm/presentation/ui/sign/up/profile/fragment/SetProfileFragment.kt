@@ -2,49 +2,41 @@ package com.gsm.presentation.ui.sign.up.profile.fragment
 
 
 import android.annotation.SuppressLint
-import android.app.Activity
+import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
-import android.content.res.Resources
 import android.database.Cursor
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.os.Environment
+import android.provider.DocumentsContract
 import android.provider.MediaStore
 import android.text.TextUtils
-import android.util.Base64.DEFAULT
-import android.util.Base64.NO_WRAP
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.annotation.RequiresApi
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.TransformationUtils.rotateImage
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.gsm.presentation.R
 import com.gsm.presentation.databinding.FragmentSetProfileBinding
 import com.gsm.presentation.ui.main.MainActivity
 import com.gsm.presentation.ui.sign.up.SignUpSignInMainActivity
 import com.gsm.presentation.util.EventObserver
+import com.gsm.presentation.util.extension.toFile
+import com.gsm.presentation.util.extension.toMultipartBody
 import com.gsm.presentation.viewmodel.profile.ProfileViewModel
 import com.gsm.presentation.viewmodel.sign.`in`.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import io.socket.engineio.parser.Base64
 import kotlinx.coroutines.launch
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import java.io.*
 
 
@@ -60,12 +52,12 @@ import java.io.*
 @AndroidEntryPoint
 class SetProfileFragment : Fragment() {
     private lateinit var binding: FragmentSetProfileBinding
-    private var proFileUri: Uri? = null
     private val viewModel by activityViewModels<ProfileViewModel>()
     private val signViewModel by viewModels<SignInViewModel>()
     var token: String = ""
     var isJobSeeker = false
-    var uploadFile: MultipartBody.Part? = null
+
+    private lateinit var getResult: ActivityResultLauncher<Intent>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -77,6 +69,26 @@ class SetProfileFragment : Fragment() {
         binding.viewmodel = viewModel
         binding.fragment = this
         getToken()
+
+        getResult = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+
+            try {
+                if (result.resultCode == RESULT_OK) {
+                    Log.d("postProfile", "onCreateView: ${result?.data?.data}")
+                   val file = File(getPathFromUri(result.data?.data))
+                    postProfile(file.toMultipartBody())
+
+                    result?.data?.data?.path
+
+                    binding.profileImageView.setImageURI(result.data?.data)
+                }
+            }catch (e:Exception){
+                Log.d("TAG", "onCreateView: ${e}")
+            }
+        }
+
 
         return binding.root
     }
@@ -90,15 +102,18 @@ class SetProfileFragment : Fragment() {
     }
 
     fun getUserProfileImage() {
-        val intent = Intent()
 
-        intent.type = "image/*"
-        intent.action = Intent.ACTION_GET_CONTENT
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = MediaStore.Images.Media.CONTENT_TYPE
+
+        getResult.launch(intent)
+
 
         ImagePicker.with(this)
             .compress(1024)
             .start()
     }
+
 
     private fun getToken() {
         signViewModel.readToken.asLiveData().observe(viewLifecycleOwner) {
@@ -106,104 +121,28 @@ class SetProfileFragment : Fragment() {
         }
     }
 
-    private fun postProfile(patch: MultipartBody.Part) {
+    private fun postProfile(toMultipartBody: MultipartBody.Part?) {
         lifecycleScope.launch {
-            viewModel.postProfile(token, patch)
+            viewModel.postProfile(token,toMultipartBody)
         }
 
 
     }
-
-
-    @RequiresApi(Build.VERSION_CODES.Q)
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        when (requestCode) {
-            2404 -> {
-                proFileUri = data?.data
-                var filepath = data?.data?.path
-                Log.d("profile", "onActivityResult: $proFileUri")
-                Log.d("profile", "onActivityResult: bitmap $filepath")
-
-                Glide.with(this)
-                    .load(proFileUri)
-                    .into(binding.profileImageView)
-
-                val ins: InputStream? = proFileUri?.let {
-                    context?.contentResolver?.openInputStream(
-                        it
-
-                    )
-                }
-                val file =
-                    File("/storage/emulated/0/Android/data/com.gsm.presentation/files/test.txt")
-
-                var inputStream: InputStream? = null
-                try {
-                    inputStream = proFileUri?.let { context!!.contentResolver.openInputStream(it) }
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                }
-                val bitmap = BitmapFactory.decodeStream(inputStream)
-                val byteArrayOutputStream = ByteArrayOutputStream()
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 20, byteArrayOutputStream)
-                val byteArray: ByteArray = byteArrayOutputStream.toByteArray()
-
-                val requestBody: RequestBody = RequestBody.create(
-                    "image/jpg".toMediaTypeOrNull(),
-                    writeTextToFile(
-                        "/storage/emulated/0/Android/data/com.gsm.presentation/files/test.txt",
-                        (Base64.encodeToString(byteArray, NO_WRAP))
-                    )
-                )
-                postProfile(MultipartBody.Part.createFormData("postImg", file.name, requestBody))
-                ins?.close()
-
-
-
-                try {
-
-                } catch (e: Exception) {
-
-                }
-            }
-            ImagePicker.RESULT_ERROR -> {
-                proFileUri = null
-                Toast.makeText(
-                    requireContext(),
-                    "비정상적인 접근입니다. 다시한번 이미지를 선택해주세요",
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
-            }
-            else -> {
-                Toast.makeText(requireContext(), "작업 취소됨. 다시한번 이미지를 선택해주세요", Toast.LENGTH_SHORT)
-                    .show()
-            }
-        }
+    @SuppressLint("Range")
+    fun getPathFromUri(uri: Uri?): String? {
+        val cursor: Cursor? = (activity as SignUpSignInMainActivity).contentResolver.query(uri!!, null, null, null, null)
+        cursor?.moveToNext()
+        val path: String? = cursor?.getString(cursor.getColumnIndex("_data"))
+        cursor?.close()
+        Log.d("postProfile", "getPathFromUri: ${path} ")
+        return path
     }
-
-    fun writeTextToFile(path: String, data: String): File {
-        val file = File(
-            path
-        );
-
-        val fileWritesr = FileWriter(file, false)
-        val bufferedWriter = BufferedWriter(fileWritesr)
-
-        bufferedWriter.append(data)
-        bufferedWriter.close()
-        return file
-    }
-
 
     fun nextButton() {
 
         if (textNullTest()) {
             lifecycleScope.launch {
                 viewModel.pathProfile(token, isJobSeeker)
-                uploadFile?.let { postProfile(it) }
 
             }
         }
