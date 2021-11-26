@@ -1,10 +1,12 @@
 package com.gsm.presentation.ui.sign.up.profile.fragment
 
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
@@ -18,6 +20,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -40,21 +44,13 @@ import okhttp3.MultipartBody
 import java.io.*
 
 
-//todo
-//    val img: Bitmap = BitmapFactory.decodeStream(ins)
-//                    ins?.close()
-//                    val resized = Bitmap.createScaledBitmap(img, 256, 256, true)
-//                    val byteArrayOutputStream = ByteArrayOutputStream()
-//                    resized.compress(Bitmap.CompressFormat.JPEG, 60, byteArrayOutputStream)
-//                    val byteArray: ByteArray = byteArrayOutputStream.toByteArray()
-//                    Log.d("profile", "onActivityResult: ${(Base64.encodeToString(byteArray, NO_WRAP))}")
-//                    postProfile(Base64.encodeToString(byteArray, NO_WRAP))
 @AndroidEntryPoint
 class SetProfileFragment : Fragment() {
     private lateinit var binding: FragmentSetProfileBinding
     private val viewModel by activityViewModels<ProfileViewModel>()
     private val signViewModel by viewModels<SignInViewModel>()
     var token: String = ""
+
     var isJobSeeker = false
 
     private lateinit var getResult: ActivityResultLauncher<Intent>
@@ -77,14 +73,14 @@ class SetProfileFragment : Fragment() {
             try {
                 if (result.resultCode == RESULT_OK) {
                     Log.d("postProfile", "onCreateView: ${result?.data?.data}")
-                   val file = File(getPathFromUri(result.data?.data))
+                    val file = File(getPathFromUri(result.data?.data))
                     postProfile(file.toMultipartBody())
 
                     result?.data?.data?.path
 
                     binding.profileImageView.setImageURI(result.data?.data)
                 }
-            }catch (e:Exception){
+            } catch (e: Exception) {
                 Log.d("TAG", "onCreateView: ${e}")
             }
         }
@@ -102,16 +98,33 @@ class SetProfileFragment : Fragment() {
     }
 
     fun getUserProfileImage() {
+        var writePermission =
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
+        var readPermission = ContextCompat.checkSelfPermission(
+            requireContext(),
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        )
+        if (writePermission == PackageManager.PERMISSION_DENIED || readPermission == PackageManager.PERMISSION_DENIED) { // 권한 없어서 요청 ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), REQ_STORAGE_PERMISSION) }
 
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = MediaStore.Images.Media.CONTENT_TYPE
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                    Manifest.permission.READ_EXTERNAL_STORAGE
+                ),
+                1000
+            )
+        } else {
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = MediaStore.Images.Media.CONTENT_TYPE
 
-        getResult.launch(intent)
+            getResult.launch(intent)
 
+        }
 
-        ImagePicker.with(this)
-            .compress(1024)
-            .start()
     }
 
 
@@ -123,14 +136,21 @@ class SetProfileFragment : Fragment() {
 
     private fun postProfile(toMultipartBody: MultipartBody.Part?) {
         lifecycleScope.launch {
-            viewModel.postProfile(token,toMultipartBody)
+            viewModel.postProfile(token, toMultipartBody)
         }
 
 
     }
+
     @SuppressLint("Range")
     fun getPathFromUri(uri: Uri?): String? {
-        val cursor: Cursor? = (activity as SignUpSignInMainActivity).contentResolver.query(uri!!, null, null, null, null)
+        val cursor: Cursor? = (activity as SignUpSignInMainActivity).contentResolver.query(
+            uri!!,
+            null,
+            null,
+            null,
+            null
+        )
         cursor?.moveToNext()
         val path: String? = cursor?.getString(cursor.getColumnIndex("_data"))
         cursor?.close()

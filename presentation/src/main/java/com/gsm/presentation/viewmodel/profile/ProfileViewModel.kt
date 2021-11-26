@@ -100,7 +100,7 @@ class ProfileViewModel @Inject constructor(
     }
 
     suspend fun postProfile(token: String, file: MultipartBody.Part?) = viewModelScope.launch {
-        Log.d(TAG, "postProfile: file ${file}")
+        Log.d(TAG, "postProfile: file ${file} token : ${token}")
 
         try {
             postProfileUseCase.buildUseCaseObservable(PostProfileUseCase.Params(token, file))
@@ -111,7 +111,7 @@ class ProfileViewModel @Inject constructor(
                         _isSuccessValue.value = Event(success)
                         Log.d("file", "postProfile: 성공")
                     }else{
-                        Log.d(TAG, "postProfile: 실패 ")
+                        Log.d(TAG, "postProf ile: 실패 ")
                     }
                 }
 

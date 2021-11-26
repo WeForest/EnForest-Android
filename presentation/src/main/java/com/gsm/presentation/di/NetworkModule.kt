@@ -28,12 +28,12 @@ object NetworkModule {
     fun provideHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
             //서버로부터의 응답까지의 시간이 읽기 시간 초과보다 크면 요청 실패로 판단한다.
-            .readTimeout(100, TimeUnit.SECONDS)
+            .readTimeout(15, TimeUnit.SECONDS)
             //서버로 요청을 시작한 후 15초가 지날 때 까지 데이터가 안오면 에러로 판단한다.
-            .connectTimeout(100, TimeUnit.SECONDS)
+            .connectTimeout(15, TimeUnit.SECONDS)
 
             // 얼마나 빨리 서버로 데이터를 받을 수 있는지 판단한다.
-            .writeTimeout(100, TimeUnit.SECONDS)
+            .writeTimeout(15, TimeUnit.SECONDS)
             .// 이 클라이언트를 통해 오고 가는 네트워크 요청/응답을 로그로 표시하도록 합니다.
             addInterceptor(getLoggingInterceptor())
 

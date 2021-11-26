@@ -20,11 +20,12 @@ interface ProfileService {
         @Body request: PathProfileRequest
     ): PathProfileResponse
 
+
     @Multipart
-    @POST("profile/picture")
+    @PATCH("profile/picture")
     suspend fun postProfile(
         @Header("authorization") token: String,
-        @Part file: MultipartBody.Part?,
-        ):BaseResponse
+        @Part images: MultipartBody.Part?,
+    ): BaseResponse
 
 }
