@@ -112,7 +112,8 @@ dependencies {
     implementation(Retrofit.RETROFIT)
     implementation(Retrofit.CONVERTER_GSON)
     implementation(Retrofit.CONVERTER_JAXB)
-
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     //okHttp
     implementation(OkHttp.OKHTTP)
     implementation(OkHttp.LOGGING_INTERCEPTOR)

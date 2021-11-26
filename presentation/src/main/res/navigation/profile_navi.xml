@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.gsm.presentation.ui.sign.up.profile.fragment.ProfileFragment"
-        android:label="fragment_profile"
+        android:label=""
         tools:layout="@layout/fragment_profile" >
 
         <action
@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/setProfileFragment"
         android:name="com.gsm.presentation.ui.sign.up.profile.fragment.SetProfileFragment"
-        android:label="fragment_set_profile"
+        android:label=""
         tools:layout="@layout/fragment_set_profile" >
 
         <action
@@ -28,7 +28,7 @@
     <fragment
         android:id="@+id/setProfileEndFragment"
         android:name="com.gsm.presentation.ui.sign.up.profile.fragment.SetProfileEndFragment"
-        android:label="fragment_set_profile_end"
+        android:label=""
         tools:layout="@layout/fragment_set_profile_end" >
 
         <action

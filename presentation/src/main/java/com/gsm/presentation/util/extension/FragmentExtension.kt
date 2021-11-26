@@ -10,6 +10,9 @@ import android.widget.EditText
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.gsm.data.entity.profile.request.Major
+import com.gsm.domain.entity.request.profile.InterestsItem
+import com.gsm.domain.entity.request.profile.MajorItem
 import com.gsm.presentation.R
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
@@ -63,3 +66,17 @@ fun File.toMultipartBody(): MultipartBody.Part = MultipartBody.Part.createFormDa
     this.name,
     this.asRequestBody("image/jpeg".toMediaTypeOrNull())
 )
+
+fun List<String>.toMajorItem(): List<MajorItem> {
+    return this.map {
+        MajorItem(it)
+    }
+
+}
+
+fun List<String>.toInterestsItem(): List<InterestsItem> {
+    return this.map {
+        InterestsItem(it)
+    }
+
+}

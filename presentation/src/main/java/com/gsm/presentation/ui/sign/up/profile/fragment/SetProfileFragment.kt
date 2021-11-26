@@ -28,6 +28,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.gsm.presentation.R
 import com.gsm.presentation.databinding.FragmentSetProfileBinding
@@ -95,6 +96,11 @@ class SetProfileFragment : Fragment() {
         isComponyOnclick()
         isJobSeekerOnclick()
         nextButton()
+        with(binding){
+            backBtn.setOnClickListener {
+                findNavController().navigateUp()
+            }
+        }
     }
 
     fun getUserProfileImage() {
@@ -171,12 +177,12 @@ class SetProfileFragment : Fragment() {
 
     private fun textNullTest(): Boolean {
         return if (!(TextUtils.isEmpty(binding.companyEmailEditText.text)) && !(TextUtils.isEmpty(
-                binding.companyEditText.text
+                binding.nameEditTxt.text
             ))
         ) {
             viewModel.setProfileEmailNameProfile(
                 binding.companyEmailEditText.text.toString(),
-                binding.companyEditText.text.toString(),
+                binding.nameEditTxt.text.toString(),
                 binding.profileImageView.toString()
             )
             true

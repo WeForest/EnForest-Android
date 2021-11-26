@@ -70,6 +70,7 @@ class ProfileViewModel @Inject constructor(
     private val _token = MutableLiveData<String>()
     val token: LiveData<String> get() = _token
 
+
     private val _isSuccessValue = MutableLiveData<Event<Boolean>>()
     val isSuccessValue: LiveData<Event<Boolean>> get() = _isSuccessValue
 
@@ -88,14 +89,16 @@ class ProfileViewModel @Inject constructor(
 
     //우선 string 값 한개만 들어가가게 설정
 
-    fun setProfilePurposeMajor(interests: String, major: String) {
+    fun setProfilePurposeMajor(
+        interests: MutableList<InterestsItem>, major: MutableList<MajorItem>?, purpose:String
+    ) {
 
 
         Log.d(TAG, "setProfilePurposeMajor perimeter: ${interests} ${major}")
-        _interests.value = listOf(InterestsItem(interests)).toMutableList()
-        _major.value = listOf(MajorItem(major)).toMutableList()
+        _interests.value = interests as? MutableList<InterestsItem>
+        _major.value = major as? MutableList<MajorItem>
+        _purpose.value=purpose
 
-        Log.d(TAG, "setProfilePurposeMajor: ${_interests.value?.get(0)} ${_major.value?.get(0)}")
 
     }
 
@@ -110,7 +113,7 @@ class ProfileViewModel @Inject constructor(
                         Log.d(TAG, "postProfile: file ${this.message}")
                         _isSuccessValue.value = Event(success)
                         Log.d("file", "postProfile: 성공")
-                    }else{
+                    } else {
                         Log.d(TAG, "postProf ile: 실패 ")
                     }
                 }
@@ -168,7 +171,7 @@ class ProfileViewModel @Inject constructor(
                     token,
                     PathProfile(
                         name = _name.value.toString(),
-                        purpose = "",
+                        purpose =_purpose.value,
                         major = _major.value,
                         isJobSeeker = isJobSeeker,
                         interests = _interests.value,

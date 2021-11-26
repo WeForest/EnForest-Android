@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -22,44 +21,66 @@
         android:layout_height="match_parent"
         tools:context=".ui.sign.up.profile.fragment.SetProfileFragment">
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/back_btn"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="start"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/left" />
+        </androidx.appcompat.widget.Toolbar>
 
         <ImageView
-            android:onClick="@{() -> fragment.getUserProfileImage()}"
             android:id="@+id/profile_imageView"
             android:layout_width="130dp"
-            android:scaleType="centerInside"
             android:layout_height="80dp"
-            android:layout_marginTop="48dp"
             android:background="@drawable/profile_background"
             android:elevation="10dp"
+            android:onClick="@{() -> fragment.getUserProfileImage()}"
             android:padding="15dp"
+            android:scaleType="centerInside"
             android:src="@drawable/profile"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
         <TextView
             android:id="@+id/name_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="50sp"
             android:fontFamily="@font/noto_sans_kr_bold"
+            android:includeFontPadding="false"
             android:text="이름"
             android:textColor="@color/black"
-            android:textSize="20dp"
+            android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profile_imageView" />
 
         <EditText
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"
-            android:id="@+id/company_editText"
+            android:id="@+id/name_edit_txt"
             android:layout_width="match_parent"
+            tools:text="안녕하세요"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:paddingLeft="10dp"
+            android:layout_marginTop="15sp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/loginedit_background"
             android:text="@{viewmodel.profileData.name}"
             android:textColor="@color/black"
-            android:textSize="15dp"
+            android:textSize="17sp"
             app:layout_constraintTop_toBottomOf="@+id/name_textview"
             tools:layout_editor_absoluteX="30dp" />
 
@@ -68,23 +89,30 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="28dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="25sp"
             android:fontFamily="@font/noto_sans_kr_bold"
             android:text="회사 이메일"
             android:textColor="@color/black"
-            android:textSize="20dp"
+            android:textSize="25sp"
+            android:includeFontPadding="false"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/company_editText" />
+            app:layout_constraintTop_toBottomOf="@+id/name_edit_txt" />
 
         <EditText
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"
             android:id="@+id/companyEmail_editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/loginedit_background"
+
+            android:layout_marginLeft="30dp"
+            tools:text="2004ckck@naver.com"
+            android:layout_marginRight="30dp"
+            android:paddingLeft="10dp"
+
             android:text="@{viewmodel.profileData.companyEmail}"
             android:textColor="@color/black"
-            android:textSize="15dp"
+            android:layout_marginTop="15sp"
+            android:textSize="17sp"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
 
@@ -97,35 +125,35 @@
             android:fontFamily="@font/noto_sans_kr_bold"
             android:text="취업 상태"
             android:textColor="@color/black"
-            android:textSize="20dp"
+            android:includeFontPadding="false"
+            android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/companyEmail_editText" />
 
         <ImageView
-            android:onClick="@{() -> fragment.isComponyOnclick()}"
             android:id="@+id/isCompany_imageView"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_marginStart="80dp"
-            android:layout_marginBottom="156dp"
+            android:layout_marginTop="30dp"
             android:background="@drawable/profile_click_background"
             android:elevation="20dp"
+            android:onClick="@{() -> fragment.isComponyOnclick()}"
             android:padding="15dp"
             android:src="@drawable/building"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView7"
-            app:layout_constraintVertical_bias="0.756" />
+            app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
         <ImageView
-            android:onClick="@{() -> fragment.isJobSeekerOnclick()}"
             android:id="@+id/isJobSicker_ImageView"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:background="@drawable/profile_background"
             android:elevation="20dp"
+            android:onClick="@{() -> fragment.isJobSeekerOnclick()}"
             android:padding="15dp"
             android:src="@drawable/document"
+            app:layout_constraintBottom_toBottomOf="@+id/isCompany_imageView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.33"
             app:layout_constraintStart_toEndOf="@+id/isCompany_imageView"
@@ -133,21 +161,21 @@
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/next_btn"
-            android:textSize="18dp"
-            android:onClick="@{() -> fragment.nextButton()}"
-            android:fontFamily="@font/noto_sans_kr_bold"
-            android:backgroundTint="@color/m_c"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:layout_marginBottom="64dp"
             android:background="@drawable/profile_background"
-            android:text="다음"
+            android:backgroundTint="@color/main_blue"
+            android:fontFamily="@font/noto_sans_kr_bold"
+            android:onClick="@{() -> fragment.nextButton()}"
+            android:text="완료"
+            android:textColor="@color/white"
+            android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/isCompany_imageView"
-            app:layout_constraintVertical_bias="0.709" />
+            app:layout_constraintStart_toStartOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

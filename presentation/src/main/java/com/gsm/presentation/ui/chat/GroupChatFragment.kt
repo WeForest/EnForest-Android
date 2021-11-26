@@ -1,4 +1,4 @@
-package com.gsm.presentation.ui.study.chat
+package com.gsm.presentation.ui.chat
 
 import android.os.Bundle
 import android.text.TextUtils
@@ -21,16 +21,17 @@ import com.gsm.presentation.viewmodel.sign.`in`.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import io.socket.client.IO
 import io.socket.client.Socket
+import io.socket.client.Socket.EVENT_CONNECT_ERROR
 import io.socket.emitter.Emitter
+import io.socket.engineio.client.EngineIOException
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
 import java.net.*
 import java.nio.channels.IllegalBlockingModeException
 import java.util.*
-import io.socket.client.Manager
-import io.socket.engineio.client.Transport
 import io.socket.engineio.client.transports.WebSocket
+import java.io.FileDescriptor.err
 
 
 @AndroidEntryPoint
@@ -62,14 +63,27 @@ class GroupChatFragment :
         getToken()
 
         try {
-            val opts = IO.Options()
-            opts.transports = arrayOf(WebSocket.NAME)
 
-            socket = IO.socket(Local_SERVER, opts)
+
+            socket = App.get()
+            socket.connect()
             socket.on(Socket.EVENT_CONNECT_ERROR, onConnectError)
             socket.on(Socket.EVENT_CONNECT, onConnectSuccess)
-            socket.connect()
-
+            socket.emit("setting", token)
+            socket.on(io.socket.client.Socket.EVENT_CONNECT) {
+                // 소켓 서버에 연결이 성공하면 호출됩니다.
+                Log.i("Socket", "Connect")
+            }.on(io.socket.client.Socket.EVENT_DISCONNECT) { args ->
+                // 소켓 서버 연결이 끊어질 경우에 호출됩니다.
+                Log.i("Socket", "Disconnet: ${args[0]}")
+            }.on(EVENT_CONNECT_ERROR) { args ->
+                // 소켓 서버 연결 시 오류가 발생할 경우에 호출됩니다.
+                var errorMessage = ""
+                if (args[0] is EngineIOException) {
+                    errorMessage = "${args[0]}: "
+                }
+                Log.i("Socket", "Connect Error: $errorMessage")
+            }
             if(socket.connect().connected()) {
                 Log.d(TAG, "onCreate: 이걸 성공?")
 
@@ -83,31 +97,13 @@ class GroupChatFragment :
         } catch (e: URISyntaxException) {
             Log.d(TAG, "onCreate:  에러 ${e.printStackTrace()}")
             e.printStackTrace()
-        } catch (ioe: IOException) {
-            // 소켓 생성 과정에서 I/O 에러 발생.
-            Log.e(TAG, "onCreate: ${ioe}")
-        } catch (uhe: UnknownHostException) {
-            // 소켓 생성 시 전달되는 호스트(www.unknown-host.com)의 IP를 식별할 수 없음.
-            Log.e(TAG, "onCreate: ${uhe}")
-        } catch (se: SecurityException) {
-            Log.e(TAG, "onCreate: ${se}")
-
-            // security manager에서 허용되지 않은 기능 수행.
-        } catch (se: IllegalArgumentException) {
-            Log.e(TAG, "onCreate: ${se}")
-            // 소켓 생성 시 전달되는 포트 번호(65536)이 허용 범위(0~65535)를 벗어남.
-        } catch (se: SocketTimeoutException) {
-            Log.e(TAG, "onCreate tiemout: ${se}")
-            // 소켓 생성 시 전달되는 포트 번호(65536)이 허용 범위(0~65535)를 벗어남.
-        } catch (se: IllegalBlockingModeException) {
-            Log.e(TAG, "onCreate : ${se}")
-            // 소켓 생성 시 전달되는 포트 번호(65536)이 허용 범위(0~65535)를 벗어남.
-        } catch (se: SocketException) {
-            Log.e(TAG, "onCreate : ${se}")
-            // 소켓 생성 시 전달되는 포트 번호(65536)이 허용 범위(0~65535)를 벗어남.
-        } catch (se: NullPointerException) {
-            Log.e(TAG, "onCreate : ${se}")
-            // 소켓 생성 시 전달되는 포트 번호(65536)이 허용 범위(0~65535)를 벗어남.
+        }catch (e:SocketTimeoutException){
+            Log.d(TAG, "onCreate:  에러 ${e.printStackTrace()}")
+            e.printStackTrace()
+        }
+        catch (e:EngineIOException){
+            Log.d(TAG, "onCreate:  에러 ${e.printStackTrace()}")
+            e.printStackTrace()
         }
 
         chat_Send_Button.setOnClickListener {

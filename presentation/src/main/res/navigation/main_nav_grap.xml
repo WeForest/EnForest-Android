@@ -71,7 +71,7 @@
     <activity
         tools:layout="@layout/fragment_group_chat"
         android:id="@+id/groupChatFragment"
-        android:name="com.gsm.presentation.ui.study.chat.GroupChatFragment"
+        android:name="com.gsm.presentation.ui.chat.GroupChatFragment"
         android:label="" >
 
         <argument

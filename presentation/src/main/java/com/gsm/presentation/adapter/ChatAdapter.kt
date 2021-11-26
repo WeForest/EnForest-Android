@@ -12,7 +12,7 @@ import android.widget.ImageView
 import android.widget.TextView
 
 import com.gsm.presentation.R
-import com.gsm.presentation.ui.study.chat.ChatModel
+import com.gsm.presentation.ui.chat.ChatModel
 import com.gsm.presentation.viewmodel.profile.ProfileViewModel
 import java.util.ArrayList
 

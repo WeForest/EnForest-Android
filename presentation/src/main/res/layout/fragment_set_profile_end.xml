@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -17,7 +16,25 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.sign.up.profile.fragment.SetProfileEndFragment">
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
+
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/back_btn"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="start"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/left" />
+
+        </androidx.appcompat.widget.Toolbar>
         <TextView
             android:id="@+id/major_textview"
             android:layout_width="wrap_content"
@@ -25,47 +42,117 @@
             android:layout_marginStart="36dp"
             android:layout_marginTop="116dp"
             android:fontFamily="@font/noto_sans_kr_bold"
+            android:includeFontPadding="false"
             android:text="전공"
             android:textColor="@color/black"
-            android:textSize="20dp"
+            android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:id="@+id/company_editText"
+            android:id="@+id/major_editText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="30dp"
+            android:paddingLeft="10dp"
+            tools:text="Android,web"
+            android:imeOptions="actionNext"
+            android:background="@drawable/loginedit_background"
             android:textColor="@color/black"
-            android:textSize="15dp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/major_textview" />
+
+        <TextView
+            android:id="@+id/textView12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="전공은 ,(컴마)로 구분됩니다."
+            android:textColor="@color/login_other_login"
+            app:layout_constraintEnd_toEndOf="@+id/interestEditText"
+            app:layout_constraintTop_toBottomOf="@+id/major_editText" />
 
         <TextView
             android:id="@+id/iterests_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="36dp"
-            android:layout_marginTop="116dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/noto_sans_kr_bold"
+            android:includeFontPadding="false"
             android:text="흥미"
+
             android:textColor="@color/black"
-            android:textSize="20dp"
+            android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/company_editText" />
+            app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
         <EditText
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"
-            android:id="@+id/Interests_editText"
+            android:id="@+id/interestEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="30dp"
+            android:paddingLeft="10sp"
+            android:imeOptions="actionNext"
+            android:background="@drawable/loginedit_background"
             android:textColor="@color/black"
-            android:textSize="15dp"
+            android:textSize="20sp"
             app:layout_constraintTop_toBottomOf="@+id/iterests_textview"
             tools:layout_editor_absoluteX="30dp" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="흥미은 ,(컴마)로 구분됩니다."
+            android:textColor="@color/login_other_login"
+            app:layout_constraintEnd_toEndOf="@+id/interestEditText"
+            app:layout_constraintTop_toBottomOf="@+id/interestEditText" />
+
+        <TextView
+            android:id="@+id/purpose_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/noto_sans_kr_bold"
+            android:includeFontPadding="false"
+            android:text="목표"
+            android:textColor="@color/black"
+            android:textSize="25sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+
+        <EditText
+            android:id="@+id/purpose_editText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="30dp"
+            android:paddingStart="10sp"
+            android:background="@drawable/loginedit_background"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:imeOptions="actionDone"
+            app:layout_constraintTop_toBottomOf="@+id/purpose_txt"
+            tools:layout_editor_absoluteX="30dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="사용자님의 멋진 목표 를 적어주세요 !"
+            android:textColor="@color/login_other_login"
+            app:layout_constraintEnd_toEndOf="@+id/purpose_editText"
+            app:layout_constraintTop_toBottomOf="@+id/purpose_editText" />
 
 
         <androidx.appcompat.widget.AppCompatButton
@@ -74,11 +161,12 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:layout_marginBottom="40dp"
+            android:layout_marginBottom="64dp"
             android:background="@drawable/profile_background"
-            android:backgroundTint="@color/m_c"
+            android:backgroundTint="@color/main_blue"
             android:fontFamily="@font/noto_sans_kr_bold"
             android:text="완료"
+            android:textColor="@color/white"
             android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
