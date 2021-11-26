@@ -1,19 +1,16 @@
-package com.gsm.presentation.ui.study
+package com.gsm.presentation.ui.study.group
 
 import android.util.Log
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
+import com.gsm.data.entity.group.response.SearchGroupResponseItem
 import com.gsm.presentation.R
-import com.gsm.presentation.adapter.GroupRecyclerAdapter
+import com.gsm.presentation.adapter.GroupListAdapter
+import com.gsm.presentation.adapter.RecyclerViewItemClickListener
 import com.gsm.presentation.base.BaseFragment
-import com.gsm.presentation.databinding.FragmentStudyBinding
-import com.gsm.presentation.ui.main.MainActivity
-import com.gsm.presentation.ui.study.group.CommunityFragment
+import com.gsm.presentation.databinding.FragmentGroupListBinding
 import com.gsm.presentation.util.extension.showVertical
 import com.gsm.presentation.viewmodel.group.GroupViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,20 +19,18 @@ import kotlinx.coroutines.launch
 
 // 그룹 리스트
 @AndroidEntryPoint
-class StudyFragment : BaseFragment<FragmentStudyBinding>(R.layout.fragment_study) {
+class GroupListFragment : BaseFragment<FragmentGroupListBinding>(R.layout.fragment_group_list),RecyclerViewItemClickListener<SearchGroupResponseItem> {
     private val viewModel: GroupViewModel by viewModels()
-    private val groupAdapter: GroupRecyclerAdapter by lazy {
-        GroupRecyclerAdapter(this)
+    private val groupAdapter: GroupListAdapter by lazy {
+        GroupListAdapter(this)
     }
 
-    override fun FragmentStudyBinding.onCreateView() {
-        setHasOptionsMenu(true)
-        (activity as MainActivity).supportActionBar?.show()
-
+    override fun FragmentGroupListBinding.onCreateView() {
+        searchSetting()
 
     }
 
-    override fun FragmentStudyBinding.onViewCreated() {
+    override fun FragmentGroupListBinding.onViewCreated() {
         initRecyclerView()
         with(viewModel) {
             lifecycleScope.launch {
@@ -47,6 +42,7 @@ class StudyFragment : BaseFragment<FragmentStudyBinding>(R.layout.fragment_study
                     }
             }
         }
+
     }
 
     private fun initRecyclerView() {
@@ -55,13 +51,10 @@ class StudyFragment : BaseFragment<FragmentStudyBinding>(R.layout.fragment_study
     }
 
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_search, menu)
-        val searchView = menu.findItem(R.id.menu_action_search).actionView as SearchView
+    fun searchSetting() {
+        binding.searchView.queryHint = getString(R.string.search_view_hint)
 
-        searchView.queryHint = getString(R.string.search_view_hint)
-
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
 
                 lifecycleScope.launch {
@@ -75,7 +68,7 @@ class StudyFragment : BaseFragment<FragmentStudyBinding>(R.layout.fragment_study
                 if (query?.isEmpty() == true) {
                     binding.studyRecycler.scrollToPosition(0)
                 }
-                searchView.onActionViewCollapsed()
+                binding.searchView.onActionViewCollapsed()
 
                 return false
             }
@@ -100,20 +93,9 @@ class StudyFragment : BaseFragment<FragmentStudyBinding>(R.layout.fragment_study
 
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-
-        return when (item.itemId) {
-            R.id.menu_action_search -> {
-                (childFragmentManager.findFragmentById(R.id.communityFragment) as? CommunityFragment)?.binding?.apply {
-                    tabLayout.visibility = View.INVISIBLE
-                    createGroupBtn.visibility = View.INVISIBLE
-                }
-
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
+    override fun onclick(data: SearchGroupResponseItem) {
 
     }
+
 
 }

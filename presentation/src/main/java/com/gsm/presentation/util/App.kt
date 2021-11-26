@@ -2,6 +2,7 @@ package com.gsm.presentation.util
 
 import android.app.Application
 import android.util.Log
+import com.gsm.presentation.util.Constant.Companion.CHAT_SERVER
 import com.gsm.presentation.util.Constant.Companion.Local_SERVER
 import dagger.hilt.android.HiltAndroidApp
 import io.socket.client.IO
@@ -14,7 +15,7 @@ class App : Application() {
         private lateinit var socket : Socket
         fun get(): Socket {
             try {
-                socket = IO.socket(Local_SERVER)
+                socket = IO.socket(CHAT_SERVER)
             } catch (e: URISyntaxException) {
                 Log.e("socket", "get: ${e}")
                 e.printStackTrace();

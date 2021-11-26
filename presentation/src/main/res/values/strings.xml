@@ -14,7 +14,7 @@
     <string name="mission">mission</string>
     <string name="study">study</string>
     <string name="home">home</string>
-    <string name="search_view_hint" >검색</string>
+    <string name="search_view_hint" >그룹 검색</string>
     <string name="basic_test">초급테스트</string>
     <string name="basic_test_explain">15분 20초</string>
     <string name="middle_test">중급테스트</string>

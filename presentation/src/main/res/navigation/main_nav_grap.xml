@@ -6,16 +6,15 @@
     app:startDestination="@id/profileFragment">
 
 
-
     <fragment
         android:id="@+id/missionFragment"
-        android:label=""
         android:name="com.gsm.presentation.ui.mission.MissionFragment"
+        android:label=""
         tools:layout="@layout/fragment_mission">
         <action
-            app:popUpToInclusive="true"
             android:id="@+id/action_fragmentMission_to_bottomSheetMissionDialog"
-            app:destination="@id/bottomSheetMissionDialog" />
+            app:destination="@id/bottomSheetMissionDialog"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_missionFragment_to_missionDetailFragment"
             app:destination="@id/missionDetailFragment" />
@@ -25,38 +24,32 @@
         android:id="@+id/bottomSheetMissionDialog"
         android:name="com.gsm.presentation.ui.mission.bottomSheet.BottomSheetMissionDialog"
         android:label="BottomSheetMissionDialog"
-        tools:layout="@layout/bottom_sheet_dialog_write_mission" >
-    </dialog>
+        tools:layout="@layout/bottom_sheet_dialog_write_mission" />
     <fragment
         android:id="@+id/missionDetailFragment"
-        tools:layout="@layout/fragment_mission_detail"
         android:name="com.gsm.presentation.ui.mission.MissionDetailFragment"
-        android:label="MissionDetailFragment" >
+        android:label="MissionDetailFragment"
+        tools:layout="@layout/fragment_mission_detail">
         <argument
             android:name="type"
-            app:nullable="true"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
 
 
     <fragment
         android:id="@+id/communityFragment"
-        android:name="com.gsm.presentation.ui.study.group.CommunityFragment"
-        tools:layout="@layout/fragment_community"
-     >
+        android:name="com.gsm.presentation.ui.study.CommunityFragment"
+        tools:layout="@layout/fragment_community">
+
 
         <action
-            android:id="@+id/action_communityFragment_to_studyFragment"
-            app:destination="@id/studyFragment" />
-        <action
-            android:id="@+id/action_communityFragment_to_groupChatFragment"
-            app:destination="@id/groupChatFragment" />
-        <argument
-            android:name="groupId"
-            app:argType="integer" />
-        <action
-            android:id="@+id/action_communityFragment_to_joinGroupDialog"
-            app:destination="@id/joinGroupDialog" />
+            android:id="@+id/action_communityFragment_to_createGroupFragment"
+            app:destination="@id/createGroupFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
 
 
     </fragment>
@@ -64,15 +57,15 @@
         android:id="@+id/profileFragment"
         android:name="com.gsm.presentation.ui.sign.up.profile.fragment.ProfileFragment"
         android:label=""
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
 
 
     </fragment>
     <activity
-        tools:layout="@layout/fragment_group_chat"
         android:id="@+id/groupChatFragment"
-        android:name="com.gsm.presentation.ui.chat.GroupChatFragment"
-        android:label="" >
+        android:name="com.gsm.presentation.ui.study.chat.GroupChatFragment"
+        android:label=""
+        tools:layout="@layout/fragment_group_chat">
 
         <argument
             android:name="groupId"
@@ -80,21 +73,22 @@
 
     </activity>
     <fragment
-        android:id="@+id/studyFragment"
-        tools:layout="@layout/fragment_study"
-        android:name="com.gsm.presentation.ui.study.StudyFragment"
-        android:label="StudyFragment" >
+        android:id="@+id/groupListFragment"
+        android:name="com.gsm.presentation.ui.study.group.GroupListFragment"
+        android:label="StudyFragment"
+        tools:layout="@layout/fragment_group_list">
         <action
             android:id="@+id/action_studyFragment_to_groupChatFragment"
             app:destination="@id/groupChatFragment" />
+
     </fragment>
     <fragment
-        tools:layout="@layout/join_dialog"
-        android:id="@+id/joinGroupDialog"
-        android:name="com.gsm.presentation.ui.study.dialog.JoinGroupDialog"
-        android:label="JoinGroupDialog" >
-        <argument
-            android:name="groupId"
-            app:argType="integer" />
+        android:id="@+id/createGroupFragment"
+        android:name="com.gsm.presentation.ui.study.group.CreateGroupFragment"
+        android:label="CreateGroupFragment" >
+        <action
+            android:id="@+id/action_createGroupFragment_to_communityFragment"
+            app:destination="@id/communityFragment" />
     </fragment>
+
 </navigation>

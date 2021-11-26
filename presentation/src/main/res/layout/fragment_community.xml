@@ -6,14 +6,14 @@
 
         <variable
             name="fragmernt"
-            type="com.gsm.presentation.ui.study.group.CommunityFragment" />
+            type="com.gsm.presentation.ui.study.CommunityFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
-        tools:context=".ui.study.group.CommunityFragment">
+        tools:context=".ui.study.CommunityFragment">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tab_layout"
@@ -42,7 +42,6 @@
             android:layout_margin="18dp"
             android:backgroundTint="@color/main_color"
             android:contentDescription="추가"
-            android:onClick="@{fragmernt::createDialog}"
             android:elevation="3dp"
             android:src="@drawable/plus"
             app:borderWidth="0dp"

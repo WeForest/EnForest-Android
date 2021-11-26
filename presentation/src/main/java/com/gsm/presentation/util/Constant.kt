@@ -10,6 +10,7 @@ class Constant {
         const val NOTIFICATION_ID = 0
         const val MISSION_CHANNEL_ID = "notification_channel"
         const val Local_SERVER = "http://192.168.219.103:3000"
+        const val CHAT_SERVER = "http://192.168.219.103:81"
 
 
         const val PREFERENCE_NAME = "token_preference"

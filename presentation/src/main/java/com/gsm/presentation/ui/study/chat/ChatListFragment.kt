@@ -1,13 +1,11 @@
-package com.gsm.presentation.ui.study.group.partner
+package com.gsm.presentation.ui.study.chat
 
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.gsm.presentation.R
 import com.gsm.presentation.adapter.GroupAdapters
-import com.gsm.presentation.adapter.GroupRecyclerAdapter
 import com.gsm.presentation.base.BaseFragment
-import com.gsm.presentation.databinding.FragmentPartnerBinding
-import com.gsm.presentation.databinding.FragmentStudyBinding
+import com.gsm.presentation.databinding.FragmentChatListBinding
 import com.gsm.presentation.util.extension.showVertical
 import com.gsm.presentation.viewmodel.group.GroupViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,7 +13,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class PartnerFragment : BaseFragment<FragmentPartnerBinding>(R.layout.fragment_partner) {
+class ChatListFragment : BaseFragment<FragmentChatListBinding>(R.layout.fragment_chat_list) {
 
     private val groupAdapter: GroupAdapters by lazy {
         GroupAdapters()
@@ -26,11 +24,11 @@ class PartnerFragment : BaseFragment<FragmentPartnerBinding>(R.layout.fragment_p
         binding.partnerRecyclerView.adapter = groupAdapter
     }
 
-    override fun FragmentPartnerBinding.onCreateView() {
+    override fun FragmentChatListBinding.onCreateView() {
 
     }
 
-    override fun FragmentPartnerBinding.onViewCreated() {
+    override fun FragmentChatListBinding.onViewCreated() {
         initRecyclerView()
         with(viewModel) {
             lifecycleScope.launch {

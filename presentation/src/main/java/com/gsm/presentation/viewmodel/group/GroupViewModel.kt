@@ -18,6 +18,7 @@ import com.gsm.domain.entity.group.response.GroupData
 import com.gsm.domain.usecase.group.*
 import com.gsm.presentation.data.ChatPagingDataSource
 import com.gsm.presentation.data.GroupPagingDataSource
+import com.gsm.presentation.util.DataState
 import com.gsm.presentation.util.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -41,7 +42,7 @@ class GroupViewModel @Inject constructor(
     private val _success = MutableLiveData<Event<Boolean?>>()
     val success: LiveData<Event<Boolean?>>
         get() = _success
-
+    val storeState = MutableLiveData<DataState<Boolean>>()
     suspend fun joinGroup(token:String,id:Int) = viewModelScope.launch {
 
         try {
@@ -56,7 +57,7 @@ class GroupViewModel @Inject constructor(
     suspend fun createGroup(token: String, name: String, description: String, tags: String) =
         viewModelScope.launch {
             Log.d(TAG, "GroupViewModel - createGroup() :${token}")
-
+            storeState.postValue(DataState.Loading)
             try {
                 createGroupUseCase.buildUseCaseObservable(
                     CreateGroupUseCase.Params(
@@ -67,9 +68,10 @@ class GroupViewModel @Inject constructor(
                     if (it.success == true) {
                         Log.d(TAG, "createGroup: 성공 ${it.group}")
                         _success.value = Event(it.success)
-
+                        storeState.postValue(DataState.Success(true))
                         _createGroupValue.value = it.group
                     } else {
+                        storeState.postValue(DataState.Failure(400,"그룹을 생성하지 못했습니다."))
                         _success.value = Event(it.success)
                         Log.e(TAG, "createGroup: 실패 ${it.group} ${it}")
 

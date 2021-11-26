@@ -1,4 +1,4 @@
-package com.gsm.presentation.ui.chat
+package com.gsm.presentation.ui.study.chat
 
 import android.os.Bundle
 import android.text.TextUtils
@@ -13,25 +13,19 @@ import com.gsm.presentation.R
 import com.gsm.presentation.adapter.ChatAdapter
 import com.gsm.presentation.base.BaseActivity
 import com.gsm.presentation.databinding.FragmentGroupChatBinding
+import com.gsm.presentation.ui.chat.ChatModel
 import com.gsm.presentation.util.App
-import com.gsm.presentation.util.Constant.Companion.Local_SERVER
 import com.gsm.presentation.util.extension.showVertical
 import com.gsm.presentation.viewmodel.profile.ProfileViewModel
 import com.gsm.presentation.viewmodel.sign.`in`.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import io.socket.client.IO
 import io.socket.client.Socket
-import io.socket.client.Socket.EVENT_CONNECT_ERROR
 import io.socket.emitter.Emitter
 import io.socket.engineio.client.EngineIOException
 import org.json.JSONException
 import org.json.JSONObject
-import java.io.IOException
 import java.net.*
-import java.nio.channels.IllegalBlockingModeException
 import java.util.*
-import io.socket.engineio.client.transports.WebSocket
-import java.io.FileDescriptor.err
 
 
 @AndroidEntryPoint
@@ -62,46 +56,28 @@ class GroupChatFragment :
         setAdapter()
         getToken()
 
-        try {
 
+        try {
 
             socket = App.get()
             socket.connect()
             socket.on(Socket.EVENT_CONNECT_ERROR, onConnectError)
             socket.on(Socket.EVENT_CONNECT, onConnectSuccess)
-            socket.emit("setting", token)
-            socket.on(io.socket.client.Socket.EVENT_CONNECT) {
-                // 소켓 서버에 연결이 성공하면 호출됩니다.
-                Log.i("Socket", "Connect")
-            }.on(io.socket.client.Socket.EVENT_DISCONNECT) { args ->
+            socket.on(io.socket.client.Socket.EVENT_DISCONNECT) { args ->
                 // 소켓 서버 연결이 끊어질 경우에 호출됩니다.
                 Log.i("Socket", "Disconnet: ${args[0]}")
-            }.on(EVENT_CONNECT_ERROR) { args ->
-                // 소켓 서버 연결 시 오류가 발생할 경우에 호출됩니다.
-                var errorMessage = ""
-                if (args[0] is EngineIOException) {
-                    errorMessage = "${args[0]}: "
-                }
-                Log.i("Socket", "Connect Error: $errorMessage")
             }
-            if(socket.connect().connected()) {
-                Log.d(TAG, "onCreate: 이걸 성공?")
-
-            }else{
-                Log.d(TAG, "onCreate: 역시 ㅋ")
-            }
-            emitSetting()
-            emitJoin()
-            socket.on("sendMessage", sendMessage)
+           socket.on("sendMessage", sendMessage)
+//
+           emitJoin()
 
         } catch (e: URISyntaxException) {
             Log.d(TAG, "onCreate:  에러 ${e.printStackTrace()}")
             e.printStackTrace()
-        }catch (e:SocketTimeoutException){
+        } catch (e: SocketTimeoutException) {
             Log.d(TAG, "onCreate:  에러 ${e.printStackTrace()}")
             e.printStackTrace()
-        }
-        catch (e:EngineIOException){
+        } catch (e: EngineIOException) {
             Log.d(TAG, "onCreate:  에러 ${e.printStackTrace()}")
             e.printStackTrace()
         }
@@ -134,13 +110,7 @@ class GroupChatFragment :
         }
     }
 
-    private fun emitSetting() {
-        //초기 설정
-        val json = mutableMapOf<String, String>()
-        json["token"] = token
-        socket.emit("setting", json)
 
-    }
 
     private fun emitJoin() {
         val userId = JSONObject()
@@ -178,6 +148,7 @@ class GroupChatFragment :
                 name = data.getString("name")
                 message = data.getString("message")
                 profile_image = data.getString("profileImg")
+                Log.d(TAG, "sendMessage: ${name} ${message} ${profile_image}")
 
                 val format = ChatModel(name, message, profile_image, "null")
                 mAdapter.addItem(format)
@@ -202,10 +173,6 @@ class GroupChatFragment :
         binding.messageEdit.setText("")
         val jsonObject = JSONObject()
         try {
-            Log.d(
-                TAG,
-                "sendMessage: message  ${message} groupId : ${args.groupId} token : ${token}"
-            )
             jsonObject.put("token", token)
             jsonObject.put("roomId", args.groupId)
             jsonObject.put("message", message)
@@ -215,7 +182,6 @@ class GroupChatFragment :
             Log.d(TAG, "sendMessage: 에러 ${e}")
             e.printStackTrace()
         }
-        Log.d(TAG, "sendMessage : object $jsonObject")
 
 
     }

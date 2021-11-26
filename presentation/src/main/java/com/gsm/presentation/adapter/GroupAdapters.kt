@@ -3,19 +3,13 @@ package com.gsm.presentation.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.Navigation
-import androidx.navigation.Navigation.findNavController
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.gsm.data.entity.group.response.SearchGroupResponseItem
 import com.gsm.presentation.R
 import com.gsm.presentation.databinding.ChattingGroupRecyclerBinding
-import com.gsm.presentation.databinding.CommunityRecyclerViewItemBinding
-import com.gsm.presentation.ui.study.group.CommunityFragmentDirections
 
 class GroupAdapters :
     PagingDataAdapter<SearchGroupResponseItem, GroupAdapters.ChatGroupRecyclerAdapterViewHolder>(
@@ -74,14 +68,7 @@ class GroupAdapters :
 
         if (item != null) {
             holder.bind(item)
-            holder.itemView.setOnClickListener { view ->
-                val action = item.chattingId?.let { it1 ->
-                    CommunityFragmentDirections.actionCommunityFragmentToGroupChatFragment(
-                        it1
-                    )
-                }
-                action?.let { view.findNavController().navigate(it) }
-            }
+
         }
     }
 

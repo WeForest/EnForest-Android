@@ -1,20 +1,19 @@
 package com.gsm.presentation.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.gsm.data.entity.group.response.SearchGroupResponseItem
 import com.gsm.presentation.R
 import com.gsm.presentation.databinding.CommunityRecyclerViewItemBinding
-import com.gsm.presentation.ui.study.dialog.JoinGroupDialog
-import com.gsm.presentation.ui.study.group.CommunityFragmentDirections
 import androidx.fragment.app.Fragment
-class GroupRecyclerAdapter(private val fragment:Fragment) :
-    PagingDataAdapter<SearchGroupResponseItem, GroupRecyclerAdapter.PartnerRecyclerAdapterViewHolder>(
+
+class GroupListAdapter(val onClickListener: RecyclerViewItemClickListener<SearchGroupResponseItem>) :
+    PagingDataAdapter<SearchGroupResponseItem, GroupListAdapter.PartnerRecyclerAdapterViewHolder>(
         diffCallback
     ) {
     companion object {
@@ -55,22 +54,22 @@ class GroupRecyclerAdapter(private val fragment:Fragment) :
 
     override fun onBindViewHolder(holder: PartnerRecyclerAdapterViewHolder, position: Int) {
         val item = getItem(position)
-        val dialog= JoinGroupDialog()
         if (item != null) {
             holder.bind(item)
-            holder.itemView.setOnClickListener {
-                dialog.show(fragment.parentFragmentManager,"dialog")
-            }
+
         }
     }
 
 
-    class PartnerRecyclerAdapterViewHolder(val binding: CommunityRecyclerViewItemBinding) :
+    inner class PartnerRecyclerAdapterViewHolder(val binding: CommunityRecyclerViewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(bind: SearchGroupResponseItem) {
             binding.data = bind
             binding.executePendingBindings()
+            itemView.setOnClickListener {
+                onClickListener.onclick(bind)
+            }
         }
     }
 

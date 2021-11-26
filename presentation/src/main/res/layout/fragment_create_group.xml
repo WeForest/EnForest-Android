@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/back_btn"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="start"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/left" />
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/create_group_btn"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_gravity="end"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/ic_baseline_check_24" />
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp">
+
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <TextView
+                android:id="@+id/group_name_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/noto_sans_kr_regular"
+                android:includeFontPadding="false"
+                android:text="그룹 이름 "
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/toolbar3" />
+
+            <EditText
+                android:id="@+id/group_name_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/fragment_group_background"
+                android:paddingLeft="20dp"
+                app:layout_constraintLeft_toLeftOf="@id/group_name_txt"
+                app:layout_constraintTop_toBottomOf="@id/group_name_txt"
+                tools:text="코틀린 할 수 있는사람?" />
+
+            <TextView
+                android:id="@+id/group_content_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/noto_sans_kr_regular"
+                android:includeFontPadding="false"
+                android:text="그룹 내용"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintLeft_toLeftOf="@id/group_name_edit"
+                app:layout_constraintTop_toBottomOf="@id/group_name_edit" />
+
+            <EditText
+                android:id="@+id/group_content_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:padding="20dp"
+                android:gravity="top"
+                android:background="@drawable/group_content_background"
+                app:layout_constraintLeft_toLeftOf="@id/group_content_txt"
+                app:layout_constraintTop_toBottomOf="@id/group_content_txt"
+                tools:text="안녕하세요 제가 코틀린을 잘 몰라서 그러는데 가르쳐주실분 계신가요?" />
+
+            <TextView
+                android:id="@+id/group_tag_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/noto_sans_kr_regular"
+                android:includeFontPadding="false"
+                android:text="태그를 적어주세요"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                app:layout_constraintLeft_toLeftOf="@id/group_content_edit"
+                app:layout_constraintTop_toBottomOf="@id/group_content_edit" />
+
+            <EditText
+                android:id="@+id/group_tag_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                tools:text="안녕"
+                android:paddingLeft="20dp"
+                android:background="@drawable/fragment_group_background"
+                app:layout_constraintLeft_toLeftOf="@id/group_tag_txt"
+                app:layout_constraintTop_toBottomOf="@id/group_tag_txt" />
+
+
+            <ProgressBar
+                android:id="@+id/loading_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/group_tag_edit"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</layout>
