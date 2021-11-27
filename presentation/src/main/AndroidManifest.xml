@@ -15,13 +15,23 @@
         android:name=".util.App"
         android:allowBackup="true"
         android:exported="true"
-        android:requestLegacyExternalStorage="true"
         android:fullBackupContent="true"
+        android:requestLegacyExternalStorage="true"
         android:supportsRtl="true"
         android:theme="@style/Theme.EnForest"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".ui.userinfo.activity.UserInfoActivity"
+            android:exported="true" >
 
-        <activity android:name=".ui.sign.up.SignUpSignInMainActivity"/>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity android:name=".ui.sign.up.SignUpSignInMainActivity" />
         <activity android:name=".ui.main.MainActivity" />
         <activity
             android:name=".ui.sign.in.SignInActivity"
@@ -29,17 +39,10 @@
         <activity
             android:name=".ui.test.activity.TestMainActivity"
             android:exported="true" />
-        <activity android:name="com.gsm.presentation.ui.study.chat.GroupChatFragment"/>
+        <activity android:name=".ui.study.chat.GroupChatFragment" />
         <activity
             android:name=".ui.splash.SplashActivity"
-            android:exported="true">
-
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true"/>
 
         <receiver
             android:name=".ui.mission.notification.MissionNotification"

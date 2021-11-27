@@ -1,4 +1,4 @@
-package com.gsm.presentation
+package com.gsm.presentation.ui.test
 
 import com.gsm.domain.entity.test.response.GetTestEntity
 import retrofit2.http.GET

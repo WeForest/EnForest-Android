@@ -15,7 +15,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.gsm.presentation.R
 import com.gsm.presentation.base.BaseActivity
-import com.gsm.presentation.databinding.FragmentSignInBinding
+import com.gsm.presentation.databinding.ActivitySignInBinding
 import com.gsm.presentation.ui.main.MainActivity
 import com.gsm.presentation.ui.sign.up.SignUpSignInMainActivity
 import com.gsm.presentation.util.EventObserver
@@ -25,7 +25,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class SignInActivity : BaseActivity<FragmentSignInBinding>(R.layout.fragment_sign_in) {
+class SignInActivity : BaseActivity<ActivitySignInBinding>(R.layout.activity_sign_in) {
     private val profileViewModel: ProfileViewModel by viewModels()
 
     private val signInViewModel: SignInViewModel by viewModels()
