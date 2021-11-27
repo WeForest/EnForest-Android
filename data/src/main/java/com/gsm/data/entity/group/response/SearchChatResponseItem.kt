@@ -1,8 +1,11 @@
 package com.gsm.data.entity.group.response
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class SearchChatResponseItem(
     @SerializedName("ChattingLog")
     val chattingLog: ChattingLogX?,
@@ -14,4 +17,4 @@ data class SearchChatResponseItem(
     val name: String?,
     @SerializedName("type")
     val type: String?
-)
+) : Parcelable

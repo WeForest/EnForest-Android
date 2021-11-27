@@ -45,17 +45,18 @@
 
 
     </fragment>
-    <activity
+    <fragment
         android:id="@+id/groupChatFragment"
         android:name="com.gsm.presentation.ui.study.chat.GroupChatFragment"
         android:label=""
         tools:layout="@layout/fragment_group_chat">
 
-        <argument
-            android:name="groupId"
-            app:argType="integer" />
 
-    </activity>
+        <argument
+            android:name="chat"
+            app:argType="com.gsm.data.entity.group.response.SearchChatResponseItem" />
+
+    </fragment>
     <fragment
         android:id="@+id/groupListFragment"
         android:name="com.gsm.presentation.ui.study.group.GroupListFragment"
@@ -63,13 +64,7 @@
         tools:layout="@layout/fragment_group_list">
 
 
-        <action
-            android:id="@+id/action_studyFragment_to_groupChatFragment"
-            app:destination="@id/groupChatFragment" >
-            <argument
-                android:name="group"
-                app:argType="com.gsm.data.entity.group.response.CreateGroupResponse" />
-        </action>
+
 
 
     </fragment>
@@ -99,6 +94,9 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+        <action
+            android:id="@+id/action_communityFragment_to_groupChatFragment"
+            app:destination="@id/groupChatFragment" />
     </fragment>
 
     <dialog

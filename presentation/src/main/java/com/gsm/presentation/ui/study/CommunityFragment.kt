@@ -24,14 +24,7 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>(R.layout.fragme
 
     override fun FragmentCommunityBinding.onViewCreated() {
         initTabLayoutAndViewPager()
-        fabClick()
-         NavController.OnDestinationChangedListener { controller, destination, arguments ->
-            when(destination.id) {
-                R.id.groupListFragment -> binding.createGroupBtn.show()
-                R.id.groupChatFragment -> binding.createGroupBtn.hide()
 
-            }
-        }
     }
 
     override fun FragmentCommunityBinding.onCreateView() {
@@ -69,11 +62,7 @@ class CommunityFragment : BaseFragment<FragmentCommunityBinding>(R.layout.fragme
 
 
 
-    private fun fabClick() {
-        binding.createGroupBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_communityFragment_to_createGroupFragment)
-        }
-    }
+
 
 
 

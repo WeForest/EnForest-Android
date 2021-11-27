@@ -34,6 +34,7 @@ class GroupListFragment : BaseFragment<FragmentGroupListBinding>(R.layout.fragme
 
     override fun FragmentGroupListBinding.onViewCreated() {
         initRecyclerView()
+        fabClick()
         with(viewModel) {
             lifecycleScope.launch {
                 getQuery("")
@@ -103,7 +104,11 @@ class GroupListFragment : BaseFragment<FragmentGroupListBinding>(R.layout.fragme
         findNavController().navigate(action)
 
     }
-
+    private fun fabClick() {
+        binding.createGroupBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_communityFragment_to_createGroupFragment)
+        }
+    }
 }
 
 

@@ -11,7 +11,7 @@ import com.gsm.data.entity.group.response.SearchGroupResponseItem
 import com.gsm.presentation.R
 import com.gsm.presentation.databinding.ChattingGroupRecyclerBinding
 
-class ChatListSAdapter :
+class ChatListSAdapter(val onClickListener: RecyclerViewItemClickListener<SearchChatResponseItem>) :
     PagingDataAdapter<SearchChatResponseItem, ChatListSAdapter.ChatGroupRecyclerAdapterViewHolder>(
         diffCallback
     ) {
@@ -51,12 +51,15 @@ class ChatListSAdapter :
     }
 
 
-    class ChatGroupRecyclerAdapterViewHolder(val binding: ChattingGroupRecyclerBinding) :
+    inner class ChatGroupRecyclerAdapterViewHolder(val binding: ChattingGroupRecyclerBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(bind: SearchChatResponseItem) {
             binding.data = bind
             binding.executePendingBindings()
+            binding.layout.setOnClickListener {
+                onClickListener.onclick(bind)
+            }
         }
     }
 
