@@ -12,7 +12,7 @@ interface  GroupRepository {
     suspend fun secessionGroup(token: String, id: Int): BaseEntity
     suspend fun createGroup(token:String,request: CreateGroup): CreateGroupEntity
     suspend fun deleteGroup(token:String,id:Int): BaseEntity
-    suspend fun searchChat(page:Int,key:String):SearchChatEntity
+//    suspend fun searchChat(page:Int,key:String):SearchChatEntity
     suspend fun searchGroup(page:Int,key:String):List<SearchGroupEntity>
 
 }

@@ -23,16 +23,16 @@ fun Group.toDomain(): GroupData {
 
 }
 
-fun SearchChatResponse.toDomain(): SearchChatEntity {
-    return SearchChatEntity(
-        this.chattingLog?.toDomain(),
-        this.chattingParticipant?.toDomain(),
-        this.id,
-        this.name,
-        this.type
-    )
-
-}
+//fun SearchChatResponse.toDomain(): SearchChatEntity {
+//    return SearchChatEntity(
+//        this.chattingLog?.toDomain(),
+//        this.chattingParticipant?.toDomain(),
+//        this.id,
+//        this.name,
+//        this.type
+//    )
+//
+//}
 
 fun JoinGroupResponse.toDomain(): JoinGroupEntity {
     return JoinGroupEntity(

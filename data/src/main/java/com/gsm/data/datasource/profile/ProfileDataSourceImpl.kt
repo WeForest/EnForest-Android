@@ -32,4 +32,11 @@ class ProfileDataSourceImpl @Inject constructor(
     ): BaseResponse {
         return service.postProfile(token, file)
     }
+
+    override suspend fun postFollow(token: String, nickName: String): PathProfileResponse {
+        return service.postFollow(token,nickName)
+    }
+    override suspend fun unPostFollow(token: String, nickName: String): PathProfileResponse {
+        return service.unPostFollow(token,nickName)
+    }
 }

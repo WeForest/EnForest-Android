@@ -29,9 +29,25 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/study_recycler"
             android:layout_width="match_parent"
+            android:paddingBottom="56dp"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@+id/toolbar4" />
-
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/create_group_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="18dp"
+            android:backgroundTint="@color/main_color"
+            android:contentDescription="추가"
+            android:elevation="3dp"
+            android:src="@drawable/plus"
+            app:borderWidth="0dp"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

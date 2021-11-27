@@ -3,37 +3,35 @@ package com.gsm.presentation.data
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.gsm.data.entity.group.response.SearchChatResponseItem
 import com.gsm.data.network.service.GroupService
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
+
 class ChatPagingDataSource @Inject constructor(
     private val service: GroupService,
-    private val k: String,
+    private val k: String?,
 
 
-    ) : PagingSource<Int, Unit>() {
+    ) : PagingSource<Int, SearchChatResponseItem>() {
     companion object {
-        const val TAG = "PostPagingSource"
+        const val TAG = "GroupPagingSource"
 
     }
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Unit> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, SearchChatResponseItem> {
         return try {
             val page = params.key ?: 1
-            val response = service.searchChat(page, k)
+            val response =
+                service.searchChat(page, k.toString())
 
-
-            val responseData = mutableListOf<Unit>()
-//            val data = response.body()?.posts ?: emptyList()
-
-//            responseData.addAll(data)
-
+            Log.d(TAG, "load: data  ${response}")
 
             val prevKey = if (page == 1) null else page - 1
             LoadResult.Page(
-                data = responseData,
+                data = response,
                 prevKey = prevKey,
                 nextKey = null,
             )
@@ -54,7 +52,7 @@ class ChatPagingDataSource @Inject constructor(
     }
 
 
-    override fun getRefreshKey(state: PagingState<Int, Unit>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, SearchChatResponseItem>): Int? {
         Log.d(TAG, "getRefreshKey:${state.anchorPosition} ")
         return state.anchorPosition?.let { anchorPosition ->
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)

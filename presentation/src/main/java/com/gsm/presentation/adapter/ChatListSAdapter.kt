@@ -3,31 +3,31 @@ package com.gsm.presentation.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.gsm.data.entity.group.response.SearchChatResponseItem
 import com.gsm.data.entity.group.response.SearchGroupResponseItem
 import com.gsm.presentation.R
 import com.gsm.presentation.databinding.ChattingGroupRecyclerBinding
 
-class GroupAdapters :
-    PagingDataAdapter<SearchGroupResponseItem, GroupAdapters.ChatGroupRecyclerAdapterViewHolder>(
+class ChatListSAdapter(val onClickListener: RecyclerViewItemClickListener<SearchChatResponseItem>) :
+    PagingDataAdapter<SearchChatResponseItem, ChatListSAdapter.ChatGroupRecyclerAdapterViewHolder>(
         diffCallback
     ) {
     companion object {
 
-        private val diffCallback = object : DiffUtil.ItemCallback<SearchGroupResponseItem>() {
+        private val diffCallback = object : DiffUtil.ItemCallback<SearchChatResponseItem>() {
             override fun areItemsTheSame(
-                oldItem: SearchGroupResponseItem,
-                newItem: SearchGroupResponseItem
+                oldItem: SearchChatResponseItem,
+                newItem: SearchChatResponseItem
             ): Boolean {
                 return oldItem == newItem
             }
 
             override fun areContentsTheSame(
-                oldItem: SearchGroupResponseItem,
-                newItem: SearchGroupResponseItem
+                oldItem: SearchChatResponseItem,
+                newItem: SearchChatResponseItem
             ): Boolean {
                 return oldItem == newItem
             }
@@ -51,12 +51,15 @@ class GroupAdapters :
     }
 
 
-    class ChatGroupRecyclerAdapterViewHolder(val binding: ChattingGroupRecyclerBinding) :
+    inner class ChatGroupRecyclerAdapterViewHolder(val binding: ChattingGroupRecyclerBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(bind: SearchGroupResponseItem) {
+        fun bind(bind: SearchChatResponseItem) {
             binding.data = bind
             binding.executePendingBindings()
+            binding.layout.setOnClickListener {
+                onClickListener.onclick(bind)
+            }
         }
     }
 

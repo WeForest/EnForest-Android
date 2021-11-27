@@ -10,9 +10,7 @@ import com.gsm.domain.entity.request.profile.MajorItem
 import com.gsm.domain.entity.request.profile.PathProfile
 import com.gsm.domain.entity.response.GetProfileEntity
 import com.gsm.domain.entity.response.PathProfileEntity
-import com.gsm.domain.usecase.profile.GetProfileUseCase
-import com.gsm.domain.usecase.profile.PathProfileUseCase
-import com.gsm.domain.usecase.profile.PostProfileUseCase
+import com.gsm.domain.usecase.profile.*
 import com.gsm.presentation.data.DataStoreRepository
 import com.gsm.presentation.util.Constant.Companion.DEFAULT_NAME
 import com.gsm.presentation.util.Event
@@ -30,7 +28,9 @@ class ProfileViewModel @Inject constructor(
     private val getProfileUseCase: GetProfileUseCase,
     private val pathProfileUseCase: PathProfileUseCase,
     private val dataStore: DataStoreRepository,
-    private val postProfileUseCase: PostProfileUseCase
+    private val postProfileUseCase: PostProfileUseCase,
+    private val postProfileFollowUseCase: PostProfileFollowUseCase,
+    private val unPostProfileUseCase: UnFollowUseCase
 ) : ViewModel() {
 
     private val TAG = "profile"
@@ -90,14 +90,14 @@ class ProfileViewModel @Inject constructor(
     //우선 string 값 한개만 들어가가게 설정
 
     fun setProfilePurposeMajor(
-        interests: MutableList<InterestsItem>, major: MutableList<MajorItem>?, purpose:String
+        interests: MutableList<InterestsItem>, major: MutableList<MajorItem>?, purpose: String
     ) {
 
 
         Log.d(TAG, "setProfilePurposeMajor perimeter: ${interests} ${major}")
         _interests.value = interests as? MutableList<InterestsItem>
         _major.value = major as? MutableList<MajorItem>
-        _purpose.value=purpose
+        _purpose.value = purpose
 
 
     }
@@ -131,6 +131,41 @@ class ProfileViewModel @Inject constructor(
         )
     }
 
+
+    // 사용자 팔로우
+    suspend fun postFollow(token: String, nickName: String) = viewModelScope.launch {
+        try {
+            postProfileFollowUseCase.buildUseCaseObservable(
+                PostProfileFollowUseCase.Params(
+                    token,
+                    nickName
+                )
+            ).let {
+                _isSuccess.value=Event(true)
+                Log.d(TAG, "postFollow: 성공")
+            }
+        }catch (e:Exception){
+            _isSuccess.value=Event(false)
+            Log.d(TAG, "postFollow: 실패")
+        }
+    }
+    // 사용자 언팔로우
+    suspend fun unPostFollow(token: String, nickName: String) = viewModelScope.launch {
+        try {
+            unPostProfileUseCase.buildUseCaseObservable(
+                UnFollowUseCase.Params(
+                    token,
+                    nickName
+                )
+            ).let {
+                _isSuccess.value=Event(true)
+                Log.d(TAG, "postFollow: 성공")
+            }
+        }catch (e:Exception){
+            _isSuccess.value=Event(false)
+            Log.d(TAG, "postFollow: 실패")
+        }
+    }
 
     suspend fun getProfile(nickname: String) = viewModelScope.launch {
 
@@ -171,7 +206,7 @@ class ProfileViewModel @Inject constructor(
                     token,
                     PathProfile(
                         name = _name.value.toString(),
-                        purpose =_purpose.value,
+                        purpose = _purpose.value,
                         major = _major.value,
                         isJobSeeker = isJobSeeker,
                         interests = _interests.value,

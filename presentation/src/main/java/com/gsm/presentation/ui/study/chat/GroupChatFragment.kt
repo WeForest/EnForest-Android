@@ -7,11 +7,15 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import androidx.navigation.navArgs
 import com.gsm.presentation.R
 import com.gsm.presentation.adapter.ChatAdapter
 import com.gsm.presentation.base.BaseActivity
+import com.gsm.presentation.base.BaseFragment
 import com.gsm.presentation.databinding.FragmentGroupChatBinding
 import com.gsm.presentation.ui.chat.ChatModel
 import com.gsm.presentation.util.App
@@ -22,6 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
 import io.socket.engineio.client.EngineIOException
+import kotlinx.coroutines.launch
 import org.json.JSONException
 import org.json.JSONObject
 import java.net.*
@@ -30,7 +35,7 @@ import java.util.*
 
 @AndroidEntryPoint
 class GroupChatFragment :
-    BaseActivity<FragmentGroupChatBinding>(R.layout.fragment_group_chat) {
+    BaseFragment<FragmentGroupChatBinding>(R.layout.fragment_group_chat) {
     private lateinit var chating_Text: EditText
     private lateinit var chat_Send_Button: Button
 
@@ -46,11 +51,12 @@ class GroupChatFragment :
     //리사이클러뷰
     private var arrayList = arrayListOf<ChatModel>()
     private val mAdapter: ChatAdapter by lazy {
-        ChatAdapter(this, arrayList, viewModel)
+        ChatAdapter(requireContext(), arrayList, viewModel)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+
+
+    override fun FragmentGroupChatBinding.onCreateView() {
         chating_Text = binding.messageEdit
         chat_Send_Button = binding.sendBtn
         setAdapter()
@@ -67,9 +73,9 @@ class GroupChatFragment :
                 // 소켓 서버 연결이 끊어질 경우에 호출됩니다.
                 Log.i("Socket", "Disconnet: ${args[0]}")
             }
-           socket.on("sendMessage", sendMessage)
+            socket.on("sendMessage", sendMessage)
 //
-           emitJoin()
+            emitJoin()
 
         } catch (e: URISyntaxException) {
             Log.d(TAG, "onCreate:  에러 ${e.printStackTrace()}")
@@ -81,6 +87,9 @@ class GroupChatFragment :
             Log.d(TAG, "onCreate:  에러 ${e.printStackTrace()}")
             e.printStackTrace()
         }
+    }
+
+    override fun FragmentGroupChatBinding.onViewCreated() {
 
         chat_Send_Button.setOnClickListener {
             //아이템 추가 부분
@@ -91,9 +100,9 @@ class GroupChatFragment :
 
     private val onConnectError = Emitter.Listener { args ->
         Log.d(TAG, "onConnectError: ${args[0]} ")
-        runOnUiThread {
+        lifecycleScope.launch {
             Toast.makeText(
-                applicationContext,
+                requireContext(),
                 "Unable to connect to NodeJS server",
                 Toast.LENGTH_LONG
             ).show()
@@ -101,9 +110,9 @@ class GroupChatFragment :
     }
 
     private val onConnectSuccess = Emitter.Listener {
-        runOnUiThread {
+        lifecycleScope.launch {
             Toast.makeText(
-                applicationContext,
+                requireContext(),
                 "이걸 성공?",
                 Toast.LENGTH_LONG
             ).show()
@@ -115,7 +124,7 @@ class GroupChatFragment :
     private fun emitJoin() {
         val userId = JSONObject()
         userId.put("token", token)
-        userId.put("roomId", args.groupId)
+        userId.put("roomId", args.chat.id)
         //socket.emit은 메세지 전송임
         socket.emit("join", userId)
 
@@ -137,7 +146,7 @@ class GroupChatFragment :
 
 
     private var sendMessage: Emitter.Listener = Emitter.Listener { args ->
-        runOnUiThread {
+        lifecycleScope.launch {
             Log.e("socket", "sendMessage return : $${args[0]}")
             val data = args[0] as JSONObject
             val name: String
@@ -156,7 +165,7 @@ class GroupChatFragment :
                 Log.e("new me", name)
             } catch (e: Exception) {
                 Log.d(TAG, "onNewMessage: 에러 ${e} ")
-                return@runOnUiThread
+                return@launch
             }
         }
     }
@@ -174,7 +183,7 @@ class GroupChatFragment :
         val jsonObject = JSONObject()
         try {
             jsonObject.put("token", token)
-            jsonObject.put("roomId", args.groupId)
+            jsonObject.put("roomId", args.chat.id)
             jsonObject.put("message", message)
             socket.emit("sendMessage", jsonObject)
 

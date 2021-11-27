@@ -61,7 +61,7 @@
             android:imeOptions="actionNext"
             android:background="@drawable/loginedit_background"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/major_textview" />
@@ -102,7 +102,7 @@
             android:imeOptions="actionNext"
             android:background="@drawable/loginedit_background"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@+id/iterests_textview"
             tools:layout_editor_absoluteX="30dp" />
 
@@ -111,7 +111,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="흥미은 ,(컴마)로 구분됩니다."
+            android:text="흥미는,(컴마)로 구분됩니다."
             android:textColor="@color/login_other_login"
             app:layout_constraintEnd_toEndOf="@+id/interestEditText"
             app:layout_constraintTop_toBottomOf="@+id/interestEditText" />
@@ -140,7 +140,7 @@
             android:paddingStart="10sp"
             android:background="@drawable/loginedit_background"
             android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textSize="14sp"
             android:imeOptions="actionDone"
             app:layout_constraintTop_toBottomOf="@+id/purpose_txt"
             tools:layout_editor_absoluteX="30dp" />

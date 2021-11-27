@@ -1,7 +1,6 @@
 package com.gsm.presentation.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.paging.PagingDataAdapter
@@ -10,7 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gsm.data.entity.group.response.SearchGroupResponseItem
 import com.gsm.presentation.R
 import com.gsm.presentation.databinding.CommunityRecyclerViewItemBinding
-import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
+import com.gsm.presentation.ui.study.CommunityFragmentDirections
 
 class GroupListAdapter(val onClickListener: RecyclerViewItemClickListener<SearchGroupResponseItem>) :
     PagingDataAdapter<SearchGroupResponseItem, GroupListAdapter.PartnerRecyclerAdapterViewHolder>(
@@ -66,8 +66,9 @@ class GroupListAdapter(val onClickListener: RecyclerViewItemClickListener<Search
 
         fun bind(bind: SearchGroupResponseItem) {
             binding.data = bind
+            binding.owner = bind.owner
             binding.executePendingBindings()
-            itemView.setOnClickListener {
+            binding.groupSetImg.setOnClickListener {
                 onClickListener.onclick(bind)
             }
         }

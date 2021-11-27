@@ -31,9 +31,9 @@ class GroupRepositoryImpl @Inject constructor(
         return groupDataSourceImpl.deleteGroup(token, id).toDomain()
     }
 
-    override suspend fun searchChat(page: Int, key: String): SearchChatEntity {
-        return groupDataSourceImpl.searchChat(page,key).toDomain()
-    }
+//    override suspend fun searchChat(page: Int, key: String): SearchChatEntity {
+//        return groupDataSourceImpl.searchChat(page,key).toDomain()
+//    }
 
     override suspend fun searchGroup(page: Int, key: String): List<SearchGroupEntity> {
         return groupDataSourceImpl.searchGroup(page,key).map {
