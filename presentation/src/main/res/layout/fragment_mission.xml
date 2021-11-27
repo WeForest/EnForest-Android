@@ -19,11 +19,12 @@
             android:id="@+id/textView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
             android:fontFamily="@font/noto_sans_kr_medium"
             android:includeFontPadding="false"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
             android:text="미션 추가하기"
-            android:textColor="@color/main_dark_blue"
+            android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -33,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="28dp"
             app:checkedChip="@+id/day_chip"
             app:layout_constraintBottom_toBottomOf="@+id/textView3"
             app:layout_constraintEnd_toEndOf="parent"
@@ -70,13 +71,13 @@
             android:id="@+id/recyclerView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layout_marginStart="20dp"
+            android:orientation="horizontal"
 
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/guideline2"
-            app:layout_constraintBottom_toBottomOf="@+id/guideline3"
             tools:listitem="@layout/item_mission" />
 
         <androidx.constraintlayout.widget.Guideline
@@ -187,8 +188,8 @@
             android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/noto_sans_kr_medium"
             android:layout_marginLeft="20dp"
+            android:fontFamily="@font/noto_sans_kr_medium"
             android:includeFontPadding="false"
             android:text="미션 정보"
             android:textColor="@color/black"
@@ -212,7 +213,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_margin="10dp"
-                android:src="@drawable/mission_calendar_day_31"
+                android:src="@drawable/one"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -258,7 +259,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_margin="10dp"
-                android:src="@drawable/mission_calendar_day_31"
+                android:src="@drawable/seven"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

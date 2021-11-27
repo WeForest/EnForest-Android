@@ -38,22 +38,6 @@
 
 
     <fragment
-        android:id="@+id/communityFragment"
-        android:name="com.gsm.presentation.ui.study.CommunityFragment"
-        tools:layout="@layout/fragment_community">
-
-
-        <action
-            android:id="@+id/action_communityFragment_to_createGroupFragment"
-            app:destination="@id/createGroupFragment"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
-
-
-    </fragment>
-    <fragment
         android:id="@+id/profileFragment"
         android:name="com.gsm.presentation.ui.sign.up.profile.fragment.ProfileFragment"
         android:label=""
@@ -77,18 +61,60 @@
         android:name="com.gsm.presentation.ui.study.group.GroupListFragment"
         android:label="StudyFragment"
         tools:layout="@layout/fragment_group_list">
+
+
         <action
             android:id="@+id/action_studyFragment_to_groupChatFragment"
-            app:destination="@id/groupChatFragment" />
+            app:destination="@id/groupChatFragment" >
+            <argument
+                android:name="group"
+                app:argType="com.gsm.data.entity.group.response.CreateGroupResponse" />
+        </action>
+
 
     </fragment>
     <fragment
         android:id="@+id/createGroupFragment"
         android:name="com.gsm.presentation.ui.study.group.CreateGroupFragment"
-        android:label="CreateGroupFragment" >
+        android:label="CreateGroupFragment">
+
         <action
             android:id="@+id/action_createGroupFragment_to_communityFragment"
             app:destination="@id/communityFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/communityFragment"
+        android:name="com.gsm.presentation.ui.study.CommunityFragment"
+        tools:layout="@layout/fragment_community">
+        <action
+            android:id="@+id/communityFragment_to_groupSetBottomSheetDialog"
+            app:destination="@id/groupSetBottomSheetDialog" >
+
+        </action>
+        <action
+            android:id="@+id/action_communityFragment_to_createGroupFragment"
+            app:destination="@id/createGroupFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
+
+    <dialog
+        android:id="@+id/groupSetBottomSheetDialog"
+        android:name="com.gsm.presentation.ui.study.group.GroupSetBottomSheetDialog"
+        android:label=""
+        tools:layout="@layout/fragment_group_list_bottom_sheet">
+
+
+        <argument
+            android:name="groupId"
+            app:argType="integer" />
+        <argument
+            android:name="nickname"
+            app:argType="string" />
+    </dialog>
+
 
 </navigation>

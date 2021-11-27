@@ -4,6 +4,7 @@ import android.text.TextUtils
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.gsm.presentation.R
@@ -22,7 +23,9 @@ class CreateGroupFragment :
 
     private val viewModel: GroupViewModel by viewModels()
     private val signViewModel: SignInViewModel by viewModels()
+    var token=""
     override fun FragmentCreateGroupBinding.onCreateView() {
+        observeToken()
 
     }
 
@@ -35,7 +38,7 @@ class CreateGroupFragment :
                 if (textNullTest()) {
                     lifecycleScope.launch {
                         viewModel.createGroup(
-                            signViewModel.token,
+                            token,
                             binding.groupNameEdit.text.toString(),
                             binding.groupContentEdit.text.toString(),
                             binding.groupTagEdit.text.toString()
@@ -77,6 +80,13 @@ class CreateGroupFragment :
         return !(TextUtils.isEmpty(binding.groupContentEdit.text.toString())) && !(TextUtils.isEmpty(
             binding.groupTagEdit.text.toString()
         )) && !(TextUtils.isEmpty(binding.groupNameEdit.text.toString()))
+
+    }
+
+    private fun observeToken(){
+        signViewModel.readToken.asLiveData().observe(viewLifecycleOwner){
+            token=it.token
+        }
 
     }
 

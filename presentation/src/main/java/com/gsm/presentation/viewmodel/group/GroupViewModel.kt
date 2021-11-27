@@ -9,6 +9,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.gsm.data.entity.group.response.SearchChatResponseItem
 
 import com.gsm.data.entity.group.response.SearchGroupResponseItem
 import com.gsm.data.network.service.GroupService
@@ -43,13 +44,16 @@ class GroupViewModel @Inject constructor(
     val success: LiveData<Event<Boolean?>>
         get() = _success
     val storeState = MutableLiveData<DataState<Boolean>>()
-    suspend fun joinGroup(token:String,id:Int) = viewModelScope.launch {
+    suspend fun joinGroup(token: String, id: Int) = viewModelScope.launch {
 
         try {
-            joinGroupUseCase.buildUseCaseObservable(JoinGroupUseCase.Params(token,id)).apply {
+
+            joinGroupUseCase.buildUseCaseObservable(JoinGroupUseCase.Params(token, id)).apply {
+                _success.value=Event(true)
                 Log.d(TAG, "joinGroup: $this")
             }
-        }catch (e:Exception){
+        } catch (e: Exception) {
+            _success.value=Event(false)
             Log.d(TAG, "joinGroup: ")
         }
     }
@@ -71,7 +75,7 @@ class GroupViewModel @Inject constructor(
                         storeState.postValue(DataState.Success(true))
                         _createGroupValue.value = it.group
                     } else {
-                        storeState.postValue(DataState.Failure(400,"그룹을 생성하지 못했습니다."))
+                        storeState.postValue(DataState.Failure(400, "그룹을 생성하지 못했습니다."))
                         _success.value = Event(it.success)
                         Log.e(TAG, "createGroup: 실패 ${it.group} ${it}")
 
@@ -110,20 +114,22 @@ class GroupViewModel @Inject constructor(
     }
 
 
-    val chatData = Pager(
+    fun getChat(query: String?): Flow<PagingData<SearchChatResponseItem>> {
+        return Pager(
 
-        PagingConfig(
-            pageSize = 20,
-            enablePlaceholders = false
-        )
-    ) {
-        ChatPagingDataSource(
-            service,
-            _query.value.toString(),
-        )
+            PagingConfig(
+                pageSize = 20,
+                enablePlaceholders = false
+            )
+        ) {
+            ChatPagingDataSource(
+                service,
+                query,
+            )
 
-    }.flow
-        .cachedIn(viewModelScope)
+        }.flow
+            .cachedIn(viewModelScope)
 
 
+    }
 }

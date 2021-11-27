@@ -1,8 +1,12 @@
 package com.gsm.data.entity.group.response
 
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Group(
     @SerializedName("description")
     val description: String?,
@@ -14,4 +18,4 @@ data class Group(
     val userId: Int?,
     @SerializedName("tags")
     val tags: String?
-)
+) : Parcelable

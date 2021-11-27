@@ -28,4 +28,12 @@ class ProfileRepositoryImpl @Inject constructor(
         return dataSource.postProfile(token, file).toDomain()
     }
 
+    override suspend fun postFollow(token: String, nickName: String): PathProfileEntity {
+        return dataSource.postFollow(token, nickName).toDomain()
+    }
+
+    override suspend fun unPostFollow(token: String, nickName: String): PathProfileEntity {
+        return dataSource.unPostFollow(token, nickName).toDomain()
+    }
+
 }

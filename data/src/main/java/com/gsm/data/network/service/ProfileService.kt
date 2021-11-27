@@ -28,4 +28,15 @@ interface ProfileService {
         @Part images: MultipartBody.Part?,
     ): BaseResponse
 
+    @POST("profile/{nickname}")
+    suspend fun postFollow(
+        @Header("authorization") token:String,
+        @Path("nickname") nickName:String
+    ):PathProfileResponse
+
+    @POST("profile/un/{nickname}")
+    suspend fun unPostFollow(
+        @Header("authorization") token:String,
+        @Path("nickname") nickName:String
+    ):PathProfileResponse
 }

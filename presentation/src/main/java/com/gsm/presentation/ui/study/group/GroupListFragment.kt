@@ -11,6 +11,7 @@ import com.gsm.presentation.adapter.GroupListAdapter
 import com.gsm.presentation.adapter.RecyclerViewItemClickListener
 import com.gsm.presentation.base.BaseFragment
 import com.gsm.presentation.databinding.FragmentGroupListBinding
+import com.gsm.presentation.ui.study.CommunityFragmentDirections
 import com.gsm.presentation.util.extension.showVertical
 import com.gsm.presentation.viewmodel.group.GroupViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,7 +20,8 @@ import kotlinx.coroutines.launch
 
 // 그룹 리스트
 @AndroidEntryPoint
-class GroupListFragment : BaseFragment<FragmentGroupListBinding>(R.layout.fragment_group_list),RecyclerViewItemClickListener<SearchGroupResponseItem> {
+class GroupListFragment : BaseFragment<FragmentGroupListBinding>(R.layout.fragment_group_list),
+    RecyclerViewItemClickListener<SearchGroupResponseItem> {
     private val viewModel: GroupViewModel by viewModels()
     private val groupAdapter: GroupListAdapter by lazy {
         GroupListAdapter(this)
@@ -94,8 +96,14 @@ class GroupListFragment : BaseFragment<FragmentGroupListBinding>(R.layout.fragme
     }
 
     override fun onclick(data: SearchGroupResponseItem) {
+        Log.d("TAG", "onclick: ${data}")
+
+        val action =
+            CommunityFragmentDirections.communityFragmentToGroupSetBottomSheetDialog(data.id?:0, data.owner.name)
+        findNavController().navigate(action)
 
     }
 
-
 }
+
+

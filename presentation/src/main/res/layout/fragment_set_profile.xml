@@ -80,7 +80,7 @@
             android:background="@drawable/loginedit_background"
             android:text="@{viewmodel.profileData.name}"
             android:textColor="@color/black"
-            android:textSize="17sp"
+            android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@+id/name_textview"
             tools:layout_editor_absoluteX="30dp" />
 
@@ -112,7 +112,7 @@
             android:text="@{viewmodel.profileData.companyEmail}"
             android:textColor="@color/black"
             android:layout_marginTop="15sp"
-            android:textSize="17sp"
+            android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
 
