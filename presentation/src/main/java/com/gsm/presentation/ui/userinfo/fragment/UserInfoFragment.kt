@@ -37,6 +37,8 @@ class UserInfoFragment : Fragment() {
 
         getUserExpLog("U2FsdGVkX1/+odzQABxvTkkDhxjN8GIs3V6WeZq9wGECzwE7P5k2Z8Wm8/iW9Jgs+aIjl18bC0q4lRZ8iRyLESy4MevH0HUYATA0EXGTE2coyb/kMXyjkz1VeDGFhOxX")
 
+        binding.fragment = this
+
         viewModel.profile.observe(viewLifecycleOwner) {
             binding.exp = it
         }
@@ -52,6 +54,10 @@ class UserInfoFragment : Fragment() {
         return binding.root
 
 
+    }
+
+    fun onclick(){
+        findNavController().navigate(R.id.action_userInfoFragment_to_userActivityFragment)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
