@@ -39,7 +39,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_margin="18dp"
-            android:backgroundTint="@color/main_color"
+            android:backgroundTint="@color/m_c"
             android:contentDescription="추가"
             android:elevation="3dp"
             android:src="@drawable/plus"
