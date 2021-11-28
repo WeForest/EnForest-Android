@@ -116,15 +116,15 @@
         <entry key="presentation/src/main/res/layout/activity_sign_up_sign_in_main.xml" value="0.335" />
         <entry key="presentation/src/main/res/layout/activity_splash.xml" value="0.25" />
         <entry key="presentation/src/main/res/layout/activity_test_main.xml" value="0.15231481481481482" />
-        <entry key="presentation/src/main/res/layout/activity_user_info.xml" value="0.15231481481481482" />
+        <entry key="presentation/src/main/res/layout/activity_user_info.xml" value="0.375" />
         <entry key="presentation/src/main/res/layout/app_start_dialog.xml" value="0.15231481481481482" />
         <entry key="presentation/src/main/res/layout/bottom_sheet_dialog_write_mission.xml" value="0.375" />
         <entry key="presentation/src/main/res/layout/chatting_group_recycler.xml" value="0.375" />
         <entry key="presentation/src/main/res/layout/community_recycler_view_item.xml" value="0.375" />
         <entry key="presentation/src/main/res/layout/fragment_chat_list.xml" value="0.15231481481481482" />
         <entry key="presentation/src/main/res/layout/fragment_community.xml" value="0.15231481481481482" />
-        <entry key="presentation/src/main/res/layout/fragment_create_group.xml" value="0.15231481481481482" />
-        <entry key="presentation/src/main/res/layout/fragment_easy_test.xml" value="0.15231481481481482" />
+        <entry key="presentation/src/main/res/layout/fragment_create_group.xml" value="0.335" />
+        <entry key="presentation/src/main/res/layout/fragment_easy_test.xml" value="0.335" />
         <entry key="presentation/src/main/res/layout/fragment_group_chat.xml" value="0.15231481481481482" />
         <entry key="presentation/src/main/res/layout/fragment_group_detail.xml" value="0.375" />
         <entry key="presentation/src/main/res/layout/fragment_group_list.xml" value="0.17962962962962964" />

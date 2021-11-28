@@ -53,6 +53,7 @@ class TestEndFragment : Fragment() {
         viewModel.isSuccess.observe(viewLifecycleOwner, EventObserver {
             if (it) {
                 if(findNavController().currentDestination?.id == R.id.testEndFragment2){
+                    viewModel.reset()
                     findNavController().navigate(R.id.action_testEndFragment2_to_testMainFragment2)
                 }else{
                 startActivity(Intent(requireContext(), MainActivity::class.java))

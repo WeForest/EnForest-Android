@@ -12,7 +12,11 @@
         android:label="TestMainFragment" >
         <action
             android:id="@+id/action_testMainFragment_to_easyTestFragment"
-            app:destination="@id/easyTestFragment" />
+            app:destination="@id/easyTestFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
 
     <fragment
@@ -22,7 +26,11 @@
         tools:layout="@layout/fragment_easy_test" >
         <action
             android:id="@+id/action_easyTestFragment_to_testEndFragment"
-            app:destination="@id/testEndFragment" />
+            app:destination="@id/testEndFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/testEndFragment"

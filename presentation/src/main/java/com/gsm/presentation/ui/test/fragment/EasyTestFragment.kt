@@ -83,7 +83,15 @@ class EasyTestFragment : Fragment() {
         else  Toast.makeText(requireContext(), "우선 정답을 기입해주세요", Toast.LENGTH_SHORT).show()
     }
 
+    fun ifUserSetBackAnswer(){
+            Log.d("SDf",viewModel.page.value.toString())
+            if(viewModel.page.value == 0) {
+                Toast.makeText(requireContext(), "0번 이하로 갈수없습니다.", Toast.LENGTH_SHORT).show()
+            }
+            else
+            {
+                viewModel.backTest()
+            }
 
-
-
-}
+        }
+    }

@@ -25,6 +25,9 @@ class TestViewModel @Inject constructor(
     private val _answerCount = MutableLiveData<Int>()
     val answerCount: LiveData<Int> get() = _answerCount
 
+    private val _backIsOk = MutableLiveData<Boolean>()
+    val backIsOk: LiveData<Boolean> get() = _backIsOk
+
     private val _isChecked = MutableLiveData<Boolean>()
     val isChecked: LiveData<Boolean> get() = _isChecked
 
@@ -38,6 +41,7 @@ class TestViewModel @Inject constructor(
     val page: LiveData<Int> get() = _page
 
     init {
+        _backIsOk.value = false
         _page.value = 0
         _isChecked.value = false
         _answerCount.value = 0
@@ -56,6 +60,19 @@ class TestViewModel @Inject constructor(
         }
     }
 
+    fun reset(){
+        _page.value= 0
+        _answerCount.value = 0
+        _backIsOk.value = false
+    }
+
+    fun backTest(){
+        _page.value= _page.value!!.minus(1)
+
+        if(backIsOk.value == true)
+            _answerCount.value = _answerCount.value!!.minus(1)
+    }
+
     fun numAdd(answer: Int) {
 
         if (answer == data.value!!.get(page.value!!).answer.toInt() && _page.value!! <= 19) {
@@ -63,12 +80,14 @@ class TestViewModel @Inject constructor(
             if (page.value == 19) {
                 return
             } else {
+                _backIsOk.value = true
                 _page.value = _page.value!!.plus(1)
             }
         } else {
             if (page.value == 19) {
                 return
             } else {
+                _backIsOk.value = false
                 _page.value = _page.value!!.plus(1)
             }
 
