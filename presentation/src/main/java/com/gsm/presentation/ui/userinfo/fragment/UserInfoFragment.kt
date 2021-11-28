@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.gsm.presentation.R
 import com.gsm.presentation.databinding.FragmentUserInfoBinding
 import com.gsm.presentation.viewmodel.test.TestViewModel
@@ -51,6 +52,13 @@ class UserInfoFragment : Fragment() {
         return binding.root
 
 
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.backBtn.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     fun GetProfile(userName: String){

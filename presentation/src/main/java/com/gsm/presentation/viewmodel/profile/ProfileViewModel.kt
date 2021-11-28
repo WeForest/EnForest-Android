@@ -71,6 +71,8 @@ class ProfileViewModel @Inject constructor(
     val token: LiveData<String> get() = _token
 
 
+
+
     private val _isSuccessValue = MutableLiveData<Event<Boolean>>()
     val isSuccessValue: LiveData<Event<Boolean>> get() = _isSuccessValue
 
@@ -217,6 +219,7 @@ class ProfileViewModel @Inject constructor(
                 Log.d(TAG, "pathProfile 성공: ${it}")
                 _isSuccess.value = Event(true)
                 saveName(_name.value.toString())
+                _pathProfileData.value=Event(it)
 
                 Log.d(TAG, "getMission: clear")
             }

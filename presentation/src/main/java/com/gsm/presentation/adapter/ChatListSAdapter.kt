@@ -7,27 +7,28 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.gsm.data.entity.group.response.SearchChatResponseItem
+import com.gsm.data.entity.group.response.SearchGroupResponse
 import com.gsm.data.entity.group.response.SearchGroupResponseItem
 import com.gsm.presentation.R
 import com.gsm.presentation.databinding.ChattingGroupRecyclerBinding
 
-class ChatListSAdapter(val onClickListener: RecyclerViewItemClickListener<SearchChatResponseItem>) :
-    PagingDataAdapter<SearchChatResponseItem, ChatListSAdapter.ChatGroupRecyclerAdapterViewHolder>(
+class ChatListSAdapter(val onClickListener: RecyclerViewItemClickListener<SearchGroupResponseItem >) :
+    PagingDataAdapter<SearchGroupResponseItem, ChatListSAdapter.ChatGroupRecyclerAdapterViewHolder>(
         diffCallback
     ) {
     companion object {
 
-        private val diffCallback = object : DiffUtil.ItemCallback<SearchChatResponseItem>() {
+        private val diffCallback = object : DiffUtil.ItemCallback<SearchGroupResponseItem>() {
             override fun areItemsTheSame(
-                oldItem: SearchChatResponseItem,
-                newItem: SearchChatResponseItem
+                oldItem: SearchGroupResponseItem,
+                newItem: SearchGroupResponseItem
             ): Boolean {
                 return oldItem == newItem
             }
 
             override fun areContentsTheSame(
-                oldItem: SearchChatResponseItem,
-                newItem: SearchChatResponseItem
+                oldItem: SearchGroupResponseItem,
+                newItem: SearchGroupResponseItem
             ): Boolean {
                 return oldItem == newItem
             }
@@ -54,7 +55,7 @@ class ChatListSAdapter(val onClickListener: RecyclerViewItemClickListener<Search
     inner class ChatGroupRecyclerAdapterViewHolder(val binding: ChattingGroupRecyclerBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(bind: SearchChatResponseItem) {
+        fun bind(bind: SearchGroupResponseItem) {
             binding.data = bind
             binding.executePendingBindings()
             binding.layout.setOnClickListener {

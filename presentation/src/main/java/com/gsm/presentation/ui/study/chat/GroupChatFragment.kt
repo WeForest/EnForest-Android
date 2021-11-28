@@ -10,6 +10,7 @@ import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.navArgs
 import com.google.gson.JsonObject
@@ -27,6 +28,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
 import io.socket.engineio.client.EngineIOException
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 import org.json.JSONException
 import org.json.JSONObject
@@ -66,6 +69,9 @@ class GroupChatFragment :
 
     override fun FragmentGroupChatBinding.onViewCreated() {
 
+        binding.backBtn.setOnClickListener {
+            findNavController().navigateUp()
+        }
 
         try {
             socket = App.get()
@@ -130,9 +136,9 @@ class GroupChatFragment :
     private fun emitJoin() {
         val userId = JSONObject()
         userId.put("token", token)
-        userId.put("roomId", 1)
+        userId.put("roomId", args.chat.id)
         //socket.emit은 메세지 전송임
-        socket.emit("join", token, 1)
+        socket.emit("join", userId)
 
     }
 
@@ -189,7 +195,7 @@ class GroupChatFragment :
         val jsonObject = JSONObject()
         try {
             jsonObject.put("token", token)
-            jsonObject.put("roomId", 1)
+            jsonObject.put("roomId", args.chat.id)
             jsonObject.put("message", message)
             socket.emit("sendMessage", jsonObject)
 

@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class TestViewModel @Inject constructor(
     private val service: TestService,
-    private val getTestUseCase : GetTestUseCase
+    private val getTestUseCase: GetTestUseCase
 ) : ViewModel() {
 
     private val TAG = "test1010"
@@ -43,12 +43,12 @@ class TestViewModel @Inject constructor(
         _answerCount.value = 0
     }
 
-    fun isCheck(){
+    fun isCheck() {
         _isChecked.value = true
     }
 
-    fun getLastClickTextId(answer: Int){
-        when(answer){
+    fun getLastClickTextId(answer: Int) {
+        when (answer) {
             R.id.checkBox -> numAdd(1)
             R.id.checkBox2 -> numAdd(2)
             R.id.checkbox3 -> numAdd(3)
@@ -58,32 +58,36 @@ class TestViewModel @Inject constructor(
 
     fun numAdd(answer: Int) {
 
-        if(answer==data.value!!.get(page.value!!).answer.toInt()&&_page.value!! <= 19)
-        {
+        if (answer == data.value!!.get(page.value!!).answer.toInt() && _page.value!! <= 19) {
             _answerCount.value = _answerCount.value!!.plus(1)
-            if(page.value == 19)
-            {
+            if (page.value == 19) {
                 return
-            }
-            else
-            {
+            } else {
                 _page.value = _page.value!!.plus(1)
             }
-        }
-        else{
-            if(page.value == 19)
-            {
+        } else {
+            if (page.value == 19) {
                 return
-            }
-            else
-            {
+            } else {
                 _page.value = _page.value!!.plus(1)
             }
 
         }
 
 
+    }
 
+    suspend fun questionCheck(token: String) = viewModelScope.launch {
+        try {
+            _answerCount.value?.let {
+                service.questionCheck(token, it).let {
+                    _isSuccess.value = Event(true)
+                }
+            }
+        }catch (e:Exception){
+            _isSuccess.value = Event(false)
+
+        }
     }
 
     suspend fun getTest() = viewModelScope.launch {

@@ -4,6 +4,8 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.gsm.data.entity.group.response.SearchChatResponseItem
+import com.gsm.data.entity.group.response.SearchGroupResponse
+import com.gsm.data.entity.group.response.SearchGroupResponseItem
 import com.gsm.presentation.R
 import com.gsm.presentation.adapter.ChatListSAdapter
 import com.gsm.presentation.adapter.RecyclerViewItemClickListener
@@ -17,7 +19,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class ChatListFragment : BaseFragment<FragmentChatListBinding>(R.layout.fragment_chat_list),RecyclerViewItemClickListener<SearchChatResponseItem> {
+class ChatListFragment : BaseFragment<FragmentChatListBinding>(R.layout.fragment_chat_list),RecyclerViewItemClickListener<SearchGroupResponseItem> {
 
     private val groupAdapter: ChatListSAdapter by lazy {
         ChatListSAdapter(this)
@@ -36,7 +38,7 @@ class ChatListFragment : BaseFragment<FragmentChatListBinding>(R.layout.fragment
         initRecyclerView()
         with(viewModel) {
             lifecycleScope.launch {
-                getChat("")
+                getQuery("")
                     .collectLatest {
                         (groupAdapter).submitData(
                             it
@@ -46,7 +48,7 @@ class ChatListFragment : BaseFragment<FragmentChatListBinding>(R.layout.fragment
         }
     }
 
-    override fun onclick(data: SearchChatResponseItem) {
+    override fun onclick(data: SearchGroupResponseItem) {
 
         val action=CommunityFragmentDirections.actionCommunityFragmentToGroupChatFragment(data)
         findNavController().navigate(action)

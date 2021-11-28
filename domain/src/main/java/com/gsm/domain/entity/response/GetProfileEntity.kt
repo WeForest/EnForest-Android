@@ -2,7 +2,7 @@ package com.gsm.domain.entity.response
 
 import com.google.gson.annotations.SerializedName
 
-data class GetProfileEntity(
+data class  GetProfileEntity(
     @SerializedName("id")
     val id: Int?,
     @SerializedName("sub")

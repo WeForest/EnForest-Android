@@ -21,7 +21,7 @@
         android:theme="@style/Theme.EnForest"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.userinfo.activity.UserInfoActivity"
+            android:name=".ui.main.MainActivity"
             android:exported="true" >
 
             <intent-filter>
@@ -32,7 +32,7 @@
 
         </activity>
         <activity android:name=".ui.sign.up.SignUpSignInMainActivity" />
-        <activity android:name=".ui.main.MainActivity" />
+<!--        <activity android:name=".ui.main.MainActivity" />-->
         <activity
             android:name=".ui.sign.in.SignInActivity"
             android:exported="false" />

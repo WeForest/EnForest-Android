@@ -32,8 +32,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
                 R.id.profileFragment,
                 R.id.communityFragment,
                 R.id.missionFragment,
+                R.id.testMainFragment2,
+                R.id.userInfoFragment2
 
-                )
+            )
         )
 
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -53,7 +55,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         binding.bottomNavigationView.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (destination.id == R.id.profileFragment || destination.id == R.id.communityFragment || destination.id == R.id.missionFragment) {
+            if (destination.id == R.id.profileFragment || destination.id == R.id.communityFragment || destination.id == R.id.missionFragment || destination.id == R.id.testMainFragment2) {
                 binding.bottomNavigationView.visibility = View.VISIBLE
             } else {
                 binding.bottomNavigationView.visibility = View.GONE

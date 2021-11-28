@@ -13,6 +13,15 @@
     <item android:id="@+id/missionFragment"
         android:title="@string/mission"
         android:icon="@drawable/ic_quiz"
-        />r
+        />
+    <item android:id="@+id/testMainFragment2"
+        android:title="역량평가"
+        android:icon="@drawable/search"
+        />
+
+    <item android:id="@+id/userInfoFragment2"
+        android:title="유저정보"
+        android:icon="@drawable/cast_expanded_controller_seekbar_thumb"
+        />
 
 </menu>
