@@ -21,4 +21,7 @@
         <item name="android:textSize">15sp</item>
         <item name="android:textColor">#ffffff</item>
     </style>
+    <style name="NoBackgroundDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@null</item>
+    </style>
 </resources>

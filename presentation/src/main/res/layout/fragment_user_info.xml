@@ -38,6 +38,7 @@
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@+id/back_btn"
+                android:onClick="@{() -> fragment.backClick()}"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="start"

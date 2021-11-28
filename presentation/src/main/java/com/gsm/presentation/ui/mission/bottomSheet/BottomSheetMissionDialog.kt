@@ -1,7 +1,9 @@
 package com.gsm.presentation.ui.mission.bottomSheet
 
+import android.graphics.Color
 import android.os.Build
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
@@ -29,7 +31,10 @@ class BottomSheetMissionDialog() :
 
     private val timeConverter: TimeConverter by lazy { TimeConverter() }
     override fun BottomSheetDialogWriteMissionBinding.onCreateView() {
+    }
 
+    override fun getTheme(): Int {
+        return R.style.NoBackgroundDialogTheme
     }
 
     var chipText = "daily"
@@ -37,6 +42,8 @@ class BottomSheetMissionDialog() :
 
     @RequiresApi(Build.VERSION_CODES.O)
     override fun BottomSheetDialogWriteMissionBinding.onViewCreated() {
+        view?.setBackgroundResource(R.drawable.mission_background)
+
         chipClickType()
         chipLevelClickType()
         Log.d("TAG", "onViewCreated: ${chipText()}")

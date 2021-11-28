@@ -56,6 +56,10 @@ class UserInfoFragment : Fragment() {
 
 
     }
+    fun backClick(){
+        findNavController().navigateUp()
+    }
+
 
     fun onclick(){
 
