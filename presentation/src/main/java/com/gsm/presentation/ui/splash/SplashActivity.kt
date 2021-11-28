@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.WindowManager
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.asLiveData
 import com.gsm.presentation.R
 import com.gsm.presentation.base.BaseActivity
@@ -24,7 +25,9 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
         super.onCreate(savedInstanceState)
         readLogin()
         noUseWifi()
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
     }
+
 
     private fun readLogin() {
         // token 값이 남아있으면 main 남아있지 않다면 다시 로그인 요구
@@ -42,6 +45,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
             }
         })
     }
+
     private fun noUseWifi() {
         //다이얼로그
 
@@ -51,7 +55,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(R.layout.activity_spl
         display.getSize(size)
         deviceSizeX = size.x
     }
-    companion object{
-        var deviceSizeX : Int = 0
+
+    companion object {
+        var deviceSizeX: Int = 0
     }
 }

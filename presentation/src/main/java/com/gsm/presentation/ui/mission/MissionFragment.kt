@@ -129,7 +129,6 @@ class MissionFragment : BaseFragment<FragmentMissionBinding>(R.layout.fragment_m
                 MONTH -> getMissionType(MONTH, 1)
             }
         }
-
     }
 
 
@@ -150,7 +149,6 @@ class MissionFragment : BaseFragment<FragmentMissionBinding>(R.layout.fragment_m
             adapter = missionAdapter
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-            setHasFixedSize(false)
         }
     }
 
