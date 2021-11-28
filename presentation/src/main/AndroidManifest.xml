@@ -35,11 +35,10 @@
         <activity android:name=".ui.main.MainActivity" />
         <activity
             android:name=".ui.sign.in.SignInActivity"
-            android:exported="false" />
+            android:exported=   "false" />
         <activity
             android:name=".ui.test.activity.TestMainActivity"
-            android:exported="true" />
-        <activity android:name=".ui.study.chat.GroupChatFragment" />
+             />
         <activity
             android:name=".ui.splash.SplashActivity"
             android:exported="true"/>

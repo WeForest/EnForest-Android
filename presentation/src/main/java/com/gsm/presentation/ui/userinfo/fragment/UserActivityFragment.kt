@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.gsm.presentation.R
 import com.gsm.presentation.databinding.FragmentUserActivityBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,10 +24,14 @@ class UserActivityFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater,
             R.layout.fragment_user_activity, container, false)
 
+        binding.fragment = this
 
 
         return binding.root
     }
 
+    fun back(){
+        findNavController().navigate(R.id.action_userActivityFragment_to_userInfoFragment)
+    }
 
 }
