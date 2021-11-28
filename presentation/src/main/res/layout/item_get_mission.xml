@@ -13,57 +13,43 @@
     <androidx.cardview.widget.CardView
         android:layout_width="160dp"
         android:layout_height="140dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="15dp">
+        android:layout_margin="10dp"
+        app:cardCornerRadius="15dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#005BFF">
+            android:background="#9DC9F1">
 
 
             <TextView
                 android:id="@+id/mission_title_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/noto_sans_kr_bold"
                 android:text="@{data.title}"
-                android:layout_marginBottom="12dp"
                 android:textColor="@color/white"
-                android:textSize="10sp"
-                app:layout_constraintBottom_toBottomOf="@id/mission_line"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="블로그 작성" />
-
-            <View
-                android:id="@+id/mission_line"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="8dp"
-                android:background="#FCEBEB"
-                android:fontFamily="@font/noto_sans_kr_medium"
-                android:includeFontPadding="false"
-                app:layout_constraintTop_toBottomOf="@id/mission_title_text" />
 
             <TextView
                 android:id="@+id/mission_content_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20sp"
-                android:fontFamily="@font/noto_sans_kr_medium"
+                android:fontFamily="@font/noto_sans_kr_bold"
                 android:includeFontPadding="false"
                 android:padding="20dp"
                 android:text="@{data.content}"
                 android:textColor="@color/white"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="@id/text_line"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mission_line"
                 tools:text="7일 중 5번의 게시글을 포스팅해라! " />
 
 
@@ -82,16 +68,18 @@
                 android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/noto_sans_kr_light"
-
+                android:fontFamily="@font/noto_sans_kr_bold"
                 android:includeFontPadding="false"
-                android:textColor="#BDA5A5"
-                app:toInt="@{data.expiredAt}"
+                android:textColor="#4E575F"
                 android:textSize="10sp"
+                android:layout_marginBottom="3dp"
                 app:layout_constraintBottom_toBottomOf="@+id/text_line"
                 app:layout_constraintEnd_toEndOf="@+id/text_line"
+                app:layout_constraintHorizontal_bias="0.52"
                 app:layout_constraintStart_toStartOf="@+id/text_line"
                 app:layout_constraintTop_toTopOf="@+id/text_line"
+                app:layout_constraintVertical_bias="1.0"
+                app:toInt="@{data.expiredAt}"
                 tools:text="02/20~04/21" />
 
 

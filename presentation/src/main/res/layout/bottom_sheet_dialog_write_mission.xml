@@ -9,53 +9,85 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:layout_margin="10dp"
+        android:backgroundTint="#7E74B5E0"
         android:layout_height="wrap_content"
-        android:background="#CEE0FF">
+        android:background="@drawable/background_practice_test">
 
 
         <TextView
             android:id="@+id/mission_write_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_margin="30dp"
+            android:fontFamily="@font/noto_sans_kr_bold"
+            android:includeFontPadding="false"
             android:text="Title"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <TextView
+            android:id="@+id/textView29"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/noto_sans_kr_medium"
+            android:text="모두에게 뽐내고싶은 한마디! 제목으로 표현해요"
+            android:textColor="@color/black"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/mission_write_text"
+            app:layout_constraintTop_toBottomOf="@+id/mission_write_text" />
+
         <EditText
             android:id="@+id/mission_write_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20sp"
-            android:layout_marginTop="15sp"
-            android:layout_marginEnd="20sp"
-            android:layout_marginBottom="20sp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginRight="20dp"
             android:background="@drawable/mission_write_background"
-            app:layout_constraintTop_toBottomOf="@id/mission_write_text" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView29" />
 
         <TextView
             android:id="@+id/mission_write_content_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20sp"
-            android:text="content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/noto_sans_kr_bold"
+            android:text="Content"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/mission_write_edit_text" />
 
+        <TextView
+            android:id="@+id/textView30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/noto_sans_kr_medium"
+            android:text="이제는 재대로된 설명을 해봐요!"
+            android:textColor="@color/black"
+            android:textSize="13dp"
+            app:layout_constraintStart_toStartOf="@+id/mission_write_text"
+            app:layout_constraintTop_toBottomOf="@+id/mission_write_content_text" />
+
         <EditText
             android:id="@+id/mission_write_content_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20sp"
-            android:layout_marginTop="15sp"
-            android:layout_marginEnd="20sp"
-            android:layout_marginBottom="20sp"
+            android:layout_marginLeft="20dp"
+            android:textSize="15dp"
+            android:layout_marginRight="20dp"
             android:background="@drawable/mission_write_background"
-            app:layout_constraintTop_toBottomOf="@id/mission_write_content_text" />
+            app:layout_constraintTop_toBottomOf="@+id/textView30"
+            tools:layout_editor_absoluteX="20dp" />
 
         <TextView
             android:id="@+id/textView6"
@@ -63,6 +95,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="20sp"
             android:text="Date"
+            android:fontFamily="@font/noto_sans_kr_bold"
             android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -147,14 +180,15 @@
                 android:text="@string/high" />
         </com.google.android.material.chip.ChipGroup>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/finish_btn"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_margin="20sp"
-            android:background="@color/main_dark_blue"
+            android:fontFamily="@font/noto_sans_kr_bold"
             android:text="완료"
-            android:textColor="@color/white"
+            android:background="@drawable/background_practice_test"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/chip_type"
             app:layout_constraintTop_toBottomOf="@+id/chip_level_type" />

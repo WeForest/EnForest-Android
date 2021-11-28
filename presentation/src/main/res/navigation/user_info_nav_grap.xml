@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/userInfoFragment"
         android:name="com.gsm.presentation.ui.userinfo.fragment.UserInfoFragment"
-        android:label="fragment"
+        android:label="fragment_user_info"
         tools:layout="@layout/fragment_user_info" >
         <action
             android:id="@+id/action_userInfoFragment_to_userActivityFragment"

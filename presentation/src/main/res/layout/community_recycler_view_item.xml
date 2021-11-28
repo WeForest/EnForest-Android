@@ -30,43 +30,26 @@
 
             <ImageView
                 android:id="@+id/profile_img"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:src="@drawable/search_frame"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_width="35dp"
-                android:layout_gravity="center"
-                android:layout_height="35dp"
-                app:profileImage="@{owner.profileImg}"
-                android:src="@drawable/search_frame" />
-
-            <TextView
-                android:id="@+id/user_name"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginStart="10dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-
-                android:layout_gravity="center"
-                android:layout_toEndOf="@id/profile_img"
-                android:fontFamily="@font/noto_sans_kr_medium"
-                android:includeFontPadding="false"
-                android:text="@{owner.name}"
-                android:textColor="@color/main_color"
-                android:textSize="17sp"
-                app:layout_constraintLeft_toLeftOf="@id/profile_img"
-                app:layout_constraintStart_toEndOf="@+id/profile_img"
-                tools:text="사용자 이름" />
+                app:profileImage="@{owner.profileImg}" />
 
             <ImageView
                 android:id="@+id/group_set_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center|end"
+                android:layout_marginEnd="4dp"
                 android:src="@drawable/ic_baseline_menu_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -80,7 +63,7 @@
             android:includeFontPadding="false"
             android:text="@{data.name}"
             android:textColor="@color/black"
-            android:textSize="23sp"
+            android:textSize="20sp"
             tools:text="코딩이 정말 힘든데 도와주세요!!!" />
 
 
@@ -92,30 +75,62 @@
             android:includeFontPadding="false"
             android:text="@{data.description}"
             android:textColor="#717171"
-            android:textSize="18sp"
+            android:textSize="15sp"
             tools:text="코딩 잘하는 방법이 뭐죠??!! 저랑 같이 공부해요!! \n구한다구욧 구구구구구구구구한다구욧" />
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="30dp">
 
             <TextView
                 android:id="@+id/tag"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="10dp"
                 android:fontFamily="@font/noto_sans_kr_medium"
                 android:includeFontPadding="false"
                 android:text="#안드로이드"
                 android:textColor="@color/main_color"
                 android:textSize="17sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="@{data.tags}" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/noto_sans_kr_bold"
+                android:text="Write By : "
+                android:textColor="@color/black"
+                android:textSize="15dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/user_name"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@+id/tag"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
-        </RelativeLayout>
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginStart="140dp"
+                android:fontFamily="@font/noto_sans_kr_bold"
+                android:includeFontPadding="false"
+                android:text="@{owner.name}"
+                android:textColor="@color/main_color"
+                android:textSize="15sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.973"
+                app:layout_constraintStart_toEndOf="@+id/tag"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="사용자 이름" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
 </layout>

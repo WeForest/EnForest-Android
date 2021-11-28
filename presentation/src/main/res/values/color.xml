@@ -20,7 +20,7 @@
     <color name="darkGray">#4B4B4B</color>
 
     <color name="statusBar">#5C6BC0</color>
-    <color name="checkedChipBackgroundColor">#206200EA</color>
+    <color name="checkedChipBackgroundColor">#7E74B5E0</color>
     <color name="chipBackgroundColor">@color/lightGray</color>
     <color name="checkedChipTextColor">#0056F1</color>
     <color name="chipTextColor">@color/darkGray</color>
