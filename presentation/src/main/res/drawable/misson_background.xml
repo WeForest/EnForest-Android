@@ -4,7 +4,5 @@
         android:radius="20dp"
         />
 
-    <solid
-        android:color="@color/white"
-        />
+
 </shape>

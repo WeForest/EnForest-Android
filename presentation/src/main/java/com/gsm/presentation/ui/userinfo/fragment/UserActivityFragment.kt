@@ -31,8 +31,9 @@ class UserActivityFragment : Fragment() {
     }
 
     fun back(){
-        if (findNavController().currentDestination?.id == R.id.userActivityFragment) {
-            findNavController().navigate(R.id.action_userActivityFragment_to_userInfoFragment)
+
+        if (findNavController().currentDestination?.id == R.id.userActivityFragment2) {
+            findNavController().navigate(R.id.action_userActivityFragment2_to_userInfoFragment2)
         }
     }
 

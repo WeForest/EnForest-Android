@@ -115,8 +115,15 @@
     </dialog>
     <fragment
         android:id="@+id/userInfoFragment2"
+        tools:layout="@layout/activity_user_info"
         android:name="com.gsm.presentation.ui.userinfo.fragment.UserInfoFragment"
-        android:label="UserInfoFragment" />
+        android:label="UserInfoFragment" >
+
+
+        <action
+            android:id="@+id/action_userInfoFragment2_to_userActivityFragment2"
+            app:destination="@id/userActivityFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/testMainFragment2"
         android:name="com.gsm.presentation.ui.test.fragment.TestMainFragment"
@@ -144,6 +151,14 @@
         <action
             android:id="@+id/action_testEndFragment2_to_testMainFragment2"
             app:destination="@id/testMainFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/userActivityFragment2"
+        android:name="com.gsm.presentation.ui.userinfo.fragment.UserActivityFragment"
+        android:label="UserActivityFragment" >
+        <action
+            android:id="@+id/action_userActivityFragment2_to_userInfoFragment2"
+            app:destination="@id/userInfoFragment2" />
     </fragment>
 
 </navigation>

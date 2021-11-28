@@ -34,6 +34,8 @@
             android:elevation="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:itemIconTint="@drawable/menu_selector_color"
+            app:itemTextColor="@drawable/menu_selector_color"
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/main_item" />
 
