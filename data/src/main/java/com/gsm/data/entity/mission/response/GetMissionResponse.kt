@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import com.gsm.data.util.Constants.Companion.TABLE_NAME
 
-@Entity(tableName = TABLE_NAME)
+    @Entity(tableName = TABLE_NAME)
 data class GetMissionResponse(
     @SerializedName("content")
     val content: String?,

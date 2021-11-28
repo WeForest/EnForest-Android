@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.work.OneTimeWorkRequest
 import com.google.android.material.chip.Chip
 import com.gsm.presentation.R
 import com.gsm.presentation.adapter.MissionAdapter
@@ -93,7 +94,8 @@ class MissionFragment : BaseFragment<FragmentMissionBinding>(R.layout.fragment_m
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             alarmMgr.setInexactRepeating(
                 AlarmManager.RTC_WAKEUP,
-                System.currentTimeMillis(),
+                OneTimeWorkRequest.MIN_BACKOFF_MILLIS,
+
                 AlarmManager.INTERVAL_DAY,// 10분전알림
                 alarmIntent
             )
