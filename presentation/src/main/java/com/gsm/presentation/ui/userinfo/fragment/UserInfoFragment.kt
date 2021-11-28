@@ -61,6 +61,8 @@ class UserInfoFragment : Fragment() {
     }
 
 
+
+
     fun onclick(){
 
         if (findNavController().currentDestination?.id == R.id.userInfoFragment2) {
