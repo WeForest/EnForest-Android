@@ -2,26 +2,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/profileFragment"
-        android:title="profile"
+        android:title="프로필"
         android:icon="@drawable/ic_people_alt"
         />
 
     <item android:id="@+id/communityFragment"
-        android:title="@string/study"
-        android:icon="@drawable/ic_menu_book"
+        android:title="그룹"
+        android:icon="@drawable/chart_tree"
         />
     <item android:id="@+id/missionFragment"
-        android:title="@string/mission"
-        android:icon="@drawable/ic_quiz"
+        android:title="미션"
+        android:icon="@drawable/calendar"
         />
     <item android:id="@+id/testMainFragment2"
         android:title="역량평가"
-        android:icon="@drawable/search"
+        android:icon="@drawable/chart_pie_alt"
         />
 
     <item android:id="@+id/userInfoFragment2"
         android:title="유저정보"
-        android:icon="@drawable/cast_expanded_controller_seekbar_thumb"
+        android:icon="@drawable/address_book"
         />
 
 </menu>
