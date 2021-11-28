@@ -69,7 +69,9 @@ dependencies {
     implementation(KTX.CORE)
     implementation(AndroidX.APP_COMPAT)
 
-    implementation('io.socket:socket.io-client:2.0.1')
+    implementation ('io.socket:socket.io-client:2.0.1') {
+        exclude group: 'org.json', module: 'json'
+    }
     implementation(Google.MATERIAL)
     implementation(AndroidX.CONSTRAINT_LAYOUT)
     implementation(AndroidX.LEGACY)

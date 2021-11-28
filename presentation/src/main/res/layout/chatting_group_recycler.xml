@@ -7,7 +7,7 @@
 
         <variable
             name="data"
-            type="com.gsm.data.entity.group.response.SearchChatResponseItem" />
+            type="com.gsm.data.entity.group.response.SearchGroupResponseItem" />
     </data>
 
     <LinearLayout
@@ -71,7 +71,7 @@
             android:layout_gravity="right"
             android:layout_marginEnd="20dp"
             android:layout_height="wrap_content"
-            android:text="@{data.type}" />
+            android:text="@{data.tags}" />
 
 
     </LinearLayout>

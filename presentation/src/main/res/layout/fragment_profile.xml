@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="50dp"
-            android:layout_marginTop="90dp"
+            android:layout_marginTop="130dp"
             android:layout_marginRight="50dp"
             android:background="@drawable/profile_background"
             android:elevation="30dp"
@@ -89,13 +89,13 @@
                 android:id="@+id/name_textview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/noto_sans_kr_bold"
+                android:fontFamily="@font/noto_sans_kr_regular"
                 android:includeFontPadding="false"
                 app:profileString="@{data.name}"
                 android:text="정보를 입력해주세요"
                 android:textColor="@color/black"
                 android:layout_marginTop="20dp"
-                android:textSize="20dp"
+                android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/profile_imageView"
@@ -107,14 +107,30 @@
                 android:layout_height="wrap_content"
                 app:profileString="@{data.companyEmail}"
                 android:fontFamily="@font/noto_sans_kr_bold"
+                android:layout_marginTop="10sp"
                 android:text="정보를 입력해주세요"
-                android:textColor="#808080"
+                android:includeFontPadding="false"
+                android:textColor="#BDB9B9"
                 android:textSize="13dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/purpose_textview"
                 tools:text="2004ckck@naver.com" />
 
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:includeFontPadding="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@{data.purpose}"
+                android:textColor="@color/black"
+                android:fontFamily="@font/noto_sans_kr_bold"
+                android:textSize="24sp"
+                android:layout_marginTop="40sp"
+                app:layout_constraintTop_toBottomOf="@+id/companyEmail_textview"
+                tools:text="항상 최선을 다합시다 !!" />
             <TextView
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
@@ -123,6 +139,7 @@
                 android:fontFamily="@font/noto_sans_kr_bold"
                 android:textColor="#808080"
                 android:textSize="13dp"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/name_textview" />
@@ -132,7 +149,6 @@
                 android:id="@+id/isCompany_imageView"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="20dp"
                 android:layout_marginBottom="90dp"
                 android:elevation="20dp"
                 android:padding="15dp"
@@ -140,20 +156,22 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/companyEmail_textview"
+                android:layout_marginTop="22sp"
+                app:layout_constraintTop_toBottomOf="@+id/textView22"
                 tools:background="@drawable/profile_click_background" />
 
             <ImageView
                 android:id="@+id/isJobSicker_ImageView"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginTop="20dp"
                 android:elevation="20dp"
+                tools:visibility="invisible"
                 android:padding="15dp"
                 android:src="@drawable/document"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/companyEmail_textview"
+                android:layout_marginTop="20sp"
+                app:layout_constraintTop_toBottomOf="@+id/textView22"
                 tools:background="@drawable/profile_background" />
 
             <LinearLayout

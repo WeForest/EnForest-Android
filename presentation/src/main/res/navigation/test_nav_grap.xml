@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/test_nav_grap"
-    app:startDestination="@id/testMainFragment">
+    app:startDestination="@id/easyTestFragment">
 
     <fragment
         tools:layout="@layout/fragment_test_main"

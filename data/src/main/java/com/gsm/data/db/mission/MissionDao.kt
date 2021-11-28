@@ -1,6 +1,7 @@
 package com.gsm.data.db.mission
 
 import androidx.room.*
+import androidx.room.Insert
 import com.gsm.data.entity.mission.response.GetMissionResponse
 
 @Dao

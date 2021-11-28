@@ -34,6 +34,7 @@ import com.gsm.presentation.R
 import com.gsm.presentation.databinding.FragmentSetProfileBinding
 import com.gsm.presentation.ui.main.MainActivity
 import com.gsm.presentation.ui.sign.up.SignUpSignInMainActivity
+import com.gsm.presentation.ui.test.activity.TestMainActivity
 import com.gsm.presentation.util.EventObserver
 import com.gsm.presentation.util.extension.toFile
 import com.gsm.presentation.util.extension.toMultipartBody
@@ -96,7 +97,7 @@ class SetProfileFragment : Fragment() {
         isComponyOnclick()
         isJobSeekerOnclick()
         nextButton()
-        with(binding){
+        with(binding) {
             backBtn.setOnClickListener {
                 findNavController().navigateUp()
             }
@@ -207,17 +208,24 @@ class SetProfileFragment : Fragment() {
     private fun getUserProfileAndSetting() {
 
         lifecycleScope.launch {
-            viewModel.isSuccess.observe(viewLifecycleOwner, EventObserver {
-
-
-                if (it) {
-                    startActivity(Intent(requireContext(), MainActivity::class.java))
-                    (activity as SignUpSignInMainActivity).finish()
-                } else {
-                    Log.d("TAG", "getUserProfileAndSetting: 실패")
-                    Toast.makeText(requireContext(), "실패", Toast.LENGTH_SHORT).show()
-                }
+            viewModel.isSuccess.observe(viewLifecycleOwner, EventObserver { success ->
+                viewModel.pathProfileData.observe(viewLifecycleOwner, EventObserver { data ->
+                    Log.d("TAG", "getUserProfileAndSetting: dd ${data.level}")
+                    if (success) {
+                        if (data.level == 0) {
+                            startActivity(Intent(requireContext(), TestMainActivity::class.java))
+                            (activity as SignUpSignInMainActivity).finish()
+                        } else {
+                            startActivity(Intent(requireContext(), MainActivity::class.java))
+                            (activity as SignUpSignInMainActivity).finish()
+                        }
+                    } else {
+                        Log.d("TAG", "getUserProfileAndSetting: 실패")
+                        Toast.makeText(requireContext(), "실패", Toast.LENGTH_SHORT).show()
+                    }
+                })
             })
+
 
         }
     }

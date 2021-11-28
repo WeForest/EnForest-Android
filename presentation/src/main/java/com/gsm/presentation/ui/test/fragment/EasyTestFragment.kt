@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.gsm.data.entity.test.response.GetTestItem
 import com.gsm.data.entity.test.response.GetTestResponse
@@ -66,9 +67,12 @@ class EasyTestFragment : Fragment() {
     fun ifUserSetAnswer(){
         if(viewModel.isChecked.value == true) {
             Log.d("SDf",viewModel.page.value.toString())
-            if(viewModel.page.value == 19)
-            {
-                findNavController().navigate(R.id.action_easyTestFragment_to_testEndFragment)
+            if(viewModel.page.value == 19) {
+                if (findNavController().currentDestination?.id == R.id.easyTestFragment) {
+                    findNavController().navigate(R.id.action_easyTestFragment_to_testEndFragment)
+                }else{
+                    findNavController().navigate(R.id.action_easyTestFragment2_to_testEndFragment2)
+                }
             }
             else
             {

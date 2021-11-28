@@ -26,6 +26,7 @@ class BottomSheetMissionDialog() :
 
     private val viewModel: MissionViewModel by viewModels<MissionViewModel>()
 
+
     private val timeConverter: TimeConverter by lazy { TimeConverter() }
     override fun BottomSheetDialogWriteMissionBinding.onCreateView() {
 
@@ -49,7 +50,6 @@ class BottomSheetMissionDialog() :
                             .isNotEmpty()
                     ) {
                         addMission(
-                            chipLevelText,
                             binding.missionWriteEditText.text.toString(),
                             binding.missionWriteContentEditText.text.toString(),
                             chipText(),

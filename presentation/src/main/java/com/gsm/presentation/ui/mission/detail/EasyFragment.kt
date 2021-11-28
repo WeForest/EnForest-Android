@@ -7,6 +7,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gsm.domain.entity.mission.GetMissionEntity
 import com.gsm.domain.entity.mission.GetMissionTypePageEntity
@@ -83,7 +84,7 @@ class EasyFragment : BaseFragment<FragmentMissionEasyBinding>(R.layout.fragment_
 
             adapter = missionAdapter
             layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                GridLayoutManager(requireContext(), 2,LinearLayoutManager.VERTICAL, false)
             setHasFixedSize(false)
         }
     }

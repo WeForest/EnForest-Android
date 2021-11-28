@@ -30,7 +30,6 @@ class MissionViewModel @Inject constructor
 
     private val _exp = MutableLiveData<Int>()
     val exp: LiveData<Int> get() = _exp
-    private val _success = MutableLiveData<Event<Boolean>>()
     private val _missionData = MutableLiveData<GetMissionEntity>()
     val missionData: LiveData<GetMissionEntity> get() = _missionData
 
@@ -45,10 +44,9 @@ class MissionViewModel @Inject constructor
     init {
         _errorMessage.value = ""
     }
-
+    private val _success = MutableLiveData<Event<Boolean>>()
     val success: LiveData<Event<Boolean>> get() = _success
     suspend fun addMission(
-        level: String,
         title: String,
         content: String,
         expiredAt: Int,
@@ -60,7 +58,7 @@ class MissionViewModel @Inject constructor
                 addMissionUseCase.buildUseCaseObservable(
                     AddMissionUseCase.Params(
                         AddMission(
-                            level,
+                            "0",
                             0,
                             title,
                             content,

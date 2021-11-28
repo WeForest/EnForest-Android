@@ -3,6 +3,7 @@ import android.util.Log
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gsm.presentation.R
 import com.gsm.presentation.adapter.MissionGetAdapter
@@ -61,7 +62,7 @@ class HardFragment : BaseFragment<FragmentMissionHardBinding>(R.layout.fragment_
 
             adapter = missionAdapter
             layoutManager =
-                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                GridLayoutManager(requireContext(), 2,LinearLayoutManager.VERTICAL, false)
             setHasFixedSize(false)
         }
     }

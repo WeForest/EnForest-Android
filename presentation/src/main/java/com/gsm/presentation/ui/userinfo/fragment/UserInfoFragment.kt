@@ -60,6 +60,13 @@ class UserInfoFragment : Fragment() {
         findNavController().navigate(R.id.action_userInfoFragment_to_userActivityFragment)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.backBtn.setOnClickListener {
+            findNavController().navigateUp()
+        }
+    }
+
     fun GetProfile(userName: String){
         with(viewModel){
 

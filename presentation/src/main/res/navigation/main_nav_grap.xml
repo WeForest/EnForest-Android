@@ -54,7 +54,7 @@
 
         <argument
             android:name="chat"
-            app:argType="com.gsm.data.entity.group.response.SearchChatResponseItem" />
+            app:argType="com.gsm.data.entity.group.response.SearchGroupResponseItem" />
 
     </fragment>
     <fragment
@@ -113,6 +113,37 @@
             android:name="nickname"
             app:argType="string" />
     </dialog>
+    <fragment
+        android:id="@+id/userInfoFragment2"
+        android:name="com.gsm.presentation.ui.userinfo.fragment.UserInfoFragment"
+        android:label="UserInfoFragment" />
+    <fragment
+        android:id="@+id/testMainFragment2"
+        android:name="com.gsm.presentation.ui.test.fragment.TestMainFragment"
+        android:label="TestMainFragment" >
+        <action
+            android:id="@+id/action_testMainFragment2_to_easyTestFragment2"
+            app:destination="@id/easyTestFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/easyTestFragment2"
+        android:name="com.gsm.presentation.ui.test.fragment.EasyTestFragment"
+        android:label="fragment_easy_test"
+        tools:layout="@layout/fragment_easy_test" >
 
+        <action
+            android:id="@+id/action_easyTestFragment2_to_testEndFragment2"
+            app:destination="@id/testEndFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/testEndFragment2"
+        android:name="com.gsm.presentation.ui.test.fragment.TestEndFragment"
+        android:label="fragment_test_end"
+        tools:layout="@layout/fragment_test_end" >
+
+        <action
+            android:id="@+id/action_testEndFragment2_to_testMainFragment2"
+            app:destination="@id/testMainFragment2" />
+    </fragment>
 
 </navigation>

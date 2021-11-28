@@ -2,6 +2,7 @@ package com.gsm.presentation.ui.mission
 
 import android.util.Log
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
@@ -22,6 +23,9 @@ class MissionDetailFragment :
         setHasOptionsMenu(false)
         missionViewModel.getType(args.type.toString())
 
+        binding.backBtn.setOnClickListener {
+            findNavController().navigateUp()
+        }
     }
 
     override fun onDestroyView() {
