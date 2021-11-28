@@ -30,6 +30,7 @@ class TestEndFragment : Fragment() {
     private lateinit var binding: FragmentTestEndBinding
     private val signViewModel: SignInViewModel by viewModels()
     var token = ""
+    var count=0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,6 +43,7 @@ class TestEndFragment : Fragment() {
 
         binding.viewmodel = viewModel
         observeToken()
+        observeCount()
         return binding.root
     }
 
@@ -63,7 +65,12 @@ class TestEndFragment : Fragment() {
 
     private fun testFinish() {
         lifecycleScope.launch {
-            viewModel.questionCheck(token)
+            viewModel.questionCheck(token,count)
+        }
+    }
+    private fun observeCount(){
+        viewModel.answerCount.observe(viewLifecycleOwner){
+         count=it
         }
     }
 

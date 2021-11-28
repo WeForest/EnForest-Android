@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">EnForest</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="client_id">313543941409-dfpn63cbqo5emnd27oc6jom1bc0vhhmb.apps.googleusercontent.com</string>
+    <string name="client_id">863855204367-hm6eoi341o031ig9ljnd2psncvr700g0.apps.googleusercontent.com</string>
 
     <string name="user_uid">U2FsdGVkX1/+odzQABxvTkkDhxjN8GIs3V6WeZq9wGECzwE7P5k2Z8Wm8/iW9Jgs+aIjl18bC0q4lRZ8iRyLESy4MevH0HUYATA0EXGTE2coyb/kMXyjkz1VeDGFhOxX</string>
     <string name="ex_text">" 다양한 사고로 따로 또 같이 자유롭게 가치있게 "</string>

@@ -210,6 +210,7 @@ class SetProfileFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.isSuccess.observe(viewLifecycleOwner, EventObserver { success ->
                 viewModel.pathProfileData.observe(viewLifecycleOwner, EventObserver { data ->
+                    Log.d("TAG", "getUserProfileAndSetting: dd ${data.level}")
                     if (success) {
                         if (data.level == 0) {
                             startActivity(Intent(requireContext(), TestMainActivity::class.java))

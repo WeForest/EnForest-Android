@@ -95,7 +95,6 @@ class GroupChatFragment :
             socket.on(Socket.EVENT_CONNECT_ERROR) { args ->
                 Log.i(TAG, "onCreateView error: ${args[0]}")
             }
-            socket.on(Socket.EVENT_CONNECT, onConnectSuccess)
             socket.on(Socket.EVENT_DISCONNECT) { args ->
                 // 소켓 서버 연결이 끊어질 경우에 호출됩니다.
                 Log.i("Socket", "Disconnet: ${args[0]}")

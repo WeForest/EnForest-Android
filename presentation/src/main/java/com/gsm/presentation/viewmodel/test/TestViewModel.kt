@@ -77,12 +77,10 @@ class TestViewModel @Inject constructor(
 
     }
 
-    suspend fun questionCheck(token: String) = viewModelScope.launch {
+    suspend fun questionCheck(token: String, number: Int) = viewModelScope.launch {
         try {
-            _answerCount.value?.let {
-                service.questionCheck(token, it).let {
-                    _isSuccess.value = Event(true)
-                }
+            service.questionCheck(token,number).let {
+                _isSuccess.value = Event(true)
             }
         }catch (e:Exception){
             _isSuccess.value = Event(false)

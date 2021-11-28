@@ -22,6 +22,9 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".ui.main.MainActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.splash.SplashActivity"
             android:exported="true" >
 
             <intent-filter>
@@ -39,10 +42,7 @@
         <activity
             android:name=".ui.test.activity.TestMainActivity"
             android:exported="true" />
-        <activity android:name=".ui.study.chat.GroupChatFragment" />
-        <activity
-            android:name=".ui.splash.SplashActivity"
-            android:exported="true"/>
+
 
         <receiver
             android:name=".ui.mission.notification.MissionNotification"
