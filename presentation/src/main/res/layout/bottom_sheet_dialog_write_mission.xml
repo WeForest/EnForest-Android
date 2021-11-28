@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_margin="10dp"
-        android:backgroundTint="#7E0B23FF"
+        android:backgroundTint="@color/m_c"
         android:layout_height="wrap_content"
         android:background="@drawable/background_practice_test">
 
@@ -23,7 +23,7 @@
             android:fontFamily="@font/noto_sans_kr_bold"
             android:includeFontPadding="false"
             android:text="Title"
-            android:textColor="#D0D8EDFF"
+            android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -62,7 +62,7 @@
             android:layout_marginTop="8dp"
             android:fontFamily="@font/noto_sans_kr_bold"
             android:text="Content"
-            android:textColor="#D0D8EDFF"
+            android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/mission_write_edit_text" />
@@ -96,7 +96,7 @@
             android:layout_margin="20sp"
             android:text="Date"
             android:fontFamily="@font/noto_sans_kr_bold"
-            android:textColor="#D0D8EDFF"
+            android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mission_write_content_edit_text" />
@@ -139,8 +139,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="20sp"
-            android:text="난이도"
-            android:textColor="#D0D8EDFF"
+            android:text="Difficulty"
+            android:textColor="@color/black"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/chip_type" />
