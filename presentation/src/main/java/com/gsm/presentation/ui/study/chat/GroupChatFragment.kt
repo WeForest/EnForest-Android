@@ -21,13 +21,16 @@ import com.gsm.presentation.base.BaseFragment
 import com.gsm.presentation.databinding.FragmentGroupChatBinding
 import com.gsm.presentation.ui.chat.ChatModel
 import com.gsm.presentation.util.App
+import com.gsm.presentation.util.Constant
 import com.gsm.presentation.util.extension.showVertical
 import com.gsm.presentation.viewmodel.profile.ProfileViewModel
 import com.gsm.presentation.viewmodel.sign.`in`.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import io.socket.client.IO
 import io.socket.client.Socket
 import io.socket.emitter.Emitter
 import io.socket.engineio.client.EngineIOException
+import io.socket.engineio.client.transports.WebSocket
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
@@ -74,18 +77,22 @@ class GroupChatFragment :
         }
 
         try {
-            socket = App.get()
+            val opts: IO.Options = io.socket.client.IO.Options()
+            opts.transports = arrayOf<String>(WebSocket.NAME)
+            opts.query = token
+            socket = io.socket.client.IO.socket("ws://192.168.219.103:81")
+            socket.send()
             socket.connect()
-            val dd=JSONObject()
-            dd.put("token",token)
-            socket.emit("connects",dd)
+            val dd = JSONObject()
+            dd.put("token", token)
+            socket.emit("connects", dd)
             emitJoin()
 
             socket.on("sendMessage", sendMessage)
 
 
 
-            socket.on(Socket.EVENT_CONNECT_ERROR){args->
+            socket.on(Socket.EVENT_CONNECT_ERROR) { args ->
                 Log.i(TAG, "onCreateView error: ${args[0]}")
             }
             socket.on(Socket.EVENT_CONNECT, onConnectSuccess)

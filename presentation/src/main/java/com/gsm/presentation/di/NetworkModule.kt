@@ -37,6 +37,7 @@ object NetworkModule {
             .// 이 클라이언트를 통해 오고 가는 네트워크 요청/응답을 로그로 표시하도록 합니다.
             addInterceptor(getLoggingInterceptor())
 
+
             .build()
 
     }
