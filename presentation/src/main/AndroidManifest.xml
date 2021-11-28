@@ -29,7 +29,6 @@
         <activity
             android:name=".ui.test.activity.TestMainActivity"
             android:exported="true" />
-        <activity android:name="com.gsm.presentation.ui.study.chat.GroupChatFragment"/>
         <activity
             android:name=".ui.splash.SplashActivity"
             android:exported="true">

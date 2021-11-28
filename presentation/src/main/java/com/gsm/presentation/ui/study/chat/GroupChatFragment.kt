@@ -12,6 +12,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.navigation.navArgs
+import com.google.gson.JsonObject
 import com.gsm.presentation.R
 import com.gsm.presentation.adapter.ChatAdapter
 import com.gsm.presentation.base.BaseActivity
@@ -55,28 +56,38 @@ class GroupChatFragment :
     }
 
 
-
     override fun FragmentGroupChatBinding.onCreateView() {
         chating_Text = binding.messageEdit
         chat_Send_Button = binding.sendBtn
         setAdapter()
         getToken()
 
+    }
+
+    override fun FragmentGroupChatBinding.onViewCreated() {
+
 
         try {
-
             socket = App.get()
             socket.connect()
-            socket.on(Socket.EVENT_CONNECT_ERROR, onConnectError)
+            val dd=JSONObject()
+            dd.put("token",token)
+            socket.emit("connects",dd)
+            emitJoin()
+
+            socket.on("sendMessage", sendMessage)
+
+
+
+            socket.on(Socket.EVENT_CONNECT_ERROR){args->
+                Log.i(TAG, "onCreateView error: ${args[0]}")
+            }
             socket.on(Socket.EVENT_CONNECT, onConnectSuccess)
-            socket.on(io.socket.client.Socket.EVENT_DISCONNECT) { args ->
+            socket.on(Socket.EVENT_DISCONNECT) { args ->
                 // 소켓 서버 연결이 끊어질 경우에 호출됩니다.
                 Log.i("Socket", "Disconnet: ${args[0]}")
             }
-            socket.on("sendMessage", sendMessage)
 //
-            emitJoin()
-
         } catch (e: URISyntaxException) {
             Log.d(TAG, "onCreate:  에러 ${e.printStackTrace()}")
             e.printStackTrace()
@@ -87,10 +98,6 @@ class GroupChatFragment :
             Log.d(TAG, "onCreate:  에러 ${e.printStackTrace()}")
             e.printStackTrace()
         }
-    }
-
-    override fun FragmentGroupChatBinding.onViewCreated() {
-
         chat_Send_Button.setOnClickListener {
             //아이템 추가 부분
             sendMessage()
@@ -113,20 +120,19 @@ class GroupChatFragment :
         lifecycleScope.launch {
             Toast.makeText(
                 requireContext(),
-                "이걸 성공?",
+                "성공",
                 Toast.LENGTH_LONG
             ).show()
         }
     }
 
 
-
     private fun emitJoin() {
         val userId = JSONObject()
         userId.put("token", token)
-        userId.put("roomId", args.chat.id)
+        userId.put("roomId", 1)
         //socket.emit은 메세지 전송임
-        socket.emit("join", userId)
+        socket.emit("join", token, 1)
 
     }
 
@@ -183,7 +189,7 @@ class GroupChatFragment :
         val jsonObject = JSONObject()
         try {
             jsonObject.put("token", token)
-            jsonObject.put("roomId", args.chat.id)
+            jsonObject.put("roomId", 1)
             jsonObject.put("message", message)
             socket.emit("sendMessage", jsonObject)
 
