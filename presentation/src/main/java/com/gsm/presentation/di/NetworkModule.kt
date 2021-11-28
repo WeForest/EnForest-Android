@@ -81,8 +81,15 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun imsIService(retrofit: Retrofit): com.gsm.presentation.TestService {
-        return (retrofit.create(com.gsm.presentation.TestService::class.java))
+    fun imsIService(retrofit: Retrofit): com.gsm.presentation.ui.test.TestService {
+        return (retrofit.create(com.gsm.presentation.ui.test.TestService::class.java))
+    }
+
+
+    @Provides
+    @Singleton
+    fun getUserInfo(retrofit: Retrofit): com.gsm.presentation.ui.userinfo.api.UserInfoService {
+        return (retrofit.create(com.gsm.presentation.ui.userinfo.api.UserInfoService::class.java))
     }
     @Provides
     @Singleton

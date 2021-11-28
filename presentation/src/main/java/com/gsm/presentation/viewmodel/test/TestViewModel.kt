@@ -5,12 +5,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.gsm.data.entity.test.response.GetTestItem
 import com.gsm.domain.entity.test.response.GetTestEntity
 import com.gsm.domain.usecase.test.GetTestUseCase
 import com.gsm.presentation.R
-import com.gsm.presentation.TestService
-import com.gsm.presentation.ui.test.fragment.TestMainFragment
+import com.gsm.presentation.ui.test.TestService
 import com.gsm.presentation.util.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

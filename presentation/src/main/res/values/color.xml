@@ -14,6 +14,8 @@
     <color name="lightGray">#F9F9F9</color>
     <color name="login_other_login">#A3A3A3</color>
     <color name="sign_up_ex_txt">#ACACAC</color>
+    <color name="background_main">#8294C0</color>
+    <color name="prograssbar">#FFAC0C</color>
     <color name="colorPrimary">#6200EA</color>
     <color name="darkGray">#4B4B4B</color>
 
@@ -22,11 +24,9 @@
     <color name="chipBackgroundColor">@color/lightGray</color>
     <color name="checkedChipTextColor">#0056F1</color>
     <color name="chipTextColor">@color/darkGray</color>
-    <color name="background_main">#8294C0</color>
     <color name="easy_test">#B6D1D4</color>
     <color name="middel_test">#EAA18A</color>
     <color name="hard_test">#F55354</color>
-    <color name="prograssbar">#FFAC0C</color>
     <color name="m_c">#8AB8FE</color>
     <color name="basic_test">#107AB0</color>
 
