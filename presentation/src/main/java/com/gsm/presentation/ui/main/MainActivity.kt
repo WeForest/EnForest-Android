@@ -1,13 +1,17 @@
 package com.gsm.presentation.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.messaging.FirebaseMessaging
 import com.gsm.presentation.R
 import com.gsm.presentation.base.BaseActivity
 import com.gsm.presentation.databinding.ActivityMainBinding
@@ -41,8 +45,19 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navi.setupWithNavController(navController)
         initNavigation()
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Log.w("TAG", "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
 
+            // Get new FCM registration token
+            val token = task.result
 
+            // Log and toast
+            Log.d("TAG", token)
+            Toast.makeText(baseContext, token, Toast.LENGTH_SHORT).show()
+        })
     }
 
 

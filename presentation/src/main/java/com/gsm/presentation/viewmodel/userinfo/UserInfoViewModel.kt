@@ -6,12 +6,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.gsm.domain.entity.response.GetProfileEntity
-import com.gsm.domain.entity.test.response.GetTestEntity
 import com.gsm.domain.entity.userinfo.ExpLog
 import com.gsm.domain.entity.userinfo.GetUSerInfoEntityP
 import com.gsm.domain.entity.userinfo.GetUserInfoEntity
 import com.gsm.domain.usecase.profile.GetProfileUseCase
-import com.gsm.presentation.ui.test.TestService
 import com.gsm.presentation.ui.userinfo.api.UserInfoService
 import com.gsm.presentation.util.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
