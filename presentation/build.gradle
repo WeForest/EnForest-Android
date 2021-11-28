@@ -6,6 +6,7 @@ plugins {
     id 'kotlin-parcelize'
     id 'androidx.navigation.safeargs.kotlin'
 }
+apply plugin: 'com.google.gms.google-services'
 android {
     compileSdk 31
 
@@ -95,7 +96,7 @@ dependencies {
     // optional - Guava support for Room, including Optional and ListenableFuture
     implementation("androidx.room:room-guava:$roomVersion")
 
-
+    //fcm
     //paging
 
     implementation("androidx.paging:paging-runtime-ktx:3.0.1")
@@ -111,7 +112,12 @@ dependencies {
 
     // LiveData
     implementation(AndroidX.LIFECYCLE_LIVEDATA)
+    implementation platform('com.google.firebase:firebase-bom:29.0.0')
 
+    // Declare the dependencies for the Firebase Cloud Messaging and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.google.firebase:firebase-analytics'
     // Retrofit
     implementation(Retrofit.RETROFIT)
     implementation(Retrofit.CONVERTER_GSON)

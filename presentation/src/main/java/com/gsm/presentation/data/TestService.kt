@@ -1,4 +1,4 @@
-package com.gsm.presentation.ui.test
+package com.gsm.presentation.data
 
 import com.gsm.domain.entity.response.PathProfileEntity
 import com.gsm.domain.entity.test.response.GetTestEntity

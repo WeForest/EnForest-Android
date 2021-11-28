@@ -7,6 +7,7 @@ import com.gsm.data.network.service.sign.LoginService
 import com.gsm.data.network.service.MissionService
 import com.gsm.data.network.service.ProfileService
 import com.gsm.data.network.service.TestService
+import com.gsm.presentation.util.Constant.Companion.BASE_FCM_URL
 import com.gsm.presentation.util.Constant.Companion.Local_SERVER
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
@@ -61,6 +62,8 @@ object NetworkModule {
 
     }
 
+
+
     @Provides
     @Singleton
     fun provideConverterFactory(): GsonConverterFactory {
@@ -82,8 +85,8 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun imsIService(retrofit: Retrofit): com.gsm.presentation.ui.test.TestService {
-        return (retrofit.create(com.gsm.presentation.ui.test.TestService::class.java))
+    fun imsIService(retrofit: Retrofit): com.gsm.presentation.data.TestService {
+        return (retrofit.create(com.gsm.presentation.data.TestService::class.java))
     }
 
 

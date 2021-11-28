@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.gsm.domain.entity.test.response.GetTestEntity
 import com.gsm.domain.usecase.test.GetTestUseCase
 import com.gsm.presentation.R
-import com.gsm.presentation.ui.test.TestService
+import com.gsm.presentation.data.TestService
 import com.gsm.presentation.util.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

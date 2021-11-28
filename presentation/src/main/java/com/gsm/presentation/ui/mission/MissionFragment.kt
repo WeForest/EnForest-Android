@@ -4,6 +4,7 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -16,7 +17,9 @@ import com.gsm.presentation.R
 import com.gsm.presentation.adapter.MissionAdapter
 import com.gsm.presentation.base.BaseFragment
 import com.gsm.presentation.databinding.FragmentMissionBinding
-import com.gsm.presentation.ui.mission.notification.MissionNotification
+import com.gsm.presentation.ui.mission.notification.MissionBroadcastReceiver
+import com.gsm.presentation.util.Constant.Companion.EXTRA_NOTIFICATION_MESSAGE
+import com.gsm.presentation.util.Constant.Companion.EXTRA_NOTIFICATION_TITLE
 import com.gsm.presentation.util.EventObserver
 import com.gsm.presentation.viewmodel.mission.MissionRemoteViewModel
 import com.gsm.presentation.viewmodel.mission.MissionViewModel
@@ -30,12 +33,15 @@ todo : 하루에 하나씩 미션이 울려 저장을 해야함 내부 db 사용
  */
 @AndroidEntryPoint
 class MissionFragment : BaseFragment<FragmentMissionBinding>(R.layout.fragment_mission) {
+    var title = ""
+    var message = ""
     private val missionAdapter: MissionAdapter by lazy { MissionAdapter() }
     private val viewModel: MissionViewModel by viewModels<MissionViewModel>()
     private val remoteViewModel: MissionRemoteViewModel by viewModels<MissionRemoteViewModel>()
     override fun FragmentMissionBinding.onCreateView() {
         setHasOptionsMenu(false)
         binding.fragment = this@MissionFragment
+
         with(binding) {
             missionDailyLayout.setOnClickListener {
 
@@ -50,71 +56,58 @@ class MissionFragment : BaseFragment<FragmentMissionBinding>(R.layout.fragment_m
                 it?.findNavController()?.navigate(action)
 
             }
-                missionMonthlyLayout.setOnClickListener {
-                    val action = MissionFragmentDirections
-                        .actionMissionFragmentToMissionDetailFragment(MONTH)
-                    it?.findNavController()?.navigate(action)
-                }
+            missionMonthlyLayout.setOnClickListener {
+                val action = MissionFragmentDirections
+                    .actionMissionFragmentToMissionDetailFragment(MONTH)
+                it?.findNavController()?.navigate(action)
             }
         }
+    }
 
-        var chipText = "daily"
+    var chipText = "daily"
 
-    val time: Long = 1000* 60 * 60
+    val time: Long = 1000 * 60 * 60
     var number: Int = 1
 
     override fun FragmentMissionBinding.onViewCreated() {
         getMissionType(DAY, 1)
         chipClickType()
         setAdapter()
-        alarmManager()
-        setTimer()
+        getMission()
+
         observeGetMissionType()
         observeGetMission()
         observeErrorMessage()
 
 
-    }
 
 
-    private fun     alarmManager() {
-        val alarmManager = context?.getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        val intent = Intent(context, MissionNotification::class.java)
-
-        intent.action = "MyBroadcastReceiverAction"
-        val pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0)
-
-        val alarmTimeAtUTC: Long = System.currentTimeMillis() + time
-
-
-        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.M) {
-            Log.d("alarm", "alarmManager: 성공 ! ")
-            alarmManager.setAlarmClock(
-                AlarmManager.AlarmClockInfo(alarmTimeAtUTC, pendingIntent),
-                pendingIntent
+        val alarmMgr = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        Log.d("알람", "onViewCreated: ${title}, ${message}")
+        val alarmIntent =
+            Intent(requireActivity(), MissionBroadcastReceiver::class.java).let { intent ->
+                intent.putExtra(EXTRA_NOTIFICATION_TITLE, "문자")
+                intent.putExtra(EXTRA_NOTIFICATION_MESSAGE, "왔습니다")
+                PendingIntent.getBroadcast(requireContext(), 0, intent, 0)
+            }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            alarmMgr.setInexactRepeating(
+                AlarmManager.RTC_WAKEUP,
+                System.currentTimeMillis(),
+                AlarmManager.INTERVAL_DAY,// 10분전알림
+                alarmIntent
             )
         } else {
-            Log.d("alarm", "alarmManager: 실패 ! ")
-            alarmManager.setExactAndAllowWhileIdle(
+            alarmMgr.setInexactRepeating(
                 AlarmManager.RTC_WAKEUP,
-                alarmTimeAtUTC,
-                pendingIntent
+                System.currentTimeMillis(),
+                AlarmManager.INTERVAL_DAY,
+                alarmIntent
             )
         }
-    }
-
-
-    private fun setTimer() {
-        val timer = Timer()
-        val task: TimerTask = object : TimerTask() {
-            override fun run() {
-                Log.d("시간", "run: $time ")
-                getMission()
-            }
-        }
-        timer.schedule(task, 0L, time)
 
     }
+
 
     private fun getMissionType(type: String, page: Int) {
         lifecycleScope.launch {
@@ -171,6 +164,8 @@ class MissionFragment : BaseFragment<FragmentMissionBinding>(R.layout.fragment_m
     private fun observeGetMission() {
         viewModel.missionData.observe(viewLifecycleOwner) {
             lifecycleScope.launch {
+                title = it.title.toString()
+                message = it.content.toString()
                 Log.d("remote", "observeGetMission: 데이터가 추가됨")
                 remoteViewModel.insertMission(it)
             }
