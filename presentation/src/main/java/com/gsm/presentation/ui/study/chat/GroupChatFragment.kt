@@ -67,6 +67,7 @@ class GroupChatFragment :
         chat_Send_Button = binding.sendBtn
         setAdapter()
         getToken()
+        binding.chatTitleTxt.setText(args.chat.name)
 
     }
 

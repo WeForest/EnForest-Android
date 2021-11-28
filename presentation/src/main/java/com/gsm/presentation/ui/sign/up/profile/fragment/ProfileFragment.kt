@@ -42,11 +42,13 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(R.layout.fragment_p
 
                 if (it.isJobSeeker == true) {
                     binding.isCompanyImageView.visibility= View.VISIBLE
+                    binding.jobTxt.setText("(구직자)")
                     binding.isJobSickerImageView.visibility= View.GONE
                     binding.isCompanyImageView.setBackgroundResource(R.drawable.profile_click_background)
                     binding.isJobSickerImageView.setBackgroundResource(R.drawable.profile_background)
                 }else{
                     binding.isCompanyImageView.visibility= View.GONE
+                    binding.jobTxt.setText("(구인자)")
                     binding.isJobSickerImageView.visibility= View.VISIBLE
                     binding.isCompanyImageView.setBackgroundResource(R.drawable.profile_background)
                     binding.isJobSickerImageView.setBackgroundResource(R.drawable.profile_click_background)

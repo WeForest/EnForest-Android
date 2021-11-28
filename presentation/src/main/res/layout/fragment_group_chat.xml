@@ -34,6 +34,7 @@
                 android:background="@drawable/left" />
 
             <TextView
+                android:id="@+id/chat_title_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="33sp"
@@ -42,11 +43,11 @@
         </androidx.appcompat.widget.Toolbar>
 
         <com.google.android.material.bottomappbar.BottomAppBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            app:layout_constraintBottom_toBottomOf="parent"
             style="@style/Widget.MaterialComponents.BottomAppBar"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/study_meeting_recycler_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="BottomAppBar">
@@ -55,11 +56,12 @@
                 android:id="@+id/message_edit"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content" />
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/send_btn"
                 android:layout_width="wrap_content"
-                android:text="보내기"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:text="보내기" />
         </com.google.android.material.bottomappbar.BottomAppBar>
 
 
