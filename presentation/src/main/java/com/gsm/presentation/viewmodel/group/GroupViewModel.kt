@@ -14,7 +14,6 @@ import com.gsm.data.entity.group.response.SearchChatResponseItem
 import com.gsm.data.entity.group.response.SearchGroupResponseItem
 import com.gsm.data.network.service.GroupService
 import com.gsm.domain.entity.group.request.CreateGroup
-import com.gsm.domain.entity.group.response.CreateGroupEntity
 import com.gsm.domain.entity.group.response.GroupData
 import com.gsm.domain.usecase.group.*
 import com.gsm.presentation.data.ChatPagingDataSource
@@ -43,19 +42,27 @@ class GroupViewModel @Inject constructor(
     private val _success = MutableLiveData<Event<Boolean?>>()
     val success: LiveData<Event<Boolean?>>
         get() = _success
+
+    private val _searchData = MutableLiveData<SearchGroupResponseItem>()
+    val searchData: LiveData<SearchGroupResponseItem> get() = _searchData
     val storeState = MutableLiveData<DataState<Boolean>>()
     suspend fun joinGroup(token: String, id: Int) = viewModelScope.launch {
 
         try {
 
             joinGroupUseCase.buildUseCaseObservable(JoinGroupUseCase.Params(token, id)).apply {
-                _success.value=Event(true)
+                _success.value = Event(true)
                 Log.d(TAG, "joinGroup: $this")
             }
         } catch (e: Exception) {
-            _success.value=Event(false)
+            _success.value = Event(false)
             Log.d(TAG, "joinGroup: ")
         }
+    }
+
+    fun getName(name: SearchGroupResponseItem) {
+        _searchData.value = name
+
     }
 
     suspend fun createGroup(token: String, name: String, description: String, tags: String) =

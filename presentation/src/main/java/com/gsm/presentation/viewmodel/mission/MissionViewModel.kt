@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gsm.domain.entity.mission.AddMissionEntity
 import com.gsm.domain.entity.mission.GetMissionEntity
 import com.gsm.domain.entity.mission.GetMissionTypePageEntity
 import com.gsm.domain.entity.mission.request.AddMission
@@ -32,7 +33,8 @@ class MissionViewModel @Inject constructor
     val exp: LiveData<Int> get() = _exp
     private val _missionData = MutableLiveData<GetMissionEntity>()
     val missionData: LiveData<GetMissionEntity> get() = _missionData
-
+    private val _addMissionData = MutableLiveData<AddMissionEntity>()
+    val addMissionData: LiveData<AddMissionEntity> get() = _addMissionData
     private val _missionPageData = MutableLiveData<Event<List<GetMissionTypePageEntity>>>()
     val missionPageData: LiveData<Event<List<GetMissionTypePageEntity>>> get() = _missionPageData
 
@@ -70,6 +72,7 @@ class MissionViewModel @Inject constructor
                     Log.d("mission", "addMission: 성공 ")
                     Log.d(TAG, "addMission: ${it}")
                     _success.value = Event(true)
+                    _addMissionData.value=it
                 }
             } catch (e: Exception) {
                 Log.e(TAG, "addMission: ${e}")

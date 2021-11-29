@@ -17,6 +17,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.gsm.presentation.R
@@ -27,6 +28,8 @@ import com.gsm.presentation.util.DataState
 import com.gsm.presentation.util.extension.toAiMultipartBody
 import com.gsm.presentation.util.extension.toMultipartBody
 import com.gsm.presentation.viewmodel.ai.AiViewModel
+import com.gsm.presentation.viewmodel.profile.ProfileViewModel
+import com.gsm.presentation.viewmodel.sign.`in`.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
@@ -38,6 +41,9 @@ class UserActivityFragment : Fragment() {
     private lateinit var binding: FragmentUserActivityBinding
     private lateinit var getResult: ActivityResultLauncher<Intent>
     private val aiViewModel: AiViewModel by viewModels()
+    private val signViewModel: SignInViewModel by viewModels()
+    private val viewModel: ProfileViewModel by viewModels()
+    var token=""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,7 +54,7 @@ class UserActivityFragment : Fragment() {
             R.layout.fragment_user_activity, container, false
         )
         binding.fragment = this
-
+        getToken()
         getResult = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) { result ->
@@ -58,7 +64,7 @@ class UserActivityFragment : Fragment() {
                 Toast.makeText(requireContext(), "컨퍼런스 인증에 성공했습니다.", Toast.LENGTH_SHORT).show()
                 Log.d("postProfile", "onCreateView: ${result?.data?.data}")
                 val file = File(getPathFromUri(result.data?.data))
-                postImage(file.toAiMultipartBody())
+                postImage(file.toMultipartBody())
 
 
             } catch (e: Exception) {
@@ -73,11 +79,14 @@ class UserActivityFragment : Fragment() {
     private fun postImage(toMultipartBody: MultipartBody.Part?) {
         Log.d("ai", "postImage: ${toMultipartBody}")
         lifecycleScope.launch {
-            aiViewModel.postConferenceImage(toMultipartBody)
+            if (toMultipartBody != null) {
+                viewModel.postConference(token,toMultipartBody)
+            }
         }
 
 
     }
+
 
     private fun observe() = with(aiViewModel) {
         conferenceData.observe(viewLifecycleOwner) {
@@ -93,6 +102,13 @@ class UserActivityFragment : Fragment() {
                     Log.d(TAG, "observe: 로딩중..")
                 }
             }
+        }
+
+    }
+
+    private fun getToken() {
+        signViewModel.readToken.asLiveData().observe(viewLifecycleOwner) {
+            token=it.token
         }
     }
 

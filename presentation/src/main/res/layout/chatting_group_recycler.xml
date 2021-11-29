@@ -59,7 +59,7 @@
             android:layout_marginTop="10dp"
             android:fontFamily="@font/noto_sans_kr_medium"
             android:includeFontPadding="false"
-            android:text="@{data.name}"
+            android:text="@{data.description}"
             android:textColor="#717171"
             android:textSize="18sp"
             tools:text="코딩 잘하는 방법이 뭐죠??!! 저랑 같이 공부해요!! \n구한다구욧 구구구구구구구구한다구욧" />
@@ -67,11 +67,11 @@
         <TextView
             android:id="@+id/chat_tag_txt"
             android:layout_width="wrap_content"
-            tools:text="태그"
+            android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_marginEnd="20dp"
-            android:layout_height="wrap_content"
-            android:text="@{data.tags}" />
+            android:text="@{data.tags}"
+            tools:text="태그" />
 
 
     </LinearLayout>

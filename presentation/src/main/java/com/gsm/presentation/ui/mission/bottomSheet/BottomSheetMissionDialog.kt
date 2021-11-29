@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
 import com.gsm.presentation.R
 import com.gsm.presentation.base.BaseBottomSheetDialogFragment
@@ -66,6 +67,13 @@ class BottomSheetMissionDialog() :
                         Toast.makeText(requireContext(), "빈칸을 입력해 주세요", Toast.LENGTH_SHORT).show()
                     }
                 }
+            }
+            addMissionData.observe(viewLifecycleOwner) {
+                val action =
+                    BottomSheetMissionDialogDirections.actionBottomSheetMissionDialogToMissionFragment(
+                        true
+                    )
+                findNavController().navigate(action)
             }
             success.observe(this@BottomSheetMissionDialog, EventObserver {
 

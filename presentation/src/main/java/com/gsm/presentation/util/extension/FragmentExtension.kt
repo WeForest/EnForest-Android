@@ -68,7 +68,7 @@ fun File.toMultipartBody(): MultipartBody.Part = MultipartBody.Part.createFormDa
 )
 
 fun File.toAiMultipartBody(): MultipartBody.Part = MultipartBody.Part.createFormData(
-    "image",
+    "file",
     this.name,
     this.asRequestBody("image/jpeg".toMediaTypeOrNull())
 )

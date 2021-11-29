@@ -2,7 +2,7 @@ plugins {
     id 'com.android.library'
     id 'kotlin-kapt'
     id 'kotlin-android'
-
+    id 'kotlin-parcelize'
 }
 
 android {

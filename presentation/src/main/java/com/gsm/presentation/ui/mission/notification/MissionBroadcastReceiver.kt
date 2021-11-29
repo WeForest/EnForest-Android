@@ -22,8 +22,8 @@ class MissionBroadcastReceiver : BroadcastReceiver() {
             Log.d("TAG", "onReceive: 알람 $title,  $message ")
             // Create Notification Data
             val notificationData = Data.Builder()
-                .putString(EXTRA_NOTIFICATION_TITLE, "새로운 미션이 도착했습니다.")
-                .putString(EXTRA_NOTIFICATION_MESSAGE, "코딩테스트 1문제 풀기")
+                .putString(EXTRA_NOTIFICATION_TITLE, title)
+                .putString(EXTRA_NOTIFICATION_MESSAGE, message)
                 .build()
 
             // WorkManager 사용

@@ -34,9 +34,17 @@ class ProfileDataSourceImpl @Inject constructor(
     }
 
     override suspend fun postFollow(token: String, nickName: String): PathProfileResponse {
-        return service.postFollow(token,nickName)
+        return service.postFollow(token, nickName)
     }
+
     override suspend fun unPostFollow(token: String, nickName: String): PathProfileResponse {
-        return service.unPostFollow(token,nickName)
+        return service.unPostFollow(token, nickName)
+    }
+
+    override suspend fun postConference(
+        token: String,
+        file: MultipartBody.Part?
+    ): PathProfileResponse {
+        return service.postConference(token, file)
     }
 }

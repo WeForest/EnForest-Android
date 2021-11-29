@@ -28,9 +28,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:fontFamily="@font/noto_sans_kr_bold"
+                android:includeFontPadding="false"
                 android:text="@{data.title}"
                 android:textColor="@color/white"
-                android:textSize="20sp"
+                android:textSize="10sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -43,13 +44,16 @@
                 android:layout_marginBottom="20sp"
                 android:fontFamily="@font/noto_sans_kr_bold"
                 android:includeFontPadding="false"
-                android:padding="20dp"
+                android:padding="10dp"
+
                 android:text="@{data.content}"
                 android:textColor="@color/white"
                 android:textSize="10sp"
+
                 app:layout_constraintBottom_toBottomOf="@id/text_line"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mission_title_text"
                 tools:text="7일 중 5번의 게시글을 포스팅해라! " />
 
 

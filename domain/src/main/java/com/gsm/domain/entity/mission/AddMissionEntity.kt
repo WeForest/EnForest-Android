@@ -1,7 +1,10 @@
 package com.gsm.domain.entity.mission
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 
 
+@Parcelize
 data class AddMissionEntity(
     val content: String?,
     val createdAt: String?,
@@ -11,4 +14,4 @@ data class AddMissionEntity(
     val level: Int?,
     val title: String?,
     val type: String?
-)
+) : Parcelable

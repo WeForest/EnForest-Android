@@ -13,4 +13,5 @@ interface ProfileRepository {
     suspend fun postProfile(token:String, file: MultipartBody.Part?) : BaseEntity
     suspend fun postFollow(token:String, nickName: String) : PathProfileEntity
     suspend fun unPostFollow(token:String, nickName: String) : PathProfileEntity
+    suspend fun postConference(token:String, file: MultipartBody.Part?) : PathProfileEntity
 }

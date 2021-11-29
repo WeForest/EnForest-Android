@@ -17,18 +17,30 @@
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_missionFragment_to_missionDetailFragment"
+            app:destination="@id/missionDetailFragment"
             app:enterAnim="@anim/from_right"
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
-            app:popExitAnim="@anim/to_right"
-            app:destination="@id/missionDetailFragment" />
+            app:popExitAnim="@anim/to_right" />
+        <argument
+            android:name="data"
+            android:defaultValue="false"
+            app:argType="boolean" />
+
 
     </fragment>
     <dialog
         android:id="@+id/bottomSheetMissionDialog"
         android:name="com.gsm.presentation.ui.mission.bottomSheet.BottomSheetMissionDialog"
         android:label="BottomSheetMissionDialog"
-        tools:layout="@layout/bottom_sheet_dialog_write_mission" />
+        tools:layout="@layout/bottom_sheet_dialog_write_mission">
+        <action
+            android:id="@+id/action_bottomSheetMissionDialog_to_missionFragment"
+            app:destination="@id/missionFragment" />
+
+    </dialog>
+
+
     <fragment
         android:id="@+id/missionDetailFragment"
         android:name="com.gsm.presentation.ui.mission.MissionDetailFragment"
@@ -49,26 +61,12 @@
 
 
     </fragment>
-    <fragment
-        android:id="@+id/groupChatFragment"
-        android:name="com.gsm.presentation.ui.study.chat.GroupChatFragment"
-        android:label=""
-        tools:layout="@layout/fragment_group_chat">
 
-
-        <argument
-            android:name="chat"
-            app:argType="com.gsm.data.entity.group.response.SearchGroupResponseItem" />
-
-    </fragment>
     <fragment
         android:id="@+id/groupListFragment"
         android:name="com.gsm.presentation.ui.study.group.GroupListFragment"
         android:label="StudyFragment"
         tools:layout="@layout/fragment_group_list">
-
-
-
 
 
     </fragment>
@@ -88,7 +86,7 @@
         tools:layout="@layout/fragment_community">
         <action
             android:id="@+id/communityFragment_to_groupSetBottomSheetDialog"
-            app:destination="@id/groupSetBottomSheetDialog" >
+            app:destination="@id/groupSetBottomSheetDialog">
 
         </action>
         <action
@@ -98,6 +96,10 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
+        <action
+            android:id="@+id/action_communityFragment_to_groupChatActivity2"
+            app:destination="@id/groupChatActivity2" />
         <action
             android:id="@+id/action_communityFragment_to_groupChatFragment"
             app:destination="@id/groupChatFragment" />
@@ -119,9 +121,9 @@
     </dialog>
     <fragment
         android:id="@+id/userInfoFragment2"
-        tools:layout="@layout/activity_user_info"
         android:name="com.gsm.presentation.ui.userinfo.fragment.UserInfoFragment"
-        android:label="UserInfoFragment" >
+        android:label="UserInfoFragment"
+        tools:layout="@layout/activity_user_info">
 
 
         <action
@@ -131,20 +133,20 @@
     <fragment
         android:id="@+id/testMainFragment2"
         android:name="com.gsm.presentation.ui.test.fragment.TestMainFragment"
-        android:label="TestMainFragment" >
+        android:label="TestMainFragment">
         <action
+            android:id="@+id/action_testMainFragment2_to_easyTestFragment2"
+            app:destination="@id/easyTestFragment2"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
-            android:id="@+id/action_testMainFragment2_to_easyTestFragment2"
-            app:destination="@id/easyTestFragment2" />
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <fragment
         android:id="@+id/easyTestFragment2"
         android:name="com.gsm.presentation.ui.test.fragment.EasyTestFragment"
         android:label="fragment_easy_test"
-        tools:layout="@layout/fragment_easy_test" >
+        tools:layout="@layout/fragment_easy_test">
 
         <action
             android:id="@+id/action_easyTestFragment2_to_testEndFragment2"
@@ -154,7 +156,7 @@
         android:id="@+id/testEndFragment2"
         android:name="com.gsm.presentation.ui.test.fragment.TestEndFragment"
         android:label="fragment_test_end"
-        tools:layout="@layout/fragment_test_end" >
+        tools:layout="@layout/fragment_test_end">
 
         <action
             android:id="@+id/action_testEndFragment2_to_testMainFragment2"
@@ -163,10 +165,28 @@
     <fragment
         android:id="@+id/userActivityFragment2"
         android:name="com.gsm.presentation.ui.userinfo.fragment.UserActivityFragment"
-        android:label="UserActivityFragment" >
+        android:label="UserActivityFragment">
         <action
             android:id="@+id/action_userActivityFragment2_to_userInfoFragment2"
             app:destination="@id/userInfoFragment2" />
     </fragment>
+    <activity
+        android:id="@+id/groupChatActivity2"
+        android:name="com.gsm.presentation.ui.study.chat.GroupChatActivity"
+        android:label="GroupChatActivity" >
+        <argument
+            android:name="chat"
+            app:argType="com.gsm.data.entity.group.response.SearchGroupResponseItem" />
+    </activity>
 
+    <fragment
+        android:id="@+id/groupChatFragment"
+        android:name="com.gsm.presentation.ui.study.chat.GroupChatFragment"
+        android:label=""
+        tools:layout="@layout/fragment_group_chat">
+        <argument
+            android:name="chat"
+            app:argType="com.gsm.data.entity.group.response.SearchGroupResponseItem" />
+
+    </fragment>
 </navigation>
