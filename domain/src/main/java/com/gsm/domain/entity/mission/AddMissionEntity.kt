@@ -11,7 +11,7 @@ data class AddMissionEntity(
     val exp: Int?,
     val expiredAt: Int?,
     val id: Int?,
-    val level: Int?,
+    val level: String?,
     val title: String?,
     val type: String?
 ) : Parcelable

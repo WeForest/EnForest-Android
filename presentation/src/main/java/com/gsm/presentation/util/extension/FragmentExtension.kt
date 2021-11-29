@@ -14,6 +14,8 @@ import com.gsm.data.entity.profile.request.Major
 import com.gsm.domain.entity.request.profile.InterestsItem
 import com.gsm.domain.entity.request.profile.MajorItem
 import com.gsm.presentation.R
+import com.gsm.presentation.data.dto.ChatResponse
+import com.gsm.presentation.ui.chat.ChatModel
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
@@ -68,7 +70,7 @@ fun File.toMultipartBody(): MultipartBody.Part = MultipartBody.Part.createFormDa
 )
 
 fun File.toAiMultipartBody(): MultipartBody.Part = MultipartBody.Part.createFormData(
-    "file",
+    "image",
     this.name,
     this.asRequestBody("image/jpeg".toMediaTypeOrNull())
 )
@@ -77,6 +79,15 @@ fun File.toAiMultipartBody(): MultipartBody.Part = MultipartBody.Part.createForm
 fun List<String>.toMajorItem(): List<MajorItem> {
     return this.map {
         MajorItem(it)
+    }
+
+}
+
+
+fun ChatResponse.toChatItem(): List<ChatModel> {
+    return this.map {
+
+        ChatModel(it.user?.name.toString(), it.content.toString(), it.user?.profileImg.toString())
     }
 
 }

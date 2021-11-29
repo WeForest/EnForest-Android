@@ -12,6 +12,8 @@ import com.gsm.domain.entity.response.GetProfileEntity
 import com.gsm.domain.entity.response.PathProfileEntity
 import com.gsm.domain.usecase.profile.*
 import com.gsm.presentation.data.DataStoreRepository
+import com.gsm.presentation.data.TestService
+import com.gsm.presentation.data.dto.ChatResponse
 import com.gsm.presentation.util.Constant.Companion.DEFAULT_NAME
 import com.gsm.presentation.util.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -31,7 +33,8 @@ class ProfileViewModel @Inject constructor(
     private val postProfileUseCase: PostProfileUseCase,
     private val postProfileFollowUseCase: PostProfileFollowUseCase,
     private val unPostProfileUseCase: UnFollowUseCase,
-    private val postConferenceUseCase: PostConferenceUseCase
+    private val postConferenceUseCase: PostConferenceUseCase,
+    private val testService: TestService
 ) : ViewModel() {
 
     private val TAG = "profile"
@@ -71,6 +74,9 @@ class ProfileViewModel @Inject constructor(
     private val _token = MutableLiveData<String>()
     val token: LiveData<String> get() = _token
 
+    private val _chatLog = MutableLiveData<ChatResponse>()
+    val chatLog: LiveData<ChatResponse> get() = _chatLog
+
 
     private val _isSuccessValue = MutableLiveData<Event<Boolean>>()
     val isSuccessValue: LiveData<Event<Boolean>> get() = _isSuccessValue
@@ -80,6 +86,18 @@ class ProfileViewModel @Inject constructor(
             Log.d(TAG, "saveName: $name")
             dataStore.saveName(name)
         }
+
+    fun getChatLog(patch: Int) = viewModelScope.launch {
+
+        try {
+            testService.getChatLog(patch).let {
+                Log.d(TAG, "getChatLog: ${it}")
+                _chatLog.value = it
+            }
+        } catch (e: Exception) {
+            Log.d("chat", "getChatLog: ${e}")
+        }
+    }
 
     suspend fun postConference(token: String, file: MultipartBody.Part) = viewModelScope.launch {
         try {

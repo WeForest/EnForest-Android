@@ -43,7 +43,7 @@ class UserActivityFragment : Fragment() {
     private val aiViewModel: AiViewModel by viewModels()
     private val signViewModel: SignInViewModel by viewModels()
     private val viewModel: ProfileViewModel by viewModels()
-    var token=""
+    var token = ""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -64,7 +64,7 @@ class UserActivityFragment : Fragment() {
                 Toast.makeText(requireContext(), "컨퍼런스 인증에 성공했습니다.", Toast.LENGTH_SHORT).show()
                 Log.d("postProfile", "onCreateView: ${result?.data?.data}")
                 val file = File(getPathFromUri(result.data?.data))
-                postImage(file.toMultipartBody())
+                postImage(file.toAiMultipartBody())
 
 
             } catch (e: Exception) {
@@ -80,7 +80,7 @@ class UserActivityFragment : Fragment() {
         Log.d("ai", "postImage: ${toMultipartBody}")
         lifecycleScope.launch {
             if (toMultipartBody != null) {
-                viewModel.postConference(token,toMultipartBody)
+                aiViewModel.postConferenceImage(toMultipartBody)
             }
         }
 
@@ -92,13 +92,22 @@ class UserActivityFragment : Fragment() {
         conferenceData.observe(viewLifecycleOwner) {
             when (it) {
                 is DataState.Success -> {
-
+                    binding.imageView2.visibility = View.GONE
+                    binding.conferenceLayout.visibility=View.VISIBLE
                     Log.d(TAG, "observe: 성공 ${it.data}")
                 }
                 is DataState.Failure -> {
+                    binding.imageView2.visibility = View.GONE
+                    binding.conferenceLayout.visibility=View.VISIBLE
                     Log.d(TAG, "observe: 실패 ${it.message}")
                 }
                 is DataState.Loading -> {
+                    binding.conferenceLayout.visibility=View.GONE
+                    binding.imageView2.visibility = View.VISIBLE
+                    binding.imageView2.playAnimation();
+                    binding.imageView2.loop(true)
+
+
                     Log.d(TAG, "observe: 로딩중..")
                 }
             }
@@ -108,7 +117,7 @@ class UserActivityFragment : Fragment() {
 
     private fun getToken() {
         signViewModel.readToken.asLiveData().observe(viewLifecycleOwner) {
-            token=it.token
+            token = it.token
         }
     }
 

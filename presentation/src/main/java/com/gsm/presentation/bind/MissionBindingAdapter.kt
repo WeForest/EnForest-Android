@@ -36,6 +36,17 @@ object MissionBindingAdapter {
                 .into(this)
         };
     }
+    @JvmStatic
+    @BindingAdapter("app:chatImage")
+    fun ImageView.chatImage(data: String?) {
+        if(data?.isNotEmpty() == true) {
+            Glide.with(this.context)
+                .load(data)
+                .override(40, 40)
+                .fitCenter()
+                .into(this)
+        };
+    }
 
     // 서버에서 가져온 이미지를 Gilde 라이브러리를통해 사이즈에 맞게 자른다
     @JvmStatic

@@ -58,10 +58,11 @@ class BottomSheetMissionDialog() :
                             .isNotEmpty()
                     ) {
                         addMission(
-                            binding.missionWriteEditText.text.toString(),
-                            binding.missionWriteContentEditText.text.toString(),
-                            chipText(),
-                            chipText
+                            chipLevelText, // low
+                            binding.missionWriteEditText.text.toString(), // 제목
+                            binding.missionWriteContentEditText.text.toString(), //내용
+                            chipText(), // 날짜
+                            chipText //타입
                         )
                     } else {
                         Toast.makeText(requireContext(), "빈칸을 입력해 주세요", Toast.LENGTH_SHORT).show()
@@ -105,7 +106,7 @@ class BottomSheetMissionDialog() :
             val selectedMealType = chip.text.toString().lowercase(Locale.ROOT)
             chipLevelText = selectedMealType
         }
-        Log.i("TAG", "chipClickType: ${chipText}")
+        Log.i("TAG", "chipClickType: ${chipLevelText}")
 
     }
 

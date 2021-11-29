@@ -33,6 +33,7 @@
             app:layout_constraintVertical_bias="0.109" />
 
         <TextView
+            android:id="@+id/textView31"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -87,6 +88,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
 tools:itemCount="3"
+            android:visibility="visible"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@+id/textView4"
@@ -119,23 +121,21 @@ tools:itemCount="3"
             app:cardElevation="15dp"
             app:layout_constraintBottom_toTopOf="@+id/textView4"
             app:layout_constraintStart_toStartOf="@+id/recyclerView"
-            app:layout_constraintTop_toBottomOf="@+id/guideline2">
+            app:layout_constraintTop_toBottomOf="@+id/textView31">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-              >
+                android:layout_height="match_parent">
 
                 <ImageView
                     android:id="@+id/imageView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/not_found"
+
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
