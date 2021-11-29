@@ -10,7 +10,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_margin="10dp"
-        android:backgroundTint="@color/m_c"
+        android:elevation="10dp"
+        android:backgroundTint="@color/white"
         android:layout_height="wrap_content"
         android:background="@drawable/background_practice_test">
 
@@ -34,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/noto_sans_kr_medium"
-            android:text="모두에게 뽐내고싶은 한마디! 제목으로 표현해요"
+            android:text="나의 미션에 이름을 입력해요"
             android:textColor="@color/black"
             android:textSize="13dp"
             app:layout_constraintStart_toStartOf="@+id/mission_write_text"
@@ -45,6 +46,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
+            android:paddingLeft="10dp"
             android:layout_marginTop="4dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/mission_write_background"
@@ -72,7 +74,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/noto_sans_kr_medium"
-            android:text="이제는 재대로된 설명을 해봐요!"
+            android:text="이곳에는 재대로된 설명을 해봐요!"
             android:textColor="@color/black"
             android:textSize="13dp"
             app:layout_constraintStart_toStartOf="@+id/mission_write_text"
@@ -84,6 +86,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             android:textSize="15dp"
+            android:paddingLeft="10dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/mission_write_background"
             app:layout_constraintTop_toBottomOf="@+id/textView30"
