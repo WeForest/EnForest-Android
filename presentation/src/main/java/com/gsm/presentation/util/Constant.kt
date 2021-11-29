@@ -12,6 +12,7 @@ class Constant {
         const val Local_SERVER = "http://ec2-15-165-35-92.ap-northeast-2.compute.amazonaws.com:3000"
         const val CHAT_SERVER = "http://ec2-15-165-35-92.ap-northeast-2.compute.amazonaws.com:3000:81"
 
+        const val AI_SERVER="http://54.180.106.31:5000"
         const val CHANNERID="misson_channel "
         const val EXTRA_NOTIFICATION_TITLE="title"
         const val EXTRA_NOTIFICATION_MESSAGE="message"

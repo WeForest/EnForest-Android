@@ -37,7 +37,10 @@
                 android:id="@+id/chat_title_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="33sp"
+                android:textSize="24sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/noto_sans_kr_regular"
+                android:includeFontPadding="false"
                 tools:text="제목" />
 
         </androidx.appcompat.widget.Toolbar>

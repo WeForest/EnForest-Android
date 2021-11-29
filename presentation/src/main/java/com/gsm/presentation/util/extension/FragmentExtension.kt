@@ -67,6 +67,13 @@ fun File.toMultipartBody(): MultipartBody.Part = MultipartBody.Part.createFormDa
     this.asRequestBody("image/jpeg".toMediaTypeOrNull())
 )
 
+fun File.toAiMultipartBody(): MultipartBody.Part = MultipartBody.Part.createFormData(
+    "image",
+    this.name,
+    this.asRequestBody("image/jpeg".toMediaTypeOrNull())
+)
+
+
 fun List<String>.toMajorItem(): List<MajorItem> {
     return this.map {
         MajorItem(it)

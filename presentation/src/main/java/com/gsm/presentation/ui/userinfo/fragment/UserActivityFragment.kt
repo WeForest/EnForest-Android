@@ -16,12 +16,20 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.gsm.presentation.R
 import com.gsm.presentation.databinding.FragmentUserActivityBinding
+import com.gsm.presentation.ui.main.MainActivity
 import com.gsm.presentation.ui.sign.up.SignUpSignInMainActivity
+import com.gsm.presentation.util.DataState
+import com.gsm.presentation.util.extension.toAiMultipartBody
 import com.gsm.presentation.util.extension.toMultipartBody
+import com.gsm.presentation.viewmodel.ai.AiViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
 import java.io.File
 
 @AndroidEntryPoint
@@ -29,6 +37,7 @@ class UserActivityFragment : Fragment() {
 
     private lateinit var binding: FragmentUserActivityBinding
     private lateinit var getResult: ActivityResultLauncher<Intent>
+    private val aiViewModel: AiViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,6 +47,7 @@ class UserActivityFragment : Fragment() {
             inflater,
             R.layout.fragment_user_activity, container, false
         )
+        binding.fragment = this
 
         getResult = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
@@ -45,28 +55,55 @@ class UserActivityFragment : Fragment() {
 
             try {
 
-                Toast.makeText(requireContext(),"컨퍼런스 인증에 성공했습니다.",Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "컨퍼런스 인증에 성공했습니다.", Toast.LENGTH_SHORT).show()
                 Log.d("postProfile", "onCreateView: ${result?.data?.data}")
                 val file = File(getPathFromUri(result.data?.data))
-//                    postProfile(file.toMultipartBody())
-
-
-//                    binding.profileImageView.setImageURI(result.data?.data)
+                postImage(file.toAiMultipartBody())
 
 
             } catch (e: Exception) {
                 Log.d("TAG", "onCreateView: ${e}")
             }
         }
-        binding.fragment = this
         onclickCamera()
 
         return binding.root
     }
 
+    private fun postImage(toMultipartBody: MultipartBody.Part?) {
+        Log.d("ai", "postImage: ${toMultipartBody}")
+        lifecycleScope.launch {
+            aiViewModel.postConferenceImage(toMultipartBody)
+        }
+
+
+    }
+
+    private fun observe() = with(aiViewModel) {
+        conferenceData.observe(viewLifecycleOwner) {
+            when (it) {
+                is DataState.Success -> {
+
+                    Log.d(TAG, "observe: 성공 ${it.data}")
+                }
+                is DataState.Failure -> {
+                    Log.d(TAG, "observe: 실패 ${it.message}")
+                }
+                is DataState.Loading -> {
+                    Log.d(TAG, "observe: 로딩중..")
+                }
+            }
+        }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        observe()
+    }
+
     @SuppressLint("Range")
     fun getPathFromUri(uri: Uri?): String? {
-        val cursor: Cursor? = (activity as SignUpSignInMainActivity).contentResolver.query(
+        val cursor: Cursor? = (activity as MainActivity).contentResolver.query(
             uri!!,
             null,
             null,

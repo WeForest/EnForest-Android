@@ -7,6 +7,8 @@ import com.gsm.data.network.service.sign.LoginService
 import com.gsm.data.network.service.MissionService
 import com.gsm.data.network.service.ProfileService
 import com.gsm.data.network.service.TestService
+import com.gsm.presentation.data.AiService
+import com.gsm.presentation.util.Constant.Companion.AI_SERVER
 import com.gsm.presentation.util.Constant.Companion.BASE_FCM_URL
 import com.gsm.presentation.util.Constant.Companion.Local_SERVER
 import dagger.hilt.InstallIn
@@ -16,6 +18,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -62,6 +65,24 @@ object NetworkModule {
 
     }
 
+//    @Singleton
+//    @Provides
+//    fun provideRetrofitAiInstance(
+//        okHttpClient: OkHttpClient,
+//        gsonConverterFactory: GsonConverterFactory
+//    ): Retrofit {
+//        return Retrofit.Builder()
+//            .baseUrl(AI_SERVER)
+//            .client(okHttpClient)
+//            //json 변화기 Factory
+//
+//            .client(provideHttpClient())
+//
+//            .addConverterFactory(gsonConverterFactory)
+//            .build()
+//
+//    }
+
 
 
     @Provides
@@ -74,6 +95,12 @@ object NetworkModule {
     @Singleton
     fun provideMissionService(retrofit: Retrofit): MissionService {
         return (retrofit.create(MissionService::class.java))
+    }
+
+    @Provides
+    @Singleton
+    fun provideAiService(retrofit: Retrofit): AiService {
+        return (retrofit.create(AiService::class.java))
     }
 
 
