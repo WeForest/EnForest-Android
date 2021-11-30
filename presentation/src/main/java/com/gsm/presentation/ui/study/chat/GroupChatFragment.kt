@@ -64,8 +64,6 @@ class GroupChatFragment :
     }
 
 
-
-
     override fun FragmentGroupChatBinding.onCreateView() {
         getToken()
         observeNickName()
@@ -266,6 +264,7 @@ class GroupChatFragment :
                     image
                 )
             )
+            binding.studyMeetingRecyclerView.smoothScrollToPosition(mAdapter.itemCount);
         } catch (e: JSONException) {
             Log.d(TAG, "sendMessage: 에러 ${e}")
             e.printStackTrace()
