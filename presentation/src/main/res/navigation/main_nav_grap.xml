@@ -155,6 +155,18 @@
         <action
             android:id="@+id/action_testMainFragment2_to_worngFragment2"
             app:destination="@id/worngFragment2" />
+        <action
+            android:id="@+id/action_testMainFragment2_to_middleTestFragment2"
+            app:destination="@id/middleTestFragment2" />
+        <action
+            android:id="@+id/action_testMainFragment2_to_hardFragment2"
+            app:destination="@id/hardFragment2" />
+        <action
+            android:id="@+id/action_testMainFragment2_to_worngMFragment2"
+            app:destination="@id/worngMFragment2" />
+        <action
+            android:id="@+id/action_testMainFragment2_to_worngHFragment2"
+            app:destination="@id/worngHFragment2" />
     </fragment>
     <fragment
         android:id="@+id/easyTestFragment2"
@@ -199,6 +211,38 @@
         <action
             android:id="@+id/action_worngEndFragment_to_testMainFragment2"
             app:destination="@id/testMainFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/middleTestFragment2"
+        android:name="com.gsm.presentation.ui.test.fragment.MiddleTestFragment"
+        android:label="MiddleTestFragment" >
+        <action
+            android:id="@+id/action_middleTestFragment2_to_testEndFragment2"
+            app:destination="@id/testEndFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/hardFragment2"
+        android:name="com.gsm.presentation.ui.test.fragment.HardFragment"
+        android:label="HardFragment" >
+        <action
+            android:id="@+id/action_hardFragment2_to_testEndFragment2"
+            app:destination="@id/testEndFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/worngHFragment2"
+        android:name="com.gsm.presentation.ui.test.fragment.WorngHFragment"
+        android:label="WorngHFragment" >
+        <action
+            android:id="@+id/action_worngHFragment2_to_worngEndFragment"
+            app:destination="@id/worngEndFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/worngMFragment2"
+        android:name="com.gsm.presentation.ui.test.fragment.WorngMFragment"
+        android:label="WorngMFragment" >
+        <action
+            android:id="@+id/action_worngMFragment2_to_worngEndFragment"
+            app:destination="@id/worngEndFragment" />
     </fragment>
 
 </navigation>

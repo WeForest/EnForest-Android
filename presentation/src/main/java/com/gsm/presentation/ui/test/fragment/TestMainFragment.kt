@@ -1,6 +1,7 @@
 package com.gsm.presentation.ui.test.fragment
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -48,10 +49,28 @@ class TestMainFragment : Fragment() {
         return binding.root
     }
 
-    fun toNavigationWrong() {
+    fun TestMOnclick(){
+
+        //중급
+        if (viewModel.wrongM.size >= 1) {
+            if (findNavController().currentDestination?.id == R.id.testMainFragment) {
+                findNavController().navigate(R.id.action_testMainFragment2_to_worngMFragment2)
+            }
+            else{
+                findNavController().navigate(R.id.action_testMainFragment2_to_worngMFragment2)
+            }
+        }
+
+        else
+        {
+            Toast.makeText(requireContext(), "우선 역량테스트(중급)를 진행 하신 후 다시오세요!", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun TestOnclick(){
         if (viewModel.wrong.size >= 1) {
             if (findNavController().currentDestination?.id == R.id.testMainFragment) {
-                findNavController().navigate(R.id.action_testMainFragment_to_worngFragment)
+                findNavController().navigate(R.id.action_testMainFragment2_to_worngFragment2)
             }
             else{
                 findNavController().navigate(R.id.action_testMainFragment2_to_worngFragment2)
@@ -60,8 +79,28 @@ class TestMainFragment : Fragment() {
 
         else
         {
-            Toast.makeText(requireContext(), "우선 역량테스트를 진행 하신 후 다시오세요!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "우선 역량테스트(초급)를 진행 하신 후 다시오세요!", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    fun TestHOnclick(){
+        if (viewModel.wrongH.size >= 1) {
+            if (findNavController().currentDestination?.id == R.id.testMainFragment) {
+                findNavController().navigate(R.id.action_testMainFragment2_to_worngHFragment2)
+            }
+            else{
+                findNavController().navigate(R.id.action_testMainFragment2_to_worngHFragment2)
+            }
+        }
+
+        else
+        {
+            Toast.makeText(requireContext(), "우선 역량테스트(고급)를 진행 하신 후 다시오세요!", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun toNavigationWrong() {
+        binding.foldingCell.toggle(false)
     }
 
     // 뷰 페이저에 들어갈 아이템

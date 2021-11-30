@@ -63,17 +63,17 @@ class TestEndFragment : Fragment() {
     private fun observeExp() {
         viewModel.pathProfile.observe(viewLifecycleOwner) {
             if (it != 0) {
-                if (findNavController().currentDestination?.id == R.id.testEndFragment2) {
+                binding.imageView.setOnClickListener {  if (findNavController().currentDestination?.id == R.id.testEndFragment2) {
                     viewModel.reset()
-                  findNavController().navigate(R.id.action_testEndFragment2_to_testMainFragment2)
-                    Toast.makeText(requireContext(), "${it}만큼 경험치가 올랐습니다!", Toast.LENGTH_SHORT)
+                    findNavController().navigate(R.id.action_testEndFragment2_to_testMainFragment2)
+                    Toast.makeText(requireContext(), "${viewModel.pathProfile.value}만큼 경험치가 올랐습니다!", Toast.LENGTH_SHORT)
                         .show()
                 } else {
                     viewModel.reset()
                     findNavController().navigate(R.id.action_testEndFragment2_to_testMainFragment2)
-                    Toast.makeText(requireContext(), "${it}만큼 경험치가 올랐습니다!", Toast.LENGTH_SHORT)
+                    Toast.makeText(requireContext(), "${viewModel.pathProfile.value}만큼 경험치가 올랐습니다!", Toast.LENGTH_SHORT)
                         .show()
-                }
+                } }
             } else {
                 viewModel.reset()
                 (activity as TestMainActivity).finish()

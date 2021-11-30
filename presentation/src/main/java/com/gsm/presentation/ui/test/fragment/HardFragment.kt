@@ -9,21 +9,26 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.gsm.presentation.R
-import com.gsm.presentation.databinding.FragmentTestMainBinding
-import com.gsm.presentation.databinding.FragmentWorgBinding
+import com.gsm.presentation.databinding.FragmentHardBinding
+import com.gsm.presentation.databinding.FragmentMiddleTestBinding
 import com.gsm.presentation.viewmodel.test.TestViewModel
+import kotlinx.coroutines.launch
 
-class WorngFragment : Fragment() {
+class HardFragment : Fragment() {
     private val viewModel by activityViewModels<TestViewModel>()
-    private lateinit var binding : FragmentWorgBinding
+    private lateinit var binding : FragmentHardBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_worg, container, false)
+
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_hard, container, false)
+
+        gogo()
 
         binding.lifecycleOwner = this
 
@@ -31,27 +36,39 @@ class WorngFragment : Fragment() {
 
         binding.fragment = this
 
-        viewModel.data.observe(viewLifecycleOwner) {
+        viewModel.dataH.observe(viewLifecycleOwner) {
             binding.text = it
         }
 
         return binding.root
     }
 
+    fun gogo(){
+        lifecycleScope.launch{
+
+            with(viewModel){
+
+                lifecycleScope.launch {
+                    viewModel.getTestH()
+                }
+
+            }
+        }
+    }
+
     fun ifUserSetAnswer(){
         if(viewModel.isChecked.value == true) {
             Log.d("SDf",viewModel.page.value.toString())
-            if(viewModel.page.value == viewModel.wrong.size-1) {
-                if (findNavController().currentDestination?.id == R.id.worngFragment) {
-                    viewModel.reset()
-                    findNavController().navigate(R.id.action_worngFragment2_to_worngEndFragment)
+            if(viewModel.page.value == 9) {
+                if (findNavController().currentDestination?.id == R.id.hardFragment) {
+                    findNavController().navigate(R.id.action_hardFragment2_to_testEndFragment2)
                 }else{
-                    findNavController().navigate(R.id.action_worngFragment2_to_worngEndFragment)
+                    findNavController().navigate(R.id.action_hardFragment2_to_testEndFragment2)
                 }
             }
             else
             {
-                viewModel.getLastClickTextId(binding.radio.checkedRadioButtonId,"틀린문제다시풀기","초급")
+                viewModel.getLastClickTextId(binding.radio.checkedRadioButtonId,"역량평가","고급")
             }
 
         }
@@ -59,6 +76,7 @@ class WorngFragment : Fragment() {
     }
 
     fun ifUserSetBackAnswer(){
+        Log.d("SDf",viewModel.page.value.toString())
         if(viewModel.page.value == 0) {
             Toast.makeText(requireContext(), "0번 이하로 갈수없습니다.", Toast.LENGTH_SHORT).show()
         }

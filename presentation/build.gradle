@@ -48,6 +48,8 @@ android {
 
 dependencies {
 
+    implementation 'com.ramotion.foldingcell:folding-cell:1.2.3'
+
 
     implementation project(':domain')
     implementation 'com.github.dhaval2404:imagepicker:2.1'

@@ -17,7 +17,11 @@
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar5"
+            android:backgroundTint="#BDD5E7"
+            android:background="@drawable/background_practice_test"
             android:layout_width="match_parent"
+            android:elevation="5dp"
+            android:layout_margin="10dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,6 +37,10 @@
         </androidx.appcompat.widget.Toolbar>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:id="@+id/study_meeting_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -43,7 +51,6 @@
         <com.google.android.material.bottomappbar.BottomAppBar
             android:id="@+id/bottomAppBar"
             style="@style/Widget.MaterialComponents.BottomAppBar"
-
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -52,13 +59,27 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:ignore="BottomAppBar">
 
+
             <EditText
                 android:id="@+id/message_edit"
                 android:layout_width="300dp"
+                android:fontFamily="@font/noto_sans_kr_medium"
+                android:padding="10dp"
+                android:elevation="5dp"
+                android:textSize="14dp"
+                android:layout_marginTop="20dp"
+                android:backgroundTint="#D0E5F4"
+                android:background="@drawable/background_practice_test"
+                android:layout_marginBottom="20dp"
+                android:text="안녕하세요 반가워요!"
+                android:layout_marginRight="10dp"
                 android:layout_height="wrap_content" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/send_btn"
+                android:elevation="5dp"
+                android:layout_margin="20dp"
+                android:background="@drawable/background_practice_test"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="보내기" />

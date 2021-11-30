@@ -42,8 +42,20 @@ class TestViewPagerAdapter(
                                 .navigate(R.id.action_testMainFragment2_to_easyTestFragment2)
                         }
                     }
-                    1 -> {}
-                    2 -> {}
+                    1 -> {    if (findNavController(fragment).currentDestination?.id == R.id.testMainFragment) {
+                        fragment.findNavController()
+                            .navigate(R.id.action_testMainFragment_to_middleTestFragment)
+                    }else{
+                        fragment.findNavController()
+                            .navigate(R.id.action_testMainFragment2_to_middleTestFragment2)
+                    }}
+                    2 -> {    if (findNavController(fragment).currentDestination?.id == R.id.testMainFragment) {
+                        fragment.findNavController()
+                            .navigate(R.id.action_testMainFragment_to_hardFragment)
+                    }else{
+                        fragment.findNavController()
+                            .navigate(R.id.action_testMainFragment2_to_hardFragment2)
+                    }}
                 }
             }
         }

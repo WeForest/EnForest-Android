@@ -9,32 +9,24 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import com.gsm.data.entity.test.response.GetTestItem
-import com.gsm.data.entity.test.response.GetTestResponse
 import com.gsm.presentation.R
 import com.gsm.presentation.databinding.FragmentEasyTestBinding
-import com.gsm.presentation.util.EventObserver
+import com.gsm.presentation.databinding.FragmentMiddleTestBinding
 import com.gsm.presentation.viewmodel.test.TestViewModel
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-@AndroidEntryPoint
-class EasyTestFragment : Fragment() {
+class MiddleTestFragment : Fragment() {
     private val viewModel by activityViewModels<TestViewModel>()
-    private lateinit var binding : FragmentEasyTestBinding
+    private lateinit var binding : FragmentMiddleTestBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
 
-
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_easy_test, container, false)
-
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_middle_test, container, false)
         gogo()
 
         binding.lifecycleOwner = this
@@ -43,24 +35,22 @@ class EasyTestFragment : Fragment() {
 
         binding.fragment = this
 
-        viewModel.data.observe(viewLifecycleOwner) {
+        viewModel.dataM.observe(viewLifecycleOwner) {
             binding.text = it
         }
-
-
         return binding.root
     }
 
     fun gogo(){
         lifecycleScope.launch{
 
-                with(viewModel){
+            with(viewModel){
 
-                    lifecycleScope.launch {
-                        viewModel.getTest()
-                    }
-
+                lifecycleScope.launch {
+                    viewModel.getTestM()
                 }
+
+            }
         }
     }
 
@@ -68,15 +58,15 @@ class EasyTestFragment : Fragment() {
         if(viewModel.isChecked.value == true) {
             Log.d("SDf",viewModel.page.value.toString())
             if(viewModel.page.value == 19) {
-                if (findNavController().currentDestination?.id == R.id.easyTestFragment) {
-                    findNavController().navigate(R.id.action_easyTestFragment2_to_testEndFragment2)
+                if (findNavController().currentDestination?.id == R.id.middleTestFragment) {
+                    findNavController().navigate(R.id.action_middleTestFragment2_to_testEndFragment2)
                 }else{
-                    findNavController().navigate(R.id.action_easyTestFragment2_to_testEndFragment2)
+                    findNavController().navigate(R.id.action_middleTestFragment2_to_testEndFragment2)
                 }
             }
             else
             {
-                viewModel.getLastClickTextId(binding.radio.checkedRadioButtonId,"역량평가","초급")
+                viewModel.getLastClickTextId(binding.radio.checkedRadioButtonId,"역량평가","중급")
             }
 
         }
@@ -84,14 +74,14 @@ class EasyTestFragment : Fragment() {
     }
 
     fun ifUserSetBackAnswer(){
-            Log.d("SDf",viewModel.page.value.toString())
-            if(viewModel.page.value == 0) {
-                Toast.makeText(requireContext(), "0번 이하로 갈수없습니다.", Toast.LENGTH_SHORT).show()
-            }
-            else
-            {
-                viewModel.backTest()
-            }
-
+        Log.d("SDf",viewModel.page.value.toString())
+        if(viewModel.page.value == 0) {
+            Toast.makeText(requireContext(), "0번 이하로 갈수없습니다.", Toast.LENGTH_SHORT).show()
         }
+        else
+        {
+            viewModel.backTest()
+        }
+
     }
+}

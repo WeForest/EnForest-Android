@@ -11,19 +11,19 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.gsm.presentation.R
-import com.gsm.presentation.databinding.FragmentTestMainBinding
+import com.gsm.presentation.databinding.FragmentHardBinding
 import com.gsm.presentation.databinding.FragmentWorgBinding
+import com.gsm.presentation.databinding.FragmentWorngMBinding
 import com.gsm.presentation.viewmodel.test.TestViewModel
 
-class WorngFragment : Fragment() {
+class WorngMFragment : Fragment() {
     private val viewModel by activityViewModels<TestViewModel>()
-    private lateinit var binding : FragmentWorgBinding
+    private lateinit var binding : FragmentWorngMBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_worg, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_worng_m, container, false)
 
         binding.lifecycleOwner = this
 
@@ -31,7 +31,7 @@ class WorngFragment : Fragment() {
 
         binding.fragment = this
 
-        viewModel.data.observe(viewLifecycleOwner) {
+        viewModel.dataM.observe(viewLifecycleOwner) {
             binding.text = it
         }
 
@@ -41,17 +41,17 @@ class WorngFragment : Fragment() {
     fun ifUserSetAnswer(){
         if(viewModel.isChecked.value == true) {
             Log.d("SDf",viewModel.page.value.toString())
-            if(viewModel.page.value == viewModel.wrong.size-1) {
-                if (findNavController().currentDestination?.id == R.id.worngFragment) {
+            if(viewModel.page.value == viewModel.wrongM.size-1) {
+                if (findNavController().currentDestination?.id == R.id.worngMFragment) {
                     viewModel.reset()
-                    findNavController().navigate(R.id.action_worngFragment2_to_worngEndFragment)
+                    findNavController().navigate(R.id.action_worngMFragment_to_worngEndFragment2)
                 }else{
-                    findNavController().navigate(R.id.action_worngFragment2_to_worngEndFragment)
+                    findNavController().navigate(R.id.action_worngMFragment2_to_worngEndFragment)
                 }
             }
             else
             {
-                viewModel.getLastClickTextId(binding.radio.checkedRadioButtonId,"틀린문제다시풀기","초급")
+                viewModel.getLastClickTextId(binding.radio.checkedRadioButtonId,"틀린문제다시풀기","중급")
             }
 
         }
@@ -68,4 +68,5 @@ class WorngFragment : Fragment() {
         }
 
     }
+
 }

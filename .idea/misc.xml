@@ -114,12 +114,35 @@
         <entry key="presentation/src/main/res/drawable/background_grow.xml" value="0.16666666666666666" />
         <entry key="presentation/src/main/res/drawable/background_grow_title.xml" value="0.16666666666666666" />
         <entry key="presentation/src/main/res/drawable/background_practice_test.xml" value="0.16666666666666666" />
+        <entry key="presentation/src/main/res/drawable/chat_edit_bavk.xml" value="0.3707692307692308" />
+        <entry key="presentation/src/main/res/drawable/mission_right.xml" value="0.3050632911392405" />
+        <entry key="presentation/src/main/res/drawable/profile_background.xml" value="0.17863247863247864" />
+        <entry key="presentation/src/main/res/layout/activity_test_main.xml" value="0.16538461538461538" />
+        <entry key="presentation/src/main/res/layout/activity_user_info.xml" value="0.29572649572649573" />
+        <entry key="presentation/src/main/res/layout/bottom_sheet_dialog_write_mission.xml" value="0.29572649572649573" />
+        <entry key="presentation/src/main/res/layout/chat_layout.xml" value="0.375" />
+        <entry key="presentation/src/main/res/layout/chatting_group_recycler.xml" value="0.29572649572649573" />
+        <entry key="presentation/src/main/res/layout/community_recycler_view_item.xml" value="0.29572649572649573" />
+        <entry key="presentation/src/main/res/layout/dddd.xml" value="0.29572649572649573" />
+        <entry key="presentation/src/main/res/layout/fragment_easy_test.xml" value="0.16538461538461538" />
+        <entry key="presentation/src/main/res/layout/fragment_group_chat.xml" value="0.375" />
+        <entry key="presentation/src/main/res/layout/fragment_group_list_bottom_sheet.xml" value="0.29572649572649573" />
+        <entry key="presentation/src/main/res/layout/fragment_hard.xml" value="0.2919831223628692" />
+        <entry key="presentation/src/main/res/layout/fragment_middle_test.xml" value="0.16538461538461538" />
+        <entry key="presentation/src/main/res/layout/fragment_mission_detail.xml" value="0.29572649572649573" />
+        <entry key="presentation/src/main/res/layout/fragment_profile.xml" value="0.335" />
+        <entry key="presentation/src/main/res/layout/fragment_test_end.xml" value="0.16538461538461538" />
+        <entry key="presentation/src/main/res/layout/fragment_test_main.xml" value="0.45" />
         <entry key="presentation/src/main/res/layout/fragment_user_activity.xml" value="0.25" />
         <entry key="presentation/src/main/res/layout/fragment_user_info.xml" value="0.25" />
+        <entry key="presentation/src/main/res/layout/fragment_worg.xml" value="0.16538461538461538" />
+        <entry key="presentation/src/main/res/layout/fragment_worng_end.xml" value="0.45" />
+        <entry key="presentation/src/main/res/layout/fragment_worng_h.xml" value="0.16538461538461538" />
+        <entry key="presentation/src/main/res/layout/fragment_worng_m.xml" value="0.16538461538461538" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
