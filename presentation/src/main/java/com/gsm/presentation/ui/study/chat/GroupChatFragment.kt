@@ -3,6 +3,7 @@ package com.gsm.presentation.ui.study.chat
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -63,6 +64,8 @@ class GroupChatFragment :
     }
 
 
+
+
     override fun FragmentGroupChatBinding.onCreateView() {
         getToken()
         observeNickName()
@@ -76,6 +79,12 @@ class GroupChatFragment :
 
 
     }
+
+//    private fun recyclerViewSetting(){
+//        binding.studyMeetingRecyclerView.addOnLayoutChangeListener(View.OnLayoutChangeListener(
+//
+//        ))
+//    }
 
     private fun setData() {
         lifecycleScope.launch {

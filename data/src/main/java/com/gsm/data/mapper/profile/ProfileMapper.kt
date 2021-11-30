@@ -54,15 +54,15 @@ fun List<MajorItem>.toDomain(): List<Major> {
 
 fun PathProfileResponse.toDomain(): PathProfileEntity {
     return PathProfileEntity(
-        this.sub,
-        this.name,
-        this.profileImg,
-        this.isJobSeeker,
-        this.companyEmail,
-        this.authCompany,
-        this.purpose,
-        this.level,
-        this.exp,
-        this.id
+        sub = this.sub,
+        name = this.name,
+        profileImg = this.profileImg,
+        isJobSeeker = this.isJobSeeker,
+        companyEmail = this.companyEmail,
+        authCompany = this.authCompany,
+        id = this.id,
+        purpose = this.purpose,
+        exp = this.exp,
+        level = this.level
     )
 }

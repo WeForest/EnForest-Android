@@ -40,6 +40,9 @@ class TestViewModel @Inject constructor(
     private val _page = MutableLiveData<Int>()
     val page: LiveData<Int> get() = _page
 
+    private val _pathProfile = MutableLiveData<Int?>()
+     val pathProfile : LiveData<Int?> get()=_pathProfile
+
     init {
         _backIsOk.value = false
         _page.value = 0
@@ -99,9 +102,12 @@ class TestViewModel @Inject constructor(
     suspend fun questionCheck(token: String, number: Int) = viewModelScope.launch {
         try {
             service.questionCheck(token,number).let {
+                _pathProfile.value=it.exp
+                Log.d(TAG, "questionCheck: ${it.exp}")
                 _isSuccess.value = Event(true)
             }
         }catch (e:Exception){
+            Log.d(TAG, "questionCheck: ${e}")
             _isSuccess.value = Event(false)
 
         }
