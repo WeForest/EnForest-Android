@@ -18,6 +18,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.gsm.presentation.R
 import com.gsm.presentation.adapter.ConferenceAdapter
 import com.gsm.presentation.databinding.FragmentUserActivityBinding
@@ -67,7 +69,7 @@ class UserActivityFragment : Fragment() {
             try {
 
                 Log.d("postProfile", "onCreateView: ${result?.data?.data}")
-                file= File(getPathFromUri(result.data?.data))
+                file = File(getPathFromUri(result.data?.data))
                 postImage(file.toAiMultipartBody())
                 observe(file.toMultipartBody())
 
@@ -94,7 +96,7 @@ class UserActivityFragment : Fragment() {
     }
 
 
-    private fun observe(file:MultipartBody.Part) = with(aiViewModel) {
+    private fun observe(file: MultipartBody.Part) = with(aiViewModel) {
         conferenceData.observe(viewLifecycleOwner) {
             when (it) {
                 is DataState.Success -> {
@@ -111,11 +113,15 @@ class UserActivityFragment : Fragment() {
                 is DataState.Failure -> {
                     binding.imageView2.visibility = View.GONE
                     binding.conferenceLayout.visibility = View.VISIBLE
+
+
+
                     Log.d(TAG, "observe: 실패 ${it.message}")
                 }
                 is DataState.Loading -> {
                     binding.conferenceLayout.visibility = View.GONE
                     binding.imageView2.visibility = View.VISIBLE
+                    binding.conferenceRecycler.visibility=View.GONE
                     binding.imageView2.playAnimation();
                     binding.imageView2.loop(true)
 
@@ -154,7 +160,7 @@ class UserActivityFragment : Fragment() {
     fun getConferenceData() {
         viewModel.conferenceData.observe(viewLifecycleOwner) {
             Log.d("TAG", "getConferenceData: ${it}")
-            conferenceAdapter.setData(listOf(it))
+            conferenceAdapter.setData((it))
         }
     }
 
@@ -162,7 +168,8 @@ class UserActivityFragment : Fragment() {
     fun setAdapter() {
         binding.conferenceRecycler.apply {
             adapter = conferenceAdapter
-            showVertical(requireContext())
+            this.layoutManager =
+                GridLayoutManager(requireContext(), 2,LinearLayoutManager.VERTICAL, false)
         }
     }
 

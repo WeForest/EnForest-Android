@@ -6,12 +6,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.gsm.presentation.R
-import com.gsm.presentation.data.dto.ConFerenceResponseX
+import com.gsm.presentation.data.dto.ConFerenceResponseItem
 import com.gsm.presentation.databinding.ConferenceItemBinding
 
 class ConferenceAdapter : RecyclerView.Adapter<ConferenceAdapter.ConFerenceViewHolder>() {
 
-    private var conFerenceList = mutableListOf<ConFerenceResponseX>()
+    private var conFerenceList = mutableListOf<ConFerenceResponseItem>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ConFerenceViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = DataBindingUtil.inflate<ConferenceItemBinding>(
@@ -36,14 +36,14 @@ class ConferenceAdapter : RecyclerView.Adapter<ConferenceAdapter.ConFerenceViewH
         RecyclerView.ViewHolder(binding.root) {
 
 
-        fun bind(data: ConFerenceResponseX) {
-            binding.data=data[0]
+        fun bind(data: ConFerenceResponseItem) {
+            binding.data=data
             binding.executePendingBindings()
 
         }
     }
 
-    fun setData(data: List<ConFerenceResponseX>) {
+    fun setData(data: List<ConFerenceResponseItem>) {
 
         val conFerenceDiffUtil =ConFerenceDiffUtil(conFerenceList, (data))
         val diffUtilResult = conFerenceDiffUtil.let { DiffUtil.calculateDiff(it) }
@@ -52,8 +52,8 @@ class ConferenceAdapter : RecyclerView.Adapter<ConferenceAdapter.ConFerenceViewH
     }
 
     class ConFerenceDiffUtil(
-        private val oldList: List<ConFerenceResponseX>,
-        private val newList: List<ConFerenceResponseX>
+        private val oldList: List<ConFerenceResponseItem>,
+        private val newList: List<ConFerenceResponseItem>
     ) : DiffUtil.Callback() {
         override fun getOldListSize(): Int = oldList.size
 

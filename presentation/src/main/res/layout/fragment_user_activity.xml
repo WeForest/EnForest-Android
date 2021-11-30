@@ -79,11 +79,12 @@
                 android:layout_marginRight="20dp"
                 android:backgroundTint="#95A8B7"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout11"
-                tools:layout_editor_absoluteX="24dp">
+               >
 
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/imageView"
                     android:layout_width="350dp"
+                    tools:src="@drawable/mission_calendar_day_31"
                     android:layout_height="300dp"
                     android:layout_marginTop="64dp"
                     android:background="@drawable/background_practice_test"
@@ -102,7 +103,7 @@
                     android:id="@+id/textView23"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
+                    android:layout_marginTop="100dp"
 
                     android:text="내가 성장한 순간들을 기록해두었어요"
                     android:fontFamily="@font/noto_sans_kr_bold"
@@ -120,13 +121,10 @@
                     android:layout_marginRight="20dp"
                     android:background="@drawable/background_practice_test"
                     android:elevation="10dp"
-                    android:layout_marginBottom="100dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.475"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView23"
-                    app:layout_constraintVertical_bias="0.547">
+                >
 
 
                     <TextView
@@ -212,7 +210,6 @@
                     android:layout_margin="20sp"
 
                     android:background="@drawable/background_practice_test"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView26">
