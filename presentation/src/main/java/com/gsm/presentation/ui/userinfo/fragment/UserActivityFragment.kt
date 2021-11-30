@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
@@ -102,6 +103,7 @@ class UserActivityFragment : Fragment() {
                 is DataState.Success -> {
                     binding.imageView2.visibility = View.GONE
                     binding.conferenceLayout.visibility = View.VISIBLE
+                    binding.conferenceRecycler.visibility = View.VISIBLE
                     lifecycleScope.launch {
                         viewModel.pathConference(
                             token, file, it.data.conference.toString(),
@@ -113,15 +115,16 @@ class UserActivityFragment : Fragment() {
                 is DataState.Failure -> {
                     binding.imageView2.visibility = View.GONE
                     binding.conferenceLayout.visibility = View.VISIBLE
+                    binding.conferenceRecycler.visibility = View.VISIBLE
 
-
+                    Toast.makeText(requireContext(),"부합하지 않은 정보입니다.",Toast.LENGTH_SHORT).show()
 
                     Log.d(TAG, "observe: 실패 ${it.message}")
                 }
                 is DataState.Loading -> {
                     binding.conferenceLayout.visibility = View.GONE
                     binding.imageView2.visibility = View.VISIBLE
-                    binding.conferenceRecycler.visibility=View.GONE
+                    binding.conferenceRecycler.visibility = View.GONE
                     binding.imageView2.playAnimation();
                     binding.imageView2.loop(true)
 
@@ -169,7 +172,7 @@ class UserActivityFragment : Fragment() {
         binding.conferenceRecycler.apply {
             adapter = conferenceAdapter
             this.layoutManager =
-                GridLayoutManager(requireContext(), 2,LinearLayoutManager.VERTICAL, false)
+                GridLayoutManager(requireContext(), 2, LinearLayoutManager.VERTICAL, false)
         }
     }
 

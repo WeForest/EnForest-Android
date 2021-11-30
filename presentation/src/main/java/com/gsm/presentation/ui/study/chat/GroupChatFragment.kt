@@ -307,6 +307,29 @@ class GroupChatFragment :
                 }
                 is DataState.Failure -> {
                     Log.d(TAG, "observe: 실패 ${it.message}")
+
+                    val jsonObject = JSONObject()
+                    try {
+                        Log.d(TAG, "sendMessage: ${abuse} message ${content}")
+                        jsonObject.put("token", token)
+                        jsonObject.put("roomId", args.chat.id)
+                        jsonObject.put("message", content)
+                        jsonObject.put("abuse", abuse)
+                        socket.emit("sendMessage", jsonObject)
+                        Log.d(TAG, "sendMessage to Emit : ${abuse} message ${content}")
+                        mAdapter.addItem(
+                            ChatModel(
+                                nickname = nickName,
+                                contents = content,
+                                profile_image = image,
+                                abuse = abuse
+                            )
+                        )
+                        binding.studyMeetingRecyclerView.smoothScrollToPosition(mAdapter.itemCount);
+                    } catch (e: JSONException) {
+                        Log.d(TAG, "sendMessage: 에러 ${e}")
+                        e.printStackTrace()
+                    }
                 }
                 is DataState.Loading -> {
 
