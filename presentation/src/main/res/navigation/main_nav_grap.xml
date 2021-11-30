@@ -139,6 +139,9 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim"
             android:id="@+id/action_testMainFragment2_to_easyTestFragment2"
             app:destination="@id/easyTestFragment2" />
+        <action
+            android:id="@+id/action_testMainFragment2_to_worngFragment2"
+            app:destination="@id/worngFragment2" />
     </fragment>
     <fragment
         android:id="@+id/easyTestFragment2"
@@ -167,6 +170,22 @@
         <action
             android:id="@+id/action_userActivityFragment2_to_userInfoFragment2"
             app:destination="@id/userInfoFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/worngFragment2"
+        android:name="com.gsm.presentation.ui.test.fragment.WorngFragment"
+        android:label="WorngFragment" >
+        <action
+            android:id="@+id/action_worngFragment2_to_worngEndFragment"
+            app:destination="@id/worngEndFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/worngEndFragment"
+        android:name="com.gsm.presentation.ui.test.fragment.WorngEndFragment"
+        android:label="WorngEndFragment" >
+        <action
+            android:id="@+id/action_worngEndFragment_to_testMainFragment2"
+            app:destination="@id/testMainFragment2" />
     </fragment>
 
 </navigation>
