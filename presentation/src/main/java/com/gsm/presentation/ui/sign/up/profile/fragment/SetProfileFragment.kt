@@ -214,27 +214,22 @@ class SetProfileFragment : Fragment() {
     private fun getUserProfileAndSetting() {
 
         lifecycleScope.launch {
-            viewModel.isSuccess.observe(viewLifecycleOwner, EventObserver { success ->
-                viewModel.pathProfileData.observe(viewLifecycleOwner, EventObserver { data ->
-                    Log.d("TAG", "getUserProfileAndSetting: dd ${data.level}")
-                    if (success) {
-                        if (data.level == 0) {
-                            startActivity(Intent(requireContext(), TestMainActivity::class.java))
-                            (activity as SignUpSignInMainActivity).finish()
-                        } else {
-                            startActivity(Intent(requireContext(), MainActivity::class.java))
-                            (activity as SignUpSignInMainActivity).finish()
-                        }
-                    } else {
-                        Log.d("TAG", "getUserProfileAndSetting: 실패")
-                        Toast.makeText(requireContext(), "실패", Toast.LENGTH_SHORT).show()
-                    }
-                })
+
+            viewModel.pathProfileData.observe(viewLifecycleOwner, EventObserver { data ->
+                Log.d("TAG", "getUserProfileAndSetting: dd ${data.level}")
+                if (data.exp == 0) {
+                    startActivity(Intent(requireContext(), TestMainActivity::class.java))
+                    (activity as SignUpSignInMainActivity).finish()
+                } else {
+                    startActivity(Intent(requireContext(), MainActivity::class.java))
+                    (activity as SignUpSignInMainActivity).finish()
+                }
             })
-
-
         }
+
+
     }
 }
+
 
 
