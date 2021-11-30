@@ -17,30 +17,18 @@
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_missionFragment_to_missionDetailFragment"
-            app:destination="@id/missionDetailFragment"
             app:enterAnim="@anim/from_right"
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
-            app:popExitAnim="@anim/to_right" />
-        <argument
-            android:name="data"
-            android:defaultValue="false"
-            app:argType="boolean" />
-
+            app:popExitAnim="@anim/to_right"
+            app:destination="@id/missionDetailFragment" />
 
     </fragment>
     <dialog
         android:id="@+id/bottomSheetMissionDialog"
         android:name="com.gsm.presentation.ui.mission.bottomSheet.BottomSheetMissionDialog"
         android:label="BottomSheetMissionDialog"
-        tools:layout="@layout/bottom_sheet_dialog_write_mission">
-        <action
-            android:id="@+id/action_bottomSheetMissionDialog_to_missionFragment"
-            app:destination="@id/missionFragment" />
-
-    </dialog>
-
-
+        tools:layout="@layout/bottom_sheet_dialog_write_mission" />
     <fragment
         android:id="@+id/missionDetailFragment"
         android:name="com.gsm.presentation.ui.mission.MissionDetailFragment"
@@ -67,6 +55,9 @@
         android:name="com.gsm.presentation.ui.study.group.GroupListFragment"
         android:label="StudyFragment"
         tools:layout="@layout/fragment_group_list">
+
+
+
 
 
     </fragment>
@@ -100,9 +91,7 @@
         <action
             android:id="@+id/action_communityFragment_to_groupChatActivity2"
             app:destination="@id/groupChatActivity2" />
-        <action
-            android:id="@+id/action_communityFragment_to_groupChatFragment"
-            app:destination="@id/groupChatFragment" />
+
     </fragment>
 
     <dialog
@@ -135,12 +124,12 @@
         android:name="com.gsm.presentation.ui.test.fragment.TestMainFragment"
         android:label="TestMainFragment">
         <action
-            android:id="@+id/action_testMainFragment2_to_easyTestFragment2"
-            app:destination="@id/easyTestFragment2"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+            app:popExitAnim="@anim/nav_default_pop_exit_anim"
+            android:id="@+id/action_testMainFragment2_to_easyTestFragment2"
+            app:destination="@id/easyTestFragment2" />
     </fragment>
     <fragment
         android:id="@+id/easyTestFragment2"

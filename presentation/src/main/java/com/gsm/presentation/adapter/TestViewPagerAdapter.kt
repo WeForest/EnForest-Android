@@ -10,16 +10,19 @@ import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.gsm.presentation.R
+import com.gsm.presentation.viewmodel.test.TestViewModel
 
 class TestViewPagerAdapter(
     testColorItemList: ArrayList<String>,
     textSetTestLevel: ArrayList<Int>,
-    fragment: Fragment
+    fragment: Fragment,
+    viewmodel : TestViewModel
 ) : RecyclerView.Adapter<TestViewPagerAdapter.PagerViewHolder>() {
 
     var item = testColorItemList
     var textLevelItem = textSetTestLevel
     var fragment = fragment
+    var viewmodel = viewmodel
 
     inner class PagerViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder
         (LayoutInflater.from(parent.context).inflate(R.layout.test_item, parent, false)) {
