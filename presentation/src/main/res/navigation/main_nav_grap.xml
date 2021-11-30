@@ -132,6 +132,7 @@
         android:id="@+id/testMainFragment2"
         android:name="com.gsm.presentation.ui.test.fragment.TestMainFragment"
         android:label="TestMainFragment" >
+
         <action
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"

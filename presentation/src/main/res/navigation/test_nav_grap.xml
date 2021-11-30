@@ -5,6 +5,7 @@
     android:id="@+id/test_nav_grap"
     app:startDestination="@id/easyTestFragment">
 
+
     <fragment
         tools:layout="@layout/fragment_test_main"
         android:id="@+id/testMainFragment"
