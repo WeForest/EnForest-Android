@@ -146,6 +146,8 @@
         <entry key="presentation/src/main/res/layout/fragment_test_main.xml" value="0.11574074074074074" />
         <entry key="presentation/src/main/res/layout/fragment_user_activity.xml" value="0.25" />
         <entry key="presentation/src/main/res/layout/fragment_user_info.xml" value="0.25" />
+        <entry key="presentation/src/main/res/layout/fragment_worg.xml" value="0.335" />
+        <entry key="presentation/src/main/res/layout/fragment_worng_end.xml" value="0.25" />
         <entry key="presentation/src/main/res/layout/item_get_mission.xml" value="0.375" />
         <entry key="presentation/src/main/res/layout/item_mission.xml" value="0.625" />
         <entry key="presentation/src/main/res/layout/item_my_chat.xml" value="0.17962962962962964" />
