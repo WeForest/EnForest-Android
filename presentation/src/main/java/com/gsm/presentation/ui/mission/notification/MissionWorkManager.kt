@@ -20,7 +20,6 @@ class MissionWorkManager(context: Context, params: WorkerParameters) :
             val title = inputData.getString(EXTRA_NOTIFICATION_TITLE).toString()
             val message = inputData.getString(EXTRA_NOTIFICATION_MESSAGE).toString()
             Log.d("알람", "doWork: ${title} ${message}")
-            // FCM 전송
             NotificationUtil(applicationContext).showNotification(
                 title,
                 message

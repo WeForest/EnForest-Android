@@ -103,8 +103,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:fontFamily="@font/noto_sans_kr_bold"
+
                     android:text="내가 성장한 순간들을 기록해두었어요"
+                    android:fontFamily="@font/noto_sans_kr_bold"
                     android:textColor="@color/black"
                     android:textSize="18dp"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -116,11 +117,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
-                    android:layout_marginTop="100dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginBottom="200sp"
                     android:background="@drawable/background_practice_test"
                     android:elevation="10dp"
+                    android:layout_marginBottom="100dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.475"
@@ -229,6 +229,34 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
 
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    app:layout_constraintTop_toBottomOf="@id/conference_layout"
+                    app:layout_constraintLeft_toLeftOf="@id/conference_layout"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/textView32"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/noto_sans_kr_bold"
+                        android:textColor="@color/black"
+                        android:textSize="18dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="성공한 컨퍼런스 인증 !" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/conference_recycler"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:listitem="@layout/conference_item"
+                        app:layout_constraintTop_toBottomOf="@id/textView32"
+                 />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>

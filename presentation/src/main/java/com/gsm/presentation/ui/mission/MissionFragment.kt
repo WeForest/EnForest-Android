@@ -1,6 +1,12 @@
 package com.gsm.presentation.ui.mission
 
 import android.annotation.SuppressLint
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
+import android.os.Build
+import android.os.SystemClock
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -16,8 +22,10 @@ import com.gsm.presentation.R
 import com.gsm.presentation.adapter.MissionAdapter
 import com.gsm.presentation.base.BaseFragment
 import com.gsm.presentation.databinding.FragmentMissionBinding
+import com.gsm.presentation.ui.mission.notification.MissionBroadcastReceiver
 import com.gsm.presentation.ui.mission.notification.MissionWorkManager
 import com.gsm.presentation.util.App
+import com.gsm.presentation.util.Constant.Companion.ALARM_TIMER
 import com.gsm.presentation.util.Constant.Companion.EXTRA_NOTIFICATION_MESSAGE
 import com.gsm.presentation.util.Constant.Companion.EXTRA_NOTIFICATION_TITLE
 import com.gsm.presentation.util.EventObserver
@@ -209,7 +217,7 @@ class MissionFragment : BaseFragment<FragmentMissionBinding>(R.layout.fragment_m
             Log.d("알람", "observeGetMission: ${it.title} ${it.content}")
             title = it.title.toString()
             message = it.content.toString()
-            setAlarm(title, message)
+//            setAlarm(title, message)
             Log.d("mission", "observeGetMission: setNumber ${number}")
 
 
