@@ -1,5 +1,6 @@
 package com.gsm.presentation.data
 
+import com.gsm.presentation.data.dto.AbuseRequest
 import com.gsm.presentation.data.dto.AbuseResponse
 import com.gsm.presentation.data.dto.ConferenceResponse
 import okhttp3.MultipartBody
@@ -8,10 +9,10 @@ import retrofit2.http.*
 
 interface AiService {
 
-    @GET("abuse/{data}")
+    @GET("abuse")
     suspend fun getAbuse(
 
-        @Path("data") data: String,
+       @Query("data")data: String
     ): Response<AbuseResponse>
 
     @Multipart

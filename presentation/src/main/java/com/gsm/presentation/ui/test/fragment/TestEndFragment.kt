@@ -65,13 +65,12 @@ class TestEndFragment : Fragment() {
             if (it != 0) {
                 if (findNavController().currentDestination?.id == R.id.testEndFragment2) {
                     viewModel.reset()
-                    startActivity(Intent(requireContext(), MainActivity::class.java))
+                  findNavController().navigate(R.id.action_testEndFragment2_to_testMainFragment2)
                     Toast.makeText(requireContext(), "${it}만큼 경험치가 올랐습니다!", Toast.LENGTH_SHORT)
                         .show()
                 } else {
                     viewModel.reset()
-                    (activity as TestMainActivity).finish()
-                    startActivity(Intent(requireContext(), MainActivity::class.java))
+                    findNavController().navigate(R.id.action_testEndFragment2_to_testMainFragment2)
                     Toast.makeText(requireContext(), "${it}만큼 경험치가 올랐습니다!", Toast.LENGTH_SHORT)
                         .show()
                 }

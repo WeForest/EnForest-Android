@@ -3,6 +3,7 @@ package com.gsm.presentation.viewmodel.ai
 import android.util.Log
 import androidx.lifecycle.*
 import com.gsm.presentation.data.AiService
+import com.gsm.presentation.data.dto.AbuseRequest
 import com.gsm.presentation.data.dto.AbuseResponse
 import com.gsm.presentation.data.dto.ConferenceResponse
 import com.gsm.presentation.util.DataState
@@ -51,10 +52,13 @@ class AiViewModel @Inject constructor(
         _abuseData.postValue(DataState.Loading)
         try {
             service.getAbuse(text).let {
-                    _abuseData.postValue(DataState.Success(it.body()!!))
+                Log.d(TAG, "abuseText: ${it}")
+
+                _abuseData.postValue(DataState.Success(it.body()!!))
             }
         } catch (e: Exception) {
 
+            Log.d(TAG, "abuseText: ${e}")
             _abuseData.postValue(DataState.Failure(400,"실패했습니다."))
         }
 
