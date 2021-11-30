@@ -68,14 +68,19 @@ class TestEndFragment : Fragment() {
                     startActivity(Intent(requireContext(), MainActivity::class.java))
                     Toast.makeText(requireContext(), "${it}만큼 경험치가 올랐습니다!", Toast.LENGTH_SHORT)
                         .show()
-
-                }else{
+                } else {
                     viewModel.reset()
                     (activity as TestMainActivity).finish()
                     startActivity(Intent(requireContext(), MainActivity::class.java))
-                    Toast.makeText(requireContext(), "한문제도 문제를 맞추시 못했습니다 ㅠㅠ", Toast.LENGTH_SHORT)
+                    Toast.makeText(requireContext(), "${it}만큼 경험치가 올랐습니다!", Toast.LENGTH_SHORT)
                         .show()
                 }
+            } else {
+                viewModel.reset()
+                (activity as TestMainActivity).finish()
+                startActivity(Intent(requireContext(), MainActivity::class.java))
+                Toast.makeText(requireContext(), "한문제도 문제를 맞추시 못했습니다 ㅠㅠ", Toast.LENGTH_SHORT)
+                    .show()
             }
 
         }

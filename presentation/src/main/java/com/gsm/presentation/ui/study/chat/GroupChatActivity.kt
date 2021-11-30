@@ -15,8 +15,6 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class GroupChatActivity : BaseActivity<ActivityGroupChatBinding>(R.layout.activity_group_chat) {
-    private val viewModel: GroupViewModel by viewModels()
-    private val args by navArgs<GroupChatActivityArgs>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -27,6 +25,5 @@ class GroupChatActivity : BaseActivity<ActivityGroupChatBinding>(R.layout.activi
             }
         }
 
-        viewModel.getName(args.chat)
     }
 }

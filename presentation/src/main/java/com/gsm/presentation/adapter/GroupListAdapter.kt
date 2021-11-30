@@ -12,7 +12,10 @@ import com.gsm.presentation.databinding.CommunityRecyclerViewItemBinding
 import androidx.navigation.findNavController
 import com.gsm.presentation.ui.study.CommunityFragmentDirections
 
-class GroupListAdapter(val onClickListener: RecyclerViewItemClickListener<SearchGroupResponseItem>) :
+class GroupListAdapter(
+    val onClickListener: RecyclerViewItemClickListener<SearchGroupResponseItem>,
+    val onLayoutClickListener: RecyclerViewItemClickListeners<SearchGroupResponseItem>
+) :
     PagingDataAdapter<SearchGroupResponseItem, GroupListAdapter.PartnerRecyclerAdapterViewHolder>(
         diffCallback
     ) {
@@ -71,6 +74,10 @@ class GroupListAdapter(val onClickListener: RecyclerViewItemClickListener<Search
             binding.groupSetImg.setOnClickListener {
                 onClickListener.onclick(bind)
             }
+            itemView.setOnClickListener {
+                onLayoutClickListener.onclicks(bind)
+            }
+
         }
     }
 

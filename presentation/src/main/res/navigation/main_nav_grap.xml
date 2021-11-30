@@ -22,13 +22,21 @@
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right"
             app:destination="@id/missionDetailFragment" />
-
+        <argument
+            android:name="data"
+            android:defaultValue="false"
+            app:argType="boolean" />
     </fragment>
     <dialog
         android:id="@+id/bottomSheetMissionDialog"
         android:name="com.gsm.presentation.ui.mission.bottomSheet.BottomSheetMissionDialog"
         android:label="BottomSheetMissionDialog"
-        tools:layout="@layout/bottom_sheet_dialog_write_mission" />
+        tools:layout="@layout/bottom_sheet_dialog_write_mission" >
+
+        <action
+            android:id="@+id/action_bottomSheetMissionDialog_to_missionFragment"
+            app:destination="@id/missionFragment" />
+    </dialog>
     <fragment
         android:id="@+id/missionDetailFragment"
         android:name="com.gsm.presentation.ui.mission.MissionDetailFragment"

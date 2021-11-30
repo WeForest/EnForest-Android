@@ -9,6 +9,7 @@ import com.gsm.data.entity.group.response.SearchGroupResponseItem
 import com.gsm.presentation.R
 import com.gsm.presentation.adapter.GroupListAdapter
 import com.gsm.presentation.adapter.RecyclerViewItemClickListener
+import com.gsm.presentation.adapter.RecyclerViewItemClickListeners
 import com.gsm.presentation.base.BaseFragment
 import com.gsm.presentation.databinding.FragmentGroupListBinding
 import com.gsm.presentation.ui.study.CommunityFragmentDirections
@@ -21,10 +22,11 @@ import kotlinx.coroutines.launch
 // 그룹 리스트
 @AndroidEntryPoint
 class GroupListFragment : BaseFragment<FragmentGroupListBinding>(R.layout.fragment_group_list),
-    RecyclerViewItemClickListener<SearchGroupResponseItem> {
+    RecyclerViewItemClickListener<SearchGroupResponseItem>,
+    RecyclerViewItemClickListeners<SearchGroupResponseItem> {
     private val viewModel: GroupViewModel by viewModels()
     private val groupAdapter: GroupListAdapter by lazy {
-        GroupListAdapter(this)
+        GroupListAdapter(this, this)
     }
 
     override fun FragmentGroupListBinding.onCreateView() {
@@ -100,14 +102,24 @@ class GroupListFragment : BaseFragment<FragmentGroupListBinding>(R.layout.fragme
         Log.d("TAG", "onclick: ${data}")
 
         val action =
-            CommunityFragmentDirections.communityFragmentToGroupSetBottomSheetDialog(data.id?:0, data.owner.name)
+            CommunityFragmentDirections.communityFragmentToGroupSetBottomSheetDialog(
+                data.id ?: 0,
+                data.owner.name
+            )
         findNavController().navigate(action)
 
     }
+
     private fun fabClick() {
         binding.createGroupBtn.setOnClickListener {
             findNavController().navigate(R.id.action_communityFragment_to_createGroupFragment)
         }
+    }
+
+    override fun onclicks(data: SearchGroupResponseItem) {
+        val action = CommunityFragmentDirections.actionCommunityFragmentToGroupChatFragment(data)
+        findNavController().navigate(action)
+
     }
 }
 
