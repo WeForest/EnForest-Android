@@ -8,10 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.gsm.presentation.R
 import com.gsm.presentation.databinding.FragmentUserInfoBinding
+import com.gsm.presentation.viewmodel.profile.ProfileViewModel
+import com.gsm.presentation.viewmodel.sign.`in`.SignInViewModel
 import com.gsm.presentation.viewmodel.test.TestViewModel
 import com.gsm.presentation.viewmodel.userinfo.UserInfoViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,6 +24,8 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class UserInfoFragment : Fragment() {
     private val viewModel by activityViewModels<UserInfoViewModel>()
+    private val profileViewModel :ProfileViewModel by viewModels()
+    private val signViewModel :SignInViewModel by viewModels()
     private lateinit var binding : FragmentUserInfoBinding
 
     override fun onCreateView(
@@ -30,13 +36,8 @@ class UserInfoFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_user_info, container, false)
 
-        getUserInfo("차경민")
 
-        GetProfile("차경민")
 
-        getUserInfoUserFollowing("차경민")
-
-        getUserExpLog("U2FsdGVkX1/+odzQABxvTkkDhxjN8GIs3V6WeZq9wGECzwE7P5k2Z8Wm8/iW9Jgs+aIjl18bC0q4lRZ8iRyLESy4MevH0HUYATA0EXGTE2coyb/kMXyjkz1VeDGFhOxX")
 
         binding.fragment = this
 
@@ -60,6 +61,25 @@ class UserInfoFragment : Fragment() {
         findNavController().navigateUp()
     }
 
+    private fun observeNickName(){
+         profileViewModel.readName.asLiveData().observe(viewLifecycleOwner){
+
+             getUserInfo(it.name)
+
+             GetProfile(it.name)
+
+             getUserInfoUserFollowing(it.name)
+         }
+    }
+    private fun observeToken(){
+        signViewModel.readToken.asLiveData().observe(viewLifecycleOwner){
+            getUserExpLog(it.token)
+
+        }
+    }
+
+
+
 
 
 
@@ -75,6 +95,8 @@ class UserInfoFragment : Fragment() {
         binding.backBtn.setOnClickListener {
             findNavController().navigateUp()
         }
+        observeNickName()
+        observeToken()
     }
 
     fun GetProfile(userName: String){

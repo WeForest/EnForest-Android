@@ -103,7 +103,8 @@ class SetProfileFragment : Fragment() {
         }
         observeImageUrl()
     }
-    private fun observeImageUrl(){
+
+    private fun observeImageUrl() {
         viewModel.url.observe(viewLifecycleOwner) {
             signViewModel.saveProfile(it)
 
@@ -222,7 +223,7 @@ class SetProfileFragment : Fragment() {
                     (activity as SignUpSignInMainActivity).finish()
                 } else {
                     startActivity(Intent(requireContext(), MainActivity::class.java))
-                    (activity as SignUpSignInMainActivity).finish()
+                    (activity as MainActivity).finish()
                 }
             })
         }
