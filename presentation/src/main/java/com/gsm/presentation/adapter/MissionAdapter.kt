@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gsm.domain.entity.mission.GetMissionTypePageEntity
 import com.gsm.presentation.R
 import com.gsm.presentation.databinding.ItemMissionBinding
+import com.gsm.presentation.ui.chat.ChatModel
+import java.util.ArrayList
 
 class MissionAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private var missionList = mutableListOf<GetMissionTypePageEntity>()

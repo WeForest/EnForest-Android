@@ -16,8 +16,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#EFF2F4"
-        >
+        android:background="#EFF2F4">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout11"
@@ -86,11 +85,12 @@
                     android:id="@+id/imageView"
                     android:layout_width="350dp"
                     android:layout_height="300dp"
-                    android:elevation="10dp"
                     android:layout_marginTop="64dp"
                     android:background="@drawable/background_practice_test"
+                    android:elevation="10dp"
                     android:paddingTop="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
+
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:lottie_autoPlay="true"
@@ -103,9 +103,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:textColor="@color/black"
                     android:fontFamily="@font/noto_sans_kr_bold"
                     android:text="내가 성장한 순간들을 기록해두었어요"
+                    android:textColor="@color/black"
                     android:textSize="18dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -170,40 +170,64 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
-                  android:id="@+id/textView26"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_marginTop="100dp"
-                  android:fontFamily="@font/noto_sans_kr_bold"
-                  android:text="자신이 참여한 커퍼런스를 인증해 봐요!"
-                  android:textSize="18dp"
-                  app:layout_constraintEnd_toEndOf="parent"
-                  app:layout_constraintStart_toStartOf="parent"
-                  app:layout_constraintTop_toBottomOf="@+id/solve_layout" />
+                    android:id="@+id/textView26"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="100dp"
+                    android:fontFamily="@font/noto_sans_kr_bold"
+                    android:text="자신이 참여한 커퍼런스를 인증해 봐요!"
+                    android:textSize="18dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/solve_layout" />
 
-              <androidx.constraintlayout.widget.ConstraintLayout
-                  android:id="@+id/conference_layout"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:layout_margin="20sp"
 
-                  android:background="@drawable/background_practice_test"
-                  app:layout_constraintBottom_toBottomOf="parent"
-                  app:layout_constraintEnd_toEndOf="parent"
-                  app:layout_constraintStart_toStartOf="parent"
-                  app:layout_constraintTop_toBottomOf="@+id/textView26">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    app:layout_constraintTop_toBottomOf="@id/textView26"
+                    android:layout_height="wrap_content">
 
-                  <ImageView
-                      android:layout_width="match_parent"
-                      android:layout_height="match_parent"
-                      android:elevation="10dp"
-                      android:layout_margin="10dp"
-                      android:src="@drawable/ic_photo_camera_black_48dp"
-                      app:layout_constraintBottom_toBottomOf="parent"
-                      app:layout_constraintEnd_toEndOf="parent"
-                      app:layout_constraintStart_toStartOf="parent"
-                      app:layout_constraintTop_toTopOf="parent" />
-              </androidx.constraintlayout.widget.ConstraintLayout>
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/imageView2"
+                        android:layout_width="350dp"
+                        android:layout_height="300dp"
+                        android:layout_marginTop="64dp"
+                        android:background="@drawable/background_practice_test"
+                        android:elevation="10dp"
+                        android:paddingTop="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:visibility="gone"
+                        app:lottie_autoPlay="false"
+                        app:lottie_fileName="image_ani.json"
+                        app:lottie_loop="false"
+                        app:lottie_speed="0.7" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/conference_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20sp"
+
+                    android:background="@drawable/background_practice_test"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView26">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:elevation="10dp"
+                        android:src="@drawable/ic_photo_camera_black_48dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </ScrollView>
 

@@ -16,7 +16,7 @@ import kotlin.random.Random
 
 class NotificationUtil(private val context: Context) {
 
-    fun showNotification(title: String, message: String) {
+    fun showNotification(title: String?, message: String?) {
         Log.d("알람", "showNotification: ${title} ${message}")
         val intent = Intent(context, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
@@ -30,8 +30,8 @@ class NotificationUtil(private val context: Context) {
         val notificationBuilder = NotificationCompat.Builder(context, channelId)
             .setColor(ContextCompat.getColor(context, R.color.main_blue))
             .setSmallIcon(R.drawable.mission_write)
-            .setContentTitle(title)
-            .setContentText(message)
+            .setContentTitle(title?:"미션이 도착했습니다." )
+            .setContentText(message?:"확인해 주세요")
             .setAutoCancel(true)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setSound(defaultSoundUri)

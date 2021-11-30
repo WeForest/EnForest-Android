@@ -19,7 +19,7 @@ class MissionRemoteViewModel @Inject constructor(
 ) : ViewModel() {
 
     suspend fun insertMission(getMissionEntity: GetMissionEntity) = viewModelScope.launch {
-        Log.d(TAG, "insertMission: ")
+        Log.d(TAG, "insertMission: ${getMissionEntity} ")
         insertMissionUsdCase.buildUseCaseObservable(InsertMissionUsdCase.Params(getMissionEntity))
     }
 
@@ -29,7 +29,7 @@ class MissionRemoteViewModel @Inject constructor(
 
 
     fun getMission(type: String, level: String) = viewModelScope.launch {
-        Log.d(TAG, "MissionRemoteViewModel - getMission() called")
+        Log.d(TAG, "MissionRemoteViewModel - getMission() called ${type},${level}")
         getMissionUseCase.getMission(type, level).let {
             Log.d(TAG, "getMission: ${it}")
             _getMission.value = it

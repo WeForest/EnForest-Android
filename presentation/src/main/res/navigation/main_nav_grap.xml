@@ -49,18 +49,7 @@
 
 
     </fragment>
-    <fragment
-        android:id="@+id/groupChatFragment"
-        android:name="com.gsm.presentation.ui.study.chat.GroupChatFragment"
-        android:label=""
-        tools:layout="@layout/fragment_group_chat">
 
-
-        <argument
-            android:name="chat"
-            app:argType="com.gsm.data.entity.group.response.SearchGroupResponseItem" />
-
-    </fragment>
     <fragment
         android:id="@+id/groupListFragment"
         android:name="com.gsm.presentation.ui.study.group.GroupListFragment"
@@ -88,7 +77,7 @@
         tools:layout="@layout/fragment_community">
         <action
             android:id="@+id/communityFragment_to_groupSetBottomSheetDialog"
-            app:destination="@id/groupSetBottomSheetDialog" >
+            app:destination="@id/groupSetBottomSheetDialog">
 
         </action>
         <action
@@ -98,9 +87,11 @@
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
             app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+
         <action
-            android:id="@+id/action_communityFragment_to_groupChatFragment"
-            app:destination="@id/groupChatFragment" />
+            android:id="@+id/action_communityFragment_to_groupChatActivity2"
+            app:destination="@id/groupChatActivity2" />
+
     </fragment>
 
     <dialog
@@ -119,9 +110,9 @@
     </dialog>
     <fragment
         android:id="@+id/userInfoFragment2"
-        tools:layout="@layout/activity_user_info"
         android:name="com.gsm.presentation.ui.userinfo.fragment.UserInfoFragment"
-        android:label="UserInfoFragment" >
+        android:label="UserInfoFragment"
+        tools:layout="@layout/activity_user_info">
 
 
         <action
@@ -131,7 +122,7 @@
     <fragment
         android:id="@+id/testMainFragment2"
         android:name="com.gsm.presentation.ui.test.fragment.TestMainFragment"
-        android:label="TestMainFragment" >
+        android:label="TestMainFragment">
         <action
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim"
@@ -139,15 +130,12 @@
             app:popExitAnim="@anim/nav_default_pop_exit_anim"
             android:id="@+id/action_testMainFragment2_to_easyTestFragment2"
             app:destination="@id/easyTestFragment2" />
-        <action
-            android:id="@+id/action_testMainFragment2_to_worngFragment2"
-            app:destination="@id/worngFragment2" />
     </fragment>
     <fragment
         android:id="@+id/easyTestFragment2"
         android:name="com.gsm.presentation.ui.test.fragment.EasyTestFragment"
         android:label="fragment_easy_test"
-        tools:layout="@layout/fragment_easy_test" >
+        tools:layout="@layout/fragment_easy_test">
 
         <action
             android:id="@+id/action_easyTestFragment2_to_testEndFragment2"
@@ -157,7 +145,7 @@
         android:id="@+id/testEndFragment2"
         android:name="com.gsm.presentation.ui.test.fragment.TestEndFragment"
         android:label="fragment_test_end"
-        tools:layout="@layout/fragment_test_end" >
+        tools:layout="@layout/fragment_test_end">
 
         <action
             android:id="@+id/action_testEndFragment2_to_testMainFragment2"
@@ -166,26 +154,28 @@
     <fragment
         android:id="@+id/userActivityFragment2"
         android:name="com.gsm.presentation.ui.userinfo.fragment.UserActivityFragment"
-        android:label="UserActivityFragment" >
+        android:label="UserActivityFragment">
         <action
             android:id="@+id/action_userActivityFragment2_to_userInfoFragment2"
             app:destination="@id/userInfoFragment2" />
     </fragment>
-    <fragment
-        android:id="@+id/worngFragment2"
-        android:name="com.gsm.presentation.ui.test.fragment.WorngFragment"
-        android:label="WorngFragment" >
-        <action
-            android:id="@+id/action_worngFragment2_to_worngEndFragment"
-            app:destination="@id/worngEndFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/worngEndFragment"
-        android:name="com.gsm.presentation.ui.test.fragment.WorngEndFragment"
-        android:label="WorngEndFragment" >
-        <action
-            android:id="@+id/action_worngEndFragment_to_testMainFragment2"
-            app:destination="@id/testMainFragment2" />
-    </fragment>
+    <activity
+        android:id="@+id/groupChatActivity2"
+        android:name="com.gsm.presentation.ui.study.chat.GroupChatActivity"
+        android:label="GroupChatActivity" >
+        <argument
+            android:name="chat"
+            app:argType="com.gsm.data.entity.group.response.SearchGroupResponseItem" />
+    </activity>
 
+    <fragment
+        android:id="@+id/groupChatFragment"
+        android:name="com.gsm.presentation.ui.study.chat.GroupChatFragment"
+        android:label=""
+        tools:layout="@layout/fragment_group_chat">
+        <argument
+            android:name="chat"
+            app:argType="com.gsm.data.entity.group.response.SearchGroupResponseItem" />
+
+    </fragment>
 </navigation>

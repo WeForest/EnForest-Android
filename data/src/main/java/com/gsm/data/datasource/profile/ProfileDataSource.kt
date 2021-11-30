@@ -13,5 +13,6 @@ interface ProfileDataSource {
     suspend fun postProfile(token: String, file: MultipartBody.Part?): BaseResponse
     suspend fun postFollow(token: String, nickName: String): PathProfileResponse
     suspend fun unPostFollow(token: String, nickName: String): PathProfileResponse
+    suspend fun postConference(token: String,file: MultipartBody.Part?): PathProfileResponse
 
 }
