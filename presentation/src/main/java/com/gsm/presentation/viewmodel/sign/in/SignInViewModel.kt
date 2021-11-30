@@ -26,6 +26,7 @@ class SignInViewModel @Inject constructor(
 
     var token = DEFAULT_TOKEN
     val readToken = dataStore.readToken
+    val readImage=dataStore.readImage
 
     private val _tokenValue = MutableLiveData<Event<String>>()
     val tokenValue: LiveData<Event<String>> get() = _tokenValue

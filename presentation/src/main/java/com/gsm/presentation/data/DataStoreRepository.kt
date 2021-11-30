@@ -35,7 +35,7 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
     private object PreferencesKeys {
         val dataStoreToken = stringPreferencesKey(PREFERENCES_TOKEN)
         val dataStoreName = stringPreferencesKey(PREFERENCES_USER_NAME)
-        val dataStoreProfileImage= stringPreferencesKey(PREFERENCES_PROFILE_IMAGE)
+        val dataStoreProfileImage = stringPreferencesKey(PREFERENCES_PROFILE_IMAGE)
 
 
     }
@@ -62,6 +62,7 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
 
         }
     }
+
     suspend fun saveProfileImage(image: String) {
 
         dataStore.edit { preferences ->
@@ -86,7 +87,6 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
         }
 
 
-
     val readName: Flow<Name> = dataStore.data
         .catch { exception ->
             if (exception is IOException) {
@@ -100,7 +100,7 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
             Log.d("DataStoreRepository", "readName  $name")
             Name(name)
         }
-    val profileImage: Flow<ProfileImage> = dataStore.data
+    val readImage: Flow<ProfileImage> = dataStore.data
         .catch { exception ->
             if (exception is IOException) {
                 emit(emptyPreferences())
@@ -120,9 +120,11 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
 data class Token(
     val token: String,
 )
+
 data class Name(
     val name: String,
 )
+
 data class ProfileImage(
-    val profileImage:String
+    val profileImage: String
 )

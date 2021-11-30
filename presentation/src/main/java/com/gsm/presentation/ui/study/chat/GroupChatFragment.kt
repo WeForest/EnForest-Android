@@ -53,7 +53,8 @@ class GroupChatFragment :
     val TAG = "ChatFragment"
     lateinit var socket: Socket
     var token = ""
-var nickName=""
+    var nickName = ""
+    var image = ""
 
     //리사이클러뷰
     private var arrayList = arrayListOf<ChatModel>()
@@ -65,7 +66,7 @@ var nickName=""
     override fun FragmentGroupChatBinding.onCreateView() {
         getToken()
         observeNickName()
-
+        observeImage()
         chating_Text = binding.messageEdit
         chat_Send_Button = binding.sendBtn
         binding.messageEdit.addTextChangedListener { text ->
@@ -104,6 +105,13 @@ var nickName=""
 
         }
         setData()
+    }
+
+    private fun observeImage() {
+        signViewModel.readImage.asLiveData().observe(viewLifecycleOwner) {
+            Log.d(TAG, "observeImage: ${it.profileImage}")
+            image = it.profileImage
+        }
     }
 
 
@@ -185,9 +193,10 @@ var nickName=""
             settingSocket(token)
         }
     }
-    private fun observeNickName(){
-        profileViewModel.readName.asLiveData().observe(viewLifecycleOwner){
-            nickName=it.name
+
+    private fun observeNickName() {
+        profileViewModel.readName.asLiveData().observe(viewLifecycleOwner) {
+            nickName = it.name
         }
     }
 
@@ -245,7 +254,7 @@ var nickName=""
                 ChatModel(
                     nickname = nickName,
                     contents = message,
-                    args.chat.owner.profileImg.toString()
+                    image
                 )
             )
         } catch (e: JSONException) {
