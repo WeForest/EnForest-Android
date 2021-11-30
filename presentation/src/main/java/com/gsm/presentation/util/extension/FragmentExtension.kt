@@ -87,7 +87,9 @@ fun List<String>.toMajorItem(): List<MajorItem> {
 fun ChatResponse.toChatItem(): List<ChatModel> {
     return this.map {
 
-        ChatModel(it.user?.name.toString(), it.content.toString(), it.user?.profileImg.toString())
+        ChatModel(it.user?.name.toString(), it.content.toString(), it.user?.profileImg.toString(),
+            it.abuse == true
+        )
     }
 
 }

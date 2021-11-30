@@ -6,6 +6,7 @@ import com.gsm.presentaBroadcastReceivertion.data.AiService
 import com.gsm.presentation.data.dto.AbuseResponse
 import com.gsm.presentation.data.dto.ConferenceResponse
 import com.gsm.presentation.util.DataState
+import com.gsm.presentation.util.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
@@ -23,6 +24,9 @@ class AiViewModel @Inject constructor(
     private val _abuseData = MutableLiveData<DataState<AbuseResponse>>()
     val abuseData: LiveData<DataState<AbuseResponse>> get() = _abuseData
 
+    private val _success = MutableLiveData<Event<Boolean>>()
+    val success: LiveData<Event<Boolean>> get() = _success
+
     val TAG = "ai"
     suspend fun postConferenceImage(file: MultipartBody.Part?) = viewModelScope.launch {
         _conferenceData.postValue(DataState.Loading)
@@ -30,10 +34,8 @@ class AiViewModel @Inject constructor(
         try {
             service.postConferenceImage(file).let {
                 if (it.body()?.success == true) {
-                    if (it.body().toString().isNotEmpty()) {
-                        Log.d(TAG, "postConferenceImage: ${it}")
-                        _conferenceData.postValue(DataState.Success(it.body()!!))
-                    }
+                    Log.d(TAG, "postConferenceImage: ${it}")
+                    _conferenceData.postValue(DataState.Success(it.body()!!))
                 } else {
                     _conferenceData.postValue(DataState.Failure(400, it.message()))
                 }
@@ -51,14 +53,14 @@ class AiViewModel @Inject constructor(
         _abuseData.postValue(DataState.Loading)
         try {
             service.getAbuse(text).let {
-                Log.d(TAG, "abuseText: ${it}")
-
+                Log.d(TAG, "abuseText: ${it.body()?.answer}")
+                _success.value = Event(true)
                 _abuseData.postValue(DataState.Success(it.body()!!))
             }
         } catch (e: Exception) {
-
+            _success.value = Event(false)
             Log.d(TAG, "abuseText: ${e}")
-            _abuseData.postValue(DataState.Failure(400,"실패했습니다."))
+            _abuseData.postValue(DataState.Failure(400, "실패했습니다."))
         }
 
     }

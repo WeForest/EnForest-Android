@@ -25,6 +25,7 @@ import com.gsm.presentation.ui.chat.ChatModel
 import com.gsm.presentation.util.App
 import com.gsm.presentation.util.Constant
 import com.gsm.presentation.util.DataState
+import com.gsm.presentation.util.EventObserver
 import com.gsm.presentation.util.extension.showVertical
 import com.gsm.presentation.viewmodel.ai.AiViewModel
 import com.gsm.presentation.viewmodel.group.GroupViewModel
@@ -52,13 +53,15 @@ class GroupChatFragment :
     private lateinit var chat_Send_Button: Button
     private val signViewModel: SignInViewModel by viewModels()
     private val profileViewModel: ProfileViewModel by viewModels()
-    private val aiViewModel : AiViewModel by viewModels()
+    private val aiViewModel: AiViewModel by viewModels()
     private val args by navArgs<GroupChatFragmentArgs>()
     val TAG = "ChatFragment"
     lateinit var socket: Socket
     var token = ""
     var nickName = ""
     var image = ""
+    var abuse = false
+    var content = ""
 
     //리사이클러뷰
     private var arrayList = arrayListOf<ChatModel>()
@@ -227,14 +230,16 @@ class GroupChatFragment :
             val name: String
             val message: String
             val profile_image: String
+            val abuse: Boolean
             try {
                 Log.e("socket", "sendMessage return : $data")
                 name = data.getString(0)
                 message = data.getString(2)
                 profile_image = data.getString(1)
-                Log.d(TAG, "sendMessage: ${name} ${message} ${profile_image}")
+                abuse = data.getBoolean(3)
+                Log.d(TAG, "sendMessage Listener: ${name} ${message} ${profile_image} ${abuse}")
 
-                val format = ChatModel(name, message, profile_image)
+                val format = ChatModel(name, message, profile_image, abuse)
                 mAdapter.addItem(format)
                 Log.e("new me", name)
             } catch (e: Exception) {
@@ -253,34 +258,16 @@ class GroupChatFragment :
         if (TextUtils.isEmpty(message)) {
             return
         }
+        content = message
+        Log.d(TAG, "sendMessage: ${message}")
         binding.messageEdit.setText("")
-        val jsonObject = JSONObject()
-        try {
-            jsonObject.put("token", token)
-            jsonObject.put("roomId", args.chat?.id)
-            jsonObject.put("message", message)
-            socket.emit("sendMessage", jsonObject)
-
-            mAdapter.addItem(
-                ChatModel(
-                    nickname = nickName,
-                    contents = message,
-                    image
-                )
-            )
-            Log.d(TAG, "sendMessage: ${message}")
-            abuseText(message)
-
-            binding.studyMeetingRecyclerView.smoothScrollToPosition(mAdapter.itemCount);
-        } catch (e: JSONException) {
-            Log.d(TAG, "sendMessage: 에러 ${e}")
-            e.printStackTrace()
-        }
+        abuseText(message)
 
 
     }
 
-    private fun abuseText(message:String){
+
+    private fun abuseText(message: String) {
         lifecycleScope.launch {
             aiViewModel.abuseText(message)
         }
@@ -292,14 +279,36 @@ class GroupChatFragment :
         abuseData.observe(viewLifecycleOwner) {
             when (it) {
                 is DataState.Success -> {
-                  
+
                     Log.d(TAG, "observe: 성공 ${it.data}")
+                    abuse = it.data.answer == "True"
+                    val jsonObject = JSONObject()
+                    try {
+                        Log.d(TAG, "sendMessage: ${abuse} message ${content}")
+                        jsonObject.put("token", token)
+                        jsonObject.put("roomId", args.chat.id)
+                        jsonObject.put("message", content)
+                        jsonObject.put("abuse", abuse)
+                        socket.emit("sendMessage", jsonObject)
+                        Log.d(TAG, "sendMessage to Emit : ${abuse} message ${content}")
+                        mAdapter.addItem(
+                            ChatModel(
+                                nickname = nickName,
+                                contents = content,
+                                profile_image = image,
+                                abuse = abuse
+                            )
+                        )
+                        binding.studyMeetingRecyclerView.smoothScrollToPosition(mAdapter.itemCount);
+                    } catch (e: JSONException) {
+                        Log.d(TAG, "sendMessage: 에러 ${e}")
+                        e.printStackTrace()
+                    }
                 }
                 is DataState.Failure -> {
                     Log.d(TAG, "observe: 실패 ${it.message}")
                 }
                 is DataState.Loading -> {
-             
 
 
                     Log.d(TAG, "observe: 로딩중..")

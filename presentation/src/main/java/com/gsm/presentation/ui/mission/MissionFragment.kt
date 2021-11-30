@@ -1,12 +1,6 @@
 package com.gsm.presentation.ui.mission
 
 import android.annotation.SuppressLint
-import android.app.AlarmManager
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
-import android.os.Build
-import android.os.SystemClock
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -15,15 +9,15 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.work.*
 import com.google.android.material.chip.Chip
 import com.gsm.domain.entity.mission.GetMissionEntity
 import com.gsm.presentation.R
 import com.gsm.presentation.adapter.MissionAdapter
 import com.gsm.presentation.base.BaseFragment
 import com.gsm.presentation.databinding.FragmentMissionBinding
-import com.gsm.presentation.ui.mission.notification.MissionBroadcastReceiver
+import com.gsm.presentation.ui.mission.notification.MissionWorkManager
 import com.gsm.presentation.util.App
-import com.gsm.presentation.util.Constant.Companion.ALARM_TIMER
 import com.gsm.presentation.util.Constant.Companion.EXTRA_NOTIFICATION_MESSAGE
 import com.gsm.presentation.util.Constant.Companion.EXTRA_NOTIFICATION_TITLE
 import com.gsm.presentation.util.EventObserver
@@ -99,34 +93,60 @@ class MissionFragment : BaseFragment<FragmentMissionBinding>(R.layout.fragment_m
     }
 
     private fun setAlarm(title: String, message: String) {
-        val triggerTime = (SystemClock.elapsedRealtime() // 기기가 부팅된 후 경과한 시간 사용
-                + ALARM_TIMER * 1000)
-        val repeatInterval = AlarmManager.INTERVAL_DAY
-        val alarmMgr = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
-        Log.d("알람", "onViewCreated: ${title}, ${message}")
-        val alarmIntent =
-            Intent(requireActivity(), MissionBroadcastReceiver::class.java).let { intent ->
-                intent.putExtra(EXTRA_NOTIFICATION_TITLE, title)
-                intent.putExtra(EXTRA_NOTIFICATION_MESSAGE, message)
-                PendingIntent.getBroadcast(requireContext(), 0, intent, 0)
-            }
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            alarmMgr.setInexactRepeating(
-                AlarmManager.ELAPSED_REALTIME_WAKEUP,
-                triggerTime,
+        var workManager = WorkManager.getInstance(requireContext())
 
-                repeatInterval, //하루마다
-                alarmIntent
-            )
-            Log.d("알람", "setAlarm: ${repeatInterval / 60000}분 마다 알림이 발생합니다.\"")
-        } else {
-            alarmMgr.setInexactRepeating(
-                AlarmManager.RTC_WAKEUP,
-                triggerTime,
-                repeatInterval,
-                alarmIntent
-            )
-        }
+        val data = Data.Builder()
+            .putString(EXTRA_NOTIFICATION_TITLE, title)
+            .putString(EXTRA_NOTIFICATION_MESSAGE, message)
+            .build()
+        val constrains = Constraints.Builder()
+            .setRequiresCharging(true)
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
+        val uploadRequest = OneTimeWorkRequest.Builder(MissionWorkManager::class.java)
+            .setConstraints(constrains)
+            .setInputData(data)
+            .build()
+        workManager.enqueue(uploadRequest)
+
+        workManager.getWorkInfoByIdLiveData(uploadRequest.id)
+            .observe(viewLifecycleOwner){
+                Log.d("TAG", "setAlarm: ${it.state.name} ")
+                if(it.state.isFinished){
+                    val data=it.outputData
+                    val message=data.getString(EXTRA_NOTIFICATION_TITLE)
+                    Log.d("TAG", "setAlarm: message ${message} ")
+                }
+            }
+
+//        val triggerTime = (SystemClock.elapsedRealtime() // 기기가 부팅된 후 경과한 시간 사용
+//                + ALARM_TIMER * 1000)
+//        val repeatInterval = AlarmManager.INTERVAL_DAY
+//        val alarmMgr = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+//        Log.d("알람", "onViewCreated: ${title}, ${message}")
+//        val alarmIntent =
+//            Intent(requireActivity(), MissionBroadcastReceiver::class.java).let { intent ->
+//                intent.putExtra(EXTRA_NOTIFICATION_TITLE, title)
+//                intent.putExtra(EXTRA_NOTIFICATION_MESSAGE, message)
+//                PendingIntent.getBroadcast(requireContext(), 0, intent, 0)
+//            }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//            alarmMgr.setInexactRepeating(
+//                AlarmManager.ELAPSED_REALTIME_WAKEUP,
+//                triggerTime,
+//
+//                repeatInterval, //하루마다
+//                alarmIntent
+//            )
+//            Log.d("알람", "setAlarm: ${repeatInterval / 60000}분 마다 알림이 발생합니다.\"")
+//        } else {
+//            alarmMgr.setInexactRepeating(
+//                AlarmManager.RTC_WAKEUP,
+//                triggerTime,
+//                repeatInterval,
+//                alarmIntent
+//            )
+//        }
     }
 
 
@@ -201,7 +221,7 @@ class MissionFragment : BaseFragment<FragmentMissionBinding>(R.layout.fragment_m
     private fun observeMissionNumber() {
         with(viewModel) {
             success.observe(viewLifecycleOwner, EventObserver {
-                if(!it){
+                if (!it) {
                     Log.d("mission", "observeMissionNumber: ${number} ")
                     App.prefs.setInt("number", 1)
                 }
