@@ -1,4 +1,4 @@
-package com.gsm.presentation.data
+package com.gsm.presentaBroadcastReceivertion.data
 
 import com.gsm.presentation.data.dto.AbuseRequest
 import com.gsm.presentation.data.dto.AbuseResponse

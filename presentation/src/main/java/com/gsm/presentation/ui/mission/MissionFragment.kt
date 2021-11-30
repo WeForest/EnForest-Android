@@ -209,6 +209,7 @@ class MissionFragment : BaseFragment<FragmentMissionBinding>(R.layout.fragment_m
         }
     }
 
+
     private fun insertMission(getMissionEntity: GetMissionEntity) {
         lifecycleScope.launch {
             remoteViewModel.insertMission(getMissionEntity)

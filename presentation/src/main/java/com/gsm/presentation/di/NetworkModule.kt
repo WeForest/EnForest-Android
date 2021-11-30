@@ -5,7 +5,7 @@ import com.gsm.data.network.service.MissionService
 import com.gsm.data.network.service.ProfileService
 import com.gsm.data.network.service.TestService
 import com.gsm.data.network.service.sign.LoginService
-import com.gsm.presentation.data.AiService
+import com.gsm.presentaBroadcastReceivertion.data.AiService
 import com.gsm.presentation.util.Constant.Companion.AI_SERVER
 import com.gsm.presentation.util.Constant.Companion.Local_SERVER
 import dagger.Module

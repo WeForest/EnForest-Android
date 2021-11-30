@@ -2,8 +2,7 @@ package com.gsm.presentation.viewmodel.ai
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.gsm.presentation.data.AiService
-import com.gsm.presentation.data.dto.AbuseRequest
+import com.gsm.presentaBroadcastReceivertion.data.AiService
 import com.gsm.presentation.data.dto.AbuseResponse
 import com.gsm.presentation.data.dto.ConferenceResponse
 import com.gsm.presentation.util.DataState
