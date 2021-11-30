@@ -17,6 +17,9 @@
             app:exitAnim="@anim/to_left"
             app:popEnterAnim="@anim/from_left"
             app:popExitAnim="@anim/to_right" />
+        <action
+            android:id="@+id/action_testMainFragment_to_worngFragment"
+            app:destination="@id/worngFragment" />
     </fragment>
 
     <fragment
@@ -40,5 +43,14 @@
         <action
             android:id="@+id/action_testEndFragment_to_testMainFragment"
             app:destination="@id/testMainFragment" />
+    </fragment>
+    <fragment
+        tools:layout="@layout/fragment_worg"
+        android:id="@+id/worngFragment"
+        android:name="com.gsm.presentation.ui.test.fragment.WorngFragment"
+        android:label="WorngFragment" >
+        <action
+            android:id="@+id/action_worngFragment_to_testEndFragment"
+            app:destination="@id/testEndFragment" />
     </fragment>
 </navigation>
