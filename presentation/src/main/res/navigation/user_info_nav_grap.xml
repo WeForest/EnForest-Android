@@ -5,6 +5,7 @@
     android:id="@+id/user_info_nav_grap"
     app:startDestination="@id/userInfoFragment">
 
+
     <fragment
         android:id="@+id/userInfoFragment"
         android:name="com.gsm.presentation.ui.userinfo.fragment.UserInfoFragment"

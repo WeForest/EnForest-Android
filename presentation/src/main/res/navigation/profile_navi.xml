@@ -10,6 +10,7 @@
         android:label=""
         tools:layout="@layout/fragment_profile" >
 
+
         <action
             android:id="@+id/action_profileFragment_to_setProfileEndFragment"
             app:destination="@id/setProfileEndFragment" />
