@@ -6,11 +6,11 @@ data class PathProfileEntity(
     val id: String?,
     val sub: String?,
     val name: String?,
-    val profileImg: Boolean?,
-    val isJobSeeker: String?,
-    val companyEmail: Boolean?,
-    val authCompany: String?,
-    val purpose: Int?,
+    val profileImg: String?,
+    val isJobSeeker: Boolean?,
+    val companyEmail: String?,
+    val authCompany: Boolean?,
+    val purpose: String?,
     val level: Int?,
-    val exp: String?
+    val exp: Int?
 )

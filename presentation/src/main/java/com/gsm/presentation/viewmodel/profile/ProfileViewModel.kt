@@ -12,6 +12,8 @@ import com.gsm.domain.entity.response.GetProfileEntity
 import com.gsm.domain.entity.response.PathProfileEntity
 import com.gsm.domain.usecase.profile.*
 import com.gsm.presentation.data.DataStoreRepository
+import com.gsm.presentation.data.TestService
+import com.gsm.presentation.data.dto.ChatResponse
 import com.gsm.presentation.util.Constant.Companion.DEFAULT_NAME
 import com.gsm.presentation.util.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,7 +32,9 @@ class ProfileViewModel @Inject constructor(
     private val dataStore: DataStoreRepository,
     private val postProfileUseCase: PostProfileUseCase,
     private val postProfileFollowUseCase: PostProfileFollowUseCase,
-    private val unPostProfileUseCase: UnFollowUseCase
+    private val unPostProfileUseCase: UnFollowUseCase,
+    private val postConferenceUseCase: PostConferenceUseCase,
+    private val testService: TestService
 ) : ViewModel() {
 
     private val TAG = "profile"
@@ -70,17 +74,44 @@ class ProfileViewModel @Inject constructor(
     private val _token = MutableLiveData<String>()
     val token: LiveData<String> get() = _token
 
-
+    private val _chatLog = MutableLiveData<ChatResponse>()
+    val chatLog: LiveData<ChatResponse> get() = _chatLog
 
 
     private val _isSuccessValue = MutableLiveData<Event<Boolean>>()
     val isSuccessValue: LiveData<Event<Boolean>> get() = _isSuccessValue
 
+    private val _url = MutableLiveData<String>()
+    val url: LiveData<String> get() = _url
     private fun saveName(name: String) =
         viewModelScope.launch(Dispatchers.IO) {
             Log.d(TAG, "saveName: $name")
             dataStore.saveName(name)
         }
+
+    fun getChatLog(patch: Int) = viewModelScope.launch {
+
+        try {
+            testService.getChatLog(patch).let {
+                Log.d(TAG, "getChatLog: ${it}")
+                _chatLog.value = it
+            }
+        } catch (e: Exception) {
+            Log.d("chat", "getChatLog: ${e}")
+        }
+    }
+
+    suspend fun postConference(token: String, file: MultipartBody.Part) = viewModelScope.launch {
+        try {
+
+            postConferenceUseCase.buildUseCaseObservable(PostConferenceUseCase.Params(token, file))
+                .let {
+                    Log.d(TAG, "postConference: ${it}")
+                }
+        } catch (e: Exception) {
+
+        }
+    }
 
 
     fun setProfileEmailNameProfile(email: String?, name: String?, profile: String?) {
@@ -114,6 +145,7 @@ class ProfileViewModel @Inject constructor(
                     if (this.success) {
                         Log.d(TAG, "postProfile: file ${this.message}")
                         _isSuccessValue.value = Event(success)
+                        _url.value = this.message
                         Log.d("file", "postProfile: 성공")
                     } else {
                         Log.d(TAG, "postProf ile: 실패 ")
@@ -143,14 +175,15 @@ class ProfileViewModel @Inject constructor(
                     nickName
                 )
             ).let {
-                _isSuccess.value=Event(true)
+                _isSuccess.value = Event(true)
                 Log.d(TAG, "postFollow: 성공")
             }
-        }catch (e:Exception){
-            _isSuccess.value=Event(false)
+        } catch (e: Exception) {
+            _isSuccess.value = Event(false)
             Log.d(TAG, "postFollow: 실패")
         }
     }
+
     // 사용자 언팔로우
     suspend fun unPostFollow(token: String, nickName: String) = viewModelScope.launch {
         try {
@@ -160,11 +193,11 @@ class ProfileViewModel @Inject constructor(
                     nickName
                 )
             ).let {
-                _isSuccess.value=Event(true)
+                _isSuccess.value = Event(true)
                 Log.d(TAG, "postFollow: 성공")
             }
-        }catch (e:Exception){
-            _isSuccess.value=Event(false)
+        } catch (e: Exception) {
+            _isSuccess.value = Event(false)
             Log.d(TAG, "postFollow: 실패")
         }
     }
@@ -219,7 +252,7 @@ class ProfileViewModel @Inject constructor(
                 Log.d(TAG, "pathProfile 성공: ${it}")
                 _isSuccess.value = Event(true)
                 saveName(_name.value.toString())
-                _pathProfileData.value=Event(it)
+                _pathProfileData.value = Event(it)
 
                 Log.d(TAG, "getMission: clear")
             }

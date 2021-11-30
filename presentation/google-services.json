@@ -1,7 +1,8 @@
 {
   "project_info": {
     "project_number": "132934041159",
-    "project_id": "sacred-veld-333001",
+    "firebase_url": "https://enforest-2a3e4-default-rtdb.firebaseio.com",
+    "project_id": "enforest-2a3e4",
     "storage_bucket": "enforest-2a3e4.appspot.com"
   },
   "client": [

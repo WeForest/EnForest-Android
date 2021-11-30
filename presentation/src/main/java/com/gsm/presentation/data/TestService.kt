@@ -2,10 +2,8 @@ package com.gsm.presentation.data
 
 import com.gsm.domain.entity.response.PathProfileEntity
 import com.gsm.domain.entity.test.response.GetTestEntity
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
-import retrofit2.http.Query
+import com.gsm.presentation.data.dto.ChatResponse
+import retrofit2.http.*
 
 interface TestService {
 
@@ -14,7 +12,13 @@ interface TestService {
 
     @POST("question/check")
     suspend fun questionCheck(
-        @Header("authorization")token:String,
-        @Query("ans") number:Int
-    ):PathProfileEntity
+        @Header("authorization") token: String,
+        @Query("ans") number: Int
+    ): PathProfileEntity
+
+
+    @GET("chat/log/{channel}")
+    suspend fun getChatLog(
+        @Path("channel") channel: Int
+    ): ChatResponse
 }

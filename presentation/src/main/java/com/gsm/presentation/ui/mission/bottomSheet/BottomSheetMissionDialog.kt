@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
 import com.gsm.presentation.R
 import com.gsm.presentation.base.BaseBottomSheetDialogFragment
@@ -57,15 +58,23 @@ class BottomSheetMissionDialog() :
                             .isNotEmpty()
                     ) {
                         addMission(
-                            binding.missionWriteEditText.text.toString(),
-                            binding.missionWriteContentEditText.text.toString(),
-                            chipText(),
-                            chipText
+                            chipLevelText, // low
+                            binding.missionWriteEditText.text.toString(), // 제목
+                            binding.missionWriteContentEditText.text.toString(), //내용
+                            chipText(), // 날짜
+                            chipText //타입
                         )
                     } else {
                         Toast.makeText(requireContext(), "빈칸을 입력해 주세요", Toast.LENGTH_SHORT).show()
                     }
                 }
+            }
+            addMissionData.observe(viewLifecycleOwner) {
+                val action =
+                    BottomSheetMissionDialogDirections.actionBottomSheetMissionDialogToMissionFragment(
+                        true
+                    )
+                findNavController().navigate(action)
             }
             success.observe(this@BottomSheetMissionDialog, EventObserver {
 
@@ -97,7 +106,7 @@ class BottomSheetMissionDialog() :
             val selectedMealType = chip.text.toString().lowercase(Locale.ROOT)
             chipLevelText = selectedMealType
         }
-        Log.i("TAG", "chipClickType: ${chipText}")
+        Log.i("TAG", "chipClickType: ${chipLevelText}")
 
     }
 

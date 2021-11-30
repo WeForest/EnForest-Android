@@ -20,11 +20,15 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        initWorkManager()
+        prefs = PreferenceUtil(applicationContext)
+
+//        initWorkManager()
     }
 
     companion object {
         private lateinit var socket : Socket
+        lateinit var prefs: PreferenceUtil
+
         fun get(): Socket {
             try {
                 socket = IO.socket(CHAT_SERVER)

@@ -22,6 +22,13 @@ interface ProfileService {
 
 
     @Multipart
+    @PATCH("profile/conference")
+    suspend fun postConference(
+        @Header("authorization") token: String,
+        @Part images: MultipartBody.Part?,
+    ): PathProfileResponse
+
+    @Multipart
     @PATCH("profile/picture")
     suspend fun postProfile(
         @Header("authorization") token: String,

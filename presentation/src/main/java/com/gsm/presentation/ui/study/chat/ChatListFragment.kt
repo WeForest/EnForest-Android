@@ -30,6 +30,7 @@ class ChatListFragment : BaseFragment<FragmentChatListBinding>(R.layout.fragment
         binding.partnerRecyclerView.adapter = groupAdapter
     }
 
+
     override fun FragmentChatListBinding.onCreateView() {
 
     }

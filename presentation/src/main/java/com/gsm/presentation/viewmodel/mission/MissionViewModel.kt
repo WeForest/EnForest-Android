@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.gsm.domain.entity.mission.AddMissionEntity
 import com.gsm.domain.entity.mission.GetMissionEntity
 import com.gsm.domain.entity.mission.GetMissionTypePageEntity
 import com.gsm.domain.entity.mission.request.AddMission
@@ -32,7 +33,8 @@ class MissionViewModel @Inject constructor
     val exp: LiveData<Int> get() = _exp
     private val _missionData = MutableLiveData<GetMissionEntity>()
     val missionData: LiveData<GetMissionEntity> get() = _missionData
-
+    private val _addMissionData = MutableLiveData<AddMissionEntity>()
+    val addMissionData: LiveData<AddMissionEntity> get() = _addMissionData
     private val _missionPageData = MutableLiveData<Event<List<GetMissionTypePageEntity>>>()
     val missionPageData: LiveData<Event<List<GetMissionTypePageEntity>>> get() = _missionPageData
 
@@ -44,38 +46,36 @@ class MissionViewModel @Inject constructor
     init {
         _errorMessage.value = ""
     }
+
     private val _success = MutableLiveData<Event<Boolean>>()
     val success: LiveData<Event<Boolean>> get() = _success
     suspend fun addMission(
+        level: String,
         title: String,
         content: String,
         expiredAt: Int,
         type: String
     ) =
         viewModelScope.launch {
-            try {
-                Log.d(TAG, "addMission: content : ${content}")
-                addMissionUseCase.buildUseCaseObservable(
-                    AddMissionUseCase.Params(
-                        AddMission(
-                            "0",
-                            0,
-                            title,
-                            content,
-                            expiredAt,
-                            type
-                        )
+            Log.d(TAG, "addMission: content : ${content}")
+            addMissionUseCase.buildUseCaseObservable(
+                AddMissionUseCase.Params(
+                    AddMission(
+                        level = level,
+                        exp = 0,
+                        title = title,
+                        content = content,
+                        expiredAt = expiredAt,
+                        type = type
                     )
-                ).let {
-                    Log.d("mission", "addMission: 성공 ")
-                    Log.d(TAG, "addMission: ${it}")
-                    _success.value = Event(true)
-                }
-            } catch (e: Exception) {
-                Log.e(TAG, "addMission: ${e}")
-                _success.value = Event(false)
+                )
+            ).let {
+                Log.d("mission", "addMission: 성공 ")
+                _success.value = Event(true)
+                _addMissionData.value = it
             }
         }
+
 
     suspend fun getMission(number: Int) = viewModelScope.launch {
 
@@ -83,6 +83,11 @@ class MissionViewModel @Inject constructor
             getMissionUseCase.buildUseCaseObservable(GetMissionUseCase.Params(number)).let {
                 _missionData.value = it
                 Log.d(TAG, "getMission: ${it?.title}")
+                if (it?.title?.isEmpty() == true) {
+                    _success.value = Event((false))
+                } else {
+                    _success.value = Event((true))
+                }
             }
 
 
@@ -121,7 +126,7 @@ class MissionViewModel @Inject constructor
         }
     }
 
-     fun getType(type: String) {
+    fun getType(type: String) {
         _type.value = type
     }
 }

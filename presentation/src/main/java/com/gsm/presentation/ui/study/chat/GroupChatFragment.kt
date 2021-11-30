@@ -3,26 +3,29 @@ package com.gsm.presentation.ui.study.chat
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.activity.viewModels
+import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.navigation.navArgs
-import com.google.gson.JsonObject
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
 import com.gsm.presentation.R
 import com.gsm.presentation.adapter.ChatAdapter
-import com.gsm.presentation.base.BaseActivity
 import com.gsm.presentation.base.BaseFragment
 import com.gsm.presentation.databinding.FragmentGroupChatBinding
 import com.gsm.presentation.ui.chat.ChatModel
 import com.gsm.presentation.util.App
 import com.gsm.presentation.util.Constant
 import com.gsm.presentation.util.extension.showVertical
+import com.gsm.presentation.viewmodel.group.GroupViewModel
 import com.gsm.presentation.viewmodel.profile.ProfileViewModel
 import com.gsm.presentation.viewmodel.sign.`in`.SignInViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -31,12 +34,12 @@ import io.socket.client.Socket
 import io.socket.emitter.Emitter
 import io.socket.engineio.client.EngineIOException
 import io.socket.engineio.client.transports.WebSocket
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
+import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
-import java.net.*
+import java.net.SocketTimeoutException
+import java.net.URISyntaxException
 import java.util.*
 
 
@@ -45,29 +48,56 @@ class GroupChatFragment :
     BaseFragment<FragmentGroupChatBinding>(R.layout.fragment_group_chat) {
     private lateinit var chating_Text: EditText
     private lateinit var chat_Send_Button: Button
-
-    private val viewModel: ProfileViewModel by viewModels()
-    private var hasConnection: Boolean = false
     private val signViewModel: SignInViewModel by viewModels()
+    private val profileViewModel: ProfileViewModel by viewModels()
     private val args by navArgs<GroupChatFragmentArgs>()
-
-    val TAG = "socket"
+    val TAG = "ChatFragment"
     lateinit var socket: Socket
     var token = ""
+    var nickName = ""
+    var image = ""
 
     //리사이클러뷰
     private var arrayList = arrayListOf<ChatModel>()
     private val mAdapter: ChatAdapter by lazy {
-        ChatAdapter(requireContext(), arrayList, viewModel)
+        ChatAdapter(arrayList)
     }
 
 
+
+
     override fun FragmentGroupChatBinding.onCreateView() {
+        getToken()
+        observeNickName()
+        observeImage()
         chating_Text = binding.messageEdit
         chat_Send_Button = binding.sendBtn
+        binding.messageEdit.addTextChangedListener { text ->
+            binding.sendBtn.isEnabled = text.toString() != ""
+        }
         setAdapter()
-        getToken()
-        binding.chatTitleTxt.setText(args.chat.name)
+
+
+    }
+
+//    private fun recyclerViewSetting(){
+//        binding.studyMeetingRecyclerView.addOnLayoutChangeListener(View.OnLayoutChangeListener(
+//
+//        ))
+//    }
+
+    private fun setData() {
+        lifecycleScope.launch {
+            args.chat.id?.let { profileViewModel.getChatLog(it) }
+            profileViewModel.chatLog.observe(viewLifecycleOwner) {
+                Log.d(TAG, "setData: ${it}")
+                mAdapter.setData(it)
+            }
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
 
     }
 
@@ -77,17 +107,41 @@ class GroupChatFragment :
             findNavController().navigateUp()
         }
 
+
+        chat_Send_Button.setOnClickListener {
+            //아이템 추가 부분
+            sendMessage()
+
+        }
+        setData()
+    }
+
+    private fun observeImage() {
+        signViewModel.readImage.asLiveData().observe(viewLifecycleOwner) {
+            Log.d(TAG, "observeImage: ${it.profileImage}")
+            image = it.profileImage
+        }
+    }
+
+
+    private fun settingSocket(token: String) {
         try {
-            val opts: IO.Options = io.socket.client.IO.Options()
-            opts.transports = arrayOf<String>(WebSocket.NAME)
-            opts.query = token
-            socket = io.socket.client.IO.socket("ws://192.168.219.103:81")
-            socket.send()
+            val opts: IO.Options = IO.Options()
+            opts.transports = arrayOf(WebSocket.NAME)
+            socket =
+                IO.socket(
+                    "http://ec2-15-165-35-92.ap-northeast-2.compute.amazonaws.com:81/chat",
+                    opts
+                )
             socket.connect()
+
             val dd = JSONObject()
+            Log.d(TAG, "onViewCreated: ${token}")
             dd.put("token", token)
-            socket.emit("connects", dd)
+            socket.emit("setting", dd)
             emitJoin()
+
+            socket.on(Socket.EVENT_CONNECT, onConnectSuccess)
 
             socket.on("sendMessage", sendMessage)
 
@@ -111,11 +165,6 @@ class GroupChatFragment :
             Log.d(TAG, "onCreate:  에러 ${e.printStackTrace()}")
             e.printStackTrace()
         }
-        chat_Send_Button.setOnClickListener {
-            //아이템 추가 부분
-            sendMessage()
-
-        }
     }
 
     private val onConnectError = Emitter.Listener { args ->
@@ -131,11 +180,7 @@ class GroupChatFragment :
 
     private val onConnectSuccess = Emitter.Listener {
         lifecycleScope.launch {
-            Toast.makeText(
-                requireContext(),
-                "성공",
-                Toast.LENGTH_LONG
-            ).show()
+            Log.d(TAG, "성공: ")
         }
     }
 
@@ -143,7 +188,7 @@ class GroupChatFragment :
     private fun emitJoin() {
         val userId = JSONObject()
         userId.put("token", token)
-        userId.put("roomId", args.chat.id)
+        userId.put("roomId", args.chat?.id)
         //socket.emit은 메세지 전송임
         socket.emit("join", userId)
 
@@ -151,10 +196,19 @@ class GroupChatFragment :
 
 
     private fun getToken() {
-        signViewModel.readToken.asLiveData().observe(this) {
+        signViewModel.readToken.asLiveData().observe(viewLifecycleOwner) {
+            Log.d(TAG, "getToken: ${it.token}")
             token = it.token
+            settingSocket(token)
         }
     }
+
+    private fun observeNickName() {
+        profileViewModel.readName.asLiveData().observe(viewLifecycleOwner) {
+            nickName = it.name
+        }
+    }
+
 
     private fun setAdapter() {
         binding.studyMeetingRecyclerView.apply {
@@ -167,20 +221,19 @@ class GroupChatFragment :
     private var sendMessage: Emitter.Listener = Emitter.Listener { args ->
         lifecycleScope.launch {
             Log.e("socket", "sendMessage return : $${args[0]}")
-            val data = args[0] as JSONObject
+            val data = args[0] as JSONArray
             val name: String
             val message: String
             val profile_image: String
             try {
                 Log.e("socket", "sendMessage return : $data")
-                name = data.getString("name")
-                message = data.getString("message")
-                profile_image = data.getString("profileImg")
+                name = data.getString(0)
+                message = data.getString(2)
+                profile_image = data.getString(1)
                 Log.d(TAG, "sendMessage: ${name} ${message} ${profile_image}")
 
-                val format = ChatModel(name, message, profile_image, "null")
+                val format = ChatModel(name, message, profile_image)
                 mAdapter.addItem(format)
-                mAdapter.notifyDataSetChanged()
                 Log.e("new me", name)
             } catch (e: Exception) {
                 Log.d(TAG, "onNewMessage: 에러 ${e} ")
@@ -202,10 +255,17 @@ class GroupChatFragment :
         val jsonObject = JSONObject()
         try {
             jsonObject.put("token", token)
-            jsonObject.put("roomId", args.chat.id)
+            jsonObject.put("roomId", args.chat?.id)
             jsonObject.put("message", message)
             socket.emit("sendMessage", jsonObject)
 
+            mAdapter.addItem(
+                ChatModel(
+                    nickname = nickName,
+                    contents = message,
+                    image
+                )
+            )
         } catch (e: JSONException) {
             Log.d(TAG, "sendMessage: 에러 ${e}")
             e.printStackTrace()
@@ -219,3 +279,4 @@ class GroupChatFragment :
         socket.disconnect()
     }
 }
+

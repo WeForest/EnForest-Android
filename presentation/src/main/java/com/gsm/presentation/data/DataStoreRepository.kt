@@ -9,9 +9,12 @@ import androidx.datastore.preferences.core.emptyPreferences
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.gsm.presentation.data.DataStoreRepository.PreferencesKeys.dataStoreName
+import com.gsm.presentation.data.DataStoreRepository.PreferencesKeys.dataStoreProfileImage
 import com.gsm.presentation.data.DataStoreRepository.PreferencesKeys.dataStoreToken
 import com.gsm.presentation.util.Constant.Companion.DEFAULT_NAME
+import com.gsm.presentation.util.Constant.Companion.DEFAULT_PROFILE
 import com.gsm.presentation.util.Constant.Companion.DEFAULT_TOKEN
+import com.gsm.presentation.util.Constant.Companion.PREFERENCES_PROFILE_IMAGE
 import com.gsm.presentation.util.Constant.Companion.PREFERENCES_TOKEN
 import com.gsm.presentation.util.Constant.Companion.PREFERENCES_USER_NAME
 import com.gsm.presentation.util.Constant.Companion.PREFERENCE_NAME
@@ -32,6 +35,7 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
     private object PreferencesKeys {
         val dataStoreToken = stringPreferencesKey(PREFERENCES_TOKEN)
         val dataStoreName = stringPreferencesKey(PREFERENCES_USER_NAME)
+        val dataStoreProfileImage = stringPreferencesKey(PREFERENCES_PROFILE_IMAGE)
 
 
     }
@@ -59,6 +63,15 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
         }
     }
 
+    suspend fun saveProfileImage(image: String) {
+
+        dataStore.edit { preferences ->
+            preferences[dataStoreProfileImage] = image
+            Log.d("DataStoreRepository", "saveProfileImage: ${preferences[dataStoreProfileImage]}")
+
+        }
+    }
+
     val readToken: Flow<Token> = dataStore.data
         .catch { exception ->
             if (exception is IOException) {
@@ -73,6 +86,7 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
             Token(token)
         }
 
+
     val readName: Flow<Name> = dataStore.data
         .catch { exception ->
             if (exception is IOException) {
@@ -86,6 +100,19 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
             Log.d("DataStoreRepository", "readName  $name")
             Name(name)
         }
+    val readImage: Flow<ProfileImage> = dataStore.data
+        .catch { exception ->
+            if (exception is IOException) {
+                emit(emptyPreferences())
+            } else {
+                throw exception
+            }
+        }
+        .map { preferences ->
+            val profile = preferences[dataStoreProfileImage] ?: DEFAULT_PROFILE
+            Log.d("DataStoreRepository", "profile  $profile")
+            ProfileImage(profile)
+        }
 
 
 }
@@ -93,6 +120,11 @@ class DataStoreRepository @Inject constructor(@ApplicationContext private val co
 data class Token(
     val token: String,
 )
+
 data class Name(
     val name: String,
+)
+
+data class ProfileImage(
+    val profileImage: String
 )

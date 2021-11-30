@@ -78,7 +78,6 @@ class SetProfileFragment : Fragment() {
                     val file = File(getPathFromUri(result.data?.data))
                     postProfile(file.toMultipartBody())
 
-                    result?.data?.data?.path
 
                     binding.profileImageView.setImageURI(result.data?.data)
                 }
@@ -101,6 +100,13 @@ class SetProfileFragment : Fragment() {
             backBtn.setOnClickListener {
                 findNavController().navigateUp()
             }
+        }
+        observeImageUrl()
+    }
+    private fun observeImageUrl(){
+        viewModel.url.observe(viewLifecycleOwner) {
+            signViewModel.saveProfile(it)
+
         }
     }
 

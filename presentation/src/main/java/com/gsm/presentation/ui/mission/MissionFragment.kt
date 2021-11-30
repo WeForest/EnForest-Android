@@ -1,24 +1,29 @@
 package com.gsm.presentation.ui.mission
 
+import android.annotation.SuppressLint
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.os.SystemClock
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.work.OneTimeWorkRequest
 import com.google.android.material.chip.Chip
+import com.gsm.domain.entity.mission.GetMissionEntity
 import com.gsm.presentation.R
 import com.gsm.presentation.adapter.MissionAdapter
 import com.gsm.presentation.base.BaseFragment
 import com.gsm.presentation.databinding.FragmentMissionBinding
 import com.gsm.presentation.ui.mission.notification.MissionBroadcastReceiver
+import com.gsm.presentation.util.App
+import com.gsm.presentation.util.Constant.Companion.ALARM_TIMER
 import com.gsm.presentation.util.Constant.Companion.EXTRA_NOTIFICATION_MESSAGE
 import com.gsm.presentation.util.Constant.Companion.EXTRA_NOTIFICATION_TITLE
 import com.gsm.presentation.util.EventObserver
@@ -36,12 +41,14 @@ todo : 하루에 하나씩 미션이 울려 저장을 해야함 내부 db 사용
 class MissionFragment : BaseFragment<FragmentMissionBinding>(R.layout.fragment_mission) {
     var title = ""
     var message = ""
+    private val args by navArgs<MissionFragmentArgs>()
     private val missionAdapter: MissionAdapter by lazy { MissionAdapter() }
     private val viewModel: MissionViewModel by viewModels<MissionViewModel>()
     private val remoteViewModel: MissionRemoteViewModel by viewModels<MissionRemoteViewModel>()
     override fun FragmentMissionBinding.onCreateView() {
         setHasOptionsMenu(false)
         binding.fragment = this@MissionFragment
+
 
         with(binding) {
             missionDailyLayout.setOnClickListener {
@@ -67,47 +74,59 @@ class MissionFragment : BaseFragment<FragmentMissionBinding>(R.layout.fragment_m
 
     var chipText = "daily"
 
-    val time: Long = 1000 * 60 * 60
     var number: Int = 1
 
     override fun FragmentMissionBinding.onViewCreated() {
         getMissionType(DAY, 1)
         chipClickType()
         setAdapter()
-        getMission()
 
         observeGetMissionType()
-        observeGetMission()
         observeErrorMessage()
 
+        getMission()
+        observeGetMission()
+        onArgs()
+        observeMissionNumber()
 
+    }
 
+    @SuppressLint("NotifyDataSetChanged")
+    private fun onArgs() {
+        if (args.data) {
+            missionAdapter.notifyDataSetChanged()
+        }
+    }
 
+    private fun setAlarm(title: String, message: String) {
+        val triggerTime = (SystemClock.elapsedRealtime() // 기기가 부팅된 후 경과한 시간 사용
+                + ALARM_TIMER * 1000)
+        val repeatInterval = AlarmManager.INTERVAL_DAY
         val alarmMgr = requireActivity().getSystemService(Context.ALARM_SERVICE) as AlarmManager
         Log.d("알람", "onViewCreated: ${title}, ${message}")
         val alarmIntent =
             Intent(requireActivity(), MissionBroadcastReceiver::class.java).let { intent ->
-                intent.putExtra(EXTRA_NOTIFICATION_TITLE, "문자")
-                intent.putExtra(EXTRA_NOTIFICATION_MESSAGE, "왔습니다")
+                intent.putExtra(EXTRA_NOTIFICATION_TITLE, title)
+                intent.putExtra(EXTRA_NOTIFICATION_MESSAGE, message)
                 PendingIntent.getBroadcast(requireContext(), 0, intent, 0)
             }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             alarmMgr.setInexactRepeating(
-                AlarmManager.RTC_WAKEUP,
-                OneTimeWorkRequest.MIN_BACKOFF_MILLIS,
+                AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                triggerTime,
 
-                AlarmManager.INTERVAL_DAY,// 10분전알림
+                repeatInterval, //하루마다
                 alarmIntent
             )
+            Log.d("알람", "setAlarm: ${repeatInterval / 60000}분 마다 알림이 발생합니다.\"")
         } else {
             alarmMgr.setInexactRepeating(
                 AlarmManager.RTC_WAKEUP,
-                System.currentTimeMillis(),
-                AlarmManager.INTERVAL_DAY,
+                triggerTime,
+                repeatInterval,
                 alarmIntent
             )
         }
-
     }
 
 
@@ -155,20 +174,44 @@ class MissionFragment : BaseFragment<FragmentMissionBinding>(R.layout.fragment_m
     private fun getMission() {
         lifecycleScope.launch {
 
-            viewModel.getMission(number++)
+            val data = App.prefs.getInt("number", number)
+            Log.d("mission", "observeGetMission: getNumber ${data}")
 
-            Log.d("number", "getMission:  number : ${number}")
+            Log.d("알람", "getMission: mission")
+            viewModel.getMission(data.toInt())
+
+
         }
     }
 
     private fun observeGetMission() {
         viewModel.missionData.observe(viewLifecycleOwner) {
-            lifecycleScope.launch {
-                title = it.title.toString()
-                message = it.content.toString()
-                Log.d("remote", "observeGetMission: 데이터가 추가됨")
-                remoteViewModel.insertMission(it)
-            }
+            Log.d("알람", "observeGetMission: ${it.title} ${it.content}")
+            title = it.title.toString()
+            message = it.content.toString()
+            setAlarm(title, message)
+            Log.d("mission", "observeGetMission: setNumber ${number}")
+
+
+            App.prefs.setInt("number", number++)
+            insertMission(it)
+        }
+    }
+
+    private fun observeMissionNumber() {
+        with(viewModel) {
+            success.observe(viewLifecycleOwner, EventObserver {
+                if(!it){
+                    Log.d("mission", "observeMissionNumber: ${number} ")
+                    App.prefs.setInt("number", 1)
+                }
+            })
+        }
+    }
+
+    private fun insertMission(getMissionEntity: GetMissionEntity) {
+        lifecycleScope.launch {
+            remoteViewModel.insertMission(getMissionEntity)
         }
     }
 

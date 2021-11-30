@@ -36,4 +36,7 @@ class ProfileRepositoryImpl @Inject constructor(
         return dataSource.unPostFollow(token, nickName).toDomain()
     }
 
+    override suspend fun postConference(token: String, file: MultipartBody.Part?): PathProfileEntity {
+        return dataSource.postConference(token, file).toDomain()
+    }
 }
