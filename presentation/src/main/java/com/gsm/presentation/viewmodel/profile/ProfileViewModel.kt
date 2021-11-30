@@ -14,6 +14,9 @@ import com.gsm.domain.usecase.profile.*
 import com.gsm.presentation.data.DataStoreRepository
 import com.gsm.presentation.data.TestService
 import com.gsm.presentation.data.dto.ChatResponse
+import com.gsm.presentation.data.dto.ConFerenceRequest
+import com.gsm.presentation.data.dto.ConFerenceResponseX
+import com.gsm.presentation.data.dto.ConferenceResponse
 import com.gsm.presentation.util.Constant.Companion.DEFAULT_NAME
 import com.gsm.presentation.util.Event
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,6 +25,7 @@ import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import retrofit2.http.Part
 import java.io.File
 import javax.inject.Inject
 
@@ -34,8 +38,9 @@ class ProfileViewModel @Inject constructor(
     private val postProfileFollowUseCase: PostProfileFollowUseCase,
     private val unPostProfileUseCase: UnFollowUseCase,
     private val postConferenceUseCase: PostConferenceUseCase,
-    private val testService: TestService
-) : ViewModel() {
+    private val testService: TestService,
+
+    ) : ViewModel() {
 
     private val TAG = "profile"
     var defaultName = DEFAULT_NAME
@@ -80,6 +85,8 @@ class ProfileViewModel @Inject constructor(
 
     private val _isSuccessValue = MutableLiveData<Event<Boolean>>()
     val isSuccessValue: LiveData<Event<Boolean>> get() = _isSuccessValue
+    private val _conferenceData = MutableLiveData<ConFerenceResponseX>()
+    val conferenceData: LiveData<ConFerenceResponseX> get() = _conferenceData
 
     private val _url = MutableLiveData<String>()
     val url: LiveData<String> get() = _url
@@ -100,6 +107,36 @@ class ProfileViewModel @Inject constructor(
             Log.d("chat", "getChatLog: ${e}")
         }
     }
+
+    suspend fun getConference(nickName: String) = viewModelScope.launch {
+        try {
+            testService.getConference(nickName).let {
+
+                Log.d(TAG, "getConference: ${it.body()?.get(0)}")
+                _conferenceData.value = it.body()
+
+            }
+        } catch (e: Exception) {
+            Log.d(TAG, "getConference: ${e}")
+        }
+    }
+
+    suspend fun pathConference(
+        token: String,
+        images: MultipartBody.Part?,
+        confernce: String,
+        name: String
+    ) =
+        viewModelScope.launch {
+            try {
+                testService.pathConference(token, images, confernce, name).let {
+                    Log.d(TAG, "pathConference: ${it}")
+                    Log.d(TAG, "pathConference: 성공")
+                }
+            } catch (e: java.lang.Exception) {
+                Log.d(TAG, "pathConference: $e")
+            }
+        }
 
     suspend fun postConference(token: String, file: MultipartBody.Part) = viewModelScope.launch {
         try {

@@ -1,7 +1,6 @@
 package com.gsm.presentation.ui.userinfo.fragment
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
@@ -20,11 +19,14 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.gsm.presentation.R
+import com.gsm.presentation.adapter.ConferenceAdapter
 import com.gsm.presentation.databinding.FragmentUserActivityBinding
 import com.gsm.presentation.ui.main.MainActivity
-import com.gsm.presentation.ui.sign.up.SignUpSignInMainActivity
 import com.gsm.presentation.util.DataState
+import com.gsm.presentation.util.extension.showVertical
 import com.gsm.presentation.util.extension.toAiMultipartBody
 import com.gsm.presentation.util.extension.toMultipartBody
 import com.gsm.presentation.viewmodel.ai.AiViewModel
@@ -44,6 +46,12 @@ class UserActivityFragment : Fragment() {
     private val signViewModel: SignInViewModel by viewModels()
     private val viewModel: ProfileViewModel by viewModels()
     var token = ""
+
+    private lateinit var file: File
+    private val conferenceAdapter: ConferenceAdapter by lazy {
+        ConferenceAdapter()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -62,14 +70,16 @@ class UserActivityFragment : Fragment() {
             try {
 
                 Log.d("postProfile", "onCreateView: ${result?.data?.data}")
-                val file = File(getPathFromUri(result.data?.data))
+                file = File(getPathFromUri(result.data?.data))
                 postImage(file.toAiMultipartBody())
+                observe(file.toMultipartBody())
 
 
             } catch (e: Exception) {
                 Log.d("TAG", "onCreateView: ${e}")
             }
         }
+        setAdapter()
         onclickCamera()
 
         return binding.root
@@ -87,22 +97,34 @@ class UserActivityFragment : Fragment() {
     }
 
 
-    private fun observe() = with(aiViewModel) {
+    private fun observe(file: MultipartBody.Part) = with(aiViewModel) {
         conferenceData.observe(viewLifecycleOwner) {
             when (it) {
                 is DataState.Success -> {
                     binding.imageView2.visibility = View.GONE
-                    binding.conferenceLayout.visibility=View.VISIBLE
+                    binding.conferenceLayout.visibility = View.VISIBLE
+                    binding.conferenceRecycler.visibility = View.VISIBLE
+                    lifecycleScope.launch {
+                        viewModel.pathConference(
+                            token, file, it.data.conference.toString(),
+                            it.data.name.toString()
+                        )
+                    }
                     Log.d(TAG, "observe: 성공 ${it.data}")
                 }
                 is DataState.Failure -> {
                     binding.imageView2.visibility = View.GONE
-                    binding.conferenceLayout.visibility=View.VISIBLE
+                    binding.conferenceLayout.visibility = View.VISIBLE
+                    binding.conferenceRecycler.visibility = View.VISIBLE
+
+                    Toast.makeText(requireContext(),"부합하지 않은 정보입니다.",Toast.LENGTH_SHORT).show()
+
                     Log.d(TAG, "observe: 실패 ${it.message}")
                 }
                 is DataState.Loading -> {
-                    binding.conferenceLayout.visibility=View.GONE
+                    binding.conferenceLayout.visibility = View.GONE
                     binding.imageView2.visibility = View.VISIBLE
+                    binding.conferenceRecycler.visibility = View.GONE
                     binding.imageView2.playAnimation();
                     binding.imageView2.loop(true)
 
@@ -114,15 +136,44 @@ class UserActivityFragment : Fragment() {
 
     }
 
+    private fun getConference(nickName: String) {
+        lifecycleScope.launch {
+            viewModel.getConference(nickName)
+        }
+    }
+
     private fun getToken() {
         signViewModel.readToken.asLiveData().observe(viewLifecycleOwner) {
             token = it.token
         }
     }
 
+    private fun getNickName() {
+        viewModel.readName.asLiveData().observe(viewLifecycleOwner) {
+            getConference(it.name)
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        observe()
+        getNickName()
+        getConferenceData()
+    }
+
+    fun getConferenceData() {
+        viewModel.conferenceData.observe(viewLifecycleOwner) {
+            Log.d("TAG", "getConferenceData: ${it}")
+            conferenceAdapter.setData((it))
+        }
+    }
+
+
+    fun setAdapter() {
+        binding.conferenceRecycler.apply {
+            adapter = conferenceAdapter
+            this.layoutManager =
+                GridLayoutManager(requireContext(), 2, LinearLayoutManager.VERTICAL, false)
+        }
     }
 
     @SuppressLint("Range")

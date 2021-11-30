@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
@@ -42,6 +43,7 @@ class ChatAdapter(var itemList: ArrayList<ChatModel>) :
     }
 
     fun addItem(format: ChatModel) {
+        Log.d("TAG", "addItem: ${format.contents}")
         itemList.add(format)
         notifyDataSetChanged()
     }
@@ -50,6 +52,17 @@ class ChatAdapter(var itemList: ArrayList<ChatModel>) :
         fun bind(data: ChatModel) {
             binding.data = data
             binding.executePendingBindings()
+            Log.d("chat", "ChatModel: ${data.abuse}")
+
+            if (data.abuse) {
+                binding.chatTvAbuse.visibility = View.VISIBLE
+                binding.chatTvContents.visibility = View.GONE
+                binding.chatTvAbuse.setOnClickListener{
+                    binding.chatTvAbuse.visibility = View.GONE
+                    binding.chatTvContents.visibility = View.VISIBLE
+                }
+            }
+
         }
 
     }
