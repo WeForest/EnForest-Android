@@ -76,7 +76,7 @@ class EasyTestFragment : Fragment() {
             }
             else
             {
-                viewModel.getLastClickTextId(binding.radio.checkedRadioButtonId)
+                viewModel.getLastClickTextId(binding.radio.checkedRadioButtonId,"역량평가")
             }
 
         }

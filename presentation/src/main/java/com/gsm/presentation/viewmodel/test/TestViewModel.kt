@@ -40,6 +40,10 @@ class TestViewModel @Inject constructor(
     private val _page = MutableLiveData<Int>()
     val page: LiveData<Int> get() = _page
 
+
+    private val _wrong = ArrayList<Int>()
+    val wrong : ArrayList<Int> get() = _wrong
+
     init {
         _backIsOk.value = false
         _page.value = 0
@@ -51,12 +55,12 @@ class TestViewModel @Inject constructor(
         _isChecked.value = true
     }
 
-    fun getLastClickTextId(answer: Int) {
+    fun getLastClickTextId(answer: Int,position: String) {
         when (answer) {
-            R.id.checkBox -> numAdd(1)
-            R.id.checkBox2 -> numAdd(2)
-            R.id.checkbox3 -> numAdd(3)
-            R.id.checkBox4 -> numAdd(4)
+            R.id.checkBox -> numAdd(1,position)
+            R.id.checkBox2 -> numAdd(2,position)
+            R.id.checkbox3 -> numAdd(3,position)
+            R.id.checkBox4 -> numAdd(4,position)
         }
     }
 
@@ -66,6 +70,10 @@ class TestViewModel @Inject constructor(
         _backIsOk.value = false
     }
 
+    fun worngReset(){
+        _wrong.clear()
+    }
+
     fun backTest(){
         _page.value= _page.value!!.minus(1)
 
@@ -73,26 +81,48 @@ class TestViewModel @Inject constructor(
             _answerCount.value = _answerCount.value!!.minus(1)
     }
 
-    fun numAdd(answer: Int) {
+    fun numAdd(answer: Int, position : String) {
 
-        if (answer == data.value!!.get(page.value!!).answer.toInt() && _page.value!! <= 19) {
-            _answerCount.value = _answerCount.value!!.plus(1)
-            if (page.value == 19) {
-                return
+        if(position == "역량평가"){
+            if (answer == data.value!!.get(page.value!!).answer.toInt() && _page.value!! <= 19) {
+                if (page.value == 19) {
+                    return
+                } else {
+                    _answerCount.value = _answerCount.value!!.plus(1)
+                    _backIsOk.value = true
+                    _page.value = _page.value!!.plus(1)
+                }
             } else {
-                _backIsOk.value = true
-                _page.value = _page.value!!.plus(1)
-            }
-        } else {
-            if (page.value == 19) {
-                return
-            } else {
-                _backIsOk.value = false
-                _page.value = _page.value!!.plus(1)
-            }
+                if (page.value == 19) {
+                    return
+                } else {
+                    _backIsOk.value = false
+                    _page.value = _page.value!!.plus(1)
+                    _wrong.add(page.value!!)
+                }
 
+            }
         }
+        else if(position == "틀린문제다시풀기"){
+            if (answer == data.value!!.get(page.value!!).answer.toInt() && _page.value!! <= wrong.size-1) {
+                Log.d("sdddddafd", (wrong.size-1).toString())
+                if (page.value == wrong.size-1) {
+                    return
+                } else {
+                    _answerCount.value = _answerCount.value!!.plus(1)
+                    _backIsOk.value = true
+                    _page.value = _page.value!!.plus(1)
+                }
+            } else {
+                if (page.value == wrong.size-1) {
+                    return
+                } else {
+                    _backIsOk.value = false
+                    _page.value = _page.value!!.plus(1)
+                }
 
+            }
+        }
 
     }
 
