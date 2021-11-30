@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.gsm.domain.entity.request.sign.TokenEntity
 import com.gsm.domain.usecase.LoginUseCase
 import com.gsm.presentation.data.DataStoreRepository
@@ -37,6 +38,12 @@ class SignInViewModel @Inject constructor(
             Log.d("Token", "saveToken: $token")
             dataStore.saveToken(token)
         }
+
+    fun saveProfile(profileImage: String) {
+        viewModelScope.launch {
+            dataStore.saveProfileImage(profileImage)
+        }
+    }
 
     suspend fun postLogin(token: String) = viewModelScope.launch {
 

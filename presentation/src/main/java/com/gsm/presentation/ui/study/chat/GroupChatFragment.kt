@@ -53,7 +53,7 @@ class GroupChatFragment :
     val TAG = "ChatFragment"
     lateinit var socket: Socket
     var token = ""
-
+var nickName=""
 
     //리사이클러뷰
     private var arrayList = arrayListOf<ChatModel>()
@@ -64,7 +64,7 @@ class GroupChatFragment :
 
     override fun FragmentGroupChatBinding.onCreateView() {
         getToken()
-
+        observeNickName()
 
         chating_Text = binding.messageEdit
         chat_Send_Button = binding.sendBtn
@@ -78,7 +78,7 @@ class GroupChatFragment :
 
     private fun setData() {
         lifecycleScope.launch {
-            profileViewModel.getChatLog(1)
+            args.chat.id?.let { profileViewModel.getChatLog(it) }
             profileViewModel.chatLog.observe(viewLifecycleOwner) {
                 Log.d(TAG, "setData: ${it}")
                 mAdapter.setData(it)
@@ -163,11 +163,7 @@ class GroupChatFragment :
 
     private val onConnectSuccess = Emitter.Listener {
         lifecycleScope.launch {
-            Toast.makeText(
-                requireContext(),
-                "성공",
-                Toast.LENGTH_LONG
-            ).show()
+            Log.d(TAG, "성공: ")
         }
     }
 
@@ -187,6 +183,11 @@ class GroupChatFragment :
             Log.d(TAG, "getToken: ${it.token}")
             token = it.token
             settingSocket(token)
+        }
+    }
+    private fun observeNickName(){
+        profileViewModel.readName.asLiveData().observe(viewLifecycleOwner){
+            nickName=it.name
         }
     }
 
@@ -242,7 +243,7 @@ class GroupChatFragment :
 
             mAdapter.addItem(
                 ChatModel(
-                    nickname = args.chat.owner.name,
+                    nickname = nickName,
                     contents = message,
                     args.chat.owner.profileImg.toString()
                 )

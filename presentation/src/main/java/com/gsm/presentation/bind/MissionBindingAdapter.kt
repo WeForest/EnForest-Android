@@ -1,9 +1,11 @@
 package com.gsm.presentation.bind
 
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.gsm.presentation.R
 
 object MissionBindingAdapter {
 
@@ -39,13 +41,15 @@ object MissionBindingAdapter {
     @JvmStatic
     @BindingAdapter("app:chatImage")
     fun ImageView.chatImage(data: String?) {
-        if(data?.isNotEmpty() == true) {
+        Log.d("TAG", "chatImage: ${data}")
             Glide.with(this.context)
                 .load(data)
-                .override(40, 40)
                 .fitCenter()
+                .error(R.drawable.profile)
+                .fallback(R.drawable.profile)
+                .override(40, 40)
+
                 .into(this)
-        };
     }
 
     // 서버에서 가져온 이미지를 Gilde 라이브러리를통해 사이즈에 맞게 자른다

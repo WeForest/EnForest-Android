@@ -81,6 +81,8 @@ class ProfileViewModel @Inject constructor(
     private val _isSuccessValue = MutableLiveData<Event<Boolean>>()
     val isSuccessValue: LiveData<Event<Boolean>> get() = _isSuccessValue
 
+    private val _url = MutableLiveData<String>()
+    val url: LiveData<String> get() = _url
     private fun saveName(name: String) =
         viewModelScope.launch(Dispatchers.IO) {
             Log.d(TAG, "saveName: $name")
@@ -143,6 +145,7 @@ class ProfileViewModel @Inject constructor(
                     if (this.success) {
                         Log.d(TAG, "postProfile: file ${this.message}")
                         _isSuccessValue.value = Event(success)
+                        _url.value = this.message
                         Log.d("file", "postProfile: 성공")
                     } else {
                         Log.d(TAG, "postProf ile: 실패 ")
