@@ -1,16 +1,15 @@
 package com.gsm.presentation.di
 
 import com.gsm.data.network.service.GroupService
-import dagger.Provides
-import dagger.Module
-import com.gsm.data.network.service.sign.LoginService
 import com.gsm.data.network.service.MissionService
 import com.gsm.data.network.service.ProfileService
 import com.gsm.data.network.service.TestService
+import com.gsm.data.network.service.sign.LoginService
 import com.gsm.presentation.data.AiService
 import com.gsm.presentation.util.Constant.Companion.AI_SERVER
-import com.gsm.presentation.util.Constant.Companion.BASE_FCM_URL
 import com.gsm.presentation.util.Constant.Companion.Local_SERVER
+import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
@@ -49,6 +48,27 @@ object NetworkModule {
 
     @Singleton
     @Provides
+    @Named("ai")
+    fun provideRetrofitAiInstance(
+        okHttpClient: OkHttpClient,
+        gsonConverterFactory: GsonConverterFactory
+    ): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(AI_SERVER)
+            .client(okHttpClient)
+            //json 변화기 Factory
+
+            .client(provideHttpClient())
+
+            .addConverterFactory(gsonConverterFactory)
+            .build()
+
+    }
+
+
+    @Singleton
+    @Provides
+    @Named("main")
     fun provideRetrofitInstance(
         okHttpClient: OkHttpClient,
         gsonConverterFactory: GsonConverterFactory
@@ -65,25 +85,6 @@ object NetworkModule {
 
     }
 //
-//    @Singleton
-//    @Provides
-//    fun provideRetrofitAiInstance(
-//        okHttpClient: OkHttpClient,
-//        gsonConverterFactory: GsonConverterFactory
-//    ): Retrofit {
-//        return Retrofit.Builder()
-//            .baseUrl(AI_SERVER)
-//            .client(okHttpClient)
-//            //json 변화기 Factory
-//
-//            .client(provideHttpClient())
-//
-//            .addConverterFactory(gsonConverterFactory)
-//            .build()
-//
-//    }
-
-
 
     @Provides
     @Singleton
@@ -93,50 +94,50 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideMissionService(retrofit: Retrofit): MissionService {
+    fun provideMissionService(@Named("main")retrofit: Retrofit): MissionService {
         return (retrofit.create(MissionService::class.java))
     }
 
     @Provides
-    @Singleton
-    fun provideAiService(retrofit: Retrofit): AiService {
+    fun provideAiService(@Named("ai") retrofit: Retrofit): AiService {
         return (retrofit.create(AiService::class.java))
     }
 
 
     @Provides
     @Singleton
-    fun provideLoginService(retrofit: Retrofit): LoginService {
+    fun provideLoginService(@Named("main") retrofit: Retrofit): LoginService {
         return (retrofit.create(LoginService::class.java))
     }
 
     @Provides
     @Singleton
-    fun imsIService(retrofit: Retrofit): com.gsm.presentation.data.TestService {
+    fun imsIService(@Named("main") retrofit: Retrofit): com.gsm.presentation.data.TestService {
         return (retrofit.create(com.gsm.presentation.data.TestService::class.java))
     }
 
 
     @Provides
     @Singleton
-    fun getUserInfo(retrofit: Retrofit): com.gsm.presentation.ui.userinfo.api.UserInfoService {
+    fun getUserInfo(@Named("main") retrofit: Retrofit): com.gsm.presentation.ui.userinfo.api.UserInfoService {
         return (retrofit.create(com.gsm.presentation.ui.userinfo.api.UserInfoService::class.java))
     }
+
     @Provides
     @Singleton
-    fun testService(retrofit: Retrofit): TestService {
+    fun testService(@Named("main") retrofit: Retrofit): TestService {
         return (retrofit.create(TestService::class.java))
     }
 
     @Provides
     @Singleton
-    fun provideGroupService(retrofit: Retrofit): GroupService {
+    fun provideGroupService(@Named("main") retrofit: Retrofit): GroupService {
         return (retrofit.create(GroupService::class.java))
     }
 
     @Provides
     @Singleton
-    fun provideProfileService(retrofit: Retrofit): ProfileService {
+    fun provideProfileService(@Named("main") retrofit: Retrofit): ProfileService {
         return (retrofit.create(ProfileService::class.java))
     }
 

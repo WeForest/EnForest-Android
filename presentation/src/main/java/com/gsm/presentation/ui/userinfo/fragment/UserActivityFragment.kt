@@ -61,7 +61,6 @@ class UserActivityFragment : Fragment() {
 
             try {
 
-                Toast.makeText(requireContext(), "컨퍼런스 인증에 성공했습니다.", Toast.LENGTH_SHORT).show()
                 Log.d("postProfile", "onCreateView: ${result?.data?.data}")
                 val file = File(getPathFromUri(result.data?.data))
                 postImage(file.toAiMultipartBody())

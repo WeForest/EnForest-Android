@@ -3,6 +3,7 @@ package com.gsm.presentation.viewmodel.ai
 import android.util.Log
 import androidx.lifecycle.*
 import com.gsm.presentation.data.AiService
+import com.gsm.presentation.data.dto.AbuseResponse
 import com.gsm.presentation.data.dto.ConferenceResponse
 import com.gsm.presentation.util.DataState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,6 +19,9 @@ class AiViewModel @Inject constructor(
 
     private val _conferenceData = MutableLiveData<DataState<ConferenceResponse>>()
     val conferenceData: LiveData<DataState<ConferenceResponse>> get() = _conferenceData
+
+    private val _abuseData = MutableLiveData<DataState<AbuseResponse>>()
+    val abuseData: LiveData<DataState<AbuseResponse>> get() = _abuseData
 
     val TAG = "ai"
     suspend fun postConferenceImage(file: MultipartBody.Part?) = viewModelScope.launch {
@@ -40,5 +44,19 @@ class AiViewModel @Inject constructor(
             Log.d(TAG, "postConferenceImage: ${e}")
             _conferenceData.postValue(DataState.Failure(e.hashCode(), e.message.toString()))
         }
+    }
+
+    suspend fun abuseText(text: String) = viewModelScope.launch {
+        Log.d(TAG, "abuseText: ${text}")
+        _abuseData.postValue(DataState.Loading)
+        try {
+            service.getAbuse(text).let {
+                    _abuseData.postValue(DataState.Success(it.body()!!))
+            }
+        } catch (e: Exception) {
+
+            _abuseData.postValue(DataState.Failure(400,"실패했습니다."))
+        }
+
     }
 }

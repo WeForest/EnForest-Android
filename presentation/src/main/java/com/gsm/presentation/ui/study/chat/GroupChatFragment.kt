@@ -24,7 +24,9 @@ import com.gsm.presentation.databinding.FragmentGroupChatBinding
 import com.gsm.presentation.ui.chat.ChatModel
 import com.gsm.presentation.util.App
 import com.gsm.presentation.util.Constant
+import com.gsm.presentation.util.DataState
 import com.gsm.presentation.util.extension.showVertical
+import com.gsm.presentation.viewmodel.ai.AiViewModel
 import com.gsm.presentation.viewmodel.group.GroupViewModel
 import com.gsm.presentation.viewmodel.profile.ProfileViewModel
 import com.gsm.presentation.viewmodel.sign.`in`.SignInViewModel
@@ -50,6 +52,7 @@ class GroupChatFragment :
     private lateinit var chat_Send_Button: Button
     private val signViewModel: SignInViewModel by viewModels()
     private val profileViewModel: ProfileViewModel by viewModels()
+    private val aiViewModel : AiViewModel by viewModels()
     private val args by navArgs<GroupChatFragmentArgs>()
     val TAG = "ChatFragment"
     lateinit var socket: Socket
@@ -112,6 +115,7 @@ class GroupChatFragment :
 
         }
         setData()
+        observe()
     }
 
     private fun observeImage() {
@@ -264,12 +268,44 @@ class GroupChatFragment :
                     image
                 )
             )
+            Log.d(TAG, "sendMessage: ${message}")
+            abuseText(message)
+
             binding.studyMeetingRecyclerView.smoothScrollToPosition(mAdapter.itemCount);
         } catch (e: JSONException) {
             Log.d(TAG, "sendMessage: 에러 ${e}")
             e.printStackTrace()
         }
 
+
+    }
+
+    private fun abuseText(message:String){
+        lifecycleScope.launch {
+            aiViewModel.abuseText(message)
+        }
+
+    }
+
+    // text가 욕설이 포함되어있는지 검사
+    private fun observe() = with(aiViewModel) {
+        abuseData.observe(viewLifecycleOwner) {
+            when (it) {
+                is DataState.Success -> {
+                  
+                    Log.d(TAG, "observe: 성공 ${it.data}")
+                }
+                is DataState.Failure -> {
+                    Log.d(TAG, "observe: 실패 ${it.message}")
+                }
+                is DataState.Loading -> {
+             
+
+
+                    Log.d(TAG, "observe: 로딩중..")
+                }
+            }
+        }
 
     }
 
