@@ -8,4 +8,4 @@
 
 
 ### 시연영상
-[![EnForest 시연영상 ]( https://img.youtube.com/vi/1ZE7zNC5Cqo/0.jpg)](https://www.youtube.com/watch?time_continue=6&v=1ZE7zNC5Cqo&feature=emb_title) 
+[![EnForest 시연영상 ]( https://img.youtube.com/vi/1ZE7zNC5Cqo/0.jpg)](https://www.youtube.com/watch?v=1ZE7zNC5Cqo) 
